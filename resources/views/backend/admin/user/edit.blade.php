@@ -55,6 +55,13 @@
             <input type="radio" name="status" class="flat-green"
                    value="0" {{ ( $user->status == 0 ) ? 'checked' : '' }}/> In Active
         </div>
+        <div class="form-group col-md-4">
+            <label for=""> Catalogue Visible </label><br/>
+            <input type="radio" name="is_visible" class="flat-green"
+                   value="1" {{ ( $user->is_visible == 1 ) ? 'checked' : '' }} /> Yes
+            <input type="radio" name="is_visible" class="flat-green"
+                   value="0" {{ ( $user->is_visible == 0 ) ? 'checked' : '' }}/> No
+        </div>
         <div class="clearfix"></div>
         <div class="col-md-12 mb-3 mt-3">
             <button type="submit" class="btn btn-success button-submit"

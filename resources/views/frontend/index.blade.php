@@ -53,6 +53,11 @@ div.content {
                     <div class="minicart-button">
                         <a class="btn" href="{{ URL::to('/my-account') }}">My Account</a>
                     </div>
+                    @if(Auth()->user()->is_visible == 1)
+                    <div class="minicart-button">
+                        <a class="btn" href="{{ URL::to('/catalogue') }}">Catalogue</a>
+                    </div>
+                    @endif
                     <div class="minicart-button">
                         <a class="btn" href="{{ route('logout') }}"
                            onclick="event.preventDefault();

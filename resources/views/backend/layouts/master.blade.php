@@ -18,6 +18,7 @@
         @include('backend.layouts.footer')
         @include('backend.layouts.modal')
         @include('backend.layouts.datatable')
+        @stack('script')
     </div>
 </div>
 </body>

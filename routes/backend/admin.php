@@ -27,6 +27,13 @@ Route::get('/export', 'UserController@export')->name('export');
 Route::resource('order', 'OrderController');
 Route::get('/allOrders','OrderController@getAll')->name('allOrders');
 
+
+Route::resource('catalogue', 'CatalogueController');
+Route::get('/allCatalogue','CatalogueController@getAll')->name('allCatalogue');
+Route::get('/get-subcatalogue','CatalogueController@getSubCatalogue');
+
+
+
 Route::resource('permissions', 'PermissionController');
 Route::get('/allPermissions', 'PermissionController@getAll')->name('allPermissions');
 

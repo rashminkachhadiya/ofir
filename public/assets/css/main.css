@@ -16,7 +16,7 @@
   line-height: 1;
   padding: 17px 0;
   background-color: black;
-  border-radius: 40px;
+  border-radius: 20px;
   text-align: center;
   margin-bottom: 10px;
   border-color: black;
@@ -26,6 +26,26 @@
   letter-spacing: 1.1px;
   background-color: white;
 }
+
+.minicart-catelogue-button a {
+  color: white;
+  font-size: 14px;
+  display: block;
+  font-weight: 700;
+  line-height: 1;
+  padding: 17px 0;
+  background-color: black;
+  border-radius: 17px;
+  text-align: center;
+  margin-bottom: 10px;
+  border-color: black;
+}
+.minicart-catelogue-button a:hover {
+  color: black !important;
+  letter-spacing: 1.1px;
+  background-color: white;
+}
+
 .border-primary{
     border-color:#3f6ad8
 }

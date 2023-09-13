@@ -11,7 +11,6 @@
 
                 <form method="POST" action="{{ route('user.auth.loginUser') }}" class="login100-form validate-form">
                     @csrf
-                    <h4>Registration</h4>
                     @if ($errors->has('email'))
                         <span class="is-invalid">{{ $errors->first('email') }}</span>
                     @endif

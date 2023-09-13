@@ -233,6 +233,7 @@ class UserController extends Controller
                $date1 = strtr($request->input('exp_date'), '/', '-');
                $user->exp_time = date('Y-m-d H:i:s' , strtotime($date1));
                $user->is_approved = $request->input('is_approved');
+               $user->is_visible = $request->input('is_visible');  
                $user->password = $request->password;
                $user->save();
 
