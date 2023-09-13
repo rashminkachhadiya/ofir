@@ -126,6 +126,8 @@ class CatalogueController extends Controller
                if(isset($file_path_1)){
                 $item->photo = $file_path_1;                
                }
+               $item->is_allcollection = $request->input('is_allcollection');
+               $item->is_available = $request->input('is_available');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -238,6 +240,8 @@ class CatalogueController extends Controller
                if(isset($file_path_1)){
                 $item->photo = $file_path_1;                
                }
+               $item->is_allcollection = $request->input('is_allcollection');
+               $item->is_available = $request->input('is_available');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();

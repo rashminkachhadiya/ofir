@@ -47,6 +47,16 @@
                                     <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
                                         <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> All Collection </label><br/>
+                                        <input type="radio" name="is_allcollection" class="flat-green" value="1" {{ ( $item->is_allcollection == 1 ) ? 'checked' : '' }}/> Yes
+                                        <input type="radio" name="is_allcollection" class="flat-green" value="0" {{ ( $item->is_allcollection == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Available </label><br/>
+                                        <input type="radio" name="is_available" class="flat-green"value="1" {{ ( $item->is_available == 1 ) ? 'checked' : '' }}/> Yes
+                                        <input type="radio" name="is_available" class="flat-green"value="0" {{ ( $item->is_available == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-success button-submit"
@@ -83,6 +93,12 @@
 <script type="text/javascript">
     
     $(document).ready(function () {
+         $('input[type="checkbox"].flat-green').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+        });
+        $('input[type="radio"].flat-green').iCheck({
+            radioClass: 'iradio_flat-green'
+        });
         $('body').on('click', '.nav-link', function(event) {
             id = $('#id').val();
             var htmlDivId = $(this).attr('href-div');

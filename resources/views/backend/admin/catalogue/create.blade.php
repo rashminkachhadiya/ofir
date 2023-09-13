@@ -42,6 +42,16 @@
                                     <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
                                         <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> All Collection </label><br/>
+                                        <input type="radio" name="is_allcollection" class="flat-green" value="1"/> Yes
+                                        <input type="radio" name="is_allcollection" class="flat-green" value="0" checked/> No
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Available </label><br/>
+                                        <input type="radio" name="is_available" class="flat-green"value="1"/> Yes
+                                        <input type="radio" name="is_available" class="flat-green"value="0" checked/> No
+                                    </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-success button-submit"
@@ -97,6 +107,13 @@
 
         let number_of_image = 1;
     $(document).ready(function () {
+
+        $('input[type="checkbox"].flat-green').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+        });
+        $('input[type="radio"].flat-green').iCheck({
+            radioClass: 'iradio_flat-green'
+        });
 
         $('#create').validate({// <- attach '.validate()' to your form
             // Rules for form validation
