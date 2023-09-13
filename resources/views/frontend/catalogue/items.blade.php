@@ -43,10 +43,10 @@ div.content {
             <div class="content row">
                 @foreach($items as $item)
                   <div class="col-md-4">
-                    <img class="mb-1"
+                    <img style="border: 5px solid black;" class="mb-1"
                       src="{{asset($item->photo) }}"
                       alt="product" width="150px" height="150px">
-                    <strong><p style="color: black; text-align: center;">{{ $item->item_title }}</p></strong>
+                    <strong><p style="color: white; text-align: center;background-color: black;width: 150px;height: 25px;">{{ $item->item_title }}</p></strong>
                   </div>
                 @endforeach
             </div>
