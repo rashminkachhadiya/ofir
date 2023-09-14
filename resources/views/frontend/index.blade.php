@@ -66,7 +66,7 @@ div.content {
                     </div>
 
                     @if(Auth()->user()->is_visible == 1)
-                    <div class="minicart-button mt-5">
+                    <div class="minicart-button mt-4">
                         <a class="btn" href="{{ URL::to('/catalogue') }}">Catalogue</a>
                     </div>
                     @endif

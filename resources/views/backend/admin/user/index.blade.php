@@ -35,6 +35,7 @@
                                 <th>Email</th>
                                 <!-- <th>Roles</th> -->
                                 <th>Status</th>
+                                <th>Last Seen</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -74,6 +75,7 @@
                     {data: 'email', name: 'email'},
                     // {data: 'role', name: 'role'},
                     {data: 'status', name: 'status'},
+                    {data: 'last_seen', name: 'last_seen'},
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,

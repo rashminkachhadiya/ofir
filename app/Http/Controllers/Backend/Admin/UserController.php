@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
-
+use Carbon\Carbon;
 use View;
 use DB;
 
@@ -41,6 +41,9 @@ class UserController extends Controller
         ->addColumn('role', function ($user) {
            return '<label class="badge badge-secondary">' . ucfirst($user->roles->pluck('name')->implode(' , ')) . '</label>';
         })
+        ->addColumn('last_seen', function ($user) {
+           return Carbon::parse($user->last_seen)->diffForHumans();
+        })
         ->addColumn('status', function ($users) {
            return $users->status ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
         })
@@ -51,7 +54,7 @@ class UserController extends Controller
            $html .= '</div>';
            return $html;
         })
-        ->rawColumns(['action', 'file_path', 'status', 'role'])
+        ->rawColumns(['action', 'file_path', 'status', 'role', 'last_seen'])
         ->addIndexColumn()
         ->make(true);
    }
