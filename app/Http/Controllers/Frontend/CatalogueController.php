@@ -95,9 +95,9 @@ class CatalogueController extends Controller
     public function getItems(Request $request)
     {
         if(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'ALL COLLECTIONS'){
-            $items = Item::where('is_allcollection',1)->get();
+            $items = Item::where('catalogue_id',$request->main_catalogue)->where('is_allcollection',1)->get();
         }elseif(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'AVAILABLE'){
-            $items = Item::where('is_available',1)->get();
+            $items = Item::where('catalogue_id',$request->main_catalogue)->where('is_available',1)->get();
         }else{
             $items = Item::where('catalogue_id',$request->main_catalogue)->where('sub_catalogue_id',$request->sub_catalogue)->get();
         }
