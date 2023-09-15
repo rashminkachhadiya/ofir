@@ -3,7 +3,7 @@
 @section('content')
 <style type="text/css">
     .back {
-  background: #e2e2e2;
+  /*background: #e2e2e2;*/
   width: 100%;
   position: absolute;
   top: 0;
@@ -14,12 +14,12 @@
   border-radius: 40px;
   width: 650px;
   height: 500px;
-  background-color: #fff;
+  background-color: #e2e2e2;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
+  /*bottom: 0;*/
   margin: auto;
   max-width: 100%;
   max-height: 100%;
