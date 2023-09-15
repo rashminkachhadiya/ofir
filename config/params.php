@@ -47,7 +47,7 @@ return [
 
     '0' => [
         '0' => 'RINGS',
-        '1' => 'BRACELETS',
+        '1' => 'BANGLE/BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -55,6 +55,15 @@ return [
     ],
 
     '1' => [
+        '0' => 'RINGS',
+        '1' => 'BANGLE/BRACELETS',
+        '2' => 'NECKLACES',
+        '3' => 'EARRINGS',
+        '4' => 'ALL COLLECTIONS',
+        '5' => 'AVAILABLE',
+    ],
+
+    '2' => [
         '0' => 'RINGS',
         '1' => 'BANGLE/BRACELETS',
         '2' => 'NECKLACES',
