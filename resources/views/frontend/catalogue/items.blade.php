@@ -108,8 +108,12 @@ div.content {
                       alt="product" width="180px" height="180px">
                     </div>
                     <div>
-                      <strong><p class="m-0" style="color: black; text-align: center;word-wrap: break-word;height: 25px;">{{ $item->item_title }}</p></strong>
+                      <div>
+                      <strong><p class="m-0" style="color: black; text-align: center;word-wrap: break-word;">{{ $item->item_title }}</p></strong>
+                    </div>
+                    <div>
                       <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->description }}</p>
+                    </div>
                     </div>
                   </div>
                 @empty
