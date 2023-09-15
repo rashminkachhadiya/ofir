@@ -4,7 +4,7 @@
     @include('frontend.layouts.head')
 </head>
 <body>
-    <div class="container-fluid">    
+    <div class="container-fluid p-0">    
         <section>
             @yield('content')
         </section>
