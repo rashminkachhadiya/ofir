@@ -101,12 +101,16 @@ div.content {
             </div>
             <div class="row">
                 @foreach($items as $item)
-                  <div class="col-md-4">
-                    <img style="border: 1px solid black;" class="mb-1"
+                  <div class="col-md-4 text-center">
+                    <div>
+                      <img style="border: 1px solid black;" class="mb-1"
                       src="{{asset($item->photo) }}"
                       alt="product" width="180px" height="180px">
-                    <strong><p class="m-0" style="color: black; text-align: center;word-wrap: break-word;width: 180px;height: 25px;">{{ $item->item_title }}</p></strong>
-                    <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->description }}</p>
+                    </div>
+                    <div>
+                      <strong><p class="m-0" style="color: black; text-align: center;word-wrap: break-word;height: 25px;">{{ $item->item_title }}</p></strong>
+                      <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->description }}</p>
+                    </div>
                   </div>
                 @endforeach
             </div>
