@@ -62,6 +62,19 @@
             <input type="radio" name="is_visible" class="flat-green"
                    value="0" {{ ( $user->is_visible == 0 ) ? 'checked' : '' }}/> No
         </div>
+        <div class="col-md-12 mt-2 mb-2">
+        <strong><label>Catalogue Store</label></strong>
+        </div>
+        @foreach(config('params.catalogue') as $key => $value)
+        <div class="form-group col-md-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="1" name="catalogue_store[{{$key}}]" id="flexCheckDefault" {{ ( json_decode($user->catalogue_store)[$key] == 1 ) ? 'checked' : '' }}>
+              <label class="form-check-label mt-2" for="flexCheckDefault">
+                {{ $value }}
+              </label>
+            </div>
+        </div>
+        @endforeach
         <div class="clearfix"></div>
         <div class="col-md-12 mb-3 mt-3">
             <button type="submit" class="btn btn-success button-submit"

@@ -42,9 +42,9 @@ div.content {
             <div class="content d-flex">
                 <div class="col-md-6">
                     @foreach($subCatalogue as $key => $value)
-                    <div class="minicart-catelogue-button">
-                        <a class="btn btn-dark" href="{{ URL::to('/catalogue') }}/{{$catalogueId}}/{{$key}}">{{ $value }}</a>
-                    </div>
+                      <div class="minicart-catelogue-button">
+                          <a class="btn btn-dark" href="{{ URL::to('/catalogue') }}/{{$catalogueId}}/{{$key}}">{{ $value }}</a>
+                      </div>
                     @endforeach
                     <!-- <div class="minicart-button">
                         <a class="btn" href="">Cartier</a>

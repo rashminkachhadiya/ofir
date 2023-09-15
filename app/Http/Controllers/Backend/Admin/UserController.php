@@ -207,7 +207,27 @@ class UserController extends Controller
    public function update(Request $request, User $user)
    {
       if ($request->ajax()) {
+        $catalogueStore = [
+          '0' => '0',
+          '1' => '0',
+          '2' => '0',
+          '3' => '0',
+          '4' => '0',
+          '5' => '0',
+          '6' => '0',
+          '7' => '0',
+          '8' => '0',
+          '9' => '0',
+          '10' => '0',
+          '11' => '0',
+        ];
 
+        if(!is_null($request->input('catalogue_store')))
+        {
+          foreach ($request->input('catalogue_store') as $key => $value) {
+            $catalogueStore[$key] = $value;
+          }
+        }
          User::findOrFail($user->id);
 
          $rules = [
@@ -236,7 +256,8 @@ class UserController extends Controller
                $date1 = strtr($request->input('exp_date'), '/', '-');
                $user->exp_time = date('Y-m-d H:i:s' , strtotime($date1));
                $user->is_approved = $request->input('is_approved');
-               $user->is_visible = $request->input('is_visible');  
+               $user->is_visible = $request->input('is_visible');
+               $user->catalogue_store = json_encode($catalogueStore);  
                $user->password = $request->password;
                $user->save();
 

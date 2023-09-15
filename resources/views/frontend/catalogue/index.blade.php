@@ -41,11 +41,13 @@ div.content {
         <div class="div-center">
             <div class="content row">
                 @foreach($Catalogue as $key => $value)
-                <div class="col-md-6">
-                    <div class="minicart-catelogue-button">
-                        <a class="btn btn-dark" href="{{ URL::to('/catalogue') }}/{{$key}}">{{ $value }}</a>
-                    </div>
-                </div>
+                  @if(json_decode(Auth::user()->catalogue_store)[$key] == 1)
+                  <div class="col-md-6">
+                      <div class="minicart-catelogue-button">
+                          <a class="btn btn-dark" href="{{ URL::to('/catalogue') }}/{{$key}}">{{ $value }}</a>
+                      </div>
+                  </div>
+                  @endif
                  @endforeach
 
                 <div class="col-md-6">
