@@ -123,6 +123,7 @@ class CatalogueController extends Controller
                $item->catalogue_id = $request->input('catalogue_id');
                $item->sub_catalogue_id = $request->input('sub_catalogue_id');
                $item->item_title = $request->input('item_title');
+               $item->description = $request->input('description');
                if(isset($file_path_1)){
                 $item->photo = $file_path_1;                
                }
@@ -237,6 +238,7 @@ class CatalogueController extends Controller
                $item->catalogue_id = $request->input('catalogue_id');
                $item->sub_catalogue_id = $request->input('sub_catalogue_id');
                $item->item_title = $request->input('item_title');
+               $item->description = $request->input('description');
                if(isset($file_path_1)){
                 $item->photo = $file_path_1;                
                }

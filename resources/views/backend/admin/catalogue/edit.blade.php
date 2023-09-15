@@ -42,6 +42,11 @@
                                         <span id="error_item_title" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <label for=""> Description </label>
+                                        <input type="text" class="form-control" id="description" name="description" value="{{ $item->description }}" placeholder="">
+                                        <span id="error_description" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 105px; height: 100px;">
                                     </div>
                                     <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">

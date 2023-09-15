@@ -103,7 +103,14 @@ class CatalogueController extends Controller
             $items = Item::where('catalogue_id',$request->main_catalogue)->where('sub_catalogue_id',$request->sub_catalogue);
         }
 
-        $items = $items->paginate($pagination);
-        return view('frontend.catalogue.items',compact('items'));
+        if($request->all_product == 'yes')
+        {
+            $items = $items->get();
+            $page = 'all_product';
+        }else{
+            $items = $items->paginate($pagination);
+            $page = '1';
+        }    
+        return view('frontend.catalogue.items',compact('items','page'));
     }
 }
