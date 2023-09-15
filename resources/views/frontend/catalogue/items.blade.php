@@ -132,9 +132,12 @@ div.content {
                   <a class="btn btn-dark set-page mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">Set Page</a>
                 </div>
                 @endif
+
+                @if($page != 'all_product')
                 <div class="minicart-catelogue-button">
                   <a class="ml-3 btn btn-dark all-product" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">All Product</a>
                 </div>
+                @endif
             </div>
         </div>
     </div>
