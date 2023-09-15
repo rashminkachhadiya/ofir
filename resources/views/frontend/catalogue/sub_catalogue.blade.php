@@ -50,14 +50,6 @@ div.content {
                         <a class="btn" href="">Cartier</a>
                     </div> -->
                 </div>
-                <div class="col-md-6">
-                    <!-- <div class="minicart-button">
-                        <a class="btn" href="">Cartier</a>
-                    </div>
-                    <div class="minicart-button">
-                        <a class="btn" href="">Cartier</a>
-                    </div> -->
-                </div>
             </div>
         </div>
     </div>
