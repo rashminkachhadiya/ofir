@@ -12,7 +12,7 @@
 
 .div-center {
   border-radius: 40px;
-  width: 600px;
+  width: 650px;
   height: 500px;
   background-color: #fff;
   position: absolute;
@@ -29,6 +29,10 @@
   display: table;
 }
 
+.pagination{
+  justify-content: center !important;
+}
+
 div.content {
   /*display: table-cell;*/
   /*vertical-align: middle;*/
@@ -43,12 +47,16 @@ div.content {
             <div class="content row">
                 @foreach($items as $item)
                   <div class="col-md-4">
-                    <img style="border: 5px solid black;" class="mb-1"
+                    <img style="border: 1px solid black;" class="mb-1"
                       src="{{asset($item->photo) }}"
-                      alt="product" width="150px" height="150px">
-                    <strong><p style="color: white; text-align: center;background-color: black;width: 150px;height: 25px;">{{ $item->item_title }}</p></strong>
+                      alt="product" width="180px" height="180px">
+                    <strong><p style="color: white; text-align: center;background-color: black;width: 180px;height: 25px;">{{ $item->item_title }}</p></strong>
                   </div>
                 @endforeach
+            </div>
+            <div class="paginatoin-area text-center mt-0 mb-0">
+                    <!-- {{$items->links('vendor.pagination.default')}} -->
+                {{ $items->appends(request()->input())->links('vendor.pagination.bootstrap-4') }}
             </div>
         </div>
     </div>
