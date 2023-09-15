@@ -95,6 +95,7 @@ class CatalogueController extends Controller
     public function getItems(Request $request)
     {
         $pagination = 9;
+        $mainCatalogue = $request->main_catalogue;
         if(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'ALL COLLECTIONS'){
             $items = Item::where('catalogue_id',$request->main_catalogue)->where('is_allcollection',1);
         }elseif(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'AVAILABLE'){
@@ -111,6 +112,6 @@ class CatalogueController extends Controller
             $items = $items->paginate($pagination);
             $page = '1';
         }    
-        return view('frontend.catalogue.items',compact('items','page'));
+        return view('frontend.catalogue.items',compact('items','page','mainCatalogue'));
     }
 }

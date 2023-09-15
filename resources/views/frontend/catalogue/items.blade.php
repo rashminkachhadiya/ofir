@@ -97,10 +97,10 @@ div.content {
     <div class="back">
         <div class="div-center">
             <div class="text-center mb-4">
-              <h2 style="color:black;font-style: italic">{{ config('params.catalogue')[$items[0]->catalogue_id] }}</h2>
+              <h2 style="color:black;font-style: italic">{{ config('params.catalogue')[$mainCatalogue] }}</h2>
             </div>
             <div class="row">
-                @foreach($items as $item)
+                @forelse($items as $item)
                   <div class="col-md-4 text-center">
                     <div>
                       <img style="border: 1px solid black;" class="mb-1"
@@ -112,7 +112,13 @@ div.content {
                       <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->description }}</p>
                     </div>
                   </div>
-                @endforeach
+                @empty
+                  <div class="text-center">
+                    <div>
+                      <p style="color: black;" class="text-center">No items found</p>                      
+                    </div>
+                  </div>
+                @endforelse
             </div>
             <div class="paginatoin-area text-center mt-0 mb-0 d-flex">
                 @if($page != 'all_product')
