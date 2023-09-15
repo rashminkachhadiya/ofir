@@ -38,6 +38,61 @@ div.content {
   /*vertical-align: middle;*/
 }
 
+.paginatoin-area {
+  margin-top: 30px;
+  padding: 20px;
+  /*border: 1px solid #efefef;*/
+  justify-content: center !important;
+}
+.paginatoin-area .pagination-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.paginatoin-area .pagination-box li {
+  margin-right: 5px;
+  display: inline-block;
+}
+.paginatoin-area .pagination-box li:last-child {
+  margin-right: 0;
+}
+.paginatoin-area .pagination-box li a {
+  color: #222222;
+  height: 25px;
+  width: 25px;
+  font-size: 11px;
+  display: inline-block;
+  text-align: center;
+  line-height: 25px;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+}
+.paginatoin-area .pagination-box li a i {
+  font-size: 26px;
+  line-height: 25px;
+}
+.paginatoin-area .pagination-box li a:hover {
+  color: #fff;
+  border-color: black;
+  background-color: black;
+}
+.paginatoin-area .pagination-box li.active{
+  color: #fff;
+  background-color: black;
+  height: 25px;
+  width: 25px;
+  font-size: 11px;
+  display: inline-block;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 50%;
+}
+
 </style>
     <div class="back">
         <div class="div-center">
@@ -55,16 +110,16 @@ div.content {
                   </div>
                 @endforeach
             </div>
-            <div class="paginatoin-area text-center mt-0 mb-0">
+            <div class="paginatoin-area text-center mt-0 mb-0 d-flex">
                 @if($page != 'all_product')
-                {{ $items->appends(request()->input())->links('vendor.pagination.bootstrap-4') }}
+                {{ $items->appends(request()->input())->links('vendor.pagination.default') }}
                 @else
-                <div>
-                  <button class="btn btn-primary set-page mb-1">Set Page</button>
+                <div class="minicart-catelogue-button">
+                  <a class="btn btn-dark set-page mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">Set Page</a>
                 </div>
                 @endif
-                <div>
-                  <button class="btn btn-primary all-product">All Product</button>
+                <div class="minicart-catelogue-button">
+                  <a class="ml-3 btn btn-dark all-product" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">All Product</a>
                 </div>
             </div>
         </div>
