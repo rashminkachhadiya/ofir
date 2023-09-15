@@ -134,4 +134,22 @@ return [
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
     ],
+
+    '10' => [
+        '0' => 'RINGS',
+        '1' => 'BANGLE/BRACELETS',
+        '2' => 'NECKLACES',
+        '3' => 'EARRINGS',
+        '4' => 'ALL COLLECTIONS',
+        '5' => 'AVAILABLE',
+    ],
+
+    '11' => [
+        '0' => 'RINGS',
+        '1' => 'BANGLE/BRACELETS',
+        '2' => 'NECKLACES',
+        '3' => 'EARRINGS',
+        '4' => 'ALL COLLECTIONS',
+        '5' => 'AVAILABLE',
+    ],
 ];
