@@ -22,10 +22,12 @@ class CatalogueController extends Controller
      */
     public function index()
     {
-      return view('backend.admin.catalogue.index');
+        $catalogues = config('params.catalogue');
+        $catalogues[''] = 'Select Catalogue';
+        return view('backend.admin.catalogue.index',compact('catalogues'));
     }
 
-     public function getAll()
+     public function getAll(Request $request)
    {
       $can_edit = $can_delete = '';
       if (!auth()->user()->can('user-edit')) {
@@ -35,13 +37,35 @@ class CatalogueController extends Controller
          $can_delete = "style='display:none;'";
       }
 
-      $items = Item::all();
+      $items = Item::select('*');
+      if(!empty($request['catalogue_id']))
+        {
+          $items->where('items.catalogue_id', '=', $request['catalogue_id']);
+        }
+      if(!empty($request['sub_catalogue_id']))
+        {
+          $items->where('items.sub_catalogue_id', '=', $request['sub_catalogue_id']);
+        }
+      $items->get();
+
       return Datatables::of($items)
         ->addColumn('created_at', function ($orders) {
           return Carbon::parse($orders->created_at)->format('d/m/Y');
         })
         ->addColumn('catalogue_id', function ($items) {
            return config('params.catalogue')[$items->catalogue_id];
+        })
+        ->addColumn('metal_colour', function ($items) {
+            if(!is_null($items->metal_colour))
+            {
+               return config('params.metal_colour')[$items->metal_colour];
+            }
+        })
+        ->addColumn('metal_type', function ($items) {
+            if(!is_null($items->metal_type))
+            {
+               return config('params.metal_type')[$items->metal_type];
+            }
         })
         ->addColumn('sub_catalogue_id', function ($items) {
            return config('params.'.$items->catalogue_id)[$items->sub_catalogue_id];
@@ -121,6 +145,8 @@ class CatalogueController extends Controller
 
                $item = new Item();
                $item->catalogue_id = $request->input('catalogue_id');
+               $item->sku = $request->input('sku');
+               $item->item_title_gram = $request->input('item_title_gram');
                $item->sub_catalogue_id = $request->input('sub_catalogue_id');
                $item->item_title = $request->input('item_title');
                $item->description = $request->input('description');
@@ -129,6 +155,12 @@ class CatalogueController extends Controller
                }
                $item->is_allcollection = $request->input('is_allcollection');
                $item->is_available = $request->input('is_available');
+               $item->size = $request->input('size');
+               $item->metal_colour = $request->input('metal_colour');
+               $item->metal_type = $request->input('metal_type');
+               $item->gram = $request->input('gram');
+               $item->quantity = $request->input('quantity');
+               $item->ct = $request->input('ct');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -236,6 +268,8 @@ class CatalogueController extends Controller
             DB::beginTransaction();
             try {
                $item->catalogue_id = $request->input('catalogue_id');
+               $item->sku = $request->input('sku');
+               $item->item_title_gram = $request->input('item_title_gram');
                $item->sub_catalogue_id = $request->input('sub_catalogue_id');
                $item->item_title = $request->input('item_title');
                $item->description = $request->input('description');
@@ -244,6 +278,12 @@ class CatalogueController extends Controller
                }
                $item->is_allcollection = $request->input('is_allcollection');
                $item->is_available = $request->input('is_available');
+               $item->size = $request->input('size');
+               $item->metal_colour = $request->input('metal_colour');
+               $item->metal_type = $request->input('metal_type');
+               $item->gram = $request->input('gram');
+               $item->quantity = $request->input('quantity');
+               $item->ct = $request->input('ct');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();

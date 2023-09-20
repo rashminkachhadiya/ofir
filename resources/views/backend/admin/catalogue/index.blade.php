@@ -19,6 +19,22 @@
             </div>
         </div>
     </div>
+    <div class="app-page-title mt-1">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="form-group col-md-12 col-sm-12">
+                    <label for=""> Catalogue </label>
+                    {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+                <div class="form-group col-md-12 col-sm-12">
+                    <label for="">Sub Catalogue </label>
+                    {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'sub_catalogue_id']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="main-card mb-3 card">
@@ -29,10 +45,17 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>SKU</th>
                                 <th>Created At</th>
                                 <th>Catalogue</th>
-                                <th>Sub Catalogue</th>
+                                <th>Product</th>
                                 <th>Item Title</th>
+                                <th>Size</th>
+                                <th>Color</th>
+                                <th>Metal Type</th>
+                                <th>Gram</th>
+                                <th>Quantity</th>
+                                <th>Ct</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -62,14 +85,25 @@
                     headers: {
                         "X-CSRF-TOKEN": CSRF_TOKEN,
                     },
+                    data: function(d) {
+                        d.catalogue_id = $('#catalogue_id').val();
+                        d.sub_catalogue_id = $('#sub_catalogue_id').val();
+                    },
                     "dataType": 'json'
                 },
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
+                    {data: 'sku', name: 'sku'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'catalogue_id', name: 'catalogue_id'},
                     {data: 'sub_catalogue_id', name: 'sub_catalogue_id'},
                     {data: 'item_title', name: 'item_title'},
+                    {data: 'size', name: 'size'},
+                    {data: 'metal_colour', name: 'metal_colour'},
+                    {data: 'metal_type', name: 'metal_type'},
+                    {data: 'gram', name:'gram'},
+                    {data: 'quantity', name: 'quantity'},
+                    {data: 'ct', name: 'ct'},
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,
@@ -107,6 +141,34 @@
             });
 
         });
+
+        $("body").on("change","#catalogue_id",function(e){
+        var catalogueId = $("#catalogue_id :selected").val();
+        var actionURL = "{{ URL::to('admin/get-subcatalogue') }}?catalogue_id="+catalogueId;
+        $.ajax({
+                type: 'GET',
+                url: actionURL,
+                success: function (data) {
+                    $('#sub_catalogue_id').empty();
+                    $('#sub_catalogue_id').append($('<option>', {
+                        value: '',
+                        text : 'Select Sub Catalogue'
+                    }));
+                    $.each(data.data, function (i, item) {
+                        $('#sub_catalogue_id').append('<option value='+ i +'>'+ item +'</option');
+                    });
+                    table.draw();
+                },
+                error: function (result) {
+                    // $("#modal_data").html("Sorry Cannot Load Data");
+                }
+            });
+
+        $("body").on("change","#sub_catalogue_id",function(e){
+            table.draw();    
+        });
+        // var sub_catalogue = {!! json_encode(config('params.')) !!};
+    });
 
     </script>
 @stop

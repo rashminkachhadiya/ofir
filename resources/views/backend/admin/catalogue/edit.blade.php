@@ -37,9 +37,19 @@
                                         <span id="error_email" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <label for=""> SKU </label>
+                                        <input type="text" class="form-control" id="sku" name="sku" value="{{ $item->sku }}" placeholder="" required>
+                                        <span id="error_sku" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Item Title </label>
                                         <input type="text" class="form-control" id="item_title" name="item_title" value="{{ $item->item_title }}" placeholder="" required>
                                         <span id="error_item_title" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <label for=""> Item Title gram</label>
+                                        <input type="text" class="form-control" id="item_title_gram" name="item_title_gram" value="{{ $item->item_title_gram }}" placeholder="">
+                                        <span id="error_item_title_gram" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Description </label>
@@ -61,6 +71,35 @@
                                         <label for=""> Available </label><br/>
                                         <input type="radio" name="is_available" class="flat-green"value="1" {{ ( $item->is_available == 1 ) ? 'checked' : '' }}/> Yes
                                         <input type="radio" name="is_available" class="flat-green"value="0" {{ ( $item->is_available == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Size </label>
+                                        <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}" required>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Metal Colour </label>
+                                          {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Metal Type </label>
+                                        {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Gram </label>
+                                       <input type="text" class="form-control" id="gram" name="gram" value="{{ $item->gram }}" placeholder="" >
+                                        <span id="error_gram" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Quantity </label>
+                                       <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $item->quantity }}" placeholder="" >
+                                        <span id="error_quantity" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Ct </label>
+                                       <input type="number" class="form-control" id="ct" name="ct" value="{{ $item->ct }}" placeholder="" >
+                                        <span id="error_ct" class="has-error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
