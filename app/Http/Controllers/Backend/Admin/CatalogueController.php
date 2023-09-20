@@ -38,16 +38,14 @@ class CatalogueController extends Controller
       }
 
       $items = Item::select('*');
-      if(!empty($request['catalogue_id']))
+      if(!is_null($request['catalogue_id']))
         {
-          $items->where('items.catalogue_id', '=', $request['catalogue_id']);
+          $items->where('catalogue_id', '=', $request['catalogue_id']);
         }
-      if(!empty($request['sub_catalogue_id']))
+      if(!is_null($request['sub_catalogue_id']))
         {
-          $items->where('items.sub_catalogue_id', '=', $request['sub_catalogue_id']);
+          $items->where('sub_catalogue_id', '=', $request['sub_catalogue_id']);
         }
-      $items->get();
-
       return Datatables::of($items)
         ->addColumn('created_at', function ($orders) {
           return Carbon::parse($orders->created_at)->format('d/m/Y');
