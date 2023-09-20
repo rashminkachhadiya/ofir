@@ -12,6 +12,7 @@ use App\Models\Item;
 use DB;
 use URL;
 use Carbon\Carbon;
+use View;
 
 class CatalogueController extends Controller
 {
@@ -73,6 +74,7 @@ class CatalogueController extends Controller
            $html .= '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->id . '/edit"  id="' . $items->id . '" class="btn btn-xs btn-info margin-r-5" title="View"><i class="fa fa-edit"></i> </a>';
            // $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $items->id . '" class="btn btn-xs btn-info mr-1 edit" title="Edit"><i class="fa fa-edit"></i> </a>';
            $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $items->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
+           $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $items->id . '" class="btn btn-xs btn-primary mr-1 copy-product" title="Copy Product"><i class="fa fa-plus"></i> </a>';
            $html .= '</div>';
            return $html;
         })
@@ -330,5 +332,49 @@ class CatalogueController extends Controller
     {
         $subCatalogue = config('params.'.$request->catalogue_id);
         return response()->json(['data' => $subCatalogue]);
+    }
+
+    public function copyProduct(Request $request)
+    {
+      $item = Item::find($request->id);
+      $view = View::make('backend.admin.catalogue.copy_item', compact('item'))->render();
+      return response()->json(['html' => $view]);
+    }
+
+    public function copyProductSave(Request $request)
+    {
+        DB::beginTransaction();
+            try {
+              $itemDetails = Item::find($request->id);
+              foreach($request->input('catalogue_store') as $key => $value){
+                $item = new Item();
+               $item->catalogue_id = $key;
+               $item->sku = $itemDetails->sku;
+               $item->item_title_gram = $itemDetails->item_title_gram;
+               $item->sub_catalogue_id = $itemDetails->sub_catalogue_id;
+               $item->item_title = $itemDetails->item_title;
+               $item->description = $itemDetails->description;
+                $item->photo = $itemDetails->photo;                
+               $item->is_allcollection = $itemDetails->is_allcollection;
+               $item->is_available = $itemDetails->is_available;
+               $item->size = $itemDetails->size;
+               $item->metal_colour = $itemDetails->metal_colour;
+               $item->metal_type = $itemDetails->metal_type;
+               $item->gram = $itemDetails->gram;
+               $item->total_gram = $itemDetails->total_gram;
+               $item->quantity = $itemDetails->quantity;
+               $item->ct = $itemDetails->ct;
+               $item->total_ct = $itemDetails->total_ct;
+               $item->created_by = Auth::user()->id;
+               $item->updated_by = Auth::user()->id;
+               $item->save();
+              }
+               DB::commit();
+               return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
+
+            } catch (\Exception $e) {
+               DB::rollback();
+               return response()->json(['type' => 'error', 'message' => $e->getMessage()]);
+            }
     }
 }

@@ -144,6 +144,24 @@
                 ajax_submit_delete('catalogue', id)
             });
 
+            $("#manage_all").on("click", ".copy-product", function () {
+                var id = $(this).attr('id');
+                $("#modal_data").empty();
+                $('.modal-title').text('Copy Product');
+
+                $.ajax({
+                    url: 'catalogue' + '/' + id + '/copy-product',
+                    type: 'get',
+                    success: function (data) {
+                        $("#modal_data").html(data.html);
+                        $('#myModal').modal('show'); // show bootstrap modal
+                    },
+                    error: function (result) {
+                        $("#modal_data").html("Sorry Cannot Load Data");
+                    }
+                });
+            });
+            
         });
 
         $("body").on("change","#catalogue_id",function(e){
