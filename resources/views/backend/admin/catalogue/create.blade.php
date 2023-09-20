@@ -23,7 +23,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Catalogue </label>
-                                        {!! Form::select('catalogue_id', $catalogues ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
+                                        {!! Form::select('catalogue_id[]', $catalogues ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id', 'multiple' => 'true']) !!}
                                         <span id="error_email" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">

@@ -140,9 +140,9 @@ class CatalogueController extends Controller
 
             DB::beginTransaction();
             try {
-
-               $item = new Item();
-               $item->catalogue_id = $request->input('catalogue_id');
+              foreach($request->input('catalogue_id') as $item_store){
+                $item = new Item();
+               $item->catalogue_id = $item_store;
                $item->sku = $request->input('sku');
                $item->item_title_gram = $request->input('item_title_gram');
                $item->sub_catalogue_id = $request->input('sub_catalogue_id');
@@ -164,7 +164,7 @@ class CatalogueController extends Controller
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
-
+              }
                DB::commit();
                $returnURL = URL::to('/admin/catalogue') . '/' . $item->id . '/edit';
                return response()->json(['type' => 'success', 'message' => "Successfully Created", 'returnURL' => $returnURL]);
