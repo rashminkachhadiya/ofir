@@ -22,5 +22,10 @@ class HomeController extends Controller
       return view('frontend.newsDetails', compact('blog'));
    }
 
+   public function thankYou()
+   {
+      return view('auth.thankyou');
+   }
+
 
 }

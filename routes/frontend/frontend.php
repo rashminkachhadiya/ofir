@@ -2,6 +2,7 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/viewNews/{blog}', 'HomeController@viewNews');
+Route::get('/thank-you','HomeController@thankYou');
 
 
 Route::middleware('auth')->group(function ()

@@ -10,6 +10,7 @@
 }
 
 .div-center {
+  border-radius: 40px;
   width: 400px;
   height: 400px;
   background-color: #fff;
@@ -40,7 +41,7 @@ div.content {
                         <form method="POST" action="{{ route('login') }}" class="register-form" id="register-form">
                             @csrf
                             <h4>Log In</h4>
-                            <p>Enter your email address and password to access account</p>
+                            <p>Enter your Username and password to access account</p>
                             
                             <div class="form-floating mb-3">
                               <input type="text" name="username" class="form-control" id="floatingInput" placeholder="name@example.com" value="{{ old('email') }}" required>

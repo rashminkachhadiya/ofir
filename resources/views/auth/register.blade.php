@@ -10,6 +10,7 @@
 }
 
 .div-center {
+  border-radius: 40px;
   width: 400px;
   height: 400px;
   background-color: #fff;
@@ -68,11 +69,16 @@ div.content {
                                     <input type="text" name="mobile" class="form-control" id="mobile" placeholder="name@example.com" value="{{ old('mobile') }}">
                                     <label for="floatingInput required">Mobile</label>
                                 </div>
+
+                                 <div class="form-floating mb-3">
+                                  <input type="text" name="hear_about" class="form-control" id="hear_about" placeholder="hear_about" value="{{ old('hear_about') }}">
+                                  <label for="floatingInput required">How did you about us?</label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-12 text-end float-right">
+                                <button type="submit" class="btn btn-dark">
                                     {{ __('Register') }}
                                 </button>
                             </div>

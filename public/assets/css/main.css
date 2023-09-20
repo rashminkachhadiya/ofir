@@ -1440,7 +1440,7 @@ pre code{
 }
 .table thead th{
     vertical-align:bottom;
-    border-bottom:2px solid #e9ecef
+    border-bottom:2px solid black;
 }
 .table tbody+tbody{
     border-top:2px solid #e9ecef
@@ -1455,7 +1455,8 @@ pre code{
     border:1px solid #e9ecef
 }
 .table-bordered th,.table-bordered td{
-    border:1px solid #e9ecef
+    border:1px solid black;
+    color:black !important;
 }
 .table-bordered thead th,.table-bordered thead td{
     border-bottom-width:2px
@@ -3493,7 +3494,8 @@ input[type="submit"].btn-block,input[type="reset"].btn-block,input[type="button"
     border-top-right-radius:0
 }
 .nav-pills .nav-link{
-    border-radius:.25rem
+    border-radius:.25rem;
+    color: black;
 }
 .nav-pills .nav-link.active,.nav-pills .show>.nav-link{
     color:#fff;
@@ -11893,7 +11895,7 @@ a.badge-alternate:hover,a.badge-alternate:focus{
     top:-3px
 }
 .card{
-	background: grey;
+	background: #80808047;
     box-shadow:0 0.46875rem 2.1875rem rgba(4,9,20,0.03),0 0.9375rem 1.40625rem rgba(4,9,20,0.03),0 0.25rem 0.53125rem rgba(4,9,20,0.05),0 0.125rem 0.1875rem rgba(4,9,20,0.03);
     border-width:0;
     transition:all .2s
@@ -12060,7 +12062,7 @@ a.badge-alternate:hover,a.badge-alternate:focus{
     margin-bottom:1rem
 }
 .nav-link{
-    font-weight:bold
+    font-weight:bold;
 }
 .nav-link:hover{
     cursor:pointer
@@ -12075,10 +12077,10 @@ a.badge-alternate:hover,a.badge-alternate:focus{
     color:#3f6ad8 !important
 }
 .nav-pills .nav-link.active{
-    background:white;
+    background:black;
 }
 .nav-pills .nav-link.active:hover{
-    color:black !important
+    color:white !important
 }
 .tabs-animated .nav-link{
     position:relative;
@@ -12251,7 +12253,7 @@ a.badge-alternate:hover,a.badge-alternate:focus{
     margin-left:8px
 }
 .nav-pills .nav-link.active,.nav-pills .nav-link.active:hover{
-    color:black;
+    color:white;
 }
 .nav-pills .nav-link.active .nav-link-icon,.nav-pills .nav-link.active:hover .nav-link-icon{
     color:black;

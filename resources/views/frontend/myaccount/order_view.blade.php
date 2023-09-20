@@ -88,7 +88,7 @@
                     <div class="row">
                         @foreach($order->orderPicture as $image)
                             <div class="col-md-2 mt-2">
-                                <img width="170px;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                <img width="170px;" style="border: 1px solid black;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
                             </div>
                         @endforeach
                     </div>

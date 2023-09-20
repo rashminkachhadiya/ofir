@@ -26,7 +26,7 @@
   overflow: auto;
   padding: 1em 2em;
   border-bottom: 2px solid #ccc;
-  display: table;
+  display: grid;
 }
 
 div.content {
@@ -36,6 +36,11 @@ div.content {
 </style>
     <div class="back row">
         <div class="div-center">
+                @guest
+                <h4 class="d-block" style="color: black;">This web Catalog only for trader</h4>
+                @else
+                <h4 class="d-block" style="color: black;">Hi, {{Auth()->user()->f_name}}</h4>
+                @endguest
             <div class="content">
                 <div>
                     @guest

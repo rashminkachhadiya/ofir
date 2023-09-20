@@ -1,13 +1,14 @@
 @extends('frontend.layouts.master')
 @section('title', 'About Us')
 @section('content')
-<div class="shop-main-wrapper section-padding">
+<div class="shop-main-wrapper section-padding" style="background: #e2e2e2">
   <div class="container">
     <div class="section-bg-color">
-      <div style="border: 1px solid #f195ab;border-radius: 2rem !important;background-color: black; " class="row">
-        <div style="border-right: 1px solid white; padding: 0px;" class="col-3">
+      <div style="border:1px solid black; border-radius: 2rem !important;background-color: white; " class="row">
+        <div style="border-right: 1px solid black; padding: 0px;" class="col-3">
           <div  class="nav flex-column nav-pills mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <!-- <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a> -->
+            <a class="m-2 mt-0" style="font-size: 30px;cursor: pointer;" href="{{ URL::to('/') }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
             <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">All Orders</a>
             <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-controls="v-pills-invoice" aria-selected="false">Pending Orders</a>
             <a class="nav-link" id="v-pills-ready-tab" data-toggle="pill" href="#v-pills-ready" role="tab" aria-controls="v-pills-ready" aria-selected="false">Ready for Collection</a>
@@ -117,6 +118,8 @@
                 </div>
               </form>
             </div> -->
+            <h4 class="d-block" style="color: black; text-align: center;">Hi {{Auth()->user()->f_name}}</h4>
+
             <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
               <div class="row">
                 <div class="col-lg-12 col-12 p-0">
