@@ -66,7 +66,7 @@ class OrderController extends Controller
            return config('params.categories')[$orders->category_id];
         })
         ->addColumn('client_name', function ($orders) {
-           return $orders->orderUser->f_name;
+           return $orders->orderUser->username;
         })
         ->addColumn('action', function ($orders) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
