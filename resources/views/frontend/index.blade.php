@@ -37,7 +37,7 @@ div.content {
     <div class="back row">
         <div class="div-center">
                 @guest
-                <h4 class="d-block" style="color: black;">This web Catalog only for trader12345</h4>
+                <h4 class="d-block" style="color: black;">This web Catalog only for trader</h4>
                 @else
                 <h4 class="d-block" style="color: black;">Hi, {{Auth()->user()->f_name}}</h4>
                 @endguest
