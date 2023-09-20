@@ -157,8 +157,10 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->gram = $request->input('gram');
+               $item->total_gram = $request->input('gram') * $request->input('quantity');
                $item->quantity = $request->input('quantity');
                $item->ct = $request->input('ct');
+               $item->total_ct = $request->input('ct') * $request->input('quantity');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -280,8 +282,10 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->gram = $request->input('gram');
+               $item->total_gram = $request->input('gram') * $request->input('quantity');
                $item->quantity = $request->input('quantity');
                $item->ct = $request->input('ct');
+               $item->total_ct = $request->input('ct') * $request->input('quantity');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();

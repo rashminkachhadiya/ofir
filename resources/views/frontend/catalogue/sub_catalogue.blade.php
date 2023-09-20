@@ -36,8 +36,13 @@ div.content {
 </style>
     <div class="back row">
         <div class="div-center">
-            <div class="text-center mb-4">
-              <h2 style="color:black;font-style: italic">{{ $catalogueTitle }}</h2>
+            <div class="mb-4 d-flex">
+              <div class="col-md-3">
+                <a class="m-2 mt-0" style="font-size: 30px;cursor: pointer;" href="{{ URL::to('/catalogue') }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
+              </div>
+              <div class="text-center col-md-6">
+                <h2 style="color:black;font-style: italic">{{ $catalogueTitle }}</h2>
+              </div>
             </div>
             <div class="content d-flex">
                 <div class="col-md-6">

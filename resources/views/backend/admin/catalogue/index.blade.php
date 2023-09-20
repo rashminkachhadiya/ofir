@@ -45,17 +45,19 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>SKU</th>
+                                <th>Code</th>
                                 <th>Created At</th>
                                 <th>Catalogue</th>
                                 <th>Product</th>
                                 <th>Item Title</th>
                                 <th>Size</th>
                                 <th>Color</th>
-                                <th>Metal Type</th>
+                                <th>Metal</th>
                                 <th>Gram</th>
-                                <th>Quantity</th>
                                 <th>Ct</th>
+                                <th>Quantity</th>
+                                <th>Total Gram</th>
+                                <th>Total Ct</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -102,8 +104,10 @@
                     {data: 'metal_colour', name: 'metal_colour'},
                     {data: 'metal_type', name: 'metal_type'},
                     {data: 'gram', name:'gram'},
-                    {data: 'quantity', name: 'quantity'},
                     {data: 'ct', name: 'ct'},
+                    {data: 'quantity', name: 'quantity'},
+                    {data: 'total_gram', name: 'total_gram'},
+                    {data: 'total_ct', name: 'total_ct'},
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,

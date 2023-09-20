@@ -37,7 +37,7 @@
                                         <span id="error_email" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
-                                        <label for=""> SKU </label>
+                                        <label for=""> Code </label>
                                         <input type="text" class="form-control" id="sku" name="sku" value="{{ $item->sku }}" placeholder="" required>
                                         <span id="error_sku" class="has-error"></span>
                                     </div>
@@ -92,14 +92,14 @@
                                         <span id="error_gram" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for=""> Quantity </label>
-                                       <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $item->quantity }}" placeholder="" >
-                                        <span id="error_quantity" class="has-error"></span>
-                                    </div>
-                                    <div class="form-group col-md-12">
                                         <label for=""> Ct </label>
                                        <input type="number" class="form-control" id="ct" name="ct" value="{{ $item->ct }}" placeholder="" >
                                         <span id="error_ct" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Quantity </label>
+                                       <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $item->quantity }}" placeholder="" >
+                                        <span id="error_quantity" class="has-error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
