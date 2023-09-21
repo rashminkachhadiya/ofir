@@ -81,20 +81,23 @@
                                         <label for=""> Metal Type </label>
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Gram </label>
-                                       <input type="text" class="form-control" id="gram" name="gram" value="" placeholder="" >
-                                        <span id="error_gram" class="has-error"></span>
+                                    <div id="catelogue_size">
+                                    <div class="form-group col-md-12 row">
+                                        <div class="col-md-3 pl-2 p-1">
+                                          <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="" placeholder="Qty">
+                                        </div>
+                                        <div class="col-md-3 p-0 p-1">
+                                          <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
+                                        </div>
+                                        <div class="col-md-3 p-0 p-1">
+                                          <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
+                                        </div>
+                                        <div class="col-md-1 p-1">
+                                            <a class="btn btn-primary add" style="color: white;">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Ct </label>
-                                       <input type="number" class="form-control" id="ct" name="ct" value="" placeholder="" >
-                                        <span id="error_ct" class="has-error"></span>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Quantity </label>
-                                       <input type="number" class="form-control" id="quantity" name="quantity" value="" placeholder="" >
-                                        <span id="error_quantity" class="has-error"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -114,6 +117,35 @@
 @endsection
 @push('script')
 <script>
+
+    let add_number = 1;
+        $("body").on("click", ".add", function (e) {
+            $("#catelogue_size").append(
+                '<div class="form-group col-md-12 row item_size-'+ add_number +'">\
+                    <div class="col-md-3 pl-2 p-1">\
+                      <input type="number" name="new_stock['+ add_number +']" class="form-control" id="new_stock-'+ add_number +'" value="" placeholder="Qty">\
+                    </div>\
+                    <div class="col-md-3 p-1">\
+                      <input type="text" name="new_gram['+ add_number +']" class="form-control" id="size_'+ add_number +'" value="" placeholder="Gram">\
+                    </div>\
+                    <div class="col-md-3 p-1">\
+                      <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
+                    </div>\
+                    <div class="col-md-1">\
+                        <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\
+                            <i class="fa fa-minus" aria-hidden="true"></i>\
+                        </a>\
+                    </div>\
+                </div>'
+            );
+            add_number++;
+        });
+
+        $("body").on("click", ".remove", function (e) {
+            let id = $(this).attr('data-id');
+            $(".item_size-" + id).remove();
+            add_number--;
+        });
 
     function showImage(imgNumber) {
         const imageUploader = document.querySelector("#photo-"+imgNumber);

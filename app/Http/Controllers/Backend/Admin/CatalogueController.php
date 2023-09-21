@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 use App\Models\Item;
+use App\Models\ItemStock;
 use DB;
 use URL;
 use Carbon\Carbon;
@@ -38,14 +39,14 @@ class CatalogueController extends Controller
          $can_delete = "style='display:none;'";
       }
 
-      $items = Item::select('*');
+      $items = Item::select('items.*', DB::raw("sum(item_stocks.qty) as tot_qty"), DB::raw("sum(item_stocks.gram) as tot_gram"), DB::raw("sum(item_stocks.ct) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id');
       if(!is_null($request['catalogue_id']))
         {
-          $items->where('catalogue_id', '=', $request['catalogue_id']);
+          $items->where('items.catalogue_id', '=', $request['catalogue_id']);
         }
       if(!is_null($request['sub_catalogue_id']))
         {
-          $items->where('sub_catalogue_id', '=', $request['sub_catalogue_id']);
+          $items->where('items.sub_catalogue_id', '=', $request['sub_catalogue_id']);
         }
       return Datatables::of($items)
         ->addColumn('created_at', function ($orders) {
@@ -158,15 +159,25 @@ class CatalogueController extends Controller
                $item->size = $request->input('size');
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
-               $item->gram = $request->input('gram');
-               $item->total_gram = $request->input('gram') * $request->input('quantity');
-               $item->quantity = $request->input('quantity');
-               $item->ct = $request->input('ct');
-               $item->total_ct = $request->input('ct') * $request->input('quantity');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
               }
+
+              if(!empty($request->new_stock))
+              {
+                  foreach ($request->new_stock as $key => $value) {
+                      $itemStock = new ItemStock();
+                      $itemStock->item_id = $item->id;
+                      $itemStock->qty = $value;
+                      $itemStock->gram = $request->new_gram[$key];
+                      $itemStock->ct = $request->new_ct[$key];
+                      $itemStock->total_gram = $value * $request->new_gram[$key];
+                      $itemStock->total_ct = $value * $request->new_ct[$key];
+                      $itemStock->save();
+                  }
+              }
+
                DB::commit();
                $returnURL = URL::to('/admin/catalogue') . '/' . $item->id . '/edit';
                return response()->json(['type' => 'success', 'message' => "Successfully Created", 'returnURL' => $returnURL]);
@@ -205,7 +216,8 @@ class CatalogueController extends Controller
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'Select Catalogue';
         $subCatalogue = config('params.'.$item->catalogue_id);
-        return view('backend.admin.catalogue.edit',compact('item','catalogues','subCatalogue'));
+        $itemStock = ItemStock::where('item_id',$id)->get();
+        return view('backend.admin.catalogue.edit',compact('item','catalogues','subCatalogue','itemStock'));
        //  $haspermision = auth()->user()->can('user-edit');
        // if ($haspermision) {
        //    $item = Item::where('id', $id)->first();
@@ -235,10 +247,7 @@ class CatalogueController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->ajax()) {
-        
-        echo "<pre>";
-        print_r($request->all());
-        die;
+
         $item = Item::find($id);
         
          $rules = [
@@ -286,26 +295,25 @@ class CatalogueController extends Controller
                $item->size = $request->input('size');
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
-               $item->gram = $request->input('gram');
-               $item->total_gram = $request->input('gram') * $request->input('quantity');
-               $item->quantity = $request->input('quantity');
-               $item->ct = $request->input('ct');
-               $item->total_ct = $request->input('ct') * $request->input('quantity');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
 
                $itemStock = ItemStock::where('item_id',$item->id)->get();
-                if(!empty($request->size))
+
+                if(!empty($request->stock))
                 {
-                    foreach ($request->qty as $key => $value) 
+                    foreach ($request->stock as $key => $value) 
                     {
                         $itemStock = ItemStock::find($key);
                         $itemStock->qty = $value;
-                        $itemStock->stock = $request->stock[$key];
+                        $itemStock->gram = $request->gram[$key];
+                        $itemStock->ct = $request->ct[$key];
+                        $itemStock->total_gram = $value * $request->gram[$key];
+                        $itemStock->total_ct = $value * $request->ct[$key];
                         $itemStock->save();
                     }
-                    $itemStockDelete = ItemStock::where('item_id',$request->item_id)->whereNotIn('id',array_keys($request->size))->delete();
+                    $itemStockDelete = ItemStock::where('item_id',$item->id)->whereNotIn('id',array_keys($request->stock))->delete();
                 }
                 
                 if(!empty($request->new_stock))
@@ -315,8 +323,9 @@ class CatalogueController extends Controller
                         $itemStock->item_id = $item->id;
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->new_gram[$key];
-
                         $itemStock->ct = $request->new_ct[$key];
+                        $itemStock->total_gram = $value * $request->new_gram[$key];
+                        $itemStock->total_ct = $value * $request->new_ct[$key];
                         $itemStock->save();
                     }
                 }

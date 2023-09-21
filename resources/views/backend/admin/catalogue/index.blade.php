@@ -53,11 +53,9 @@
                                 <th>Size</th>
                                 <th>Color</th>
                                 <th>Metal</th>
-                                <th>Gram</th>
-                                <th>Ct</th>
-                                <th>Quantity</th>
-                                <th>Total Gram</th>
-                                <th>Total Ct</th>
+                                <th>Tot. Qty</th>
+                                <th>Tot. Gram</th>
+                                <th>Tot. Ct</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -103,11 +101,9 @@
                     {data: 'size', name: 'size'},
                     {data: 'metal_colour', name: 'metal_colour'},
                     {data: 'metal_type', name: 'metal_type'},
-                    {data: 'gram', name:'gram'},
-                    {data: 'ct', name: 'ct'},
-                    {data: 'quantity', name: 'quantity'},
-                    {data: 'total_gram', name: 'total_gram'},
-                    {data: 'total_ct', name: 'total_ct'},
+                    {data: 'tot_qty', name: 'tot_qty'},
+                    {data: 'tot_gram', name: 'tot_gram'},
+                    {data: 'tot_ct', name: 'tot_ct'},
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,

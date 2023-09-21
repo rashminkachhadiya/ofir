@@ -87,6 +87,40 @@
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
                                     <div id="catelogue_size">
+                                        @if(count($itemStock) > 0  && !empty($itemStock))
+                                            <?php
+                                                $sizeCount = 0;
+                                            ?>
+                                            @foreach($itemStock as $size)
+                                            <div class="form-group col-md-12 row mt-1 item_size-{{$size->id}}">
+                                                <div class="col-md-3 pl-2 p-1">
+                                                  <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{ $size->qty }}">
+                                                </div>
+                                                <div class="col-md-3 p-0 p-1">
+                                                  <input type="number" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
+                                                </div>
+                                                <div class="col-md-3 p-0 p-1">
+                                                  <input type="number" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
+                                                </div>
+                                                @if($sizeCount == 0)
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-primary add" style="color: white;">
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                                <?php
+                                                    $sizeCount++;
+                                                ?>
+                                                @else
+                                                <div class="col-md-1">
+                                                    <a class="btn btn-danger remove" data-id="{{ $size->id }}" style="color: white;">
+                                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                                @endif
+                                            </div>
+                                            @endforeach
+                                            @else
                                         <div class="form-group col-md-12 row">
                                             <div class="col-md-3 pl-2 p-1">
                                               <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="" placeholder="Qty">
@@ -103,6 +137,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
