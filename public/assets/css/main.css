@@ -8,6 +8,27 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
+ .product-details-des .quantity {
+    margin-right: 15px;
+}
+.product-details-des .quantity .pro-qty input {
+    width: 28px;
+    float: left;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    text-align: center;
+    background-color: transparent;
+}
+ .product-details-des .quantity .pro-qty {
+    width: 65px;
+    height: 40px;
+    border: 1px solid #ddd;
+    padding: 0 15px;
+    border-radius: 40px;
+    float: left;
+}
  .minicart-button a {
   color: white;
   font-size: 14px;

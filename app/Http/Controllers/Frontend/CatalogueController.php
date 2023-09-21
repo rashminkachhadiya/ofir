@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Item; 
+use App\Models\Item;
+use View;
 
 class CatalogueController extends Controller
 {
@@ -113,5 +114,12 @@ class CatalogueController extends Controller
             $page = '1';
         }    
         return view('frontend.catalogue.items',compact('items','page','mainCatalogue'));
+    }
+
+    public function itemDetails(Request $request)
+    {
+        $item = Item::where('id',$request->item_id)->first();
+        $view = View::make('frontend.catalogue.quick_view', compact('item'))->render();
+        return response()->json(['html' => $view]);
     }
 }

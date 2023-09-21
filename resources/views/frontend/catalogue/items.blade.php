@@ -108,9 +108,11 @@ div.content {
                 @forelse($items as $item)
                   <div class="col-md-4 text-center">
                     <div>
-                      <img style="border: 1px solid black;" class="mb-1"
-                      src="{{asset($item->photo) }}"
-                      alt="product" width="180px" height="180px">
+                      <a data-bs-toggle="modal" data-id="{{ $item->id }}" class="quick_view_details" href="javascript:void(0);">
+                        <img style="border: 1px solid black;" class="mb-1"
+                        src="{{asset($item->photo) }}"
+                        alt="product" width="180px" height="180px">
+                      </a>
                     </div>
                     <div>
                     <div>
@@ -146,6 +148,9 @@ div.content {
             </div>
         </div>
     </div>
+<div class="modal" id="quick_view_item_details">
+
+</div>
 @endsection
 @push('script')
 <script type="text/javascript">
@@ -163,5 +168,22 @@ div.content {
     url.search = search_params.toString();
     window.location.href = url.toString();
   });
+  $(".quick_view_details").click(function(event) {
+      $("#quick_view_item_details").empty();
+    
+      var id = $(this).attr('data-id');
+      $.ajax({
+          url: "{{ URL::to('item-details')}}" + '/' + id,
+          type: 'get',
+          success: function(data) {
+              $("#quick_view_item_details").html(data.html);
+              $('#quick_view_item_details').modal('show'); // show bootstrap modal
+          },
+          error: function(result) {
+              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+          }
+        
+      });
+    });
 </script>
 @endpush
