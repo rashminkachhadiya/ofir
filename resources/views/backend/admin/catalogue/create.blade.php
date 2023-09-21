@@ -37,6 +37,14 @@
                                         <span id="error_sku" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <img id="preview-1" src="" alt="" style="width: 105px; height: 100px;">
+                                    </div>
+                                    <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
+                                        <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Item Title </label>
                                         <input type="text" class="form-control" id="item_title" name="item_title" value="" placeholder="" required>
                                         <span id="error_item_title" class="has-error"></span>
@@ -50,12 +58,6 @@
                                         <label for=""> Description </label>
                                         <input type="text" class="form-control" id="description" name="description" value="" placeholder="">
                                         <span id="error_description" class="has-error"></span>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <img id="preview-1" src="" alt="" style="width: 105px; height: 100px;">
-                                    </div>
-                                    <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
-                                        <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> All Collection </label><br/>
@@ -71,7 +73,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group col-md-12">
                                         <label for=""> Size </label>
-                                        <input type="text" class="form-control" id="size" name="size" value="" required>
+                                        <input type="text" class="form-control" id="size" name="size" value="">
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> Metal Colour </label>
@@ -81,23 +83,39 @@
                                         <label for=""> Metal Type </label>
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
-                                    <div id="catelogue_size">
-                                    <div class="form-group col-md-12 row">
-                                        <div class="col-md-3 pl-2 p-1">
+                                </div>
+                                <div id="catelogue_size">
+                                    <div class="form-group row">
+                                        <div class="col-md-2 pl-2 p-1">
+                                          <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
                                           <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="" placeholder="Qty">
                                         </div>
-                                        <div class="col-md-3 p-0 p-1">
+                                        <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
                                         </div>
-                                        <div class="col-md-3 p-0 p-1">
+                                        <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
                                         </div>
+                                        <div class="col-md-2 p-0 p-1">
+                                              <input type="text" name="notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Notes">
+                                            </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <select class="form-control" name="new_item_status[0]">
+                                                <option value="" >Select option</option>
+                                                <option value="0" >Apro</option>
+                                                <option value="1" >Sale</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
+                                            </div>
                                         <div class="col-md-1 p-1">
                                             <a class="btn btn-primary add" style="color: white;">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </a>
                                         </div>
-                                    </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-3">
@@ -121,15 +139,31 @@
     let add_number = 1;
         $("body").on("click", ".add", function (e) {
             $("#catelogue_size").append(
-                '<div class="form-group col-md-12 row item_size-'+ add_number +'">\
-                    <div class="col-md-3 pl-2 p-1">\
+                '<div class="form-group row item_size-'+ add_number +'">\
+                    <div class="col-md-2 pl-2 p-1">\
+                      <input type="text" name="new_code['+ add_number +']" class="form-control" id="new_code-'+ add_number +'" value="" placeholder="Code">\
+                    </div>\
+                    <div class="col-md-1 pl-2 p-1">\
                       <input type="number" name="new_stock['+ add_number +']" class="form-control" id="new_stock-'+ add_number +'" value="" placeholder="Qty">\
                     </div>\
-                    <div class="col-md-3 p-1">\
+                    <div class="col-md-1 p-1">\
                       <input type="text" name="new_gram['+ add_number +']" class="form-control" id="size_'+ add_number +'" value="" placeholder="Gram">\
                     </div>\
-                    <div class="col-md-3 p-1">\
+                    <div class="col-md-1 p-1">\
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Note">\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
+                        <option value="">Select option</option>\
+                        <option value="0">Apro</option>\
+                        <option value="1">Sale</option>\
+                      </select>\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
                     </div>\
                     <div class="col-md-1">\
                         <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\

@@ -39,7 +39,7 @@ class CatalogueController extends Controller
          $can_delete = "style='display:none;'";
       }
 
-      $items = Item::select('items.*', DB::raw("sum(item_stocks.qty) as tot_qty"), DB::raw("sum(item_stocks.gram) as tot_gram"), DB::raw("sum(item_stocks.ct) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id');
+      $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id');
       if(!is_null($request['catalogue_id']))
         {
           $items->where('items.catalogue_id', '=', $request['catalogue_id']);
@@ -167,14 +167,18 @@ class CatalogueController extends Controller
               if(!empty($request->new_stock))
               {
                   foreach ($request->new_stock as $key => $value) {
-                      $itemStock = new ItemStock();
-                      $itemStock->item_id = $item->id;
-                      $itemStock->qty = $value;
-                      $itemStock->gram = $request->new_gram[$key];
-                      $itemStock->ct = $request->new_ct[$key];
-                      $itemStock->total_gram = $value * $request->new_gram[$key];
-                      $itemStock->total_ct = $value * $request->new_ct[$key];
-                      $itemStock->save();
+                        $itemStock = new ItemStock();
+                        $itemStock->item_id = $item->id;
+                        $itemStock->item_code = $request->new_code[$key];
+                        $itemStock->qty = $value;
+                        $itemStock->gram = $request->new_gram[$key];
+                        $itemStock->ct = $request->new_ct[$key];
+                        $itemStock->total_gram = $value * $request->new_gram[$key];
+                        $itemStock->total_ct = $value * $request->new_ct[$key];
+                        $itemStock->notes = $request->new_notes[$key];
+                        $itemStock->item_status = $request->new_item_status[$key];
+                        $itemStock->date = !is_null($request->new_date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->new_date[$key])) : NULL;
+                        $itemStock->save();
                   }
               }
 
@@ -306,11 +310,15 @@ class CatalogueController extends Controller
                     foreach ($request->stock as $key => $value) 
                     {
                         $itemStock = ItemStock::find($key);
+                        $itemStock->item_code = $request->code[$key];
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->gram[$key];
                         $itemStock->ct = $request->ct[$key];
                         $itemStock->total_gram = $value * $request->gram[$key];
                         $itemStock->total_ct = $value * $request->ct[$key];
+                        $itemStock->notes = $request->notes[$key];
+                        $itemStock->item_status = $request->item_status[$key];
+                        $itemStock->date = !is_null($request->date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->date[$key])) : NULL;
                         $itemStock->save();
                     }
                     $itemStockDelete = ItemStock::where('item_id',$item->id)->whereNotIn('id',array_keys($request->stock))->delete();
@@ -321,11 +329,15 @@ class CatalogueController extends Controller
                     foreach ($request->new_stock as $key => $value) {
                         $itemStock = new ItemStock();
                         $itemStock->item_id = $item->id;
+                        $itemStock->item_code = $request->new_code[$key];
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->new_gram[$key];
                         $itemStock->ct = $request->new_ct[$key];
                         $itemStock->total_gram = $value * $request->new_gram[$key];
                         $itemStock->total_ct = $value * $request->new_ct[$key];
+                        $itemStock->notes = $request->new_notes[$key];
+                        $itemStock->item_status = $request->new_item_status[$key];
+                        $itemStock->date = !is_null($request->new_date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->new_date[$key])) : NULL;
                         $itemStock->save();
                     }
                 }

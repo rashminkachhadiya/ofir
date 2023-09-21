@@ -9,12 +9,12 @@
                 </div>
                 <div>All Users</div>
                 <div class="d-inline-block ml-2">
-                    <!-- @can('user-create')
+                    @can('user-create')
                         <button class="btn btn-success" onclick="create()"><i
                                 class="glyphicon glyphicon-plus"></i>
                             New User
                         </button>
-                    @endcan -->
+                    @endcan
                 </div>
             </div>
         </div>

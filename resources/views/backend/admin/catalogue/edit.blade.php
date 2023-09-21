@@ -42,6 +42,14 @@
                                         <span id="error_sku" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 105px; height: 100px;">
+                                    </div>
+                                    <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
+                                        <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Item Title </label>
                                         <input type="text" class="form-control" id="item_title" name="item_title" value="{{ $item->item_title }}" placeholder="" required>
                                         <span id="error_item_title" class="has-error"></span>
@@ -55,12 +63,6 @@
                                         <label for=""> Description </label>
                                         <input type="text" class="form-control" id="description" name="description" value="{{ $item->description }}" placeholder="">
                                         <span id="error_description" class="has-error"></span>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 105px; height: 100px;">
-                                    </div>
-                                    <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
-                                        <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> All Collection </label><br/>
@@ -86,59 +88,79 @@
                                         <label for=""> Metal Type </label>
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
-                                    <div id="catelogue_size">
-                                        @if(count($itemStock) > 0  && !empty($itemStock))
-                                            <?php
-                                                $sizeCount = 0;
-                                            ?>
-                                            @foreach($itemStock as $size)
-                                            <div class="form-group col-md-12 row mt-1 item_size-{{$size->id}}">
-                                                <div class="col-md-3 pl-2 p-1">
-                                                  <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{ $size->qty }}">
-                                                </div>
-                                                <div class="col-md-3 p-0 p-1">
-                                                  <input type="number" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
-                                                </div>
-                                                <div class="col-md-3 p-0 p-1">
-                                                  <input type="number" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
-                                                </div>
-                                                @if($sizeCount == 0)
-                                                <div class="col-md-1">
-                                                    <a class="btn btn-primary add" style="color: white;">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                    </a>
-                                                </div>
-                                                <?php
-                                                    $sizeCount++;
-                                                ?>
-                                                @else
-                                                <div class="col-md-1">
-                                                    <a class="btn btn-danger remove" data-id="{{ $size->id }}" style="color: white;">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                    </a>
-                                                </div>
-                                                @endif
+                                </div>
+                                <div id="catelogue_size">
+                                    @if(count($itemStock) > 0  && !empty($itemStock))
+                                        <?php
+                                            $sizeCount = 0;
+                                        ?>
+                                        @foreach($itemStock as $size)
+                                        <div class="form-group row mt-1 item_size-{{$size->id}}">
+                                            <div class="col-md-2 pl-2 p-1">
+                                              <input type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
                                             </div>
-                                            @endforeach
-                                            @else
-                                        <div class="form-group col-md-12 row">
-                                            <div class="col-md-3 pl-2 p-1">
-                                              <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="" placeholder="Qty">
+                                            <div class="col-md-1 pl-2 p-1">
+                                              <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{ $size->qty }}">
                                             </div>
-                                            <div class="col-md-3 p-0 p-1">
-                                              <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="number" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
                                             </div>
-                                            <div class="col-md-3 p-0 p-1">
-                                              <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="number" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
                                             </div>
-                                            <div class="col-md-1 p-1">
+                                            <div class="col-md-2 p-0 p-1">
+                                              <input type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Notes">
+                                            </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <select class="form-control" name="item_status[{{ $size->id }}]">
+                                                <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select option</option>
+                                                <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
+                                                <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sale</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <input type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
+                                            </div>
+                                            @if($sizeCount == 0)
+                                            <div class="col-md-1">
                                                 <a class="btn btn-primary add" style="color: white;">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </a>
                                             </div>
+                                            <?php
+                                                $sizeCount++;
+                                            ?>
+                                            @else
+                                            <div class="col-md-1">
+                                                <a class="btn btn-danger remove" data-id="{{ $size->id }}" style="color: white;">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            @endif
                                         </div>
-                                        @endif
+                                        @endforeach
+                                        @else
+                                        
+                                    <div class="form-group col-md-12 row">
+                                        <div class="col-md-2 pl-2 p-1">
+                                          <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                          <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="" placeholder="Qty">
+                                        </div>
+                                        <div class="col-md-1 p-0 p-1">
+                                          <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
+                                        </div>
+                                        <div class="col-md-1 p-0 p-1">
+                                          <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
+                                        </div>
+                                        <div class="col-md-1 p-1">
+                                            <a class="btn btn-primary add" style="color: white;">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-success button-submit"
@@ -227,15 +249,31 @@
         let add_number = 1;
         $("body").on("click", ".add", function (e) {
             $("#catelogue_size").append(
-                '<div class="form-group col-md-12 row item_size-'+ add_number +'">\
-                    <div class="col-md-3 pl-2 p-1">\
+                '<div class="form-group row item_size-'+ add_number +'">\
+                    <div class="col-md-2 pl-2 p-1">\
+                      <input type="text" name="new_code['+ add_number +']" class="form-control" id="new_code-'+ add_number +'" value="" placeholder="Code">\
+                    </div>\
+                    <div class="col-md-1 pl-2 p-1">\
                       <input type="number" name="new_stock['+ add_number +']" class="form-control" id="new_stock-'+ add_number +'" value="" placeholder="Qty">\
                     </div>\
-                    <div class="col-md-3 p-1">\
+                    <div class="col-md-1 p-1">\
                       <input type="text" name="new_gram['+ add_number +']" class="form-control" id="size_'+ add_number +'" value="" placeholder="Gram">\
                     </div>\
-                    <div class="col-md-3 p-1">\
+                    <div class="col-md-1 p-1">\
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Note">\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
+                        <option value="">Select option</option>\
+                        <option value="0">Apro</option>\
+                        <option value="1">Sale</option>\
+                      </select>\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
                     </div>\
                     <div class="col-md-1">\
                         <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\

@@ -92,10 +92,8 @@ class UserController extends Controller
       if ($request->ajax()) {
          // Setup the validator
          $rules = [
-           'name' => 'required',
-           'email' => 'required|email|unique:users,email',
-           'password' => 'required|same:confirm-password',
-           'photo' => 'image|max:2024|mimes:jpeg,jpg,png'
+            'f_name' => 'required',
+           'l_name' => 'required',
          ];
 
          $validator = Validator::make($request->all(), $rules);
@@ -123,15 +121,43 @@ class UserController extends Controller
                }
             }
 
+            $catalogueStore = [
+          '0' => '0',
+          '1' => '0',
+          '2' => '0',
+          '3' => '0',
+          '4' => '0',
+          '5' => '0',
+          '6' => '0',
+          '7' => '0',
+          '8' => '0',
+          '9' => '0',
+          '10' => '0',
+          '11' => '0',
+        ];
 
+        if(!is_null($request->input('catalogue_store')))
+        {
+          foreach ($request->input('catalogue_store') as $key => $value) {
+            $catalogueStore[$key] = $value;
+          }
+        }
             DB::beginTransaction();
             try {
 
                $user = new User();
-               $user->name = $request->input('name');
+               $user->f_name = $request->input('f_name');
+               $user->l_name = $request->input('l_name');
+               $user->username = $request->input('username');
                $user->email = $request->input('email');
-               $user->password = Hash::make($request->password);
-               $user->file_path = $file_path;
+               $user->status = $request->input('status');
+               // $user->exp_time = \DateTime::createFromFormat('d/m/Y H:i:s', $request->input('exp_date'));
+               $date1 = strtr($request->input('exp_date'), '/', '-');
+               $user->exp_time = date('Y-m-d H:i:s' , strtotime($date1));
+               $user->is_approved = $request->input('is_approved');
+               $user->is_visible = $request->input('is_visible');
+               $user->catalogue_store = json_encode($catalogueStore);  
+               $user->password = $request->password;
                $user->save();
 
                // generate role
@@ -262,7 +288,7 @@ class UserController extends Controller
                $user->save();
 
                DB::commit();
-               // \Mail::to($user->email)->send(new \App\Mail\SendCredentialMail($user));
+               \Mail::to($user->email)->send(new \App\Mail\SendCredentialMail($user));
                return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
 
             } catch (\Exception $e) {

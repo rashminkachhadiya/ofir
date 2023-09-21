@@ -53,7 +53,7 @@
                                 <th>Size</th>
                                 <th>Color</th>
                                 <th>Metal</th>
-                                <th>Tot. Qty</th>
+                                <th>Qty</th>
                                 <th>Tot. Gram</th>
                                 <th>Tot. Ct</th>
                                 <th>Action</th>

@@ -2,60 +2,80 @@
       novalidate>
     <div class="form-row">
         <div id="status"></div>
-        <br/>
-        <div class="clearfix"></div>
-        <div class="form-group col-md-6 col-sm-12">
-            <label for=""> Name </label>
-            <input type="text" class="form-control" id="name" name="name" value="" placeholder="" required>
-            <span id="error_name" class="has-error"></span>
+        <div class="form-group col-md-4 col-sm-12">
+            <label for=""> First Name </label>
+            <input type="text" class="form-control" id="f_name" name="f_name" value="" placeholder=""
+                   required>
+            <span id="f_name" class="has-error"></span>
         </div>
-        <div class="form-group col-md-6 col-sm-12">
+        <div class="form-group col-md-4 col-sm-12">
+            <label for=""> Last Name </label>
+            <input type="text" class="form-control" id="l_name" name="l_name" value="" placeholder=""
+                   required>
+            <span id="l_name" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-4 col-sm-12">
             <label for=""> Email </label>
-            <input type="text" class="form-control" id="email" name="email" value="" placeholder="" required>
+            <input type="text" class="form-control" id="email" name="email" value="" placeholder=""
+                   readonly>
             <span id="error_email" class="has-error"></span>
         </div>
-        <div class="form-group col-md-6 col-sm-12">
-            <label>Password:</label>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control','required')) !!}
+        <div class="form-group col-md-4 col-sm-12">
+            <label for=""> User Name </label>
+            <input type="text" class="form-control" id="username" name="username" value="" placeholder=""
+                   required>
+            <span id="error_username" class="has-error"></span>
+        </div>
+        <div class="form-group col-md-4 col-sm-12">
+            <label for=""> Password </label>
+            <input type="text" class="form-control" id="password" name="password" value="" placeholder=""
+                   required>
             <span id="error_password" class="has-error"></span>
         </div>
-        <div class="form-group col-md-6 col-sm-12">
-            <label>Confirm Password:</label>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control','required')) !!}
-            <span id="error_confirm-password" class="has-error"></span>
-        </div>
-        <div class="col-md-12">
-            <label for="photo">Logo (File must be jpg, jpeg, png)</label>
-            <div class="input-group">
-                <input id="photo" type="file" name="photo" style="display:none">
-                <div class="input-group-prepend">
-                    <a class="btn btn-secondary text-white" onclick="$('input[id=photo]').click();">Browse</a>
-                </div>
-                <input type="text" name="SelectedFileName" class="form-control" id="SelectedFileName"
-                       value="" readonly>
-            </div>
-            <script type="text/javascript">
-                $('input[id=photo]').change(function () {
-                    $('#SelectedFileName').val($(this).val());
-                });
-            </script>
-            <span id="error_photo" class="has-error"></span>
+
+        <div class="form-group col-md-4 col-sm-12">
+            <label for=""> Exp. Time </label>
+            <input type="text" class="form-control" id="datepicker" name="exp_date" value="" placeholder=""
+                   required>
+            <span id="error_password" class="has-error"></span>
         </div>
         <div class="clearfix"></div>
-        <div class="col-sm-12 col-md-12 mb-3 mt-3">
-            <strong>Assign Role: </strong>
-            <div class='row mb-3 mt-3'>
-                @foreach($roles as $role)
-                    @if($role->guard_name != 'admin')
-                        <div class="col-md-2 col-sm-12">
-                            <input type="checkbox" name="all_role" class="data-check flat-green"
-                                   value="{{$role->id}}"/> {{ $role->name }}
-                        </div>
-                    @endif
-                @endforeach
+        <div class="form-group col-md-4">
+            <label for=""> Is Approved ? </label><br/>
+            <input type="radio" name="is_approved" class="flat-green"
+                   value="1" checked /> Yes
+            <input type="radio" name="is_approved" class="flat-green"
+                   value="0" /> No
+        </div>
+        <div class="form-group col-md-4">
+            <label for=""> Status </label><br/>
+            <input type="radio" name="status" class="flat-green"
+                   value="1" checked /> Active
+            <input type="radio" name="status" class="flat-green"
+                   value="0"/> In Active
+        </div>
+        <div class="form-group col-md-4">
+            <label for=""> Catalogue Visible </label><br/>
+            <input type="radio" name="is_visible" class="flat-green"
+                   value="1" checked /> Yes
+            <input type="radio" name="is_visible" class="flat-green"
+                   value="0" /> No
+        </div>
+        <div class="col-md-12 mt-2 mb-2">
+        <strong><label>Catalogue Store</label></strong>
+        </div>
+        @foreach(config('params.catalogue') as $key => $value)
+        <div class="form-group col-md-2">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="1" name="catalogue_store[{{$key}}]" id="flexCheckDefault" >
+              <label class="form-check-label mt-2" for="flexCheckDefault">
+                {{ $value }}
+              </label>
             </div>
         </div>
-        <div class="col-md-12 mb-3">
+        @endforeach
+        <div class="clearfix"></div>
+        <div class="col-md-12 mb-3 mt-3">
             <button type="submit" class="btn btn-success button-submit"
                     data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
             </button>
@@ -64,7 +84,16 @@
 </form>
 
 <script>
-
+    var dateToday = new Date(); 
+    $( "#datepicker" ).datetimepicker({
+        dateFormat: 'dd/mm/yy',
+        showSecond: true,
+        timeFormat: 'HH:mm:ss',
+      changeMonth: true,
+      changeYear: true,
+      autoClose: true,
+      pick12HourFormat: false,
+    });
     $(document).ready(function () {
         $('input[type="checkbox"].flat-green').iCheck({
             checkboxClass: 'icheckbox_flat-green',
@@ -94,19 +123,7 @@
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 myData.append('_token', CSRF_TOKEN);
                 myData.append('roles', list_id);
-
-                swal({
-                    title: "Confirm to assign " + list_id.length + " roles",
-                    text: "Assign Role",
-                    type: "warning",
-                    showCancelButton: true,
-                    closeOnConfirm: false,
-                    showLoaderOnConfirm: true,
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes, Assign!"
-                }, function () {
-
-                    $.ajax({
+                $.ajax({
                         url: 'users',
                         type: 'POST',
                         data: myData,
@@ -140,8 +157,6 @@
 
                         }
                     });
-                });
-
             }
             // <- end 'submitHandler' callback
         });                    // <- end '.validate()'
