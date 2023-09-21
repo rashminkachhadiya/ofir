@@ -236,6 +236,9 @@ class CatalogueController extends Controller
     {
         if ($request->ajax()) {
         
+        echo "<pre>";
+        print_r($request->all());
+        die;
         $item = Item::find($id);
         
          $rules = [
@@ -291,6 +294,32 @@ class CatalogueController extends Controller
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
+
+               $itemStock = ItemStock::where('item_id',$item->id)->get();
+                if(!empty($request->size))
+                {
+                    foreach ($request->qty as $key => $value) 
+                    {
+                        $itemStock = ItemStock::find($key);
+                        $itemStock->qty = $value;
+                        $itemStock->stock = $request->stock[$key];
+                        $itemStock->save();
+                    }
+                    $itemStockDelete = ItemStock::where('item_id',$request->item_id)->whereNotIn('id',array_keys($request->size))->delete();
+                }
+                
+                if(!empty($request->new_stock))
+                {
+                    foreach ($request->new_stock as $key => $value) {
+                        $itemStock = new ItemStock();
+                        $itemStock->item_id = $item->id;
+                        $itemStock->qty = $value;
+                        $itemStock->gram = $request->new_gram[$key];
+
+                        $itemStock->ct = $request->new_ct[$key];
+                        $itemStock->save();
+                    }
+                }
 
                DB::commit();
                return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
