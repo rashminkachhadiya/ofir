@@ -50,9 +50,9 @@ class UserController extends Controller
         ->addColumn('action', function ($user) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $user->id . '" class="btn btn-xs btn-info mr-1 edit" title="Edit"><i class="fa fa-edit"></i> </a>';
-           if($user->tot_order == 0){
+           // if($user->tot_order == 0){
               $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $user->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
-           }
+           // }
            $html .= '</div>';
            return $html;
         })

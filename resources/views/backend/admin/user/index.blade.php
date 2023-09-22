@@ -34,7 +34,7 @@
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <!-- <th>Roles</th> -->
-                                <th>Tot. Order</th>
+                                <!-- <th>Tot. Order</th> -->
                                 <th>Status</th>
                                 <th>Last Seen</th>
                                 <th>Action</th>
@@ -75,7 +75,7 @@
                     {data: 'l_name', name: 'l_name'},
                     {data: 'email', name: 'email'},
                     // {data: 'role', name: 'role'},
-                    {data: 'tot_order', name: 'tot_order', searchable: false},
+                    // {data: 'tot_order', name: 'tot_order', searchable: false},
                     {data: 'status', name: 'status'},
                     {data: 'last_seen', name: 'last_seen'},
                     {data: 'action', name: 'action'}
