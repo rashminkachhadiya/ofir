@@ -101,9 +101,9 @@
                     {data: 'size', name: 'size'},
                     {data: 'metal_colour', name: 'metal_colour'},
                     {data: 'metal_type', name: 'metal_type'},
-                    {data: 'tot_qty', name: 'tot_qty'},
-                    {data: 'tot_gram', name: 'tot_gram'},
-                    {data: 'tot_ct', name: 'tot_ct'},
+                    {data: 'tot_qty', name: 'tot_qty', searchable: false},
+                    {data: 'tot_gram', name: 'tot_gram', searchable: false},
+                    {data: 'tot_ct', name: 'tot_ct', searchable: false},
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,
