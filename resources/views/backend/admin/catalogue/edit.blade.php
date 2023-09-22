@@ -78,7 +78,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group col-md-12">
                                         <label for=""> Size </label>
-                                        <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}" required>
+                                        <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}">
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> Metal Colour </label>

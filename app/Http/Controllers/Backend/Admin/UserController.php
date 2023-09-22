@@ -154,6 +154,9 @@ class UserController extends Controller
                // $user->exp_time = \DateTime::createFromFormat('d/m/Y H:i:s', $request->input('exp_date'));
                $date1 = strtr($request->input('exp_date'), '/', '-');
                $user->exp_time = date('Y-m-d H:i:s' , strtotime($date1));
+               $user->mobile = $request->input('mobile');
+               $user->address_1 = $request->input('address_1');
+               $user->address_2 = $request->input('address_2');
                $user->is_approved = $request->input('is_approved');
                $user->is_visible = $request->input('is_visible');
                $user->catalogue_store = json_encode($catalogueStore);  
@@ -259,8 +262,6 @@ class UserController extends Controller
          $rules = [
            'f_name' => 'required',
            'l_name' => 'required',
-           'email' => 'required|email|unique:users,email,' . $user->id,
-           'password' => 'required',
          ];
 
          $validator = Validator::make($request->all(), $rules);
@@ -276,11 +277,17 @@ class UserController extends Controller
                $user->f_name = $request->input('f_name');
                $user->l_name = $request->input('l_name');
                $user->username = $request->input('username');
-               $user->email = $request->input('email');
+               if(!is_null($request->input('email')))
+               {
+                $user->email = $request->input('email');                
+               }
                $user->status = $request->input('status');
                // $user->exp_time = \DateTime::createFromFormat('d/m/Y H:i:s', $request->input('exp_date'));
                $date1 = strtr($request->input('exp_date'), '/', '-');
                $user->exp_time = date('Y-m-d H:i:s' , strtotime($date1));
+               $user->mobile = $request->input('mobile');
+               $user->address_1 = $request->input('address_1');
+               $user->address_2 = $request->input('address_2');
                $user->is_approved = $request->input('is_approved');
                $user->is_visible = $request->input('is_visible');
                $user->catalogue_store = json_encode($catalogueStore);  
@@ -288,7 +295,10 @@ class UserController extends Controller
                $user->save();
 
                DB::commit();
+              if(!is_null($user->email))
+              {
                \Mail::to($user->email)->send(new \App\Mail\SendCredentialMail($user));
+              }
                return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
 
             } catch (\Exception $e) {

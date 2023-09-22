@@ -47,7 +47,8 @@ return [
 
     '0' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -56,7 +57,8 @@ return [
 
     '1' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -65,7 +67,8 @@ return [
 
     '2' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -74,7 +77,8 @@ return [
 
     '3' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -83,7 +87,8 @@ return [
 
     '4' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -92,7 +97,8 @@ return [
 
     '5' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -101,7 +107,8 @@ return [
     
     '6' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -110,7 +117,8 @@ return [
 
     '7' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -119,7 +127,8 @@ return [
 
     '8' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -128,7 +137,8 @@ return [
 
     '9' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -137,7 +147,8 @@ return [
 
     '10' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
@@ -146,7 +157,8 @@ return [
 
     '11' => [
         '0' => 'RINGS',
-        '1' => 'BANGLE/BRACELETS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
