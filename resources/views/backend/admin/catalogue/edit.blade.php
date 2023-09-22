@@ -88,6 +88,11 @@
                                         <label for=""> Metal Type </label>
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Is Active? </label><br/>
+                                        <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
+                                        <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
                                 </div>
                                 <div id="catelogue_size">
                                     @if(count($itemStock) > 0  && !empty($itemStock))

@@ -33,7 +33,7 @@ class UserController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
-      $users = User::all();
+      $users = User::select('users.*',DB::raw("COUNT(orders.id) as tot_order"))->leftjoin('orders','users.id','=','orders.user_id')->groupBy('users.id');
       return Datatables::of($users)
         ->addColumn('file_path', function ($users) {
            return "<img src='" . asset($users->file_path) . "' class='img-thumbnail' width='50px'>";
@@ -50,7 +50,9 @@ class UserController extends Controller
         ->addColumn('action', function ($user) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $user->id . '" class="btn btn-xs btn-info mr-1 edit" title="Edit"><i class="fa fa-edit"></i> </a>';
-           $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $user->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
+           if($user->tot_order == 0){
+              $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $user->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
+           }
            $html .= '</div>';
            return $html;
         })

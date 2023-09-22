@@ -34,6 +34,7 @@
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <!-- <th>Roles</th> -->
+                                <th>Tot. Order</th>
                                 <th>Status</th>
                                 <th>Last Seen</th>
                                 <th>Action</th>
@@ -68,12 +69,13 @@
                     "dataType": 'json'
                 },
                 columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false},
                     // {data: 'file_path', name: 'file_path'},
                     {data: 'f_name', name: 'f_name'},
                     {data: 'l_name', name: 'l_name'},
                     {data: 'email', name: 'email'},
                     // {data: 'role', name: 'role'},
+                    {data: 'tot_order', name: 'tot_order', searchable: false},
                     {data: 'status', name: 'status'},
                     {data: 'last_seen', name: 'last_seen'},
                     {data: 'action', name: 'action'}

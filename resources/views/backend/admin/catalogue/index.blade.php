@@ -50,12 +50,13 @@
                                 <th>Catalogue</th>
                                 <th>Product</th>
                                 <th>Item Title</th>
-                                <th>Size</th>
                                 <th>Color</th>
                                 <th>Metal</th>
+                                <th>Size</th>
                                 <th>Qty</th>
                                 <th>Tot. Gram</th>
                                 <th>Tot. Ct</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -98,12 +99,13 @@
                     {data: 'catalogue_id', name: 'catalogue_id'},
                     {data: 'sub_catalogue_id', name: 'sub_catalogue_id'},
                     {data: 'item_title', name: 'item_title'},
-                    {data: 'size', name: 'size'},
                     {data: 'metal_colour', name: 'metal_colour'},
                     {data: 'metal_type', name: 'metal_type'},
+                    {data: 'size', name: 'size'},
                     {data: 'tot_qty', name: 'tot_qty', searchable: false},
                     {data: 'tot_gram', name: 'tot_gram', searchable: false},
                     {data: 'tot_ct', name: 'tot_ct', searchable: false},
+                    {data: 'is_active',name: 'is_active'},
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,

@@ -72,6 +72,9 @@ class CatalogueController extends Controller
         ->addColumn('sub_catalogue_id', function ($items) {
            return config('params.'.$items->catalogue_id)[$items->sub_catalogue_id];
         })
+        ->addColumn('is_active', function ($items) {
+           return $items->is_active ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
+        })
         ->addColumn('action', function ($items) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
            $html .= '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->id . '/edit"  id="' . $items->id . '" class="btn btn-xs btn-info margin-r-5" title="View"><i class="fa fa-edit"></i> </a>';
@@ -81,7 +84,7 @@ class CatalogueController extends Controller
            $html .= '</div>';
            return $html;
         })
-        ->rawColumns(['action', 'category_id', 'sub_catalogue_id', 'item_title'])
+        ->rawColumns(['action', 'category_id', 'sub_catalogue_id', 'item_title','is_active'])
         ->addIndexColumn()
         ->make(true);
    }
@@ -163,6 +166,7 @@ class CatalogueController extends Controller
                $item->size = $request->input('size');
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
+               $item->is_active = $request->input('is_active');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -303,6 +307,7 @@ class CatalogueController extends Controller
                $item->size = $request->input('size');
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
+               $item->is_active = $request->input('is_active');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
