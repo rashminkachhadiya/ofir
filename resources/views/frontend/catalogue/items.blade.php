@@ -108,11 +108,14 @@ div.content {
                 @forelse($items as $item)
                   <div class="col-md-4 text-center">
                     <div>
-                      <a data-bs-toggle="modal" data-id="{{ $item->id }}" class="quick_view_details" href="javascript:void(0);">
+                      <img style="border: 1px solid black;" class="mb-1"
+                      src="{{asset($item->photo) }}"
+                      alt="product" width="180px" height="180px">
+                      <!-- <a data-bs-toggle="modal" data-id="{{ $item->id }}" class="quick_view_details" href="javascript:void(0);">
                         <img style="border: 1px solid black;" class="mb-1"
                         src="{{asset($item->photo) }}"
                         alt="product" width="180px" height="180px">
-                      </a>
+                      </a> -->
                     </div>
                     <div>
                     <div>
