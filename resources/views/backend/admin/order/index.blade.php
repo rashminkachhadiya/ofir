@@ -52,6 +52,8 @@
         }
     </style>
     <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
         $(function () {
 
             table = $('#manage_all').DataTable({
@@ -62,6 +64,11 @@
                     "type": "GET",
                     headers: {
                         "X-CSRF-TOKEN": CSRF_TOKEN,
+                    },
+                    data: function(d) {
+                        d.user_id = urlParams.get('user_id');
+                        d.catalogue_id = $('#catalogue_id').val();
+                        d.sub_catalogue_id = $('#sub_catalogue_id').val();
                     },
                     "dataType": 'json'
                 },
@@ -75,6 +82,7 @@
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,
+
             });
             $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
                 'width': '220px',

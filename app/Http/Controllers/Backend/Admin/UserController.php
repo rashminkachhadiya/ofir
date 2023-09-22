@@ -12,6 +12,7 @@ use Yajra\DataTables\DataTables;
 use Carbon\Carbon;
 use View;
 use DB;
+use URL;
 
 class UserController extends Controller
 {
@@ -44,19 +45,22 @@ class UserController extends Controller
         ->addColumn('last_seen', function ($user) {
            return Carbon::parse($user->last_seen)->diffForHumans();
         })
+        ->addColumn('tot_order', function ($users) {
+           return '<a href="'. URL :: to('/admin/order'). "?user_id=" . $users->id .'">'. $users->tot_order .'</a>';
+        })
         ->addColumn('status', function ($users) {
            return $users->status ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
         })
         ->addColumn('action', function ($user) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $user->id . '" class="btn btn-xs btn-info mr-1 edit" title="Edit"><i class="fa fa-edit"></i> </a>';
-           // if($user->tot_order == 0){
+           if($user->tot_order == 0){
               $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $user->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
-           // }
+           }
            $html .= '</div>';
            return $html;
         })
-        ->rawColumns(['action', 'file_path', 'status', 'role', 'last_seen'])
+        ->rawColumns(['action', 'file_path', 'status', 'role', 'last_seen','tot_order'])
         ->addIndexColumn()
         ->make(true);
    }

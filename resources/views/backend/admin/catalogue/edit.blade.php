@@ -146,7 +146,7 @@
                                         @endforeach
                                         @else
                                         
-                                    <div class="form-group col-md-12 row">
+                                    <div class="form-group row">
                                         <div class="col-md-2 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
                                         </div>
@@ -159,6 +159,19 @@
                                         <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
                                         </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <select class="form-control" name="new_item_status[0]">
+                                                <option value="" >Select option</option>
+                                                <option value="0" >Apro</option>
+                                                <option value="1" >Sale</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                            <input type="text" name="notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Name">
+                                        </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
+                                            </div>
                                         <div class="col-md-1 p-1">
                                             <a class="btn btn-primary add" style="color: white;">
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
