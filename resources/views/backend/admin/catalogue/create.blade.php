@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label for="">Sub Catalogue </label>
-                                        {!! Form::select('sub_catalogue_id', [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'sub_catalogue_id']) !!}
+                                        {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'sub_catalogue_id']) !!}
                                         <span id="error_email" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
@@ -192,28 +192,28 @@
       };
     }
 
-    $("body").on("change","#catalogue_id",function(e){
-        var catalogueId = $("#catalogue_id :selected").val();
-        var actionURL = "{{ URL::to('admin/get-subcatalogue') }}?catalogue_id="+catalogueId;
-        $.ajax({
-                type: 'GET',
-                url: actionURL,
-                success: function (data) {
-                    $('#sub_catalogue_id').empty();
-                    $('#sub_catalogue_id').append($('<option>', {
-                        value: '',
-                        text : 'Select Sub Catalogue'
-                    }));
-                    $.each(data.data, function (i, item) {
-                        $('#sub_catalogue_id').append('<option value='+ i +'>'+ item +'</option');
-                    });
-                },
-                error: function (result) {
-                    // $("#modal_data").html("Sorry Cannot Load Data");
-                }
-            });
-        // var sub_catalogue = {!! json_encode(config('params.')) !!};
-    });
+    // $("body").on("change","#catalogue_id",function(e){
+    //     var catalogueId = $("#catalogue_id :selected").val();
+    //     var actionURL = "{{ URL::to('admin/get-subcatalogue') }}?catalogue_id="+catalogueId;
+    //     $.ajax({
+    //             type: 'GET',
+    //             url: actionURL,
+    //             success: function (data) {
+    //                 $('#sub_catalogue_id').empty();
+    //                 $('#sub_catalogue_id').append($('<option>', {
+    //                     value: '',
+    //                     text : 'Select Sub Catalogue'
+    //                 }));
+    //                 $.each(data.data, function (i, item) {
+    //                     $('#sub_catalogue_id').append('<option value='+ i +'>'+ item +'</option');
+    //                 });
+    //             },
+    //             error: function (result) {
+    //                 // $("#modal_data").html("Sorry Cannot Load Data");
+    //             }
+    //         });
+    //     // var sub_catalogue = {!! json_encode(config('params.')) !!};
+    // });
 
         let number_of_image = 1;
     $(document).ready(function () {

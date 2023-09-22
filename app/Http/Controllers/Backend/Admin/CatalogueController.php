@@ -26,7 +26,9 @@ class CatalogueController extends Controller
     {
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'Select Catalogue';
-        return view('backend.admin.catalogue.index',compact('catalogues'));
+        $subCatalogue = config('params.0');
+        $subCatalogue[''] = 'Select Sub Catalogue';
+        return view('backend.admin.catalogue.index',compact('catalogues', 'subCatalogue'));
     }
 
      public function getAll(Request $request)
@@ -95,7 +97,9 @@ class CatalogueController extends Controller
        if ($haspermision) {
             $catalogues = config('params.catalogue');
             $catalogues[''] = 'Select Catalogue';
-          return view('backend.admin.catalogue.create',compact('catalogues'));
+            $subCatalogue = config('params.0');
+            $subCatalogue[''] = 'Select Sub Catalogue';
+          return view('backend.admin.catalogue.create',compact('catalogues','subCatalogue'));
        } else {
           abort(403, 'Sorry, you are not authorized to access the page');
        }
