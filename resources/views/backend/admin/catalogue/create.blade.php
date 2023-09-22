@@ -98,9 +98,6 @@
                                         <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
                                         </div>
-                                        <div class="col-md-2 p-0 p-1">
-                                              <input type="text" name="notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Notes">
-                                            </div>
                                             <div class="col-md-2 p-0 p-1">
                                               <select class="form-control" name="new_item_status[0]">
                                                 <option value="" >Select option</option>
@@ -108,6 +105,9 @@
                                                 <option value="1" >Sale</option>
                                               </select>
                                             </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                            <input type="text" name="notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Name">
+                                        </div>
                                             <div class="col-md-2 p-0 p-1">
                                               <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
                                             </div>
@@ -153,14 +153,14 @@
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
                     </div>\
                     <div class="col-md-2 p-1">\
-                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Note">\
-                    </div>\
-                    <div class="col-md-2 p-1">\
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
                         <option value="">Select option</option>\
                         <option value="0">Apro</option>\
                         <option value="1">Sale</option>\
                       </select>\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Name">\
                     </div>\
                     <div class="col-md-2 p-1">\
                       <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\

@@ -114,14 +114,14 @@
                                               <input type="number" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
                                             </div>
                                             <div class="col-md-2 p-0 p-1">
-                                              <input type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Notes">
-                                            </div>
-                                            <div class="col-md-2 p-0 p-1">
                                               <select class="form-control" name="item_status[{{ $size->id }}]">
                                                 <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select option</option>
                                                 <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
                                                 <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sale</option>
                                               </select>
+                                            </div>
+                                            <div class="col-md-2 p-0 p-1">
+                                              <input type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Name">
                                             </div>
                                             <div class="col-md-2 p-0 p-1">
                                               <input type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
@@ -268,14 +268,14 @@
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
                     </div>\
                     <div class="col-md-2 p-1">\
-                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Note">\
-                    </div>\
-                    <div class="col-md-2 p-1">\
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
                         <option value="">Select option</option>\
                         <option value="0">Apro</option>\
                         <option value="1">Sale</option>\
                       </select>\
+                    </div>\
+                    <div class="col-md-2 p-1">\
+                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Name">\
                     </div>\
                     <div class="col-md-2 p-1">\
                       <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
