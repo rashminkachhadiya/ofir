@@ -83,8 +83,37 @@
                                         <label for=""> Metal Type </label>
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> Is Active? </label><br/>
+                                        <input type="radio" name="is_active" class="flat-green"value="1" checked /> Yes
+                                        <input type="radio" name="is_active" class="flat-green"value="0"/> No
+                                    </div>
                                 </div>
                                 <div id="catelogue_size">
+                                    <hr>
+                                    <div class="row text-center">
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong>Code</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Qty</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Gram</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Ct</strong></p>
+                                        </div>
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong> Status</strong></p>
+                                        </div>
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong> Name</strong></p>
+                                        </div>
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong> Date</strong></p>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-md-2 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">

@@ -1,6 +1,14 @@
 @extends('backend.layouts.master')
 @section('title', ' All Order')
 @section('content')
+<style type="text/css">
+    .thead tr:first-child th {
+    position: sticky;
+    z-index: 12;
+    top: 0;
+    background: white;
+}
+</style>
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
@@ -23,12 +31,10 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="form-group col-md-12 col-sm-12">
-                    <label for=""> Catalogue </label>
                     {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
                 <div class="form-group col-md-12 col-sm-12">
-                    <label for="">Sub Catalogue </label>
                     {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
@@ -109,6 +115,8 @@
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,
+                "scrollX": true,
+                "scrollY": 450
             });
             $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
                 'width': '220px',

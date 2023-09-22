@@ -95,6 +95,30 @@
                                     </div>
                                 </div>
                                 <div id="catelogue_size">
+                                    <hr>
+                                    <div class="row text-center">
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong>Code</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Qty</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Gram</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Ct</strong></p>
+                                        </div>
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong> Status</strong></p>
+                                        </div>
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong> Name</strong></p>
+                                        </div>
+                                        <div class="col-md-2 pl-2 p-1">
+                                            <p><strong> Date</strong></p>
+                                        </div>
+                                    </div>
                                     @if(count($itemStock) > 0  && !empty($itemStock))
                                         <?php
                                             $sizeCount = 0;
