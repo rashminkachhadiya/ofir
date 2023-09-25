@@ -11,6 +11,13 @@
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="link-tab-product-details" data-mdb-toggle="tab" href-div="tab-product-details" role="tab" aria-controls="ex1-tabs-1" aria-selected="true" >Product Details</a>
                       </li>
+                      <li class="nav-item ml-2" role="presentation">
+                       <a href="{{ URL :: to('/admin/catalogue/create') }}" class="btn btn-success"><i
+                                class="glyphicon glyphicon-plus"></i>
+                            Add New Item
+                        </a>
+                      </li>
+
                     </ul>
                     <!-- Tabs navs -->
 
