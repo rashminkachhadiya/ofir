@@ -19,6 +19,20 @@
             </div>
         </div>
     </div>
+    <div class="app-page-title mt-1">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="form-group col-md-12 col-sm-12">
+                    {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+                <div class="form-group col-md-12 col-sm-12">
+                    {!! Form::select('order_status', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="main-card mb-3 card">
@@ -66,9 +80,8 @@
                         "X-CSRF-TOKEN": CSRF_TOKEN,
                     },
                     data: function(d) {
-                        d.user_id = urlParams.get('user_id');
-                        d.catalogue_id = $('#catalogue_id').val();
-                        d.sub_catalogue_id = $('#sub_catalogue_id').val();
+                        d.user_id = $('#user_id').val();
+                        d.order_status = $('#order_status').val();
                     },
                     "dataType": 'json'
                 },
@@ -116,6 +129,15 @@
                 ajax_submit_delete('users', id)
             });
 
+        });
+
+        $("body").on("change","#user_id",function(e){
+            table.draw();
+        // var sub_catalogue = {!! json_encode(config('params.')) !!};
+        });
+
+        $("body").on("change","#order_status",function(e){
+            table.draw();    
         });
 
     </script>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Role;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -22,7 +23,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('backend.admin.order.index');
+        $orderStatus = config('params.order_status');
+        $orderStatus[''] = 'Select Status';
+        $users = User::pluck('f_name','id')->toArray();
+        $users[''] = 'Select Users';
+        return view('backend.admin.order.index',compact('orderStatus','users'));
     }
 
     public function getAll(Request $request)
@@ -35,21 +40,22 @@ class OrderController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
+      $orders = Order::select('*');
+      if(!is_null($request['user_id']))
+      {
+        $orders->where('orders.user_id', '=', $request['user_id']);
+      }
       if(!empty($request['user_id']))
       {
-        $orders = Order::where('user_id',$request['user_id'])->get(); 
-        $return = "style='display:none;'";
-        $status = "style='display:none;'";
-
-        // $invoices->;
-      }else{
-        $orders = Order::select('*');
-        if(!empty($request['param']))
-        {
-          $orders->where('orders.created_at', '>=', Carbon::yesterday());
-          $orders->orWhere('orders.created_at', '=',now());  
-        }
-        $orders->get();
+        $orders->where('orders.user_id', '=', $request['user_id']);
+      }
+      if(!is_null($request['order_status']))
+      {
+        $orders->where('orders.order_status', '=', $request['order_status']);
+      }
+      if(!is_null($request['search']['value']))
+      {
+        $orders->orWhere('orders.order_number', 'LIKE', '%'. $request['search']['value'] .'%');
       }
       return Datatables::of($orders)
         ->addColumn('created_at', function ($orders) {
