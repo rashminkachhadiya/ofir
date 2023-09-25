@@ -43,21 +43,21 @@
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Mobile </label>
             <input type="text" class="form-control" id="mobile" name="mobile" value="{{ $user->mobile }}" placeholder=""
-                   required>
+                   >
             <span id="error_mobile" class="has-error"></span>
         </div>
 
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Address 1 </label>
             <input type="text" class="form-control" id="address_1" name="address_1" value="{{ $user->address_1 }}" placeholder=""
-                   required>
+                   >
             <span id="error_address_1" class="has-error"></span>
         </div>
 
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Address 2 </label>
             <input type="text" class="form-control" id="address_2" name="address_2" value="{{ $user->address_1 }}" placeholder=""
-                   required>
+                   >
             <span id="error_address_2" class="has-error"></span>
         </div>
         <div class="clearfix"></div>
