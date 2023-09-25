@@ -116,7 +116,8 @@
                 ],
                 "autoWidth": false,
                 "scrollX": true,
-                "scrollY": 450
+                "scrollY": 450,
+                "alwaysCloneTop": true
             });
             $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
                 'width': '220px',

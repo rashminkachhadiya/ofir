@@ -26,7 +26,7 @@ class CatalogueController extends Controller
     {
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'Select Catalogue';
-        $subCatalogue = config('params.0');
+        $subCatalogue = config('params.1');
         $subCatalogue[''] = 'Select Sub Catalogue';
         return view('backend.admin.catalogue.index',compact('catalogues', 'subCatalogue'));
     }
@@ -100,7 +100,7 @@ class CatalogueController extends Controller
        if ($haspermision) {
             $catalogues = config('params.catalogue');
             $catalogues[''] = 'Select Catalogue';
-            $subCatalogue = config('params.0');
+            $subCatalogue = config('params.1');
             $subCatalogue[''] = 'Select Sub Catalogue';
           return view('backend.admin.catalogue.create',compact('catalogues','subCatalogue'));
        } else {
