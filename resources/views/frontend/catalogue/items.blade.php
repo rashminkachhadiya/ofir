@@ -101,21 +101,21 @@ div.content {
                 <a class="m-2 mt-0" style="font-size: 30px;cursor: pointer;" href="{{ URL::to('/catalogue') }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
               </div>
               <div class="col-md-6">
-                <h2 style="color:black;font-style: italic; text-align: center;">{{ config('params.catalogue')[$mainCatalogue] }}</h2>  
+                <h2 style="color:black;font-style: italic; text-align: center;">{{ config('params.catalogue')[$mainCatalogue] }} <span style="font-size: 15px;">{{config('params.'.$mainCatalogue)[$subCatelogue]}}</span></h2> 
               </div>
             </div>
             <div class="row">
                 @forelse($items as $item)
                   <div class="col-md-4 text-center">
                     <div>
-                      <img style="border: 1px solid black;" class="mb-1"
+                      <!-- <img style="border: 1px solid black;" class="mb-1"
                       src="{{asset($item->photo) }}"
-                      alt="product" width="180px" height="180px">
-                      <!-- <a data-bs-toggle="modal" data-id="{{ $item->id }}" class="quick_view_details" href="javascript:void(0);">
+                      alt="product" width="180px" height="180px"> -->
+                      <a data-bs-toggle="modal" data-id="{{ $item->id }}" class="quick_view_details" href="javascript:void(0);">
                         <img style="border: 1px solid black;" class="mb-1"
                         src="{{asset($item->photo) }}"
                         alt="product" width="180px" height="180px">
-                      </a> -->
+                      </a>
                     </div>
                     <div>
                     <div>

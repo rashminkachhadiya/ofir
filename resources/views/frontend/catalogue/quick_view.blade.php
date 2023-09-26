@@ -20,10 +20,14 @@
                         <div class="product-details-des">
                            
                             <h3 class="product-name" style="word-wrap: break-word;">{{ $item->item_title }}</h3>
-                            <p style="margin-bottom: 0px;" class="pro-desc">{{ $item->item_description }}</p>
-                            <p style="font-size: 10px;"><strong> Code: </strong> {{ $item->sku }}</p>
+                            <p style="margin-bottom: 0px;" class="pro-desc">{{ $item->description }}</p>
+                            <p style="font-size: 10px;"><strong> {{ $item->sku }} - {{ $item->item_title_gram }} </strong></p>
+                            <div class="quantity-cart-box align-items-center">
+                                <p style="margin-bottom: 0px">Metal Type: <strong>{{ config('params.metal_type')[$item->metal_type] }}</strong></p>
+                                <p>Metal Color: <strong>{{ config('params.metal_colour')[$item->metal_colour] }}</strong></p>
+                            </div>
                             <div class="quantity-cart-box d-flex align-items-center">
-                                    
+                            
                             </div>
                             <div class="quantity-cart-box d-flex align-items-center">
                                 <h6 class="option-title mr-2">Qty</h6>
@@ -34,9 +38,9 @@
                                 <i class="fa fa-plus-circle"></i>
                             </div>
                             <div class="d-flex" style="justify-content: end;">
-                                <!-- <div class="action_link ml-3">
-                                    <a style="background: #f195ab !important; color: black !important;" class="btn btn-cart add-to-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Add to cart</strong></a>
-                                </div> -->
+                                <div class="action_link ml-3">
+                                    <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart add-to-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Add to cart</strong></a>
+                                </div>
                                 <div class="ml-2" style="width: 50px;margin-top: 10px;">
                                     
                                 </div>

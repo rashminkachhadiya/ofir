@@ -76,8 +76,9 @@ class OrderController extends Controller
         })
         ->addColumn('action', function ($orders) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
-           $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-info edit" title="Edit"><i class="fa fa-edit"></i> </a>';
+           $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fa fa-book"></i> </a>';
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
+           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
            // $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $orders->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
            $html .= '</div>';
            return $html;
@@ -127,6 +128,7 @@ class OrderController extends Controller
      */
     public function edit($id, Request $request)
     {
+        $haspermision = auth()->user()->can('user-edit');
         if ($request->ajax()) {
              $haspermision = auth()->user()->can('user-edit');
              if ($haspermision) {
@@ -137,9 +139,15 @@ class OrderController extends Controller
              } else {
                 abort(403, 'Sorry, you are not authorized to access the page');
              }
-          } else {
-             return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
-        }
+          }
+        if ($haspermision) {
+          $order = Order::where('id',$id)->first();
+          $metalType = config('params.metal_type');
+          $metalColour = config('params.metal_colour');
+          return view('backend.admin.order.edit_order',compact('order','metalType','metalColour'));
+       } else {
+          abort(403, 'Sorry, you are not authorized to access the page');
+       }
     }
 
     /**
@@ -183,6 +191,18 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+      
+    }
+
+    public function updateOrder(Request $request)
+    {
+      $order = Order::find($request->order_id);
+      $order->metal_type = $request->metal_type;
+      $order->metal_colour = $request->metal_colour;
+      $order->size = $request->size;
+      $order->quantity = $request->quantity;
+      $order->admin_notes = $request->admin_notes;
+      $order->save();
+      return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
     }
 }

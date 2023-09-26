@@ -25,6 +25,7 @@ Route::get('/allUser', 'UserController@getAll')->name('allUser.users');
 Route::get('/export', 'UserController@export')->name('export');
 
 Route::resource('order', 'OrderController');
+Route::post('/update-order','OrderController@updateOrder');
 Route::get('/allOrders','OrderController@getAll')->name('allOrders');
 
 
