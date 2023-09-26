@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use View;
 use Session;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
+
 
 class CatalogueController extends Controller
 {
@@ -132,5 +135,29 @@ class CatalogueController extends Controller
         $item = Item::where('id',$request->item_id)->first();
         $view = View::make('frontend.catalogue.quick_view', compact('item'))->render();
         return response()->json(['html' => $view]);
+    }
+
+    public function addToCart(Request $request)
+    {
+        $cart = new Cart();
+        $cart->user_id = Auth::user()->id;
+        $cart->item_id = $request->item_id;
+        $cart->quantity = $request->item_qty;
+        $cart->save();
+        return true;
+    }
+
+    public function cart(Request $request)
+    {   
+        $cartItem = Cart::select('items.*','carts.*','carts.id as cart_id')->join('items','carts.item_id','items.id')->where('user_id',Auth::user()->id)->get()->toArray();
+        
+        return view('frontend.myaccount.cart',compact('cartItem'));
+    }
+
+    public function removeToCart(Request $request)
+    {
+        $cart = Cart::find($request->cart_id);
+        $cart->delete();
+        return true;
     }
 }
