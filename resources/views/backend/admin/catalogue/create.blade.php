@@ -171,6 +171,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-1 mb-1">
+                                    <a class="btn btn-primary add" style="color: white;">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-success button-submit"
                                             data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save

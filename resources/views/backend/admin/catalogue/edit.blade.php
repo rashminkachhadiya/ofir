@@ -200,7 +200,6 @@
                                         </div>
                                         @endforeach
                                         @else
-                                        
                                     <div class="form-group row">
                                         <div class="col-md-2 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
@@ -249,6 +248,11 @@
                                         </div>
                                     </div>
                                     @endif
+                                </div>
+                                <div class="col-md-1 mb-1">
+                                    <a class="btn btn-primary add" style="color: white;">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-success button-submit"
