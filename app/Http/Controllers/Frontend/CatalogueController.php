@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use View;
+use Session;
 
 class CatalogueController extends Controller
 {
@@ -95,6 +96,15 @@ class CatalogueController extends Controller
 
     public function getItems(Request $request)
     {
+        $previousURL = url()->previous();
+        $last_url = explode('?',str_replace(url('/'), '', $previousURL));
+        if(isset($last_url[1]))
+        {
+            if($last_url[1] != 'all_product=yes' && $last_url[1] != 'all_product=no')
+            {
+                Session::put('previousURL',url()->previous());
+            }
+        }
         $pagination = 9;
         $mainCatalogue = $request->main_catalogue;
         $subCatelogue = $request->sub_catalogue;

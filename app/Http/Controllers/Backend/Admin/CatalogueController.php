@@ -75,6 +75,9 @@ class CatalogueController extends Controller
         ->addColumn('is_active', function ($items) {
            return $items->is_active ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
         })
+        ->addColumn('tot_qty', function ($items) {
+          return number_format((float)$items->tot_qty, 0, '.', '');
+        })
         ->addColumn('action', function ($items) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
            $html .= '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->id . '/edit"  id="' . $items->id . '" class="btn btn-xs btn-info margin-r-5" title="View"><i class="fa fa-edit"></i> </a>';
@@ -181,6 +184,8 @@ class CatalogueController extends Controller
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->new_gram[$key];
                         $itemStock->ct = $request->new_ct[$key];
+                        $itemStock->pieces = $request->new_pieces[$key];
+                        $itemStock->size = $request->new_size[$key];
                         $itemStock->total_gram = $value * $request->new_gram[$key];
                         $itemStock->total_ct = $value * $request->new_ct[$key];
                         $itemStock->notes = $request->new_notes[$key];
@@ -323,6 +328,9 @@ class CatalogueController extends Controller
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->gram[$key];
                         $itemStock->ct = $request->ct[$key];
+                        $itemStock->pieces = $request->pieces[$key];
+                        $itemStock->size = $request->q_size[$key];
+                        $itemStock->colour = $request->colour[$key];
                         $itemStock->total_gram = $value * $request->gram[$key];
                         $itemStock->total_ct = $value * $request->ct[$key];
                         $itemStock->notes = $request->notes[$key];
@@ -342,6 +350,9 @@ class CatalogueController extends Controller
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->new_gram[$key];
                         $itemStock->ct = $request->new_ct[$key];
+                        $itemStock->pieces = $request->new_pieces[$key];
+                        $itemStock->size = $request->new_q_size[$key];
+                        $itemStock->colour = $request->new_colour[$key];
                         $itemStock->total_gram = $value * $request->new_gram[$key];
                         $itemStock->total_ct = $value * $request->new_ct[$key];
                         $itemStock->notes = $request->new_notes[$key];

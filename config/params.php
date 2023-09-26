@@ -3,10 +3,13 @@
 
 return [
     'categories' => [
-        '0' => 'Ring',
-        '1' => 'Bracelets',
-        '2' => 'Earrings',
-        '3' => 'Pendants',
+        '0' => 'RINGS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
+        '7' => 'PENDANT',
+        '2' => 'NECKLACES',
+        '3' => 'EARRINGS',
+        '5' => 'AVAILABLE',
     ],
 
     'metal_type' => [

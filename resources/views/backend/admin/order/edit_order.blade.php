@@ -44,6 +44,14 @@
                                     {{ config('params.order_status')[$order->order_status] }}
                                 </div>
                             </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Customer Notes : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->notes }}
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="d-flex">

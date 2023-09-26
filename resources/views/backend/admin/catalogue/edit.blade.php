@@ -114,15 +114,24 @@
                                             <p><strong> Gram</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Size</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Colour</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Ct</strong></p>
                                         </div>
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Pcs.</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Status</strong></p>
                                         </div>
-                                        <div class="col-md-2 pl-2 p-1">
-                                            <p><strong> Name</strong></p>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Customer</strong></p>
                                         </div>
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Date</strong></p>
                                         </div>
                                     </div>
@@ -139,22 +148,37 @@
                                               <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{ $size->qty }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="number" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
+                                              <input type="text" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="number" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
+                                              <input type="text" name="q_size[{{ $size->id }}]" class="form-control" id="q_size{{ $size->id }}" value="{{ $size->size }}">
                                             </div>
-                                            <div class="col-md-2 p-0 p-1">
+                                            <div class="col-md-1 p-0 p-1">
+                                              <select class="form-control" name="colour[{{ $size->id }}]">
+                                                <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select</option>
+                                                <option value="0" {{ $size->colour == "0" ? 'selected' : '' }}>White</option>
+                                                <option value="1" {{ $size->colour == "1" ? 'selected' : '' }}>Yellow</option>
+                                                <option value="2" {{ $size->colour == "2" ? 'selected' : '' }}>Red</option>
+                                                <option value="3" {{ $size->colour == "3" ? 'selected' : '' }}>Mix</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="text" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
+                                            </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="number" name="pieces[{{ $size->id }}]" class="form-control" id="pieces_{{ $size->id }}" value="{{ $size->pieces }}">
+                                            </div>
+                                            <div class="col-md-1 p-0 p-1">
                                               <select class="form-control" name="item_status[{{ $size->id }}]">
-                                                <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select option</option>
+                                                <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select</option>
                                                 <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
                                                 <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sale</option>
                                               </select>
                                             </div>
-                                            <div class="col-md-2 p-0 p-1">
+                                            <div class="col-md-1 p-0 p-1">
                                               <input type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Name">
                                             </div>
-                                            <div class="col-md-2 p-0 p-1">
+                                            <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
                                             </div>
                                             @if($sizeCount == 0)
@@ -188,19 +212,34 @@
                                           <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
                                         </div>
                                         <div class="col-md-1 p-0 p-1">
+                                          <input type="text" name="new_q_size[0]" class="form-control" id="new_q_size-0" value="" placeholder="Size">
+                                        </div>
+                                        <div class="col-md-1 p-0 p-1">
+                                          <select class="form-control" name="new_colour[0]">
+                                            <option value="">Select</option>
+                                            <option value="0">White</option>
+                                            <option value="1">Yellow</option>
+                                            <option value="2">Red</option>
+                                            <option value="3">Mix</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
                                         </div>
-                                            <div class="col-md-2 p-0 p-1">
+                                        <div class="col-md-1 p-0 p-1">
+                                          <input type="number" name="new_pieces[0]" class="form-control" id="new_pieces-0" value="" placeholder="Pcs">
+                                        </div>
+                                            <div class="col-md-1 p-0 p-1">
                                               <select class="form-control" name="new_item_status[0]">
-                                                <option value="" >Select option</option>
+                                                <option value="" >Select</option>
                                                 <option value="0" >Apro</option>
                                                 <option value="1" >Sale</option>
                                               </select>
                                             </div>
-                                            <div class="col-md-2 p-0 p-1">
-                                            <input type="text" name="notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Name">
+                                            <div class="col-md-1 p-0 p-1">
+                                            <input type="text" name="new_notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Name">
                                         </div>
-                                            <div class="col-md-2 p-0 p-1">
+                                            <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
                                             </div>
                                         <div class="col-md-1 p-1">
@@ -309,19 +348,34 @@
                       <input type="text" name="new_gram['+ add_number +']" class="form-control" id="size_'+ add_number +'" value="" placeholder="Gram">\
                     </div>\
                     <div class="col-md-1 p-1">\
+                      <input type="text" name="new_q_size['+ add_number +']" class="form-control" id="q_size_'+ add_number +'" value="" placeholder="Size">\
+                    </div>\
+                    <div class="col-md-1 p-1">\
+                      <select class="form-control" id="colour_'+ add_number +'" name="new_colour['+ add_number +']">\
+                        <option value="">Select</option>\
+                        <option value="0">White</option>\
+                        <option value="1">Yellow</option>\
+                        <option value="2">Red</option>\
+                        <option value="3">Mix</option>\
+                      </select>\
+                    </div>\
+                    <div class="col-md-1 p-1">\
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
                     </div>\
-                    <div class="col-md-2 p-1">\
+                    <div class="col-md-1 p-1">\
+                      <input type="number" name="new_pieces['+ add_number +']" class="form-control" id="pieces_'+ add_number +'" value="" placeholder="Pieces">\
+                    </div>\
+                    <div class="col-md-1 p-1">\
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
-                        <option value="">Select option</option>\
+                        <option value="">Select</option>\
                         <option value="0">Apro</option>\
                         <option value="1">Sale</option>\
                       </select>\
                     </div>\
-                    <div class="col-md-2 p-1">\
+                    <div class="col-md-1 p-1">\
                       <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Name">\
                     </div>\
-                    <div class="col-md-2 p-1">\
+                    <div class="col-md-1 p-1">\
                       <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
                     </div>\
                     <div class="col-md-1">\

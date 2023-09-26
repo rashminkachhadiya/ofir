@@ -24,9 +24,9 @@ class OrderController extends Controller
     public function index()
     {
         $orderStatus = config('params.order_status');
-        $orderStatus[''] = 'Select Status';
+        $orderStatus[''] = 'All Status';
         $users = User::pluck('f_name','id')->toArray();
-        $users[''] = 'Select Users';
+        $users[''] = 'All Users';
         return view('backend.admin.order.index',compact('orderStatus','users'));
     }
 
@@ -76,7 +76,15 @@ class OrderController extends Controller
         })
         ->addColumn('action', function ($orders) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
-           $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fa fa-book"></i> </a>';
+           
+           if($orders->order_status == '0'){
+            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fa fa-clock"></i> </a>';
+           }elseif($orders->order_status == '1'){
+            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fas fa-shipping-fast"></i> </a>';
+           }elseif($orders->order_status == '2'){
+            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fa fa-check"></i> </a>';
+           }
+
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
            // $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $orders->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
