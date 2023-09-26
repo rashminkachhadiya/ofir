@@ -149,7 +149,7 @@
                                           <input type="text" name="new_ct[0]" class="form-control" id="new_ct-0" value=""  placeholder="Ct">
                                         </div>
                                         <div class="col-md-1 p-0 p-1">
-                                          <input type="number" name="new_pieces[0]" class="form-control" id="new_pieces-0" value="" placeholder="Pcs">
+                                          <input type="text" name="new_pieces[0]" class="form-control" id="new_pieces-0" value="" placeholder="Pcs">
                                         </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <select class="form-control" name="new_item_status[0]">
@@ -223,7 +223,7 @@
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
                     </div>\
                     <div class="col-md-1 p-1">\
-                      <input type="number" name="new_pieces['+ add_number +']" class="form-control" id="pieces_'+ add_number +'" value="" placeholder="Pieces">\
+                      <input type="text" name="new_pieces['+ add_number +']" class="form-control" id="pieces_'+ add_number +'" value="" placeholder="Pieces">\
                     </div>\
                     <div class="col-md-1 p-1">\
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
