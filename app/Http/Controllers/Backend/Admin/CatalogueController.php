@@ -54,7 +54,12 @@ class CatalogueController extends Controller
         }
         if(!is_null($request['in_stock']))
         {
-          $items->where('items.in_stock', '=', $request['in_stock']);
+          if($request['in_stock'] == 1)
+          {
+            $items->having('tot_qty','>',0);
+          }else{
+            $items->having('tot_qty','=',0);
+          }
         }
       return Datatables::of($items)
         ->addColumn('created_at', function ($orders) {
@@ -93,7 +98,7 @@ class CatalogueController extends Controller
            $html .= '</div>';
            return $html;
         })
-        ->rawColumns(['action', 'category_id', 'sub_catalogue_id', 'item_title','is_active'])
+        ->rawColumns(['action', 'category_id', 'sub_catalogue_id', 'item_title','is_active','tot_qty'])
         ->addIndexColumn()
         ->make(true);
    }
@@ -176,7 +181,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
-               $item->in_stock = $request->input('in_stock');
+               // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -320,7 +325,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
-               $item->in_stock = $request->input('in_stock');
+               // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();

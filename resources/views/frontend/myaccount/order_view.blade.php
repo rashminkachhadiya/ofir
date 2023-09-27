@@ -1,6 +1,6 @@
 <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
+            <div class="main-card mb-3 card" style="background: #f6f5f3 !important;">
                 <div class="card-body">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
                         <div>

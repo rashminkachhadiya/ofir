@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderImage;
+use DB;
 
 
 class CatalogueController extends Controller
@@ -114,19 +115,19 @@ class CatalogueController extends Controller
         $mainCatalogue = $request->main_catalogue;
         $subCatelogue = $request->sub_catalogue;
         if(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'ALL COLLECTIONS'){
-            $items = Item::where('catalogue_id',$request->main_catalogue)->where('is_allcollection',1)->where('is_active',1);
+            $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('catalogue_id',$request->main_catalogue)->where('is_allcollection',1)->where('is_active',1);
         }elseif(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'AVAILABLE'){
-            $items = Item::where('catalogue_id',$request->main_catalogue)->where('is_available',1)->where('is_active',1);
+            $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('catalogue_id',$request->main_catalogue)->where('is_available',1)->where('is_active',1);
         }else{
-            $items = Item::where('catalogue_id',$request->main_catalogue)->where('sub_catalogue_id',$request->sub_catalogue)->where('is_active',1);
+            $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('items.catalogue_id',$request->main_catalogue)->where('items.sub_catalogue_id',$request->sub_catalogue)->where('items.is_active',1);
         }
 
         if($request->all_product == 'yes')
         {
-            $items = $items->get();
+            $items = $items->orderBy('items.sku','ASC')->get();
             $page = 'all_product';
         }else{
-            $items = $items->paginate($pagination);
+            $items = $items->orderBy('items.sku','ASC')->paginate($pagination);
             $page = '1';
         }    
         return view('frontend.catalogue.items',compact('items','page','mainCatalogue','subCatelogue'));

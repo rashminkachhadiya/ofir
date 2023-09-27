@@ -88,11 +88,6 @@
                                         <input type="radio" name="is_active" class="flat-green"value="1" checked /> Yes
                                         <input type="radio" name="is_active" class="flat-green"value="0"/> No
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> In Stock? </label><br/>
-                                        <input type="radio" name="in_stock" class="flat-green"value="1"/> Yes
-                                        <input type="radio" name="in_stock" class="flat-green"value="0" checked/> No
-                                    </div>
                                 </div>
                                 <div id="catelogue_size">
                                     <hr>

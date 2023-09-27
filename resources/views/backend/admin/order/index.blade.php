@@ -44,6 +44,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Order Date</th>
+                                <th>Supplier</th>
                                 <th>Order Number</th>
                                 <th>Category</th>
                                 <th>Clinet Name</th>
@@ -88,6 +89,7 @@
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'supplier_name', name: 'supplier_name'},
                     {data: 'order_number', name: 'order_number'},
                     {data: 'category', name: 'category'},
                     {data: 'client_name', name: 'client_name'},
@@ -126,7 +128,7 @@
             // Delete
             $("#manage_all").on("click", ".delete", function () {
                 var id = $(this).attr('id');
-                ajax_submit_delete('users', id)
+                ajax_submit_delete('order', id)
             });
 
         });

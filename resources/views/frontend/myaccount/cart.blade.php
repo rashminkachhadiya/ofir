@@ -14,7 +14,7 @@
   border-radius: 40px;
   width: 1100px;
   height: 500px;
-  background-color: #e2e2e2;
+  background-color: #f6f5f3;
   position: absolute;
   left: 0;
   right: 0;

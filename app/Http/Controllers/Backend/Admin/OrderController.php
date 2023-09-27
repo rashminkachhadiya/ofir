@@ -88,6 +88,8 @@ class OrderController extends Controller
 
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
+
+           $html .= '<a id="' . $orders->id . '" class="btn btn-xs btn-danger margin-r-5 delete" title="Delete"><i class="fa fa-times"></i> </a>';
            // $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $orders->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
            $html .= '</div>';
            return $html;
@@ -198,14 +200,26 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-      
+        if ($request->ajax()) {
+         $haspermision = auth()->user()->can('user-delete');
+         if ($haspermision) {
+            $order = Order::findOrFail($id); //Get user with specified id
+            $order->delete();
+            return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+         } else {
+            abort(403, 'Sorry, you are not authorized to access the page');
+         }
+      } else {
+         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+      }
     }
 
     public function updateOrder(Request $request)
     {
       $order = Order::find($request->order_id);
+      $order->supplier_name = $request->supplier_name;
       $order->metal_type = $request->metal_type;
       $order->metal_colour = $request->metal_colour;
       $order->size = $request->size;

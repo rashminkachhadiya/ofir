@@ -128,8 +128,8 @@ div.content {
                     <div>
                       <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->sku }} - {{ $item->item_title_gram }}
                       @if(Auth::user()->stock_visible == 1)
-                        @if($item->in_stock == '1')
-                          <span><i class="fa fa-circle" aria-hidden="true" style="color: green;"></i></span>
+                        @if($item->tot_qty > 0)
+                          <span><i class="fa fa-circle" aria-hidden="true" style="color: green;font-size:7px !important; "></i></span>
                         @endif
                       @endif
                       </p>

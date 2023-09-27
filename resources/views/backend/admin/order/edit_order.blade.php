@@ -3,8 +3,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
+            <div class="main-card mb-3 card" style="background: #f6f5f3;">
+                <div class="card-body" style="color: black;">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
                         <div>
                             <h5><strong> Order Details </strong></h5>
@@ -74,6 +74,14 @@
                             novalidate>
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-3">
+                                        <p><strong> Supplier Name : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="supplier_name" name="supplier_name" value="{{ $order->supplier_name }}" placeholder="Supplier Name">
+                                    </div>
+                                </div>
                                 <div class="d-flex">
                                     <div class="col-md-3">
                                         <p><strong> Metal Type : </strong></p>
