@@ -1,6 +1,7 @@
 <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 50%">
     <div class="modal-content">
         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Hi, {{Auth()->user()->f_name}}</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="">
@@ -23,12 +24,13 @@
                             <p style="margin-bottom: 0px;" class="pro-desc">{{ $item->description }}</p>
                             <p style="font-size: 10px;"><strong> {{ $item->sku }} - {{ $item->item_title_gram }} </strong></p>
                             <div class="quantity-cart-box align-items-center">
-                                <p style="margin-bottom: 0px">Metal Type: <strong>{{ config('params.metal_type')[$item->metal_type] }}</strong></p>
-                                <p>Metal Color: <strong>{{ config('params.metal_colour')[$item->metal_colour] }}</strong></p>
+                                <p style="">Metal Type: <strong>{{ config('params.metal_type')[$item->metal_type] }}</strong></p>
                             </div>
-                            <div class="quantity-cart-box d-flex align-items-center">
+                            <div class="quantity-cart-box mb-1 d-flex align-items-center">
+                                <p class="mr-1 mb-1">Size:</p>
+                                <input type="text" style="width: 50%;border-radius: 50px;" class="form-control" name="size" id="size" placeholder="Size"></strong>
+                            </div>
                             
-                            </div>
                             <div class="quantity-cart-box d-flex align-items-center">
                                 <h6 class="option-title mr-2">Qty</h6>
                                 <i class="fa fa-minus-circle mr-3"></i>
@@ -36,6 +38,14 @@
                                     <div class="pro-qty"><input type="text" id="item-qty" value="1"></div>
                                 </div>
                                 <i class="fa fa-plus-circle"></i>
+                            </div>
+                            <div class="quantity-cart-box mt-2 d-flex align-items-center">
+                                <p class="mr-1 mb-1">Ref.</p>
+                                <input type="text" style="width: 50%;border-radius: 50px;" class="form-control" name="reference" id="ref" placeholder="Reference"></strong>
+                            </div>
+                            <div class="quantity-cart-box mt-2 mb-2 align-items-center">
+                                <p class="mr-1 mb-1">Notes:</p>
+                                <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes" id="notes" rows="3" required="false"></textarea>
                             </div>
                             <div class="d-flex" style="justify-content: end;">
                                 <div class="action_link ml-3">

@@ -12,7 +12,7 @@
 
 .div-center {
   border-radius: 40px;
-  width: 900px;
+  width: 1100px;
   height: 500px;
   background-color: #e2e2e2;
   position: absolute;
@@ -118,9 +118,15 @@ div.content {
                       <th class="pro-title">Code</th>
                       <th class="pro-title">Product</th>
                       <!-- <th class="pro-price">Price</th> -->
+                      <th class="pro-quantity">Metal Type</th>
+                      <th class="pro-quantity">Metal Colour</th>
+                      <th class="pro-quantity">Size</th>
                       <th class="pro-quantity">Quantity</th>
+                      <th class="pro-quantity">Ref</th>
+                      <th class="pro-quantity">Notes</th>
+
                       <!-- <th class="pro-subtotal">Total</th> -->
-                      <th class="pro-remove">Remove</th>
+                      <th class="pro-remove">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -132,20 +138,43 @@ div.content {
                     @foreach($cartItem as $id=>$item)
                     <tr id="cart_item-{{ $id }}">
                       <td class="pro-thumbnail"><img style="height: 75px;width: 75px;" src="{{asset($item['photo'])}}"></td>
-                      <td width="20%" class="pro-quantity">
+                      <td width="10%" class="pro-quantity">
                         <div class="product-quantity quantity">
                           {{ $item['sku'] }}
                         </div>
                       </td>
-                      <td width="45%" class="pro-quantity">
+                      <td width="10%" class="pro-quantity">
                         <div class="product-quantity quantity">
                           {{ $item['item_title'] }}
                         </div>
                       </td>
-                      
+                      <td width="10%" class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ config('params.metal_type')[$item['metal_type']] }}
+                        </div>
+                      </td>
+                      <td width="10%" class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ config('params.metal_colour')[$item['metal_colour']] }}
+                        </div>
+                      </td>
+                      <td width="10%" class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['cart_size'] }}
+                        </div>
+                      </td>
                       <td class="pro-quantity text-center">
                         <div class="product-quantity quantity">
                           {{ $item['quantity'] }}
+                        </div>
+                      </td>
+                      <td class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['ref'] }}
+                        </div>
+                      </td><td class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['notes'] }}
                         </div>
                       </td>
                       <?php
@@ -153,7 +182,11 @@ div.content {
                         $allTotal = $allTotal + $Total;
                         $VAT = $allTotal * 0.2;
                       ?>
-                      <td class="pro-remove text-center"><a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart"><i style="color: red;" class="pe-7s-trash"></i></a></td>
+                      <td width="10%" class="pro-remove text-center">
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">Order</a>
+
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart"><i style="color: red;" class="pe-7s-trash"></i></a>
+                      </td>
                     </tr>
                     @endforeach
                     @endif
@@ -217,6 +250,21 @@ div.content {
           
         });
     });
+
+  $(".order-btn").click(function(event){
+    var id = $(this).attr('data-id');
+      $.ajax({
+          url: 'create-order' + '/' + id,
+          type: 'get',
+          success: function(data) {
+              location.reload();
+          },
+          error: function(result) {
+              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+          }
+        
+      });
+  });
   $(".quick_view_details").click(function(event) {
       $("#quick_view_item_details").empty();
     

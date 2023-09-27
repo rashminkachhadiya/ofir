@@ -10,4 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Cart extends Model
 {
     use HasFactory,SoftDeletes;
+
+    public function itemDetails()
+    {
+        return $this->belongsTo(Item::class, 'item_id','id');
+    }
 }

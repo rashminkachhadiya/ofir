@@ -181,9 +181,12 @@ div.content {
         e.preventDefault();
         var itemId = $(this).attr('item-id');
         var itemQty = $('#item-qty').val();
+        var size = $('#size').val();
+        var ref = $('#ref').val();
+        var notes = $('#notes').val();
         $.ajax({
             url: "{{ URL::to('add-to-cart')}}",
-            data:{'item_id' : itemId, 'item_qty' : itemQty,'_token':"{{csrf_token()}}"},
+            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}"},
             dataType: 'json',
             type: 'POST',
             success: function(data) {

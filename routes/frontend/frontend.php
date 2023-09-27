@@ -15,6 +15,8 @@ Route::middleware('auth')->group(function ()
 	Route::post('add-to-cart', 'CatalogueController@addToCart');
 	Route::get('cart', 'CatalogueController@cart');
 	Route::get('item-remove-cart/{cart_id}', 'CatalogueController@removeToCart');
+	Route::get('create-order/{cart_id}', 'CatalogueController@createOrder');
+	
 
 	Route::get('item-details/{item_id}','CatalogueController@itemDetails');
 	Route::get('my-account/order/{order_id}','MyAccountController@orderDetails');
