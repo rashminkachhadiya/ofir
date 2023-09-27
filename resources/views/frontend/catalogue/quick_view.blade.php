@@ -24,7 +24,11 @@
                             <p style="margin-bottom: 0px;" class="pro-desc">{{ $item->description }}</p>
                             <p style="font-size: 10px;"><strong> {{ $item->sku }} - {{ $item->item_title_gram }} </strong></p>
                             <div class="quantity-cart-box align-items-center">
-                                <p style="">Metal Type: <strong>{{ config('params.metal_type')[$item->metal_type] }}</strong></p>
+                                <p style="">Metal Type: <strong>
+                                    @if(!is_null($item->metal_type)){{ config('params.metal_type')[$item->metal_type] }}</strong>
+                                    @endif
+                                </p>
+
                             </div>
                             <div class="quantity-cart-box mb-1 d-flex align-items-center">
                                 <p class="mr-1 mb-1">Size:</p>
