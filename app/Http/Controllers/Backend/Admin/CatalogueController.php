@@ -24,6 +24,17 @@ class CatalogueController extends Controller
      */
     public function index()
     {
+      $catalog = 1;
+        $allCatalogue = Item::where('catalogue_id',0)->where('sub_catalogue_id',0)->get();
+        foreach ($allCatalogue as $itemCat) {
+          $itemCat->sku = 'CARG'.$number = sprintf('%03d',$catalog);
+          $itemCat->save();
+          $catalog++;
+        }
+        die;
+        echo "<pre>";
+        print_r($allCatalogue);
+        die;
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
         $subCatalogue = config('params.1');
