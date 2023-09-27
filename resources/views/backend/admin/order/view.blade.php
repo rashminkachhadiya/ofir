@@ -75,7 +75,9 @@
                                     <p><strong> Metal Type : </strong></p>
                                 </div>
                                 <div class="col-md-9">
+                                    @if(!is_null($order->metal_type))
                                     {{ config('params.metal_type')[$order->metal_type] }}
+                                    @endif
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -83,7 +85,9 @@
                                     <p><strong> Metal Colour : </strong></p>
                                 </div>
                                 <div class="col-md-9">
+                                    @if(!is_null($order->metal_colour))
                                     {{ config('params.metal_colour')[$order->metal_colour] }}
+                                    @endif
                                 </div>
                             </div>
                             <div class="d-flex">
