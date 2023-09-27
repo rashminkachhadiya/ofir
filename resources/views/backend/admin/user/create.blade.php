@@ -16,8 +16,7 @@
         </div>
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Email </label>
-            <input type="text" class="form-control" id="email" name="email" value="" placeholder=""
-                   readonly>
+            <input type="text" class="form-control" id="email" name="email" value="" placeholder="">
             <span id="error_email" class="has-error"></span>
         </div>
         <div class="form-group col-md-4 col-sm-12">

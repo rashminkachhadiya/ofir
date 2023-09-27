@@ -96,6 +96,10 @@
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
                                     <div class="form-group col-md-12">
+                                        <label for=""> Cost Fee </label>
+                                        <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <label for=""> Is Active? </label><br/>
                                         <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
                                         <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No

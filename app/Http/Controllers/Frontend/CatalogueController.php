@@ -124,10 +124,10 @@ class CatalogueController extends Controller
 
         if($request->all_product == 'yes')
         {
-            $items = $items->orderBy('items.sku','ASC')->get();
+            $items = $items->orderByRaw('ISNULL(items.sku), items.sku ASC')->get();
             $page = 'all_product';
         }else{
-            $items = $items->orderBy('items.sku','ASC')->paginate($pagination);
+            $items = $items->orderByRaw('ISNULL(items.sku), items.sku ASC')->paginate($pagination);
             $page = '1';
         }    
         return view('frontend.catalogue.items',compact('items','page','mainCatalogue','subCatelogue'));

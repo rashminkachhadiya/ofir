@@ -181,6 +181,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
+               $item->cost_fee = $request->input('cost_fee');
                // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
@@ -325,6 +326,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
+               $item->cost_fee = $request->input('cost_fee');
                // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
