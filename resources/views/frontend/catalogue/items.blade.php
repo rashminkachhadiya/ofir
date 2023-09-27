@@ -92,7 +92,6 @@ div.content {
   line-height: 25px;
   border-radius: 50%;
 }
-
 </style>
     <div class="back">
         <div class="div-center">
@@ -127,7 +126,13 @@ div.content {
                       <strong><p class="m-0" style="color: black; text-align: center;word-wrap: break-word;">{{ $item->item_title }}</p></strong>
                     </div>
                     <div>
-                      <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->sku }} - {{ $item->item_title_gram }}</p>
+                      <p style="color:black; word-wrap: break-word;" class="text-center">{{ $item->sku }} - {{ $item->item_title_gram }}
+                      @if(Auth::user()->stock_visible == 1)
+                        @if($item->in_stock == '1')
+                          <span><i class="fa fa-circle" aria-hidden="true" style="color: green;"></i></span>
+                        @endif
+                      @endif
+                      </p>
                     </div>
                     </div>
                   </div>

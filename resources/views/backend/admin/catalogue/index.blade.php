@@ -30,12 +30,16 @@
     <div class="app-page-title mt-1">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
-                <div class="form-group col-md-12 col-sm-12">
+                <div class="form-group col-md-6 col-sm-6">
                     {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
-                <div class="form-group col-md-12 col-sm-12">
+                <div class="form-group col-md-6 col-sm-6">
                     {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+                <div class="form-group col-md-6 col-sm-6">
+                    {!! Form::select('in_stock', $inStock ?? [],  $item->in_stock ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'in_stock']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
             </div>
@@ -52,7 +56,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Code</th>
-                                <th>Created At</th>
+                                <th>Date</th>
                                 <th>Catalogue</th>
                                 <th>Product</th>
                                 <th>Item Title</th>
@@ -60,8 +64,8 @@
                                 <th>Metal</th>
                                 <th>Size</th>
                                 <th>Qty</th>
-                                <th>Tot. Gram</th>
-                                <th>Tot. Ct</th>
+                                <th>Gram</th>
+                                <th>Ct</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -95,6 +99,7 @@
                     data: function(d) {
                         d.catalogue_id = $('#catalogue_id').val();
                         d.sub_catalogue_id = $('#sub_catalogue_id').val();
+                        d.in_stock = $('#in_stock').val();
                     },
                     "dataType": 'json'
                 },
@@ -117,7 +122,11 @@
                 "autoWidth": false,
                 "scrollX": true,
                 "scrollY": 450,
-                "alwaysCloneTop": true
+                "alwaysCloneTop": true,
+                "lengthMenu": [10,25, 50, 100],
+                "language": {
+                    "lengthMenu": "Show _MENU_ "
+                }
             });
             $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
                 'width': '220px',
@@ -176,6 +185,10 @@
         // var sub_catalogue = {!! json_encode(config('params.')) !!};
     });
         $("body").on("change","#sub_catalogue_id",function(e){
+            table.draw();    
+        });
+
+        $("body").on("change","#in_stock",function(e){
             table.draw();    
         });
 

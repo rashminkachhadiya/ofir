@@ -100,6 +100,11 @@
                                         <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
                                         <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label for=""> In Stock? </label><br/>
+                                        <input type="radio" name="in_stock" class="flat-green"value="1" {{ ( $item->in_stock == 1 ) ? 'checked' : '' }}/> Yes
+                                        <input type="radio" name="in_stock" class="flat-green"value="0" {{ ( $item->in_stock == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
                                 </div>
                                 <div id="catelogue_size">
                                     <hr>

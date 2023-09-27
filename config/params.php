@@ -167,4 +167,9 @@ return [
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
     ],
+
+    'in_stock' => [
+        '0' => 'No',
+        '1' => 'Yes',
+    ],
 ];

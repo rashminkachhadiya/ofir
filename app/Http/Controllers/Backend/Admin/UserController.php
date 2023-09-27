@@ -165,6 +165,7 @@ class UserController extends Controller
                $user->address_2 = $request->input('address_2');
                $user->is_approved = $request->input('is_approved');
                $user->is_visible = $request->input('is_visible');
+               $user->stock_visible = $request->input('stock_visible');
                $user->catalogue_store = json_encode($catalogueStore);  
                $user->password = $request->password;
                $user->save();
@@ -296,6 +297,7 @@ class UserController extends Controller
                $user->address_2 = $request->input('address_2');
                $user->is_approved = $request->input('is_approved');
                $user->is_visible = $request->input('is_visible');
+               $user->stock_visible = $request->input('stock_visible');
                $user->catalogue_store = json_encode($catalogueStore);  
                $user->password = $request->password;
                $user->save();

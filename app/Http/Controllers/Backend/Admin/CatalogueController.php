@@ -25,10 +25,12 @@ class CatalogueController extends Controller
     public function index()
     {
         $catalogues = config('params.catalogue');
-        $catalogues[''] = 'Select Catalogue';
+        $catalogues[''] = 'All Catalogue';
         $subCatalogue = config('params.1');
-        $subCatalogue[''] = 'Select Sub Catalogue';
-        return view('backend.admin.catalogue.index',compact('catalogues', 'subCatalogue'));
+        $subCatalogue[''] = 'All Sub Catalogue';
+        $inStock = config('params.in_stock');
+        $inStock[''] = 'All Stock';
+        return view('backend.admin.catalogue.index',compact('catalogues', 'subCatalogue','inStock'));
     }
 
      public function getAll(Request $request)
@@ -49,6 +51,10 @@ class CatalogueController extends Controller
       if(!is_null($request['sub_catalogue_id']))
         {
           $items->where('items.sub_catalogue_id', '=', $request['sub_catalogue_id']);
+        }
+        if(!is_null($request['in_stock']))
+        {
+          $items->where('items.in_stock', '=', $request['in_stock']);
         }
       return Datatables::of($items)
         ->addColumn('created_at', function ($orders) {
@@ -170,6 +176,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
+               $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -313,6 +320,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
+               $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();

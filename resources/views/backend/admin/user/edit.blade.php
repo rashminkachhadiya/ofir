@@ -82,6 +82,15 @@
             <input type="radio" name="is_visible" class="flat-green"
                    value="0" {{ ( $user->is_visible == 0 ) ? 'checked' : '' }}/> No
         </div>
+        <div class="form-group col-md-4"></div>
+        <div class="form-group col-md-4"></div>
+        <div class="form-group col-md-4">
+            <label for=""> Stock Visible </label><br/>
+            <input type="radio" name="stock_visible" class="flat-green"
+                   value="1" {{ ( $user->stock_visible == 1 ) ? 'checked' : '' }} /> Yes
+            <input type="radio" name="stock_visible" class="flat-green"
+                   value="0" {{ ( $user->stock_visible == 0 ) ? 'checked' : '' }}/> No
+        </div>
         <div class="col-md-12 mt-2 mb-2">
         <strong><label>Catalogue Store</label></strong>
         </div>

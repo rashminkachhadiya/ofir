@@ -10,6 +10,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderImage;
 
 
 class CatalogueController extends Controller
@@ -176,14 +177,6 @@ class CatalogueController extends Controller
         $order->order_number = Order::autoGenerateOrderNumber();
         $order->sku = $cart->itemDetails->sku;
         $order->category_id = $cart->itemDetails->sub_catalogue_id;
-        if(!is_null($cart->itemDetails->photo))
-        {
-            $image = explode('assets/images/items/',$cart->itemDetails->photo);
-        }
-        if(!is_null($image[1]))
-        {
-            $order->images = $image[1];
-        }
         $order->metal_type = $cart->itemDetails->metal_type;
         $order->metal_colour = $cart->itemDetails->metal_colour;
         $order->size = $cart->size;
@@ -191,7 +184,22 @@ class CatalogueController extends Controller
         $order->notes = $cart->notes;
         $order->ref = $cart->ref;
         $order->save();
-        $cart->delete();
+
+        $orderImage = new OrderImage();
+        if(!is_null($cart->itemDetails->photo))
+        {
+            $image = explode('assets/images/items/',$cart->itemDetails->photo);
+            $oldPath = $cart->itemDetails->photo;
+            $newPath = public_path('assets/images/users/order/'.$image[1]);
+            \File::copy($oldPath , $newPath);
+        }
+        if(!is_null($image[1]))
+        {
+            $orderImage->order_id = $order->id;
+            $orderImage->images = $image[1];
+            $orderImage->save();
+        }
+        $cart->delete();        
         return true;
     }
 }

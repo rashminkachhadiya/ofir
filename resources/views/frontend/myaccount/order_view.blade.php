@@ -11,6 +11,14 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="d-flex">
                                 <div class="col-md-3">
+                                    <p><strong> Order Date : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
                                     <p><strong> Order Number : </strong></p>
                                 </div>
                                 <div class="col-md-9">
