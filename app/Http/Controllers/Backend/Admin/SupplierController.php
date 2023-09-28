@@ -48,7 +48,7 @@ class SupplierController extends Controller
         //    return Carbon::parse($user->last_seen)->diffForHumans();
         // })
         ->addColumn('tot_order', function ($users) {
-           return '<a href="'. URL :: to('/admin/order'). "?supplier_id=" . $users->id .'">'. $users->tot_order .'</a>';
+           return '<a href="void:javscript(0)">'. $users->tot_order .'</a>';
         })
         // ->addColumn('status', function ($users) {
         //    return $users->status ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
