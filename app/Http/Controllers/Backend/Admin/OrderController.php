@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderImage;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Supplier;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -153,9 +154,11 @@ class OrderController extends Controller
           }
         if ($haspermision) {
           $order = Order::where('id',$id)->first();
+          $supplier = Supplier::all()->pluck('f_name','id')->toArray();
+          $supplier[''] = 'Select Supplier';
           $metalType = config('params.metal_type');
           $metalColour = config('params.metal_colour');
-          return view('backend.admin.order.edit_order',compact('order','metalType','metalColour'));
+          return view('backend.admin.order.edit_order',compact('order','metalType','metalColour','supplier'));
        } else {
           abort(403, 'Sorry, you are not authorized to access the page');
        }

@@ -36,6 +36,9 @@ Route::get('/allCatalogue','CatalogueController@getAll')->name('allCatalogue');
 Route::get('/get-subcatalogue','CatalogueController@getSubCatalogue');
 
 
+Route::resource('supplier', 'SupplierController');
+Route::get('/allSupplier', 'SupplierController@getAll')->name('allSupplier.users');
+
 
 Route::resource('permissions', 'PermissionController');
 Route::get('/allPermissions', 'PermissionController@getAll')->name('allPermissions');

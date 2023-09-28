@@ -79,7 +79,7 @@
                                         <p><strong> Supplier Name : </strong></p>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" id="supplier_name" name="supplier_name" value="{{ $order->supplier_name }}" placeholder="Supplier Name">
+                                        {!! Form::select('supplier_name', $supplier ?? [],  $order->supplier_name ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_name']) !!}
                                     </div>
                                 </div>
                                 <div class="d-flex">

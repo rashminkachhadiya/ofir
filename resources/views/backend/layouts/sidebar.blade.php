@@ -57,6 +57,12 @@
                         Catalogue
                     </a>
                 </li>
+                <li>
+                    <a href="{{ URL :: to('/admin/supplier') }}">
+                        <i class="metismenu-icon"></i>
+                        Supplier
+                    </a>
+                </li>
                 <!-- <li>
                     <a href="{{ URL :: to('/admin/blogs') }}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
