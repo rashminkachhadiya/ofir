@@ -258,8 +258,19 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        if ($request->ajax()) {
+         $haspermision = auth()->user()->can('user-delete');
+         if ($haspermision) {
+            $user = Supplier::findOrFail($id); //Get user with specified id
+            $user->delete();
+            return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+         } else {
+            abort(403, 'Sorry, you are not authorized to access the page');
+         }
+      } else {
+         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+      }
     }
 }
