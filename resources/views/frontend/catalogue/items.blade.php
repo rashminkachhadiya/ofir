@@ -215,7 +215,7 @@ div.content {
             success: function(data) {
               console.log(data.data);
               setTimeout(function(){
-                alert("price USD : " + data.data.price_usd + '\n' + "Price Pound : " + data.data.price_pound + "\n" + "Price EUR : " + data.data.price_eur)
+                alert("Price $ : " + data.data.price_usd + '\n' + "Price \xA3 : " + data.data.price_pound + "\n" + "Price \u20AC : " + data.data.price_eur + '\n' + "Notes : " + data.data.price_notes);
               }, 1500); 
             },
             error: function(result) {

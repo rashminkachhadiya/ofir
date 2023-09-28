@@ -341,7 +341,7 @@ class CatalogueController extends Controller
                $item->price_usd = $request->input('price_usd');
                $item->price_pound = $request->input('price_pound');
                $item->price_eur = $request->input('price_eur');
-               
+               $item->price_notes = $request->input('price_notes');
                // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;

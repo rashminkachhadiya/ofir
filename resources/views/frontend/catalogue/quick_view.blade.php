@@ -52,9 +52,11 @@
                                 <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes" id="notes" rows="3" required="false"></textarea>
                             </div>
                             <div class="d-flex" style="justify-content: end;">
+                                @if(!is_null($item->price_usd) || !is_null($item->price_pound) || !is_null($item->price_eur))
                                 <div class="action_link ml-3">
                                     <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart ask_for_price" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Ask for Price</strong></a>
                                 </div>
+                                @endif
                                 <div class="action_link ml-3">
                                     <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart add-to-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Add to cart</strong></a>
                                 </div>
