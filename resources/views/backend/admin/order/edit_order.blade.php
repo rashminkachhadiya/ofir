@@ -95,7 +95,7 @@
                                         <p><strong> Metal Colour : </strong></p>
                                     </div>
                                     <div class="col-md-9">
-                                        {!! Form::select('metal_colour', $metalColour ?? [],  $order->metal_colur ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                        {!! Form::select('metal_colour', $metalColour ?? [],  $order->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">
