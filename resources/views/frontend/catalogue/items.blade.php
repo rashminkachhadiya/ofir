@@ -204,6 +204,27 @@ div.content {
         });
     });
 
+  $(document).on("click", ".ask_for_price", function(e) {
+        e.preventDefault();
+        var itemId = $(this).attr('item-id');
+        $.ajax({
+            url: "{{ URL::to('ask-for-price')}}",
+            data:{'item_id' : itemId},
+            dataType: 'json',
+            type: 'get',
+            success: function(data) {
+              console.log(data.data);
+              setTimeout(function(){
+                alert("price USD : " + data.data.price_usd + '\n' + "Price Pound : " + data.data.price_pound + "\n" + "Price EUR : " + data.data.price_eur)
+              }, 1500); 
+            },
+            error: function(result) {
+                $("#quick_view_item_details").html("Sorry Cannot Load Data");
+            }
+          
+        });
+    });
+ 
   $(".quick_view_details").click(function(event) {
       $("#quick_view_item_details").empty();
     

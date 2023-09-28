@@ -96,6 +96,16 @@
                                         {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
                                     <div class="form-group col-md-12">
+                                        <label for=""> Price USD </label>
+                                        <input type="text" class="form-control" id="price_usd" name="price_usd" value="{{ $item->price_usd }}">
+                                    </div><div class="form-group col-md-12">
+                                        <label for=""> Price Pound </label>
+                                        <input type="text" class="form-control" id="price_pound" name="price_pound" value="{{ $item->price_pound }}">
+                                    </div><div class="form-group col-md-12">
+                                        <label for=""> Price EUR </label>
+                                        <input type="text" class="form-control" id="price_eur" name="price_eur" value="{{ $item->price_eur }}">
+                                    </div>
+                                    <div class="form-group col-md-12">
                                         <label for=""> Cost Fee </label>
                                         <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
                                     </div>

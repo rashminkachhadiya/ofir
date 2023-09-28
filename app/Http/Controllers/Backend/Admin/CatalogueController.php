@@ -338,6 +338,10 @@ class CatalogueController extends Controller
                $item->metal_type = $request->input('metal_type');
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');
+               $item->price_usd = $request->input('price_usd');
+               $item->price_pound = $request->input('price_pound');
+               $item->price_eur = $request->input('price_eur');
+               
                // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;

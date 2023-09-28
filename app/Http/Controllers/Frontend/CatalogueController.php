@@ -203,4 +203,10 @@ class CatalogueController extends Controller
         $cart->delete();        
         return true;
     }
+
+    public function askForPrice(Request $request)
+    {
+        $itemPrice = Item::where('id',$request->item_id)->first();
+        return response()->json(['data' => $itemPrice]);
+    }
 }
