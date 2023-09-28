@@ -36,7 +36,7 @@ class SupplierController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
-      $users = Supplier::all();
+      $users = Supplier::select('suppliers.*',DB::raw("COUNT(orders.id) as tot_order"))->leftjoin('orders','suppliers.id','=','orders.supplier_name');
       return Datatables::of($users)
         // ->addColumn('file_path', function ($users) {
         //    return "<img src='" . asset($users->file_path) . "' class='img-thumbnail' width='50px'>";
@@ -47,9 +47,9 @@ class SupplierController extends Controller
         // ->addColumn('last_seen', function ($user) {
         //    return Carbon::parse($user->last_seen)->diffForHumans();
         // })
-        // ->addColumn('tot_order', function ($users) {
-        //    return '<a href="'. URL :: to('/admin/order'). "?user_id=" . $users->id .'">'. $users->tot_order .'</a>';
-        // })
+        ->addColumn('tot_order', function ($users) {
+           return '<a href="'. URL :: to('/admin/order'). "?supplier_id=" . $users->id .'">'. $users->tot_order .'</a>';
+        })
         // ->addColumn('status', function ($users) {
         //    return $users->status ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
         // })
@@ -62,7 +62,7 @@ class SupplierController extends Controller
            $html .= '</div>';
            return $html;
         })
-        ->rawColumns(['f_name','action'])
+        ->rawColumns(['f_name','action','tot_order'])
         ->addIndexColumn()
         ->make(true);
 

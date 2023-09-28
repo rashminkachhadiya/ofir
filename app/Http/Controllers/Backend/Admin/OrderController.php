@@ -43,6 +43,7 @@ class OrderController extends Controller
          $can_delete = "style='display:none;'";
       }
       $orders = Order::select('*');
+      $supplier = Supplier::pluck('f_name','id')->toArray();
       if(!is_null($request['user_id']))
       {
         $orders->where('orders.user_id', '=', $request['user_id']);
@@ -50,6 +51,10 @@ class OrderController extends Controller
       if(!empty($request['user_id']))
       {
         $orders->where('orders.user_id', '=', $request['user_id']);
+      }
+      if(!empty($request['supplier_id']))
+      {
+        $orders->where('orders.supplier_name', '=', $request['supplier_id']);
       }
       if(!is_null($request['order_status']))
       {
@@ -59,7 +64,7 @@ class OrderController extends Controller
       {
         $orders->orWhere('orders.order_number', 'LIKE', '%'. $request['search']['value'] .'%');
       }
-      return Datatables::of($orders)
+      return Datatables::of($orders,$supplier)
         ->addColumn('created_at', function ($orders) {
           return Carbon::parse($orders->created_at)->format('d/m/Y');
            // return $orders->created_at;
@@ -69,6 +74,9 @@ class OrderController extends Controller
         })
         ->addColumn('order_status', function ($orders) {
            return config('params.order_status')[$orders->order_status];
+        })
+        ->addColumn('supplier_name', function ($orders) use ($supplier) {
+           return isset($supplier[$orders->supplier_name]) ? $supplier[$orders->supplier_name] : "";
         })
         ->addColumn('category', function ($orders) {
            return config('params.categories')[$orders->category_id];
