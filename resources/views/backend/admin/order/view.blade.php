@@ -33,7 +33,7 @@
                                     <p><strong> Order By : </strong></p>
                                 </div>
                                 <div class="col-md-9">
-                                    {{ $order->orderUser->name }}
+                                    {{ $order->orderUser->f_name }}
                                 </div>
                             </div>
                             <div class="d-flex">

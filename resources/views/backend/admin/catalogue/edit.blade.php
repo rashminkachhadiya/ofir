@@ -71,10 +71,17 @@
                                         <input type="text" class="form-control" id="description" name="description" value="{{ $item->description }}" placeholder="">
                                         <span id="error_description" class="has-error"></span>
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    <div class="d-flex">
+                                    <div class="form-group col-md-6">
                                         <label for=""> All Collection </label><br/>
                                         <input type="radio" name="is_allcollection" class="flat-green" value="1" {{ ( $item->is_allcollection == 1 ) ? 'checked' : '' }}/> Yes
                                         <input type="radio" name="is_allcollection" class="flat-green" value="0" {{ ( $item->is_allcollection == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for=""> Is Active? </label><br/>
+                                        <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
+                                        <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No
+                                    </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> Available </label><br/>
@@ -101,24 +108,19 @@
                                     </div>
                                     <div class="d-flex">
                                     <div class="form-group col-md-4">
-                                        <label for=""> Price $ </label>
+                                        <label for="">$ </label>
                                         <input type="text" class="form-control" id="price_usd" name="price_usd" value="{{ $item->price_usd }}">
                                     </div><div class="form-group col-md-4">
-                                        <label for=""> Price &pound; </label>
+                                        <label for=""> &pound; </label>
                                         <input type="text" class="form-control" id="price_pound" name="price_pound" value="{{ $item->price_pound }}">
                                     </div><div class="form-group col-md-4">
-                                        <label for=""> Price &euro; </label>
+                                        <label for=""> &euro; </label>
                                         <input type="text" class="form-control" id="price_eur" name="price_eur" value="{{ $item->price_eur }}">
                                     </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> Price Notes </label>
                                         <input type="text" class="form-control" id="price_notes" name="price_notes" value="{{ $item->price_notes }}">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Is Active? </label><br/>
-                                        <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
-                                        <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No
                                     </div>
                                 </div>
                                 <div id="catelogue_size">
