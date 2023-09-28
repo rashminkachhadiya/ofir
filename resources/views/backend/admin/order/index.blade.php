@@ -97,6 +97,10 @@
                     {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,
+                "lengthMenu": [25, 50, 100],
+                "language": {
+                    "lengthMenu": "Show _MENU_ "
+                }
 
             });
             $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({

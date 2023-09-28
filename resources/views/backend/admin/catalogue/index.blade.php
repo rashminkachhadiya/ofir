@@ -123,7 +123,7 @@
                 "scrollX": true,
                 "scrollY": 450,
                 "alwaysCloneTop": true,
-                "lengthMenu": [10,25, 50, 100],
+                "lengthMenu": [25, 50, 100],
                 "language": {
                     "lengthMenu": "Show _MENU_ "
                 }
