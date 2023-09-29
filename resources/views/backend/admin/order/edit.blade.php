@@ -5,7 +5,7 @@
         <div id="status"></div>
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Status </label>
-            {!! Form::select('status', config('params.order_status') ?? [],  $order->status ?? '', ['class' => 'form-control select2','data-control'=>"select2", 'id'=>'status']) !!}
+            {!! Form::select('status', config('params.order_status') ?? [],  $order->order_status ?? '', ['class' => 'form-control select2','data-control'=>"select2", 'id'=>'status']) !!}
             <span id="error_title" class="has-error"></span>
         </div>
         <div class="form-group col-md-4 col-sm-12">
