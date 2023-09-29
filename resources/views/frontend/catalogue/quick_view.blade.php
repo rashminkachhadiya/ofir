@@ -18,23 +18,35 @@
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                               <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                @if(!is_null($item->photo_2))
                                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                @endif
+                                @if(!is_null($item->photo_3))
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                @endif
+                                @if(!is_null($item->photo_4))
                                 <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                @endif
                               </ol>
                               <div class="carousel-inner">
                                 <div class="carousel-item active">
                                   <img class="d-block w-100" src="{{asset($item->photo)}}" alt="First slide">
                                 </div>
+                                @if(!is_null($item->photo_2))
                                 <div class="carousel-item">
                                   <img class="d-block w-100" src="{{asset($item->photo_2)}}" alt="Second slide">
                                 </div>
+                                @endif
+                                @if(!is_null($item->photo_2))
                                 <div class="carousel-item">
                                   <img class="d-block w-100" src="{{asset($item->photo_3)}}" alt="Third slide">
                                 </div>
+                                @endif
+                                @if(!is_null($item->photo_2))
                                 <div class="carousel-item">
                                   <img class="d-block w-100" src="{{asset($item->photo_4)}}" alt="Third slide">
                                 </div>
+                                @endif
                               </div>
                             </div>
                         </div>
