@@ -320,6 +320,51 @@ class CatalogueController extends Controller
                }
             }
 
+            if ($request->hasFile('photo_2')) {
+               if ($request->file('photo_2')->isValid()) {
+                  $destinationPath = public_path('assets/images/items/');
+                  $extension = $request->file('photo_2')->getClientOriginalExtension();
+                  $fileName = time() . '2' . '.' . $extension;
+                  $file_path_2 = 'assets/images/items/' . $fileName;
+                  $request->file('photo_2')->move($destinationPath, $fileName);
+               } else {
+                  return response()->json([
+                    'type' => 'error',
+                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                  ]);
+               }
+            }
+
+            if ($request->hasFile('photo_3')) {
+               if ($request->file('photo_3')->isValid()) {
+                  $destinationPath = public_path('assets/images/items/');
+                  $extension = $request->file('photo_3')->getClientOriginalExtension();
+                  $fileName = time() . '3' . '.' . $extension;
+                  $file_path_3 = 'assets/images/items/' . $fileName;
+                  $request->file('photo_3')->move($destinationPath, $fileName);
+               } else {
+                  return response()->json([
+                    'type' => 'error',
+                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                  ]);
+               }
+            }
+
+            if ($request->hasFile('photo_4')) {
+               if ($request->file('photo_4')->isValid()) {
+                  $destinationPath = public_path('assets/images/items/');
+                  $extension = $request->file('photo_4')->getClientOriginalExtension();
+                  $fileName = time() . '4' . '.' . $extension;
+                  $file_path_4 = 'assets/images/items/' . $fileName;
+                  $request->file('photo_4')->move($destinationPath, $fileName);
+               } else {
+                  return response()->json([
+                    'type' => 'error',
+                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                  ]);
+               }
+            }
+
             DB::beginTransaction();
             try {
                $item->catalogue_id = $request->input('catalogue_id');
@@ -330,6 +375,15 @@ class CatalogueController extends Controller
                $item->description = $request->input('description');
                if(isset($file_path_1)){
                 $item->photo = $file_path_1;                
+               }
+               if(isset($file_path_2)){
+                $item->photo_2 = $file_path_2;                
+               }
+               if(isset($file_path_3)){
+                $item->photo_3 = $file_path_3;                
+               }
+               if(isset($file_path_4)){
+                $item->photo_4 = $file_path_4;                
                }
                $item->is_allcollection = $request->input('is_allcollection');
                $item->is_available = $request->input('is_available');

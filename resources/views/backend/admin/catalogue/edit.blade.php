@@ -48,11 +48,38 @@
                                         <input type="text" class="form-control" id="sku" name="sku" value="{{ $item->sku }}" placeholder="" required>
                                         <span id="error_sku" class="has-error"></span>
                                     </div>
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 105px; height: 100px;">
+                                    <div class="text-center">
+                                        <div class="form-group col-md-12 col-sm-12">
+                                            <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 105px; height: 100px;">
+                                        </div>
+                                        <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 150px; margin-left: 98px;">
+                                            <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
+                                        </div>
                                     </div>
-                                    <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
-                                        <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
+                                    <div class="d-flex">
+                                        <div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <img id="preview-2" src="{{ asset($item->photo_2) }}" alt="" style="width: 105px; height: 100px;">
+                                            </div>
+                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
+                                                <input id="photo-2" type="file" accept="image/*" class="form-control" name="photo_2" onchange="showImage(2)">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <img id="preview-3" src="{{ asset($item->photo_3) }}" alt="" style="width: 105px; height: 100px;">
+                                            </div>
+                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
+                                                <input id="photo-3" type="file" accept="image/*" class="form-control" name="photo_3" onchange="showImage(3)">
+                                            </div>
+                                        </div><div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <img id="preview-4" src="{{ asset($item->photo_4) }}" alt="" style="width: 105px; height: 100px;">
+                                            </div>
+                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
+                                                <input id="photo-4" type="file" accept="image/*" class="form-control" name="photo_4" onchange="showImage(4)">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">

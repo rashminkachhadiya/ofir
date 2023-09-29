@@ -10,11 +10,33 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="product-large-slider">
-                            @if(!empty($item->photo))
+                            <!-- @if(!empty($item->photo))
                             <div class="pro-large-img img-zoom">
                                 <img  src="{{asset($item->photo)}}" alt="product-details" width="180px" height="180px" />
                             </div>
-                            @endif
+                            @endif -->
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                              <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                              </ol>
+                              <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                  <img class="d-block w-100" src="{{asset($item->photo)}}" alt="First slide">
+                                </div>
+                                <div class="carousel-item">
+                                  <img class="d-block w-100" src="{{asset($item->photo_2)}}" alt="Second slide">
+                                </div>
+                                <div class="carousel-item">
+                                  <img class="d-block w-100" src="{{asset($item->photo_3)}}" alt="Third slide">
+                                </div>
+                                <div class="carousel-item">
+                                  <img class="d-block w-100" src="{{asset($item->photo_4)}}" alt="Third slide">
+                                </div>
+                              </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-7">
