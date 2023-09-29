@@ -42,7 +42,7 @@ class OrderController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
-      $orders = Order::select('*')->get();
+      $orders = Order::select('*');
       $supplier = Supplier::pluck('f_name','id')->toArray();
       if(!is_null($request['user_id']))
       {
