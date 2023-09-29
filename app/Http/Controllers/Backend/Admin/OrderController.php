@@ -240,6 +240,7 @@ class OrderController extends Controller
       $order->metal_colour = $request->metal_colour;
       $order->size = $request->size;
       $order->quantity = $request->quantity;
+      $order->est_price = $request->est_price;
       $order->admin_notes = $request->admin_notes;
       $order->save();
       return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);

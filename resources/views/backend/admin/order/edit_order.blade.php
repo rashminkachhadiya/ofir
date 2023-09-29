@@ -124,6 +124,14 @@
                                 </div>
                                 <div class="d-flex mt-1">
                                     <div class="col-md-3">
+                                        <p><strong> Est. Price : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" class="form-control" id="est_price" name="est_price" value="{{ $order->est_price }}" placeholder="Est Price" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-3">
                                         <p><strong>Admin Notes : </strong></p>
                                     </div>
                                     <div class="col-md-9">

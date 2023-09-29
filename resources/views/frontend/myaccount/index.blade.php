@@ -131,6 +131,7 @@
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
+                          <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
                         </tr>
                       </thead>
@@ -141,6 +142,9 @@
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
+                            <td>
+                              {{ $order->est_price }}
+                            </td>
                             <td>
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
@@ -169,6 +173,7 @@
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
+                          <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
                         </tr>
                       </thead>
@@ -179,6 +184,9 @@
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
+                            <td>
+                              {{ $order->est_price }}
+                            </td>
                             <td>
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
@@ -207,6 +215,7 @@
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
+                          <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
                         </tr>
                       </thead>
@@ -217,6 +226,9 @@
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
+                            <td>
+                              {{ $order->est_price }}
+                            </td>
                             <td>
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
