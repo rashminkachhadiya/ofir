@@ -42,7 +42,7 @@ class OrderController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
-      $orders = Order::select('*');
+      $orders = Order::select('*')->get();
       $supplier = Supplier::pluck('f_name','id')->toArray();
       if(!is_null($request['user_id']))
       {
@@ -98,7 +98,7 @@ class OrderController extends Controller
             $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fa fa-shopping-cart"></i></a>';
            }
 
-           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
+           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '?next=' .$orders->next() .'"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
 
            $html .= '<a id="' . $orders->id . '" class="btn btn-xs btn-danger margin-r-5 delete" title="Delete"><i class="fa fa-times"></i> </a>';
@@ -140,7 +140,9 @@ class OrderController extends Controller
     public function show($id, Request $request)
     {
         $order = Order::find($id);
-        return view('backend.admin.order.view',compact('order'));
+        $nextOrder = $order->next();
+        $preOrder = $order->previous();
+        return view('backend.admin.order.view',compact('order','nextOrder','preOrder'));
     }
 
     /**

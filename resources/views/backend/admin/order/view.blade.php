@@ -4,6 +4,14 @@
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="main-card mb-3 card" style="background: #f6f5f3;">
+                <div style="display: flex;justify-content: space-between;">
+                    <div>
+                        <a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('admin/order/') }}/{{$preOrder}}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
+                    </div>
+                    <div>
+                        <a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('admin/order/') }}/{{$nextOrder}}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM281 385c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l71-71L136 280c-13.3 0-24-10.7-24-24s10.7-24 24-24l182.1 0-71-71c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L393 239c9.4 9.4 9.4 24.6 0 33.9L281 385z"/></svg></a>
+                    </div>
+                </div>
                 <div class="card-body" style="color: black;">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
                         <div>

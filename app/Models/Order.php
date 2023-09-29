@@ -41,4 +41,15 @@ class Order extends Model
     {
     	return $this->hasMany(OrderImage::class, 'order_id','id');
     }
+
+    public function next(){
+    // get next user
+    return Order::select('id')->where('id', '>', $this->id)->orderBy('id','asc')->first()->id ?? NULL;
+
+    }
+    public  function previous(){
+        // get previous  user
+        return Order::where('id', '<', $this->id)->orderBy('id','desc')->first()->id ?? NULL;
+
+    }
 }
