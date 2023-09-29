@@ -30,6 +30,14 @@
                             </div>
                             <div class="d-flex">
                                 <div class="col-md-3">
+                                    <p><strong> Code : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->sku }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
                                     <p><strong> Order By : </strong></p>
                                 </div>
                                 <div class="col-md-9">
