@@ -15,7 +15,7 @@
                                 <img  src="{{asset($item->photo)}}" alt="product-details" width="180px" height="180px" />
                             </div>
                             @endif -->
-                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div style="border: 1px solid black;" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                               <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                 @if(!is_null($item->photo_2))

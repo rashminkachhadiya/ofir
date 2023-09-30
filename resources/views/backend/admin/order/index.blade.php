@@ -49,6 +49,7 @@
                                 <th>Code</th>
                                 <th>Category</th>
                                 <th>Clinet Name</th>
+                                <th>Est. Price</th>
                                 <th>Order Status</th>
                                 <th>Action</th>
                             </tr>
@@ -95,6 +96,7 @@
                     {data: 'sku', name: 'sku'},
                     {data: 'category', name: 'category'},
                     {data: 'client_name', name: 'client_name'},
+                    {data: 'tot_est_price', name: 'tot_est_price'},
                     {data: 'order_status', name: 'order_status'},
                     {data: 'action', name: 'action'}
                 ],

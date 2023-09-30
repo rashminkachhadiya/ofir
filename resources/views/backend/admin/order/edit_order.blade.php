@@ -116,18 +116,18 @@
                                 </div>
                                 <div class="d-flex mt-1">
                                     <div class="col-md-3">
-                                        <p><strong> Quantity : </strong></p>
                                     </div>
-                                    <div class="col-md-9">
-                                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $order->quantity }}" placeholder="Quantity" required>
+                                    <div class="col-md-2 pr-0">
+                                        <input type="text" class="form-control" id="quantity" name="quantity" value="{{ $order->quantity }}" placeholder="Quantity">
                                     </div>
-                                </div>
-                                <div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                        <p><strong> Est. Price : </strong></p>
+                                    <div class="col-md-2 pr-0">
+                                        {!! Form::select('est_currency', $currency ?? [],  $order->est_currency ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'est_currency']) !!}
                                     </div>
-                                    <div class="col-md-9">
-                                        <input type="number" class="form-control" id="est_price" name="est_price" value="{{ $order->est_price }}" placeholder="Est Price" required>
+                                    <div class="col-md-2 pr-0">
+                                        <input type="text" class="form-control" id="est_price" name="est_price" value="{{ $order->est_price }}" placeholder="Est Price">
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <input type="text" class="form-control" id="tot_est_price" name="tot_est_price" value="{{ $order->tot_est_price }}" placeholder="Totol" readonly>
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">
@@ -173,6 +173,12 @@
         function create() {
             ajax_submit_create('categories');
         }
+
+        $(document).on("focusout", "#quantity, #est_price", function(e) {
+            e.preventDefault();
+            var totalPrice = parseFloat($("#quantity").val()) * parseFloat($("#est_price").val());
+            $("#tot_est_price").val(totalPrice.toFixed(2));
+        });
 
         $(document).ready(function () {
             // View Form

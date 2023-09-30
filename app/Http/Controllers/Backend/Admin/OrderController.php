@@ -84,6 +84,12 @@ class OrderController extends Controller
         ->addColumn('client_name', function ($orders) {
            return $orders->orderUser->f_name;
         })
+        ->addColumn('tot_est_price', function ($orders) {
+          if(!is_null($orders->est_price_currency))
+          {
+           return  config('params.currency')[$orders->est_price_currency] . $orders->tot_est_price;
+          }
+        })
         ->addColumn('action', function ($orders) use ($can_edit, $can_delete) {
            $html = '<div class="btn-group">';
            
@@ -171,7 +177,8 @@ class OrderController extends Controller
           $supplier[''] = 'Select Supplier';
           $metalType = config('params.metal_type');
           $metalColour = config('params.metal_colour');
-          return view('backend.admin.order.edit_order',compact('order','metalType','metalColour','supplier'));
+          $currency = config('params.currency');
+          return view('backend.admin.order.edit_order',compact('order','metalType','metalColour','supplier', 'currency'));
        } else {
           abort(403, 'Sorry, you are not authorized to access the page');
        }
@@ -241,6 +248,8 @@ class OrderController extends Controller
       $order->size = $request->size;
       $order->quantity = $request->quantity;
       $order->est_price = $request->est_price;
+      $order->est_price_currency = $request->est_currency;
+      $order->tot_est_price = $request->tot_est_price;
       $order->admin_notes = $request->admin_notes;
       $order->save();
       return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);

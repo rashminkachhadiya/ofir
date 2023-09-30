@@ -143,7 +143,9 @@
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
                             <td>
-                              {{ $order->est_price }}
+                              @if(!is_null($order->est_price_currency))
+                                {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
+                              @endif
                             </td>
                             <td>
                               <div class="btn-group">
@@ -185,7 +187,9 @@
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
                             <td>
-                              {{ $order->est_price }}
+                              @if(!is_null($order->est_price_currency))
+                                {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
+                              @endif
                             </td>
                             <td>
                               <div class="btn-group">
@@ -227,7 +231,9 @@
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
                             <td>
-                              {{ $order->est_price }}
+                              @if(!is_null($order->est_price_currency))
+                                {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
+                              @endif
                             </td>
                             <td>
                               <div class="btn-group">

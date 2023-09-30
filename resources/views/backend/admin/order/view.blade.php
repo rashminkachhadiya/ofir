@@ -15,7 +15,7 @@
                 <div class="card-body" style="color: black;">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
                         <div>
-                            <h5><strong> Order Details </strong></h5>
+                            <h5><strong> View Details </strong></h5>
                         </div>
                     </div>
                     <div class="d-flex">
@@ -121,6 +121,26 @@
                                 <div class="col-md-9">
                                     {{ $order->quantity }}
                                 </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Est Price : </strong></p>
+                                </div>
+                                @if(!is_null($order->est_price_currency))
+                                <div class="col-md-9">
+                                    {{ config('params.currency')[$order->est_price_currency] }}{{ number_format((float) $order->est_price, 2, '.', '') }}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Total Est Price </strong></p>
+                                </div>
+                                @if(!is_null($order->est_price_currency))
+                                <div class="col-md-9">
+                                    {{ config('params.currency')[$order->est_price_currency] }}{{ $order->tot_est_price }}
+                                </div>
+                                @endif
                             </div>
                             @if(!is_null($order->admin_notes))
                             <div class="d-flex">
