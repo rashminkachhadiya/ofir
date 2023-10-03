@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 50%">
+<div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 65%">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Hi, {{Auth()->user()->f_name}}</h5>
@@ -49,6 +49,9 @@
                                 @endif
                               </div>
                             </div>
+                            <div>
+                                <strong>{{ $item->sku }}</strong>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -56,49 +59,118 @@
                            
                             <h3 class="product-name" style="word-wrap: break-word;">{{ $item->item_title }}</h3>
                             <p style="margin-bottom: 0px;" class="pro-desc">{{ $item->description }}</p>
-                            <p style="font-size: 10px;"><strong> {{ $item->sku }} - {{ $item->item_title_gram }} </strong></p>
-                            <div class="quantity-cart-box align-items-center">
-                                <p style="">Metal Type: <strong>
-                                    @if(!is_null($item->metal_type)){{ config('params.metal_type')[$item->metal_type] }}</strong>
-                                    @endif
-                                </p>
-
-                            </div>
-                            <div class="quantity-cart-box mb-1 d-flex align-items-center">
-                                <p class="mr-1 mb-1">Size:</p>
-                                <input type="text" style="width: 50%;border-radius: 50px;" class="form-control" name="size" id="size" placeholder="Size"></strong>
-                            </div>
-                            
-                            <div class="quantity-cart-box d-flex align-items-center">
-                                <h6 class="option-title mr-2">Qty</h6>
-                                <i class="fa fa-minus-circle mr-3"></i>
-                                <div class="quantity">
-                                    <div class="pro-qty"><input type="text" id="item-qty" value="1"></div>
+                            <div class="row">
+                                <div class="col-md-5 mt-2">
+                                    <div class="d-flex">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Metal</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            {!! Form::select('metal_type', $metalType ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Weight</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" id="weight" name="weight" value="" placeholder="Weight" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Size</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" id="size" name="size" value="" placeholder="Size" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Qty</label>
+                                        </div>
+                                        <div class="col-md-6 p-0 d-flex">
+                                            <div class="quantity">
+                                                <input class="form-control" name="qty" type="text" id="item-qty" value="1">
+                                            </div>
+                                            <div class="text-center" style="padding: 9px;">
+                                                <i class="fa fa-plus-circle"></i> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Ref...</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" name="reference" id="ref" placeholder="Reference">
+                                        </div>
+                                    </div>
                                 </div>
-                                <i class="fa fa-plus-circle"></i>
-                            </div>
-                            <div class="quantity-cart-box mt-2 d-flex align-items-center">
-                                <p class="mr-1 mb-1">Ref.</p>
-                                <input type="text" style="width: 50%;border-radius: 50px;" class="form-control" name="reference" id="ref" placeholder="Reference"></strong>
-                            </div>
-                            <div class="quantity-cart-box mt-2 mb-2 align-items-center">
-                                <p class="mr-1 mb-1">Notes:</p>
-                                <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes" id="notes" rows="3" required="false"></textarea>
-                            </div>
-                            <div class="d-flex" style="justify-content: end;">
-                                @if(!is_null($item->price_usd) || !is_null($item->price_pound) || !is_null($item->price_eur))
-                                <div class="action_link ml-3">
-                                    <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart ask_for_price" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Ask for Price</strong></a>
-                                </div>
-                                @endif
-                                <div class="action_link ml-3">
-                                    <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart add-to-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Add to cart</strong></a>
-                                </div>
-                                <div class="ml-2" style="width: 50px;margin-top: 10px;">
+                                <div class="col-md-1">
                                     
                                 </div>
+                                <div class="col-md-5 mt-2">
+                                    <div class="d-flex">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Gem.</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" id="gem" name="gem" value="" placeholder="Gem">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Shape</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" id="shape" name="shape" value="" placeholder="Shape" required>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Carat</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" id="carat" name="carat" value="" placeholder="Carat">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Colour</label>
+                                        </div>
+                                        <div class="col-md-6 p-0 d-flex">
+                                            {!! Form::select('metal_colour', $metalColour ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Cleaerty</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" placeholder="Cleaerty">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quantity-cart-box mt-2 mb-2 align-items-center">
+                                <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes" id="notes" rows="3" required="false"></textarea>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex" style="justify-content: end;">
+                    @if(!is_null($item->price_usd) || !is_null($item->price_pound) || !is_null($item->price_eur))
+                    <div class="action_link ml-3">
+                        <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart ask_for_price" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Ask for Price</strong></a>
+                    </div>
+                    @endif
+                    <div class="action_link ml-3">
+                        <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart add-to-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Add to cart</strong></a>
+                    </div>
+                    <div class="ml-2" style="width: 50px;margin-top: 10px;">
+                        
                     </div>
                 </div>
             </div> <!-- product details inner end -->

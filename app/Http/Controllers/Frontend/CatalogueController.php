@@ -136,7 +136,11 @@ class CatalogueController extends Controller
     public function itemDetails(Request $request)
     {
         $item = Item::where('id',$request->item_id)->first();
-        $view = View::make('frontend.catalogue.quick_view', compact('item'))->render();
+        $metalType = config('params.metal_type');
+        $metalType[''] = "Select";
+        $metalColour = config('params.metal_colour');
+        $metalColour[''] = "Select";
+        $view = View::make('frontend.catalogue.quick_view', compact('item','metalType','metalColour'))->render();
         return response()->json(['html' => $view]);
     }
 
@@ -146,6 +150,12 @@ class CatalogueController extends Controller
         $cart->user_id = Auth::user()->id;
         $cart->item_id = $request->item_id;
         $cart->quantity = $request->item_qty;
+        $cart->metal_type = $request->metal_type;
+        $cart->weight = $request->weight;
+        $cart->gem = $request->gem;
+        $cart->shape = $request->shape;
+        $cart->metal_colour = $request->metal_colour;
+        $cart->cleaerty = $request->cleaerty;
         $cart->size = $request->size;
         $cart->ref = $request->ref;
         $cart->notes = $request->notes;
@@ -157,9 +167,9 @@ class CatalogueController extends Controller
     {   
         $cartItem = Cart::select('items.*','carts.*','carts.id as cart_id','carts.size as cart_size')->join('items','carts.item_id','items.id')->where('user_id',Auth::user()->id)->get()->toArray();
 
-        // echo "<pre>";
-        // print_r($cartItem);
-        // die;
+        echo "<pre>";
+        print_r($cartItem);
+        die;
         return view('frontend.myaccount.cart',compact('cartItem'));
     }
 

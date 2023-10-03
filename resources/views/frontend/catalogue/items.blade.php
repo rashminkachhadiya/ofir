@@ -185,13 +185,22 @@ div.content {
   $(document).on("click", ".add-to-cart", function(e) {
         e.preventDefault();
         var itemId = $(this).attr('item-id');
+        var metalType = $('#metal_type').val();
+        var weight = $('#weight').val();
+
+        var gem = $('#gem').val();
+        var shape = $('#shape').val();
+        var metalColour = $('#metal_colour').val();
+        var cleaerty = $('#cleaerty').val();
+
+
         var itemQty = $('#item-qty').val();
         var size = $('#size').val();
         var ref = $('#ref').val();
         var notes = $('#notes').val();
         $.ajax({
             url: "{{ URL::to('add-to-cart')}}",
-            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}"},
+            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty},
             dataType: 'json',
             type: 'POST',
             success: function(data) {
