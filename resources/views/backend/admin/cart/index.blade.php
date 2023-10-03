@@ -43,7 +43,11 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Order Date</th>
+                                <th>Date</th>
+                                <th>Client</th>
+                                <th>Code</th>
+                                <th>Category</th>
+                                <th>Qty</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -84,6 +88,11 @@
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'client_name', name: 'client_name'},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'category', name: 'category'},
+                    {data: 'quantity', name: 'quantity'},
+                    {data: 'action', name: 'action'},
                 ],
                 "autoWidth": false,
                 "lengthMenu": [25, 50, 100],

@@ -37,7 +37,23 @@ class CartController extends Controller
         ->addColumn('created_at', function ($carts) {
           return Carbon::parse($carts->created_at)->format('d/m/Y');
         })
-        ->rawColumns(['created_at'])
+        ->addColumn('client_name', function ($carts) {
+           return $carts->orderUser->f_name;
+        })
+        ->addColumn('sku', function ($carts) {
+           return $carts->itemDetails->sku;
+        })
+        ->addColumn('category', function ($carts) {
+           return config('params.categories')[$carts->itemDetails->sub_catalogue_id];
+        })
+        ->addColumn('action', function ($carts) use ($can_edit, $can_delete) {
+           $html = '<div class="btn-group">';
+           
+           $html .= '<a href="' . \URL :: to('admin/cart') .  '/' . $carts->id . '"  id="' . $carts->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
+           $html .= '</div>';
+           return $html;
+        })
+        ->rawColumns(['created_at','client_name','action'])
         ->addIndexColumn()
         ->make(true);
     }
@@ -70,7 +86,8 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Cart::find($id);
+        return view('backend.admin.cart.view',compact('order'));
     }
 
     /**
