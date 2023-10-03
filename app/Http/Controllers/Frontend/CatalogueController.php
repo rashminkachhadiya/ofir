@@ -166,10 +166,6 @@ class CatalogueController extends Controller
     public function cart(Request $request)
     {   
         $cartItem = Cart::select('items.*','carts.*','carts.id as cart_id','carts.size as cart_size')->join('items','carts.item_id','items.id')->where('user_id',Auth::user()->id)->get()->toArray();
-
-        echo "<pre>";
-        print_r($cartItem);
-        die;
         return view('frontend.myaccount.cart',compact('cartItem'));
     }
 
