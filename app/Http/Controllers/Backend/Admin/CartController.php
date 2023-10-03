@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Cart;
+use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
+
 
 class CartController extends Controller
 {
@@ -17,6 +21,26 @@ class CartController extends Controller
         return view('backend.admin.cart.index');
     }
 
+    public function getAll(Request $request)
+    {   
+        $can_edit = $can_delete = '';
+      if (!auth()->user()->can('user-edit')) {
+         $can_edit = "style='display:none;'";
+      }
+      if (!auth()->user()->can('user-delete')) {
+         $can_delete = "style='display:none;'";
+      }
+
+      $carts = Cart::select('carts.*');
+      
+      return Datatables::of($carts)
+        ->addColumn('created_at', function ($carts) {
+          return Carbon::parse($carts->created_at)->format('d/m/Y');
+        })
+        ->rawColumns(['created_at'])
+        ->addIndexColumn()
+        ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *

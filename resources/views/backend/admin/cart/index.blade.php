@@ -44,13 +44,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Order Date</th>
-                                <th>Supplier</th>
-                                <th>Order Number</th>
-                                <th>Code</th>
-                                <th>Category</th>
-                                <th>Clinet Name</th>
-                                <th>Est. Price</th>
-                                <th>Order Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -77,7 +70,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    "url": '{!! route('admin.allOrders') !!}',
+                    "url": '{!! route('admin.allCarts') !!}',
                     "type": "GET",
                     headers: {
                         "X-CSRF-TOKEN": CSRF_TOKEN,
@@ -91,14 +84,6 @@
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'supplier_name', name: 'supplier_name'},
-                    {data: 'order_number', name: 'order_number'},
-                    {data: 'sku', name: 'sku'},
-                    {data: 'category', name: 'category'},
-                    {data: 'client_name', name: 'client_name'},
-                    {data: 'tot_est_price', name: 'tot_est_price'},
-                    {data: 'order_status', name: 'order_status'},
-                    {data: 'action', name: 'action'}
                 ],
                 "autoWidth": false,
                 "lengthMenu": [25, 50, 100],
