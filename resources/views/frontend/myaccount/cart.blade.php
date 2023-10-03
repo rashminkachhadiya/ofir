@@ -188,8 +188,8 @@ div.content {
                       ?>
                       <td width="10%" class="pro-remove text-center">
                         <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">Order</a>
-
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart"><i style="color: red;" class="pe-7s-trash"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="edit-btn" style="color: blue;" title="Edit"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart" title="Delete"><i style="color: red;" class="pe-7s-trash"></i></a>
                       </td>
                     </tr>
                     @endforeach
@@ -269,6 +269,55 @@ div.content {
         
       });
   });
+
+  $(".update-cart").click(function(event){
+        var itemId = $(this).attr('item-id');
+        var metalType = $('#metal_type').val();
+        var weight = $('#weight').val();
+
+        var gem = $('#gem').val();
+        var shape = $('#shape').val();
+        var metalColour = $('#metal_colour').val();
+        var carat = $('#carat').val();
+        var cleaerty = $('#cleaerty').val();
+
+
+        var itemQty = $('#item-qty').val();
+        var size = $('#size').val();
+        var ref = $('#ref').val();
+        var notes = $('#notes').val();
+        $.ajax({
+            url: "{{ URL::to('update-cart')}}",
+            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty,'carat': carat},
+            dataType: 'json',
+            type: 'POST',
+            success: function(data) {
+                location.reload(true); // show bootstrap modal
+            },
+            error: function(result) {
+                $("#quick_view_item_details").html("Sorry Cannot Load Data");
+            }
+          
+        });
+  });
+
+  $(".edit-btn").click(function(event){
+    $("#quick_view_item_details").empty();
+    var id = $(this).attr('data-id');
+      $.ajax({
+          url: 'edit-cart-item' + '/' + id,
+          type: 'get',
+          success: function(data) {
+              $("#quick_view_item_details").html(data.html);
+              $('#quick_view_item_details').modal('show'); // show bootstrap modal
+          },
+          error: function(result) {
+              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+          }
+        
+      });
+  });
+
   $(".quick_view_details").click(function(event) {
       $("#quick_view_item_details").empty();
     

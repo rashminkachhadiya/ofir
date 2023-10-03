@@ -17,8 +17,14 @@ Route::middleware('auth')->group(function ()
 	Route::get('cart', 'CatalogueController@cart');
 	Route::get('item-remove-cart/{cart_id}', 'CatalogueController@removeToCart');
 	Route::get('create-order/{cart_id}', 'CatalogueController@createOrder');
+	Route::get('edit-cart-item/{cart_id}', 'CatalogueController@editCartItem');
+	Route::post('update-cart', 'CatalogueController@updateCart');
+
 	
 
 	Route::get('item-details/{item_id}','CatalogueController@itemDetails');
 	Route::get('my-account/order/{order_id}','MyAccountController@orderDetails');
+	Route::get('my-account/order-confim/{order_id}','MyAccountController@orderConfirm');
+	Route::get('my-account/order-cancel/{order_id}','MyAccountController@orderCancel');
+
 });

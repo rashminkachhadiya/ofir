@@ -70,6 +70,14 @@
                             </div>
                             <div class="d-flex">
                                 <div class="col-md-3">
+                                    <p><strong> Ref. : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->ref }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
                                     <p><strong> Customer Notes : </strong></p>
                                 </div>
                                 <div class="col-md-9">
@@ -112,6 +120,47 @@
                                 </div>
                                 <div class="col-md-9">
                                     {{ $order->size }}
+                                </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Weight : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->weight }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Shape : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->shape }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Carat : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->carat }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Cleaerty : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->cleaerty }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Gem. : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->gem }}
                                 </div>
                             </div>
                             <div class="d-flex">

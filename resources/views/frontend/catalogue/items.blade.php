@@ -191,6 +191,7 @@ div.content {
         var gem = $('#gem').val();
         var shape = $('#shape').val();
         var metalColour = $('#metal_colour').val();
+        var carat = $('#carat').val();
         var cleaerty = $('#cleaerty').val();
 
 
@@ -200,7 +201,7 @@ div.content {
         var notes = $('#notes').val();
         $.ajax({
             url: "{{ URL::to('add-to-cart')}}",
-            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty},
+            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty,'carat': carat},
             dataType: 'json',
             type: 'POST',
             success: function(data) {
@@ -209,7 +210,6 @@ div.content {
             error: function(result) {
                 $("#quick_view_item_details").html("Sorry Cannot Load Data");
             }
-          
         });
     });
 

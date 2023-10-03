@@ -35,6 +35,7 @@ Route::post('/catalogue-save/{id}', 'CatalogueController@copyProductSave');
 Route::get('/allCatalogue','CatalogueController@getAll')->name('allCatalogue');
 Route::get('/get-subcatalogue','CatalogueController@getSubCatalogue');
 
+Route::resource('cart', 'CartController');
 
 Route::resource('supplier', 'SupplierController');
 Route::get('/allSupplier', 'SupplierController@getAll')->name('allSupplier.users');

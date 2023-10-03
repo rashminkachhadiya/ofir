@@ -28,4 +28,19 @@ class MyAccountController extends Controller
         $view = View::make('frontend.myaccount.order_view', compact('order'))->render();
         return response()->json(['html' => $view]);
     }
+
+    public function orderConfirm(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->order_status = 3;
+        $order->save();
+        return true;
+    }
+
+    public function orderCancel(Request $request)
+    {
+        $order = Order::find($request->order_id);
+        $order->delete();
+        return true;
+    }
 }

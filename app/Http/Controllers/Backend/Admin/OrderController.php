@@ -246,6 +246,13 @@ class OrderController extends Controller
       $order->metal_type = $request->metal_type;
       $order->metal_colour = $request->metal_colour;
       $order->size = $request->size;
+
+      $order->weight = $request->weight;
+      $order->shape = $request->shape;
+      $order->carat = $request->carat;
+      $order->cleaerty = $request->cleaerty;
+      $order->gem = $request->gem;
+
       $order->quantity = $request->quantity;
       $order->est_price = $request->est_price;
       $order->est_price_currency = $request->est_currency;

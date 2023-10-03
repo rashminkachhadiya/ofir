@@ -151,6 +151,16 @@
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
+                              @if($order->order_status == 0)
+                              <div class="btn-group">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                              </div>
+                              @endif
+                              @if($order->order_status == 3)
+                              <div class="btn-group">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                              </div>
+                              @endif
                             </td>
                           </tr>
                         @empty
@@ -195,6 +205,16 @@
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
+                              @if($order->order_status == 0)
+                              <div class="btn-group">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                              </div>
+                              @endif
+                              @if($order->order_status == 3)
+                              <div class="btn-group">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                              </div>
+                              @endif
                             </td>
                           </tr>
                         @empty
@@ -239,6 +259,16 @@
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
+                              @if($order->order_status == 0)
+                              <div class="btn-group">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                              </div>
+                              @endif
+                              @if($order->order_status == 3)
+                              <div class="btn-group">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                              </div>
+                              @endif
                             </td>
                           </tr>
                         @empty
@@ -293,6 +323,34 @@
         });
     });
 
+    $(document).on("click", ".order_confim", function () {
+        var id = $(this).attr('id');
+        $.ajax({
+            url: 'my-account/order-confim' + '/' + id,
+            type: 'get',
+            success: function (data) {
+              location.reload();
+            },
+            error: function (result) {
+                $("#modal_data").html("Sorry Cannot Load Data");
+            }
+        });
+    });
+
+    $(document).on("click", ".order_cancel", function () {
+        var id = $(this).attr('id');
+        $.ajax({
+            url: 'my-account/order-cancel' + '/' + id,
+            type: 'get',
+            success: function (data) {
+              location.reload();
+            },
+            error: function (result) {
+                $("#modal_data").html("Sorry Cannot Load Data");
+            }
+        });
+    });
+    
     $(document).on("click", ".view_invoice", function () {
         $("#modal_data").empty();
         $('.modal-title').text('View Invoice'); // Set Title to Bootstrap modal title

@@ -156,6 +156,7 @@ class CatalogueController extends Controller
         $cart->shape = $request->shape;
         $cart->metal_colour = $request->metal_colour;
         $cart->cleaerty = $request->cleaerty;
+        $cart->carat = $request->carat;
         $cart->size = $request->size;
         $cart->ref = $request->ref;
         $cart->notes = $request->notes;
@@ -165,7 +166,11 @@ class CatalogueController extends Controller
 
     public function cart(Request $request)
     {   
-        $cartItem = Cart::select('items.*','carts.*','carts.id as cart_id','carts.size as cart_size')->join('items','carts.item_id','items.id')->where('user_id',Auth::user()->id)->get()->toArray();
+        $cartItem = Cart::select('items.sku','items.item_title','items.photo','carts.*','carts.id as cart_id','carts.size as cart_size')->join('items','carts.item_id','items.id')->where('user_id',Auth::user()->id)->get()->toArray();
+
+        // echo "<pre>";
+        // print_r($cartItem);
+        // die;
         return view('frontend.myaccount.cart',compact('cartItem'));
     }
 
@@ -184,8 +189,13 @@ class CatalogueController extends Controller
         $order->order_number = Order::autoGenerateOrderNumber();
         $order->sku = $cart->itemDetails->sku;
         $order->category_id = $cart->itemDetails->sub_catalogue_id;
-        $order->metal_type = $cart->itemDetails->metal_type;
-        $order->metal_colour = $cart->itemDetails->metal_colour;
+        $order->metal_type = $cart->metal_type;
+        $order->metal_colour = $cart->metal_colour;
+        $order->weight = $cart->weight;
+        $order->gem = $cart->gem;
+        $order->shape = $cart->shape;
+        $order->cleaerty = $cart->cleaerty;
+        $order->carat = $cart->carat;
         $order->size = $cart->size;
         $order->quantity = $cart->quantity;
         $order->notes = $cart->notes;
@@ -214,5 +224,36 @@ class CatalogueController extends Controller
     {
         $itemPrice = Item::where('id',$request->item_id)->first();
         return response()->json(['data' => $itemPrice]);
+    }
+
+    public function editCartItem(Request $request)
+    {
+        $item = Cart::where('id',$request->cart_id)->first();
+        $metalType = config('params.metal_type');
+        $metalType[''] = "Select";
+        $metalColour = config('params.metal_colour');
+        $metalColour[''] = "Select";
+        $view = View::make('frontend.catalogue.edit_view', compact('item','metalType','metalColour'))->render();
+        return response()->json(['html' => $view]);
+    }
+
+    public function updateCart(Request $request)
+    {
+        $cart = Cart::find($request->item_id);
+        $cart->user_id = Auth::user()->id;
+        $cart->item_id = $request->item_id;
+        $cart->quantity = $request->item_qty;
+        $cart->metal_type = $request->metal_type;
+        $cart->weight = $request->weight;
+        $cart->gem = $request->gem;
+        $cart->shape = $request->shape;
+        $cart->metal_colour = $request->metal_colour;
+        $cart->cleaerty = $request->cleaerty;
+        $cart->carat = $request->carat;
+        $cart->size = $request->size;
+        $cart->ref = $request->ref;
+        $cart->notes = $request->notes;
+        $cart->save();
+        return true;
     }
 }

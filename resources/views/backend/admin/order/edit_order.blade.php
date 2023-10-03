@@ -62,6 +62,14 @@
                             </div>
                             <div class="d-flex">
                                 <div class="col-md-3">
+                                    <p><strong> Ref. : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->ref }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
                                     <p><strong> Customer Notes : </strong></p>
                                 </div>
                                 <div class="col-md-9">
@@ -90,7 +98,7 @@
                                         {!! Form::select('supplier_name', $supplier ?? [],  $order->supplier_name ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_name']) !!}
                                     </div>
                                 </div>
-                                <div class="d-flex">
+                                <div class="d-flex mt-1">
                                     <div class="col-md-3">
                                         <p><strong> Metal Type : </strong></p>
                                     </div>
@@ -112,6 +120,43 @@
                                     </div>
                                     <div class="col-md-9">
                                         <input type="text" class="form-control" id="size" name="size" value="{{ $order->size }}" placeholder="Size" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-3">
+                                        <p><strong> Weight : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="weight" name="weight" value="{{ $order->weight }}" placeholder="Weight" required>
+                                    </div>
+                                </div><div class="d-flex mt-1">
+                                    <div class="col-md-3">
+                                        <p><strong> Shape : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="shape" name="shape" value="{{ $order->shape }}" placeholder="Shape" required>
+                                    </div>
+                                </div><div class="d-flex mt-1">
+                                    <div class="col-md-3">
+                                        <p><strong> Carat : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="carat" name="carat" value="{{ $order->carat }}" placeholder="Carat" required>
+                                    </div>
+                                </div><div class="d-flex mt-1">
+                                    <div class="col-md-3">
+                                        <p><strong> Cleaerty : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="cleaerty" name="cleaerty" value="{{ $order->cleaerty }}" placeholder="Cleaerty" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-3">
+                                        <p><strong> Gem. : </strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="gem" name="gem" value="{{ $order->gem }}" placeholder="Gem" required>
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">

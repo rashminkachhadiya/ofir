@@ -52,6 +52,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ URL :: to('/admin/cart') }}">
+                        <i class="metismenu-icon"></i>
+                        Cart
+                    </a>
+                </li>
+                <li>
                     <a href="{{ URL :: to('/admin/catalogue') }}">
                         <i class="metismenu-icon"></i>
                         Catalogue
