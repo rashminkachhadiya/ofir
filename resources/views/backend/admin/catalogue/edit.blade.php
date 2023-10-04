@@ -80,31 +80,31 @@
                                         <div class="col-md-5">
                                             <div class="text-center">
                                                 <div class="form-group col-md-12 col-sm-12">
-                                                    <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 250px; height: 250px;">
+                                                    <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 280px; height: 280px;" class="uploadImage" data-id="1">
                                                 </div>
                                                 <div class="mt-1 form-group col-md-12 col-sm-12" style="text-align: -webkit-center;">
-                                                    <input id="photo-1" type="file" accept="image/*" style="width: 250px;" class="form-control" name="photo_1" onchange="showImage(1)">
+                                                    <input id="photo-1" type="file" accept="image/*" style="width: 250px;display: none;" class="form-control" name="photo_1" onchange="showImage(1)">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group col-md-12 col-sm-12">
-                                                <img id="preview-2" src="{{ asset($item->photo_2) }}" alt="" style="width: 105px; height: 100px;">
+                                                <img id="preview-2" src="{{ asset($item->photo_2) }}" alt="" style="width: 83px; height: 83px;" class="uploadImage" data-id="2">
                                             </div>
                                             <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
-                                                <input id="photo-2" type="file" accept="image/*" class="form-control" name="photo_2" onchange="showImage(2)">
+                                                <input id="photo-2" type="file" accept="image/*" class="form-control" style="display: none;" name="photo_2" onchange="showImage(2)">
                                             </div>
                                             <div class="form-group col-md-12 col-sm-12">
-                                                <img id="preview-3" src="{{ asset($item->photo_3) }}" alt="" style="width: 105px; height: 100px;">
+                                                <img id="preview-3" src="{{ asset($item->photo_3) }}" alt="" style="width: 83px; height: 83px;" class="uploadImage" data-id="3">
                                             </div>
                                             <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
-                                                <input id="photo-3" type="file" accept="image/*" class="form-control" name="photo_3" onchange="showImage(3)">
+                                                <input id="photo-3" type="file" accept="image/*" class="form-control" name="photo_3" style="display: none;" onchange="showImage(3)">
                                             </div>
                                             <div class="form-group col-md-12 col-sm-12">
-                                                <img id="preview-4" src="{{ asset($item->photo_4) }}" alt="" style="width: 105px; height: 100px;">
+                                                <img id="preview-4" src="{{ asset($item->photo_4) }}" alt="" style="width: 83px; height: 83px;" class="uploadImage" data-id="4">
                                             </div>
                                             <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
-                                                <input id="photo-4" type="file" accept="image/*" class="form-control" name="photo_4" onchange="showImage(4)">
+                                                <input id="photo-4" type="file" accept="image/*" class="form-control" name="photo_4" style="display: none;" onchange="showImage(4)">
                                             </div>
                                         </div>
                                     </div>
@@ -289,11 +289,7 @@
                                               <input type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
                                             </div>
                                             @if($sizeCount == 0)
-                                            <div class="col-md-1">
-                                                <a class="btn btn-primary add" style="color: white;">
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
+                                            
                                             <?php
                                                 $sizeCount++;
                                             ?>
@@ -348,20 +344,17 @@
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
                                             </div>
-                                        <div class="col-md-1 p-1">
-                                            <a class="btn btn-primary add" style="color: white;">
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </a>
-                                        </div>
+                                        
                                     </div>
                                     @endif
                                 </div>
-                                <div class="col-md-1 mb-1">
-                                    <a class="btn btn-primary add" style="color: white;">
-                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                    </a>
-                                </div>
+                                
                                 <div class="col-md-12 mb-3">
+                                    <div class="col-md-1 mb-1">
+                                        <a class="btn btn-primary add" style="color: white;">
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                     <button type="submit" class="btn btn-success button-submit"
                                             data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
                                     </button>
@@ -516,6 +509,11 @@
             checkboxClass: 'icheckbox_flat-green',
         });
 
+        $('.uploadImage').click(function(){
+            var id = $(this).attr('data-id');
+          $("#photo-" + id).click();
+        });
+        
         $('#edit').validate({// <- attach '.validate()' to your form
             // Rules for form validation
             rules: {
