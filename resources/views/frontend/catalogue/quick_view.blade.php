@@ -74,7 +74,7 @@
                                             <label class="col-form-label">Weight</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="weight" name="weight" value="" placeholder="Weight" required>
+                                            <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}" placeholder="Weight">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -82,7 +82,7 @@
                                             <label class="col-form-label">Size</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="size" name="size" value="" placeholder="Size" required>
+                                            <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}" placeholder="Size">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -116,7 +116,7 @@
                                             <label class="col-form-label">Gem.</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="gem" name="gem" value="" placeholder="Gem">
+                                            <input type="text" class="form-control" id="gem" name="gem" value="{{ $item->gem }}" placeholder="Gem">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -124,7 +124,7 @@
                                             <label class="col-form-label">Shape</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="shape" name="shape" value="" placeholder="Shape" required>
+                                            <input type="text" class="form-control" id="shape" name="shape" value="{{ $item->shape }}" placeholder="Shape" required>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -132,7 +132,7 @@
                                             <label class="col-form-label">Carat</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="carat" name="carat" value="" placeholder="Carat">
+                                            <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -140,7 +140,7 @@
                                             <label class="col-form-label">Colour</label>
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
-                                            {!! Form::select('metal_colour', $metalColour ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                            <input type="text" class="form-control" name="metal_colour" id="metal_colour" value="{{ $item->colour }}" placeholder="Colour">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -148,7 +148,7 @@
                                             <label class="col-form-label">Cleaerty</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" placeholder="Cleaerty">
+                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" value="{{ $item->cleaerty }}" placeholder="Cleaerty">
                                         </div>
                                     </div>
                                 </div>

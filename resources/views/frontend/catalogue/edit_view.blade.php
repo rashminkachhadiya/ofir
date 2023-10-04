@@ -140,7 +140,7 @@
                                             <label class="col-form-label">Colour</label>
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
-                                            {!! Form::select('metal_colour', $metalColour ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                            <input type="text" class="form-control" name="metal_colour" id="metal_colour" value="{{ $item->metal_colour }}" placeholder="Colour">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">

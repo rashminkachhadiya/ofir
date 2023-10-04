@@ -95,16 +95,6 @@
                             </div>
                             <div class="d-flex">
                                 <div class="col-md-3">
-                                    <p><strong> Metal Colour : </strong></p>
-                                </div>
-                                <div class="col-md-9">
-                                    @if($order->metal_colour)
-                                    {{ config('params.metal_colour')[$order->metal_colour] }}
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-3">
                                     <p><strong> Size : </strong></p>
                                 </div>
                                 <div class="col-md-9">
@@ -117,6 +107,14 @@
                                 </div>
                                 <div class="col-md-9">
                                     {{ $order->weight }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
+                                    <p><strong> Gem. : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->gem }}
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -137,20 +135,21 @@
                             </div>
                             <div class="d-flex">
                                 <div class="col-md-3">
+                                    <p><strong> Colour : </strong></p>
+                                </div>
+                                <div class="col-md-9">
+                                    {{ $order->metal_colour }}
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-3">
                                     <p><strong> Cleaerty : </strong></p>
                                 </div>
                                 <div class="col-md-9">
                                     {{ $order->cleaerty }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-3">
-                                    <p><strong> Gem. : </strong></p>
-                                </div>
-                                <div class="col-md-9">
-                                    {{ $order->gem }}
-                                </div>
-                            </div>
+                            
                             <div class="d-flex">
                                 <div class="col-md-3">
                                     <p><strong> Quantity : </strong></p>

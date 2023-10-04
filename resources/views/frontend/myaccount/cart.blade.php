@@ -157,9 +157,7 @@ div.content {
                       </td>
                       <td width="10%" class="pro-quantity text-center">
                         <div class="product-quantity quantity">
-                          @if(!is_null($item['metal_type']))
-                          {{ config('params.metal_colour')[$item['metal_colour']] }}
-                          @endif
+                          {{ $item['metal_colour'] }}
                         </div>
                       </td>
                       <td width="10%" class="pro-quantity text-center">
@@ -270,36 +268,6 @@ div.content {
       });
   });
 
-  $(".update-cart").click(function(event){
-        var itemId = $(this).attr('item-id');
-        var metalType = $('#metal_type').val();
-        var weight = $('#weight').val();
-
-        var gem = $('#gem').val();
-        var shape = $('#shape').val();
-        var metalColour = $('#metal_colour').val();
-        var carat = $('#carat').val();
-        var cleaerty = $('#cleaerty').val();
-
-
-        var itemQty = $('#item-qty').val();
-        var size = $('#size').val();
-        var ref = $('#ref').val();
-        var notes = $('#notes').val();
-        $.ajax({
-            url: "{{ URL::to('update-cart')}}",
-            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty,'carat': carat},
-            dataType: 'json',
-            type: 'POST',
-            success: function(data) {
-                location.reload(true); // show bootstrap modal
-            },
-            error: function(result) {
-                $("#quick_view_item_details").html("Sorry Cannot Load Data");
-            }
-          
-        });
-  });
 
   $(".edit-btn").click(function(event){
     $("#quick_view_item_details").empty();

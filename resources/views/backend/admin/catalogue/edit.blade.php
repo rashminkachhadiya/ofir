@@ -32,7 +32,7 @@
                                 <div id="status"></div>
                                 <br/>
                                 <div class="clearfix"></div>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Catalogue </label>
                                         {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
@@ -48,31 +48,58 @@
                                         <input type="text" class="form-control" id="sku" name="sku" value="{{ $item->sku }}" placeholder="" required>
                                         <span id="error_sku" class="has-error"></span>
                                     </div>
-                                    <div class="text-center">
-                                        <div class="form-group col-md-12 col-sm-12">
-                                            <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 105px; height: 100px;">
-                                        </div>
-                                        <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 150px; margin-left: 98px;">
-                                            <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
-                                        </div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <label for=""> Item Title </label>
+                                        <input type="text" class="form-control" id="item_title" name="item_title" value="{{ $item->item_title }}" placeholder="" required>
+                                        <span id="error_item_title" class="has-error"></span>
                                     </div>
-                                    <div class="d-flex">
-                                        <div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <label for=""> Description </label>
+                                        <input type="text" class="form-control" id="description" name="description" value="{{ $item->description }}" placeholder="">
+                                        <span id="error_description" class="has-error"></span>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 d-flex p-0">
+                                        <div class="col-md-4 p-0">
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Metal </label>
+                                                {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Weight </label>
+                                                <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Metal </label>
+                                                  {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Size </label>
+                                                <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="text-center">
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 250px; height: 250px;">
+                                                </div>
+                                                <div class="mt-1 form-group col-md-12 col-sm-12" style="text-align: -webkit-center;">
+                                                    <input id="photo-1" type="file" accept="image/*" style="width: 250px;" class="form-control" name="photo_1" onchange="showImage(1)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
                                             <div class="form-group col-md-12 col-sm-12">
                                                 <img id="preview-2" src="{{ asset($item->photo_2) }}" alt="" style="width: 105px; height: 100px;">
                                             </div>
                                             <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
                                                 <input id="photo-2" type="file" accept="image/*" class="form-control" name="photo_2" onchange="showImage(2)">
                                             </div>
-                                        </div>
-                                        <div>
                                             <div class="form-group col-md-12 col-sm-12">
                                                 <img id="preview-3" src="{{ asset($item->photo_3) }}" alt="" style="width: 105px; height: 100px;">
                                             </div>
                                             <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
                                                 <input id="photo-3" type="file" accept="image/*" class="form-control" name="photo_3" onchange="showImage(3)">
                                             </div>
-                                        </div><div>
                                             <div class="form-group col-md-12 col-sm-12">
                                                 <img id="preview-4" src="{{ asset($item->photo_4) }}" alt="" style="width: 105px; height: 100px;">
                                             </div>
@@ -83,71 +110,102 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <label for=""> Item Title </label>
-                                        <input type="text" class="form-control" id="item_title" name="item_title" value="{{ $item->item_title }}" placeholder="" required>
-                                        <span id="error_item_title" class="has-error"></span>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12">
+                                    
+                                    <!-- <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Item Title gram</label>
                                         <input type="text" class="form-control" id="item_title_gram" name="item_title_gram" value="{{ $item->item_title_gram }}" placeholder="">
                                         <span id="error_item_title_gram" class="has-error"></span>
+                                    </div> -->
+                                    <div class="col-md-12 p-1 pb-4 text-center" style="border: 1px solid">
+                                        <h5 class="text-center">Gem Info</h5>
+                                        <div class="d-flex">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Gem.</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="gem" name="gem" value="{{ $item->gem }}" placeholder="Gem">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Shape</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="shape" name="shape" value="{{ $item->shape }}" placeholder="Shape">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Carat</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Colour</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $item->colour }}" placeholder="Colour">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Cleaerty</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" name="cleaerty" value="{{ $item->cleaerty }}" id="cleaerty" placeholder="Cleaerty">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Pcs</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" name="pcs" value="{{ $item->pcs }}" id="pcs" placeholder="Pcs">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <label for=""> Description </label>
-                                        <input type="text" class="form-control" id="description" name="description" value="{{ $item->description }}" placeholder="">
-                                        <span id="error_description" class="has-error"></span>
+                                    <div class="col-md-12 p-0 mt-5">
+                                        <h5 style="text-align: center">Ask for Price</h5>
+                                        <div class="form-group col-md-12 p-0">
+                                            <label for=""> Cost Fee </label>
+                                            <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
+                                        </div>
+                                        <div class="d-flex">
+                                        <div class="form-group col-md-4 pl-0">
+                                            <label for="">$ </label>
+                                            <input type="text" class="form-control" id="price_usd" name="price_usd" value="{{ $item->price_usd }}">
+                                        </div><div class="form-group col-md-4 pl-0">
+                                            <label for=""> &pound; </label>
+                                            <input type="text" class="form-control" id="price_pound" name="price_pound" value="{{ $item->price_pound }}">
+                                        </div><div class="form-group col-md-4 pl-0">
+                                            <label for=""> &euro; </label>
+                                            <input type="text" class="form-control" id="price_eur" name="price_eur" value="{{ $item->price_eur }}">
+                                        </div>
+                                        </div>
+                                        <div class="form-group col-md-12 p-0">
+                                            <label for=""> Price Notes </label>
+                                            <input type="text" class="form-control" id="price_notes" name="price_notes" value="{{ $item->price_notes }}">
+                                        </div>
                                     </div>
                                     <div class="d-flex">
-                                    <div class="form-group col-md-6">
-                                        <label for=""> All Collection </label><br/>
-                                        <input type="radio" name="is_allcollection" class="flat-green" value="1" {{ ( $item->is_allcollection == 1 ) ? 'checked' : '' }}/> Yes
-                                        <input type="radio" name="is_allcollection" class="flat-green" value="0" {{ ( $item->is_allcollection == 0 ) ? 'checked' : '' }}/> No
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for=""> Is Active? </label><br/>
-                                        <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
-                                        <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No
-                                    </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""> All Collection </label><br/>
+                                            <input type="radio" name="is_allcollection" class="flat-green" value="1" {{ ( $item->is_allcollection == 1 ) ? 'checked' : '' }}/> Yes
+                                            <input type="radio" name="is_allcollection" class="flat-green" value="0" {{ ( $item->is_allcollection == 0 ) ? 'checked' : '' }}/> No
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""> Is Active? </label><br/>
+                                            <input type="radio" name="is_active" class="flat-green"value="1" {{ ( $item->is_active == 1 ) ? 'checked' : '' }}/> Yes
+                                            <input type="radio" name="is_active" class="flat-green"value="0" {{ ( $item->is_active == 0 ) ? 'checked' : '' }}/> No
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
                                         <label for=""> Available </label><br/>
                                         <input type="radio" name="is_available" class="flat-green"value="1" {{ ( $item->is_available == 1 ) ? 'checked' : '' }}/> Yes
                                         <input type="radio" name="is_available" class="flat-green"value="0" {{ ( $item->is_available == 0 ) ? 'checked' : '' }}/> No
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Size </label>
-                                        <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Metal Colour </label>
-                                          {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Metal Type </label>
-                                        {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Cost Fee </label>
-                                        <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
-                                    </div>
-                                    <div class="d-flex">
-                                    <div class="form-group col-md-4">
-                                        <label for="">$ </label>
-                                        <input type="text" class="form-control" id="price_usd" name="price_usd" value="{{ $item->price_usd }}">
-                                    </div><div class="form-group col-md-4">
-                                        <label for=""> &pound; </label>
-                                        <input type="text" class="form-control" id="price_pound" name="price_pound" value="{{ $item->price_pound }}">
-                                    </div><div class="form-group col-md-4">
-                                        <label for=""> &euro; </label>
-                                        <input type="text" class="form-control" id="price_eur" name="price_eur" value="{{ $item->price_eur }}">
-                                    </div>
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Price Notes </label>
-                                        <input type="text" class="form-control" id="price_notes" name="price_notes" value="{{ $item->price_notes }}">
                                     </div>
                                 </div>
                                 <div id="catelogue_size">

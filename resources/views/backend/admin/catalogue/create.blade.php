@@ -20,7 +20,7 @@
                                 <div id="status"></div>
                                 <br/>
                                 <div class="clearfix"></div>
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Catalogue </label>
                                         {!! Form::select('catalogue_id[]', $catalogues ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id', 'multiple' => 'true']) !!}
@@ -37,60 +37,164 @@
                                         <span id="error_sku" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
-                                        <img id="preview-1" src="" alt="" style="width: 105px; height: 100px;">
-                                    </div>
-                                    <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 200px;">
-                                        <input id="photo-1" type="file" accept="image/*" class="form-control" name="photo_1" onchange="showImage(1)">
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Item Title </label>
                                         <input type="text" class="form-control" id="item_title" name="item_title" value="" placeholder="" required>
                                         <span id="error_item_title" class="has-error"></span>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12">
-                                        <label for=""> Item Title gram</label>
-                                        <input type="text" class="form-control" id="item_title_gram" name="item_title_gram" value="" placeholder="">
-                                        <span id="error_item_title_gram" class="has-error"></span>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
                                         <label for=""> Description </label>
                                         <input type="text" class="form-control" id="description" name="description" value="" placeholder="">
                                         <span id="error_description" class="has-error"></span>
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> All Collection </label><br/>
-                                        <input type="radio" name="is_allcollection" class="flat-green" value="1"/> Yes
-                                        <input type="radio" name="is_allcollection" class="flat-green" value="0" checked/> No
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Available </label><br/>
-                                        <input type="radio" name="is_available" class="flat-green"value="1"/> Yes
-                                        <input type="radio" name="is_available" class="flat-green"value="0" checked/> No
+                                    <div class="form-group col-md-12 col-sm-12 d-flex p-0">
+                                        <div class="col-md-4 p-0">
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Metal </label>
+                                                {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Weight </label>
+                                                <input type="text" class="form-control" id="weight" name="weight" value="">
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Metal </label>
+                                                  {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for=""> Size </label>
+                                                <input type="text" class="form-control" id="size" name="size" value="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="text-center">
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <img id="preview-1" src="" alt="" style="width: 250px; height: 250px;">
+                                                </div>
+                                                <div class="mt-1 form-group col-md-12 col-sm-12" style="text-align: -webkit-center;">
+                                                    <input id="photo-1" type="file" accept="image/*" style="width: 250px;" class="form-control" name="photo_1" onchange="showImage(1)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <img id="preview-2" src="" alt="" style="width: 105px; height: 100px;">
+                                            </div>
+                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
+                                                <input id="photo-2" type="file" accept="image/*" class="form-control" name="photo_2" onchange="showImage(2)">
+                                            </div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <img id="preview-3" src="" alt="" style="width: 105px; height: 100px;">
+                                            </div>
+                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
+                                                <input id="photo-3" type="file" accept="image/*" class="form-control" name="photo_3" onchange="showImage(3)">
+                                            </div>
+                                            <div class="form-group col-md-12 col-sm-12">
+                                                <img id="preview-4" src="" alt="" style="width: 105px; height: 100px;">
+                                            </div>
+                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
+                                                <input id="photo-4" type="file" accept="image/*" class="form-control" name="photo_4" onchange="showImage(4)">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Size </label>
-                                        <input type="text" class="form-control" id="size" name="size" value="">
+                                    
+                                    <!-- <div class="form-group col-md-12 col-sm-12">
+                                        <label for=""> Item Title gram</label>
+                                        <input type="text" class="form-control" id="item_title_gram" name="item_title_gram" value="" placeholder="">
+                                        <span id="error_item_title_gram" class="has-error"></span>
+                                    </div> -->
+                                    
+                                    <div class="col-md-12 p-1 pb-4 text-center" style="border: 1px solid">
+                                        <h5 class="text-center">Gem Info</h5>
+                                        <div class="d-flex">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Gem.</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="gem" name="gem" value="" placeholder="Gem">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Shape</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="shape" name="shape" value="" placeholder="Shape">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Carat</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="carat" name="carat" value="" placeholder="Carat">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Colour</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" id="colour" name="gem_colour" value="" placeholder="Colour">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Cleaerty</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" name="cleaerty" value="" id="cleaerty" placeholder="Cleaerty">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-1">
+                                            <div class="col-md-4 p-0">
+                                                <label class="col-form-label">Pcs</label>
+                                            </div>
+                                            <div class="col-md-6 p-0">
+                                                <input type="text" class="form-control" name="pcs" value="" id="pcs" placeholder="Pcs">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 p-0 mt-5">
+                                        <h5 style="text-align: center">Ask for Price</h5>
+                                        <div class="form-group col-md-12 p-0">
+                                            <label for=""> Cost Fee </label>
+                                            <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="">
+                                        </div>
+                                        <div class="d-flex">
+                                        <div class="form-group col-md-4 pl-0">
+                                            <label for="">$ </label>
+                                            <input type="text" class="form-control" id="price_usd" name="price_usd" value="">
+                                        </div><div class="form-group col-md-4 pl-0">
+                                            <label for=""> &pound; </label>
+                                            <input type="text" class="form-control" id="price_pound" name="price_pound" value="">
+                                        </div><div class="form-group col-md-4 pl-0">
+                                            <label for=""> &euro; </label>
+                                            <input type="text" class="form-control" id="price_eur" name="price_eur" value="">
+                                        </div>
+                                        </div>
+                                        <div class="form-group col-md-12 p-0">
+                                            <label for=""> Price Notes </label>
+                                            <input type="text" class="form-control" id="price_notes" name="price_notes" value="">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex">
+                                        <div class="form-group col-md-6">
+                                            <label for=""> All Collection </label><br/>
+                                            <input type="radio" name="is_allcollection" class="flat-green" value="1"/> Yes
+                                            <input type="radio" name="is_allcollection" class="flat-green" value="0" checked /> No
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for=""> Is Active? </label><br/>
+                                            <input type="radio" name="is_active" class="flat-green"value="1" /> Yes
+                                            <input type="radio" name="is_active" class="flat-green"value="0" checked /> No
+                                        </div>
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <label for=""> Metal Colour </label>
-                                          {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Metal Type </label>
-                                        {!! Form::select('metal_type', config('params.metal_type') ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Cost Fee </label>
-                                        <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="">
-                                    </div>
-                                    <div class="form-group col-md-12">
-                                        <label for=""> Is Active? </label><br/>
-                                        <input type="radio" name="is_active" class="flat-green"value="1" checked /> Yes
-                                        <input type="radio" name="is_active" class="flat-green"value="0"/> No
+                                        <label for=""> Available </label><br/>
+                                        <input type="radio" name="is_available" class="flat-green"value="1" checked /> Yes
+                                        <input type="radio" name="is_available" class="flat-green"value="0"/> No
                                     </div>
                                 </div>
                                 <div id="catelogue_size">

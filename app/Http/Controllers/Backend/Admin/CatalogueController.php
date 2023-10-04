@@ -173,6 +173,51 @@ class CatalogueController extends Controller
                }
             }
 
+            if ($request->hasFile('photo_2')) {
+               if ($request->file('photo_2')->isValid()) {
+                  $destinationPath = public_path('assets/images/items/');
+                  $extension = $request->file('photo_2')->getClientOriginalExtension();
+                  $fileName = time() . '2' . '.' . $extension;
+                  $file_path_2 = 'assets/images/items/' . $fileName;
+                  $request->file('photo_2')->move($destinationPath, $fileName);
+               } else {
+                  return response()->json([
+                    'type' => 'error',
+                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                  ]);
+               }
+            }
+
+            if ($request->hasFile('photo_3')) {
+               if ($request->file('photo_3')->isValid()) {
+                  $destinationPath = public_path('assets/images/items/');
+                  $extension = $request->file('photo_3')->getClientOriginalExtension();
+                  $fileName = time() . '3' . '.' . $extension;
+                  $file_path_3 = 'assets/images/items/' . $fileName;
+                  $request->file('photo_3')->move($destinationPath, $fileName);
+               } else {
+                  return response()->json([
+                    'type' => 'error',
+                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                  ]);
+               }
+            }
+
+            if ($request->hasFile('photo_4')) {
+               if ($request->file('photo_4')->isValid()) {
+                  $destinationPath = public_path('assets/images/items/');
+                  $extension = $request->file('photo_4')->getClientOriginalExtension();
+                  $fileName = time() . '4' . '.' . $extension;
+                  $file_path_4 = 'assets/images/items/' . $fileName;
+                  $request->file('photo_4')->move($destinationPath, $fileName);
+               } else {
+                  return response()->json([
+                    'type' => 'error',
+                    'message' => "<div class='alert alert-warning'>Please! File is not valid</div>"
+                  ]);
+               }
+            }
+
             DB::beginTransaction();
             try {
               foreach($request->input('catalogue_id') as $item_store){
@@ -186,13 +231,35 @@ class CatalogueController extends Controller
                if(isset($file_path_1)){
                 $item->photo = $file_path_1;                
                }
+               if(isset($file_path_2)){
+                $item->photo_2 = $file_path_2;                
+               }
+               if(isset($file_path_3)){
+                $item->photo_3 = $file_path_3;                
+               }
+               if(isset($file_path_4)){
+                $item->photo_4 = $file_path_4;                
+               }
                $item->is_allcollection = $request->input('is_allcollection');
                $item->is_available = $request->input('is_available');
                $item->size = $request->input('size');
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
+
+               $item->weight = $request->input('weight');
+               $item->gem = $request->input('gem');
+               $item->shape = $request->input('shape');
+               $item->carat = $request->input('carat');
+               $item->colour = $request->input('gem_colour');
+               $item->cleaerty = $request->input('cleaerty');
+               $item->pcs = $request->input('pcs');
+
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');
+               $item->price_usd = $request->input('price_usd');
+               $item->price_pound = $request->input('price_pound');
+               $item->price_eur = $request->input('price_eur');
+               $item->price_notes = $request->input('price_notes');
                // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
@@ -390,6 +457,15 @@ class CatalogueController extends Controller
                $item->size = $request->input('size');
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
+
+               $item->weight = $request->input('weight');
+               $item->gem = $request->input('gem');
+               $item->shape = $request->input('shape');
+               $item->carat = $request->input('carat');
+               $item->colour = $request->input('gem_colour');
+               $item->cleaerty = $request->input('cleaerty');
+               $item->pcs = $request->input('pcs');
+
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');
                $item->price_usd = $request->input('price_usd');
