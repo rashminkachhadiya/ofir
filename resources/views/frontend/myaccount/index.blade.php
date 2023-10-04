@@ -12,7 +12,7 @@
             <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">All Orders</a>
             <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-controls="v-pills-invoice" aria-selected="false">Pending Orders</a>
             <a class="nav-link" id="v-pills-ready-tab" data-toggle="pill" href="#v-pills-ready" role="tab" aria-controls="v-pills-ready" aria-selected="false">Ready for Collection</a>
-            <!-- <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-controls="v-pills-invoice" aria-selected="false">Your Invoices</a> -->
+            <a class="nav-link" id="v-pills-my-cart-tab" data-toggle="pill" href="#v-pills-my-cart" role="tab" aria-controls="v-pills-my-cart" aria-selected="false">My Cart</a>
           </div>
         </div>
         <div class="col-9 mt-4">
@@ -282,6 +282,97 @@
                 </div>
                 </div>
             </div>
+            <div class="table-pane fade" id="v-pills-my-cart" role="tabpanel" aria-labelledby="v-pills-my-cart-tab">
+              <div class="row">
+            <div class="col-lg-12 col-12">
+              <div class="cart-table table-responsive mb-40">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th class="pro-thumbnail">Image</th>
+                      <th class="pro-title">Code</th>
+                      <th class="pro-title">Product</th>
+                      <!-- <th class="pro-price">Price</th> -->
+                      <th class="pro-quantity">Metal Type</th>
+                      <th class="pro-quantity">Metal Colour</th>
+                      <th class="pro-quantity">Size</th>
+                      <th class="pro-quantity">Quantity</th>
+                      <th class="pro-quantity">Ref</th>
+                      <th class="pro-quantity">Notes</th>
+
+                      <!-- <th class="pro-subtotal">Total</th> -->
+                      <th class="pro-remove">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $allTotal = 0;
+                    $VAT = 0;
+                    ?>
+                    @if($cartItem)
+                    @foreach($cartItem as $id=>$item)
+                    <tr id="cart_item-{{ $id }}">
+                      <td class="pro-thumbnail"><img style="height: 75px;width: 75px;" src="{{asset($item['photo'])}}"></td>
+                      <td width="10%" class="pro-quantity">
+                        <div class="product-quantity quantity">
+                          {{ $item['sku'] }}
+                        </div>
+                      </td>
+                      <td width="10%" class="pro-quantity">
+                        <div class="product-quantity quantity">
+                          {{ $item['item_title'] }}
+                        </div>
+                      </td>
+                      <td width="10%" class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          @if(!is_null($item['metal_type']))
+                          {{ config('params.metal_type')[$item['metal_type']] }}
+                          @endif
+                        </div>
+                      </td>
+                      <td width="10%" class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['metal_colour'] }}
+                        </div>
+                      </td>
+                      <td width="10%" class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['cart_size'] }}
+                        </div>
+                      </td>
+                      <td class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['quantity'] }}
+                        </div>
+                      </td>
+                      <td class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['ref'] }}
+                        </div>
+                      </td><td class="pro-quantity text-center">
+                        <div class="product-quantity quantity">
+                          {{ $item['notes'] }}
+                        </div>
+                      </td>
+                      <?php
+                        $Total = $item['quantity'] * $item['price'];
+                        $allTotal = $allTotal + $Total;
+                        $VAT = $allTotal * 0.2;
+                      ?>
+                      <td width="10%" class="pro-remove text-center">
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">Order</a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="edit-btn" style="color: blue;" title="Edit"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart" title="Delete"><i style="color: red;" class="pe-7s-trash"></i></a>
+                      </td>
+                    </tr>
+                    @endforeach
+                    @endif
+                  </tbody>
+                </table>
+              </div>
+            </div>  
+        </div>
+            </div>
         </div>
       </div>
     </div>
@@ -301,6 +392,9 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal" id="quick_view_item_details">
+
 </div>
 @endsection
 @push('script')
@@ -322,6 +416,54 @@
             }
         });
     });
+
+    $(".remove-item-cart").click(function(event) {
+        var id = $(this).attr('data-id');
+        $.ajax({
+            url: 'item-remove-cart' + '/' + id,
+            type: 'get',
+            success: function(data) {
+                location.reload();
+            },
+            error: function(result) {
+                $("#quick_view_item_details").html("Sorry Cannot Load Data");
+            }
+          
+        });
+    });
+
+  $(".order-btn").click(function(event){
+    var id = $(this).attr('data-id');
+      $.ajax({
+          url: 'create-order' + '/' + id,
+          type: 'get',
+          success: function(data) {
+              location.reload();
+          },
+          error: function(result) {
+              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+          }
+        
+      });
+  });
+
+
+  $(".edit-btn").click(function(event){
+    $("#quick_view_item_details").empty();
+    var id = $(this).attr('data-id');
+      $.ajax({
+          url: 'edit-cart-item' + '/' + id,
+          type: 'get',
+          success: function(data) {
+              $("#quick_view_item_details").html(data.html);
+              $('#quick_view_item_details').modal('show'); // show bootstrap modal
+          },
+          error: function(result) {
+              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+          }
+        
+      });
+  });
 
     $(document).on("click", ".order_confim", function () {
         var id = $(this).attr('id');
