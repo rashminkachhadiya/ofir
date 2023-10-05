@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Carbon\Carbon;
 
@@ -18,7 +19,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('backend.admin.cart.index');
+        $users = User::pluck('f_name','id')->toArray();
+        $users[''] = 'All Users';
+        return view('backend.admin.cart.index',compact('users'));
     }
 
     public function getAll(Request $request)
@@ -32,7 +35,10 @@ class CartController extends Controller
       }
 
       $carts = Cart::select('carts.*');
-      
+      if(!empty($request['user_id']))
+      {
+        $carts->where('carts.user_id', '=', $request['user_id']);
+      }
       return Datatables::of($carts)
         ->addColumn('created_at', function ($carts) {
           return Carbon::parse($carts->created_at)->format('d/m/Y');
