@@ -114,6 +114,11 @@ class OrderController extends Controller
         })
         ->rawColumns(['action', 'order_type', 'order_status', 'order_total', 'shipping_address_first_name'])
         ->addIndexColumn()
+        ->setRowClass(function ($orders) {
+              if($orders->order_status == 3){
+                return 'confirm';
+              }
+          })
         ->make(true);
     }
     /**
