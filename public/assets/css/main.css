@@ -5200,13 +5200,13 @@ a.close.disabled{
 .carousel-indicators{
     position:absolute;
     right:0;
-    bottom:0;
-    left:0;
+    bottom:-21px;
+    left:25px;
     z-index:15;
     display:flex;
-    justify-content:center;
+    justify-content:right;
     padding-left:0;
-    margin-right:15%;
+    /*margin-right:15%;*/
     margin-left:15%;
     list-style:none
 }
@@ -5220,7 +5220,7 @@ a.close.disabled{
     margin-left:3px;
     text-indent:-999px;
     cursor:pointer;
-    background-color:#fff;
+    background-color:#b8a4a4;
     background-clip:padding-box;
     border-top:10px solid transparent;
     border-bottom:10px solid transparent;
