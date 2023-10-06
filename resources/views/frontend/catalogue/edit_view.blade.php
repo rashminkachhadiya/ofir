@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
                                             <div class="quantity">
-                                                <input class="form-control" name="qty" type="text" id="item-qty" value="{{ $item->size }}">
+                                                <input class="form-control" name="qty" type="text" id="item-qty" value="{{ $item->quantity }}">
                                             </div>
                                             <div class="text-center" style="padding: 9px;">
                                                 <i class="fa fa-plus-circle"></i> 

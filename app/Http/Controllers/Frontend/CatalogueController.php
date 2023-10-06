@@ -240,8 +240,8 @@ class CatalogueController extends Controller
     public function updateCart(Request $request)
     {
         $cart = Cart::find($request->item_id);
-        $cart->user_id = Auth::user()->id;
-        $cart->item_id = $request->item_id;
+        // $cart->user_id = Auth::user()->id;
+        // $cart->item_id = $request->item_id;
         $cart->quantity = $request->item_qty;
         $cart->metal_type = $request->metal_type;
         $cart->weight = $request->weight;
