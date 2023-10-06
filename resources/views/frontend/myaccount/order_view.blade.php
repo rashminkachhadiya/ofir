@@ -201,6 +201,14 @@
                                     {{ $order->cleaerty }}
                                 </div>
                             </div>
+                            <div class="d-flex">
+                                <div class="col-md-6 text-center">
+                                    <p><strong> Pcs : </strong></p>
+                                </div>
+                                <div class="col-md-6 text-left">
+                                    {{ $order->pcs }}
+                                </div>
+                            </div>
                     </div>
                 </div>
                     <div class="row">

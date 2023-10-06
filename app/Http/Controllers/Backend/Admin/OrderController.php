@@ -26,7 +26,6 @@ class OrderController extends Controller
     public function index()
     {
         $orderStatus = config('params.order_status');
-        $orderStatus[''] = 'All Status';
         $users = User::pluck('f_name','id')->toArray();
         $users[''] = 'All Users';
         return view('backend.admin.order.index',compact('orderStatus','users'));
@@ -57,7 +56,7 @@ class OrderController extends Controller
       }
       if(!is_null($request['order_status']))
       {
-        $orders->where('orders.order_status', '=', $request['order_status']);
+        $orders->whereIn('orders.order_status', $request['order_status']);
       }
       if(!is_null($request['search']['value']))
       {
@@ -257,6 +256,7 @@ class OrderController extends Controller
       $order->carat = $request->carat;
       $order->colour = $request->gem_colour;
       $order->cleaerty = $request->cleaerty;
+      $order->pcs = $request->pcs;
       $order->gem = $request->gem;
 
       $order->quantity = $request->quantity;

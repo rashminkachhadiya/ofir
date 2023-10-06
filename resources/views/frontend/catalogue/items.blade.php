@@ -195,7 +195,7 @@ div.content {
         var colour = $('#colour').val();
 
         var cleaerty = $('#cleaerty').val();
-
+        var pcs = $('#pcs').val();
 
         var itemQty = $('#item-qty').val();
         var size = $('#size').val();
@@ -203,7 +203,7 @@ div.content {
         var notes = $('#notes').val();
         $.ajax({
             url: "{{ URL::to('add-to-cart')}}",
-            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty,'carat': carat,'colour':colour},
+            data:{'item_id' : itemId, 'item_qty' : itemQty,'size' : size,'ref' : ref,'notes':notes,'_token':"{{csrf_token()}}",'metal_type' : metalType,'weight' : weight,'gem' : gem,'shape' : shape,'metal_colour' : metalColour,'cleaerty': cleaerty,'carat': carat,'colour':colour,'pcs' : pcs},
             dataType: 'json',
             type: 'POST',
             success: function(data) {

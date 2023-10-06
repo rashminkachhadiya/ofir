@@ -11,6 +11,10 @@
  .confirm {
     color: green !important;
  }
+ .select2-results__option[aria-selected] {
+    cursor: pointer;
+    color: black;
+}
  .product-details-des .quantity {
     margin-right: 15px;
 }

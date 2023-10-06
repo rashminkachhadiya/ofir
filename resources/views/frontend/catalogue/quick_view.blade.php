@@ -163,6 +163,14 @@
                                             <input type="text" class="form-control" name="cleaerty" id="cleaerty" value="{{ $item->cleaerty }}" placeholder="Cleaerty">
                                         </div>
                                     </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Pcs</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            <input type="text" class="form-control" name="pcs" id="pcs" value="{{ $item->pcs }}" placeholder="Pcs">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="quantity-cart-box mt-2 mb-2 align-items-center">

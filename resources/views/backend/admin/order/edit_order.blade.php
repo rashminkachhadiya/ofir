@@ -196,6 +196,14 @@
                                         <input type="text" class="form-control" id="cleaerty" name="cleaerty" value="{{ $order->cleaerty }}" placeholder="Cleaerty" required>
                                     </div>
                                 </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong> Pcs : </strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="pcs" name="pcs" value="{{ $order->pcs }}" placeholder="Pcs" required>
+                                    </div>
+                                </div>
                                 <div class="float-right mt-2">
                                     <button type="button" class="btn btn-success update-submit"
                                                 data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save

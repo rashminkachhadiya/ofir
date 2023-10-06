@@ -27,7 +27,7 @@
                     <span id="error_email" class="has-error"></span>
                 </div>
                 <div class="form-group col-md-12 col-sm-12">
-                    {!! Form::select('order_status', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status']) !!}
+                    {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
                 <input type="hidden" id="supplier_id" name="supplier_id" value="">
@@ -149,6 +149,12 @@
                 table.draw();
             // var sub_catalogue = {!! json_encode(config('params.')) !!};
             });
+
+            $('#order_status').select2({
+                placeholder: "All Status",
+                allowClear: true
+            });
+            jQuery(" .select2-results__group").css("-webkit-text-fill-color", "#00ff7b");
         });
 
 
