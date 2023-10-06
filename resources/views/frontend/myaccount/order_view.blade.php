@@ -95,6 +95,16 @@
                             </div>
                             <div class="d-flex">
                                 <div class="col-md-6">
+                                    <p><strong> Metal Colour : </strong></p>
+                                </div>
+                                <div class="col-md-6">
+                                    @if(!is_null($order->metal_colour))
+                                    {{ config('params.metal_colour')[$order->metal_colour] }}
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="col-md-6">
                                     <p><strong> Size : </strong></p>
                                 </div>
                                 <div class="col-md-6">
@@ -180,7 +190,7 @@
                                     <p><strong> Colour : </strong></p>
                                 </div>
                                 <div class="col-md-6 text-left">
-                                    {{ $order->metal_colour }}
+                                    {{ $order->colour }}
                                 </div>
                             </div>
                             <div class="d-flex">

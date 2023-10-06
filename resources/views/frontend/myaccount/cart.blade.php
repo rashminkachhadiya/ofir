@@ -157,7 +157,9 @@ div.content {
                       </td>
                       <td width="10%" class="pro-quantity text-center">
                         <div class="product-quantity quantity">
-                          {{ $item['metal_colour'] }}
+                          @if(!is_null($item['metal_colour']))
+                          {{ config('params.metal_colour')[$item['metal_colour']] }}
+                          @endif
                         </div>
                       </td>
                       <td width="10%" class="pro-quantity text-center">

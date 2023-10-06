@@ -151,12 +151,14 @@ class CatalogueController extends Controller
         $cart->item_id = $request->item_id;
         $cart->quantity = $request->item_qty;
         $cart->metal_type = $request->metal_type;
+        $cart->metal_colour = $request->metal_colour;
         $cart->weight = $request->weight;
         $cart->gem = $request->gem;
         $cart->shape = $request->shape;
         $cart->metal_colour = $request->metal_colour;
         $cart->cleaerty = $request->cleaerty;
         $cart->carat = $request->carat;
+        $cart->colour = $request->colour;
         $cart->size = $request->size;
         $cart->ref = $request->ref;
         $cart->notes = $request->notes;
@@ -196,6 +198,7 @@ class CatalogueController extends Controller
         $order->shape = $cart->shape;
         $order->cleaerty = $cart->cleaerty;
         $order->carat = $cart->carat;
+        $order->colour = $cart->colour;
         $order->size = $cart->size;
         $order->quantity = $cart->quantity;
         $order->notes = $cart->notes;
@@ -250,6 +253,7 @@ class CatalogueController extends Controller
         $cart->metal_colour = $request->metal_colour;
         $cart->cleaerty = $request->cleaerty;
         $cart->carat = $request->carat;
+        $cart->colour = $request->colour;
         $cart->size = $request->size;
         $cart->ref = $request->ref;
         $cart->notes = $request->notes;

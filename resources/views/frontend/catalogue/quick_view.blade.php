@@ -75,6 +75,14 @@
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
+                                            <label class="col-form-label">Colour</label>
+                                        </div>
+                                        <div class="col-md-6 p-0">
+                                            {!! Form::select('metal_colour', $metalColour ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="d-flex mt-1">
+                                        <div class="col-md-4 p-0">
                                             <label class="col-form-label">Weight</label>
                                         </div>
                                         <div class="col-md-6 p-0">
@@ -144,7 +152,7 @@
                                             <label class="col-form-label">Colour</label>
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
-                                            <input type="text" class="form-control" name="metal_colour" id="metal_colour" value="{{ $item->colour }}" placeholder="Colour">
+                                            <input type="text" class="form-control" name="colour" id="colour" value="{{ $item->colour }}" placeholder="Colour">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">

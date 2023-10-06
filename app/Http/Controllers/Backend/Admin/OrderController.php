@@ -255,6 +255,7 @@ class OrderController extends Controller
       $order->weight = $request->weight;
       $order->shape = $request->shape;
       $order->carat = $request->carat;
+      $order->colour = $request->gem_colour;
       $order->cleaerty = $request->cleaerty;
       $order->gem = $request->gem;
 
