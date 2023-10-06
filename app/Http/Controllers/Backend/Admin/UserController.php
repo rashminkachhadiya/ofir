@@ -34,7 +34,7 @@ class UserController extends Controller
       if (!auth()->user()->can('user-delete')) {
          $can_delete = "style='display:none;'";
       }
-      $users = User::select('users.*',DB::raw("COUNT(orders.id) as tot_order"))->leftjoin('orders','users.id','=','orders.user_id')->groupBy('users.id');
+      $users = User::select('users.*',DB::raw("COUNT(orders.id) as tot_order"))->leftjoin('orders','users.id','=','orders.user_id')->whereNotNull('deleted_at')->groupBy('users.id');
       return Datatables::of($users)
         ->addColumn('file_path', function ($users) {
            return "<img src='" . asset($users->file_path) . "' class='img-thumbnail' width='50px'>";
