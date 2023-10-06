@@ -72,7 +72,12 @@ class OrderController extends Controller
            return $orders->order_number;
         })
         ->addColumn('order_status', function ($orders) {
-           return config('params.order_status')[$orders->order_status];
+          if($orders->order_status == 3)
+          {
+            return "<div style='color:green;'>".config('params.order_status')[$orders->order_status]."</div>";
+          }else{
+           return config('params.order_status')[$orders->order_status]; 
+          }
         })
         ->addColumn('supplier_name', function ($orders) use ($supplier) {
            return isset($supplier[$orders->supplier_name]) ? $supplier[$orders->supplier_name] : "";
@@ -113,11 +118,6 @@ class OrderController extends Controller
         })
         ->rawColumns(['action', 'order_type', 'order_status', 'order_total', 'shipping_address_first_name'])
         ->addIndexColumn()
-        ->setRowClass(function ($orders) {
-              if($orders->order_status == 3){
-                return 'confirm';
-              }
-          })
         ->make(true);
     }
     /**
