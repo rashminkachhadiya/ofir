@@ -129,7 +129,7 @@
                                         <input type="text" class="form-control" id="quantity" name="quantity" value="{{ $order->quantity }}" placeholder="Quantity">
                                     </div>
                                     <div class="col-md-3 pr-0">
-                                        {!! Form::select('est_currency', $currency ?? [],  $order->est_currency ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'est_currency']) !!}
+                                        {!! Form::select('est_currency', $currency ?? [],  $order->est_price_currency ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'est_currency']) !!}
                                     </div>
                                     <div class="col-md-3 pr-0">
                                         <input type="text" class="form-control" id="est_price" name="est_price" value="{{ $order->est_price }}" placeholder="Est Price">
