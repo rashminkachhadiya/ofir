@@ -11,78 +11,78 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Order Date : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Order Number : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ $order->order_number }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Code : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ $order->sku }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Order By : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ $order->orderUser->f_name }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Email : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ $order->orderUser->email }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Order Status : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ config('params.order_status')[$order->order_status] }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Ref. : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ $order->ref }}
                                 </div>
                             </div>
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Customer Notes : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ $order->notes }}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <div class="d-flex">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <p><strong> Category : </strong></p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                     {{ config('params.categories')[$order->category_id] }}
                                 </div>
                             </div>
@@ -91,108 +91,111 @@
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <div class="d-flex mt-1">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <p><strong> Supplier Name : </strong></p>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         {!! Form::select('supplier_name', $supplier ?? [],  $order->supplier_name ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_name']) !!}
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <p><strong> Metal Type : </strong></p>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         {!! Form::select('metal_type', $metalType ?? [],  $order->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <p><strong> Size : </strong></p>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         <input type="text" class="form-control" id="size" name="size" value="{{ $order->size }}" placeholder="Size" required>
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <p><strong> Weight : </strong></p>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         <input type="text" class="form-control" id="weight" name="weight" value="{{ $order->weight }}" placeholder="Weight" required>
                                     </div>
                                 </div>
-                                <div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                        <p><strong> Gem. : </strong></p>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="gem" name="gem" value="{{ $order->gem }}" placeholder="Gem" required>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                        <p><strong> Shape : </strong></p>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="shape" name="shape" value="{{ $order->shape }}" placeholder="Shape" required>
-                                    </div>
-                                </div><div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                        <p><strong> Carat : </strong></p>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="carat" name="carat" value="{{ $order->carat }}" placeholder="Carat" required>
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                        <p><strong> Colour : </strong></p>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $order->metal_colour }}" placeholder="Colour">
-                                    </div>
-                                </div>
-                                <div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                        <p><strong> Cleaerty : </strong></p>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" id="cleaerty" name="cleaerty" value="{{ $order->cleaerty }}" placeholder="Cleaerty" required>
-                                    </div>
-                                </div>
+                                
                                 
                                 <div class="d-flex mt-1">
-                                    <div class="col-md-3">
-                                    </div>
-                                    <div class="col-md-2 pr-0">
+                                    <div class="col-md-3 pr-0">
                                         <input type="text" class="form-control" id="quantity" name="quantity" value="{{ $order->quantity }}" placeholder="Quantity">
                                     </div>
-                                    <div class="col-md-2 pr-0">
+                                    <div class="col-md-3 pr-0">
                                         {!! Form::select('est_currency', $currency ?? [],  $order->est_currency ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'est_currency']) !!}
                                     </div>
-                                    <div class="col-md-2 pr-0">
+                                    <div class="col-md-3 pr-0">
                                         <input type="text" class="form-control" id="est_price" name="est_price" value="{{ $order->est_price }}" placeholder="Est Price">
                                     </div>
-                                    <div class="col-md-3 ">
+                                    <div class="col-md-6 ">
                                         <input type="text" class="form-control" id="tot_est_price" name="tot_est_price" value="{{ $order->tot_est_price }}" placeholder="Totol" readonly>
                                     </div>
                                 </div>
                                 <div class="d-flex mt-1">
-                                    <div class="col-md-3">
+                                    <div class="col-md-6">
                                         <p><strong>Admin Notes : </strong></p>
                                     </div>
-                                    <div class="col-md-9">
-                                        <textarea type="text" class="form-control" id="notes" name="admin_notes" placeholder="Admin Notes" rows="5" required="false">{{ $order->admin_notes }}</textarea>
+                                    <div class="col-md-12">
+                                        <textarea type="text" class="form-control" id="notes" name="admin_notes" placeholder="Admin Notes" rows="3" required="false">{{ $order->admin_notes }}</textarea>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="col-md-4 p-1 pb-4 text-center">
+                                        <h5 class="text-center">Gem Info</h5>
+                                        <div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong> Gem. : </strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="gem" name="gem" value="{{ $order->gem }}" placeholder="Gem" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong> Shape : </strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="shape" name="shape" value="{{ $order->shape }}" placeholder="Shape" required>
+                                    </div>
+                                </div><div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong> Carat : </strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="carat" name="carat" value="{{ $order->carat }}" placeholder="Carat" required>
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong> Colour : </strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $order->metal_colour }}" placeholder="Colour">
+                                    </div>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong> Cleaerty : </strong></p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control" id="cleaerty" name="cleaerty" value="{{ $order->cleaerty }}" placeholder="Cleaerty" required>
                                     </div>
                                 </div>
                                 <div class="float-right mt-2">
                                     <button type="button" class="btn btn-success update-submit"
                                                 data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
                                         </button>
-                                </div> 
-                            </form> 
-                        </div>
+                                </div>
+                                    </div>
+                        </form> 
+
                     </div>
                     <div class="row">
                         @foreach($order->orderPicture as $image)

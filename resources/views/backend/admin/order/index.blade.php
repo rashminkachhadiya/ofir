@@ -30,6 +30,7 @@
                     {!! Form::select('order_status', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
+                <input type="hidden" id="supplier_id" name="supplier_id" value="">
             </div>
         </div>
     </div>
@@ -69,8 +70,6 @@
         }
     </style>
     <script>
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
         $(function () {
 
             table = $('#manage_all').DataTable({
@@ -84,6 +83,7 @@
                     },
                     data: function(d) {
                         d.user_id = $('#user_id').val();
+                        d.supplier_id = $('#supplier_id').val();
                         d.order_status = $('#order_status').val();
                     },
                     "dataType": 'json'
@@ -121,6 +121,12 @@
 
         $(document).ready(function () {
             // View Form
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            $('#user_id').val(urlParams.get('user_id'));
+            $('#supplier_id').val(urlParams.get('supplier_id'));
+            table.draw();
+            // console.log(urlParams.get('user_id'));
             $("#manage_all").on("click", ".view", function () {
                 var id = $(this).attr('id');
                 ajax_submit_view('order', id)
@@ -139,12 +145,12 @@
                 ajax_submit_delete('order', id)
             });
 
+            $("body").on("change","#user_id",function(e){
+                table.draw();
+            // var sub_catalogue = {!! json_encode(config('params.')) !!};
+            });
         });
 
-        $("body").on("change","#user_id",function(e){
-            table.draw();
-        // var sub_catalogue = {!! json_encode(config('params.')) !!};
-        });
 
         $("body").on("change","#order_status",function(e){
             table.draw();    

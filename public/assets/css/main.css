@@ -9,7 +9,7 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
  .confirm {
-    background: green !important;
+    color: green !important;
  }
  .product-details-des .quantity {
     margin-right: 15px;

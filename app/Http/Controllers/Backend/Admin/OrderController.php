@@ -34,7 +34,6 @@ class OrderController extends Controller
 
     public function getAll(Request $request)
    {
-      
       $can_edit = $can_delete = '';
       if (!auth()->user()->can('user-edit')) {
          $can_edit = "style='display:none;'";
@@ -153,7 +152,8 @@ class OrderController extends Controller
         $order = Order::find($id);
         $nextOrder = $order->next();
         $preOrder = $order->previous();
-        return view('backend.admin.order.view',compact('order','nextOrder','preOrder'));
+        $supplier = Supplier::pluck('f_name','id')->toArray();
+        return view('backend.admin.order.view',compact('order','nextOrder','preOrder','supplier'));
     }
 
     /**
