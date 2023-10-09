@@ -119,7 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 pr-0" style="border-left: 1px solid;">
+                                <div class="col-md-1 pr-0" style="border-left: 1px solid #cfd7df;">
                                     
                                 </div>
                                 <div class="col-md-5 mt-2">
