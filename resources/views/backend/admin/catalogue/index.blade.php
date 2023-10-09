@@ -42,6 +42,22 @@
                     {!! Form::select('in_stock', $inStock ?? [],  $item->in_stock ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'in_stock']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
+                <div class="d-flex col-md-2 col-sm-2" style="align-items: center">
+                    <div>
+                        <p>Gr: &nbsp;</p>
+                    </div>
+                    <div>
+                        <p id="total_gram_val">0.00</p>                        
+                    </div>
+                </div>
+                <div class="d-flex col-md-2 col-sm-2" style="align-items: center">
+                    <div>
+                        <p>Ct: &nbsp;</p>
+                    </div>
+                    <div>
+                        <p id="total_ct_val">0.00</p>                        
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -119,6 +135,38 @@
                     {data: 'is_active',name: 'is_active'},
                     {data: 'action', name: 'action'}
                 ],
+                footerCallback: function (row, data, start, end, display) {
+                    let api = this.api();
+             
+                    // Remove the formatting to get integer data for summation
+                    let intVal = function (i) {
+                        return typeof i === 'string'
+                            ? i.replace(/[\$,]/g, '') * 1
+                            : typeof i === 'number'
+                            ? i
+                            : 0.00;
+                    };
+             
+                    // Total over all pages
+                    total = api
+                        .column(4)
+                        .data()
+                        .reduce((a, b) => intVal(a) + intVal(b), 0);
+             
+                    // Total over this page
+                    gramTotal = api
+                        .column(10, { page: 'current' })
+                        .data()
+                        .reduce((a, b) => intVal(a) + intVal(b), 0);
+
+                    ctTotal = api
+                        .column(11, { page: 'current' })
+                        .data()
+                        .reduce((a, b) => intVal(a) + intVal(b), 0);
+                    $('#total_gram_val').html(gramTotal.toFixed(2));
+                    $('#total_ct_val').html(ctTotal.toFixed(2));
+                    // console.log(pageTotal);
+                },
                 "autoWidth": false,
                 "scrollX": true,
                 "scrollY": 450,
@@ -142,6 +190,7 @@
 
         $(document).ready(function () {
             // View Form
+            
             $("#manage_all").on("click", ".view", function () {
                 var id = $(this).attr('id');
                 ajax_submit_view('order', id)

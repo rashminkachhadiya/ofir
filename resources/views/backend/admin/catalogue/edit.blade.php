@@ -167,20 +167,38 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 p-0 mt-5">
+                                    <div class="col-md-12 mt-5 mb-3" style="border:1px solid;">
                                         <h5 style="text-align: center">Ask for Price</h5>
-                                        <div class="form-group col-md-12 p-0">
-                                            <label for=""> Cost Fee </label>
-                                            <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
-                                        </div>
                                         <div class="d-flex">
+                                            <div class="form-group col-md-2 p-0">
+                                                <label for=""> Work </label>
+                                                <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
+                                            </div>
+                                            <div class="form-group col-md-2 p-0 pl-1">
+                                                <label for=""> Setting </label>
+                                                <input type="text" class="form-control" id="setting" name="setting" value="{{ $item->setting }}">
+                                            </div>
+                                            <div class="form-group col-md-2 p-0 pl-1">
+                                                <label for=""> Diamond </label>
+                                                <input type="text" class="form-control" id="diamond" name="diamond" value="{{ $item->diamond }}">
+                                            </div>
+                                            <div class="form-group col-md-2 p-0 pl-1">
+                                                <label for=""> Loss </label>
+                                                <input type="text" class="form-control" id="loss" name="loss" value="{{ $item->loss }}">
+                                            </div>
+                                            <div class="form-group col-md-4 p-0 pl-1">
+                                                <label for=""> Note: </label>
+                                                <input type="text" class="form-control" id="diamond_note" name="diamond_note" value="{{ $item->diamond_note }}">
+                                            </div>
+                                        </div>
+                                    <div class="d-flex">
                                         <div class="form-group col-md-4 pl-0">
                                             <label for="">$ </label>
                                             <input type="text" class="form-control" id="price_usd" name="price_usd" value="{{ $item->price_usd }}">
                                         </div><div class="form-group col-md-4 pl-0">
                                             <label for=""> &pound; </label>
                                             <input type="text" class="form-control" id="price_pound" name="price_pound" value="{{ $item->price_pound }}">
-                                        </div><div class="form-group col-md-4 pl-0">
+                                        </div><div class="form-group col-md-4 p-0">
                                             <label for=""> &euro; </label>
                                             <input type="text" class="form-control" id="price_eur" name="price_eur" value="{{ $item->price_eur }}">
                                         </div>
@@ -513,7 +531,7 @@
             var id = $(this).attr('data-id');
           $("#photo-" + id).click();
         });
-        
+
         $('#edit').validate({// <- attach '.validate()' to your form
             // Rules for form validation
             rules: {

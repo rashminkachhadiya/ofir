@@ -261,6 +261,12 @@ class CatalogueController extends Controller
                $item->price_eur = $request->input('price_eur');
                $item->price_notes = $request->input('price_notes');
                // $item->in_stock = $request->input('in_stock');
+
+               $item->setting = $request->input('setting');
+               $item->diamond = $request->input('diamond');
+               $item->loss = $request->input('loss');
+               $item->diamond_note = $request->input('diamond_note');
+               
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -472,6 +478,12 @@ class CatalogueController extends Controller
                $item->price_pound = $request->input('price_pound');
                $item->price_eur = $request->input('price_eur');
                $item->price_notes = $request->input('price_notes');
+
+               $item->setting = $request->input('setting');
+               $item->diamond = $request->input('diamond');
+               $item->loss = $request->input('loss');
+               $item->diamond_note = $request->input('diamond_note');
+
                // $item->in_stock = $request->input('in_stock');
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;

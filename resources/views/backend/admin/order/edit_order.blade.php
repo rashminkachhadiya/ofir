@@ -10,6 +10,8 @@
                             <h5><strong> Order Details </strong></h5>
                         </div>
                     </div>
+                    <form id='edit-tab' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
+                            novalidate>
                     <div class="d-flex">
                         <div class="col-md-4 col-sm-12">
                             <div class="d-flex">
@@ -57,7 +59,7 @@
                                     <p><strong> Order Status : </strong></p>
                                 </div>
                                 <div class="col-md-6">
-                                    {{ config('params.order_status')[$order->order_status] }}
+                                    {!! Form::select('status', config('params.order_status') ?? [],  $order->order_status ?? '', ['class' => 'form-control select2','data-control'=>"select2", 'id'=>'status']) !!}
                                 </div>
                             </div>
                             <div class="d-flex">
@@ -86,8 +88,7 @@
                                     {{ config('params.categories')[$order->category_id] }}
                                 </div>
                             </div>
-                            <form id='edit-tab' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
-                            novalidate>
+                            
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="order_id" value="{{ $order->id }}">
                                 <div class="d-flex mt-1">

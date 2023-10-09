@@ -32,6 +32,7 @@ return [
         '3' => 'Order Confimed',
         '1' => 'Ready for collection',
         '2' => 'Done',
+        '4' => 'Cancel Order',
     ],
 
     'catalogue' => [

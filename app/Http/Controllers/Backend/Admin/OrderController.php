@@ -105,6 +105,8 @@ class OrderController extends Controller
            }
            elseif($orders->order_status == '3'){
             $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="Edit"><i class="fa fa-shopping-cart"></i></a>';
+           }elseif($orders->order_status == '4'){
+            $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="re-open"><i class="fa fa-folder-open"></i></a>';
            }
 
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '?next=' .$orders->next() .'"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
@@ -249,6 +251,7 @@ class OrderController extends Controller
       $order->supplier_name = $request->supplier_name;
       $order->metal_type = $request->metal_type;
       $order->metal_colour = $request->metal_colour;
+      $order->order_status = $request->status;
       $order->size = $request->size;
 
       $order->weight = $request->weight;

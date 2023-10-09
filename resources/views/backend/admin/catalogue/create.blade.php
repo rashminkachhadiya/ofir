@@ -156,11 +156,29 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 p-0 mt-5">
+                                    <div class="col-md-12 mt-5 mb-3" style="border:1px solid;">
                                         <h5 style="text-align: center">Ask for Price</h5>
-                                        <div class="form-group col-md-12 p-0">
-                                            <label for=""> Cost Fee </label>
-                                            <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="">
+                                        <div class="d-flex">
+                                            <div class="form-group col-md-2 p-0">
+                                                <label for=""> Work </label>
+                                                <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="">
+                                            </div>
+                                            <div class="form-group col-md-2 p-0 pl-1">
+                                                <label for=""> Setting </label>
+                                                <input type="text" class="form-control" id="setting" name="setting" value="">
+                                            </div>
+                                            <div class="form-group col-md-2 p-0 pl-1">
+                                                <label for=""> Diamond </label>
+                                                <input type="text" class="form-control" id="diamond" name="diamond" value="">
+                                            </div>
+                                            <div class="form-group col-md-2 p-0 pl-1">
+                                                <label for=""> Loss </label>
+                                                <input type="text" class="form-control" id="loss" name="loss" value="">
+                                            </div>
+                                            <div class="form-group col-md-4 p-0 pl-1">
+                                                <label for=""> Note: </label>
+                                                <input type="text" class="form-control" id="diamond_note" name="diamond_note" value="">
+                                            </div>
                                         </div>
                                         <div class="d-flex">
                                         <div class="form-group col-md-4 pl-0">
@@ -169,7 +187,7 @@
                                         </div><div class="form-group col-md-4 pl-0">
                                             <label for=""> &pound; </label>
                                             <input type="text" class="form-control" id="price_pound" name="price_pound" value="">
-                                        </div><div class="form-group col-md-4 pl-0">
+                                        </div><div class="form-group col-md-4 p-0">
                                             <label for=""> &euro; </label>
                                             <input type="text" class="form-control" id="price_eur" name="price_eur" value="">
                                         </div>

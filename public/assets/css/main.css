@@ -15,6 +15,9 @@
     cursor: pointer;
     color: black;
 }
+.select2-selection__choice{
+    color: black !important;
+}
  .product-details-des .quantity {
     margin-right: 15px;
 }
