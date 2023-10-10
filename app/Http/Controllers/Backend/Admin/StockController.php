@@ -52,6 +52,17 @@ class StockController extends Controller
         ->addColumn('sku', function ($items) {
             return $items->item['sku'];
         })
+        ->addColumn('item_status', function ($items) {
+            if(!is_null($items->item_status))
+            {
+               if($items->item_status == '0')
+               {
+                    return "Apro";
+               }elseif ($items->item_status == '1') {
+                   return "Sold";
+               }
+            }
+        })
         ->rawColumns(['created_at', 'date','sku'])
         ->addIndexColumn()
         ->make(true);
