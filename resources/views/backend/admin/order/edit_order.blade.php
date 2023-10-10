@@ -11,10 +11,10 @@
                         </div>
                         <div class="d-flex">
                             <div class="mr-1">
-                                <a class="btn btn-xs btn-info" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}/flag=view">View</a>
+                                <a class="btn btn-xs btn-info" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}&flag=view">View</a>
                             </div>
                             <div>
-                                <a class="btn btn-xs btn-success" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}/flag=pdf">PDF</a>
+                                <a class="btn btn-xs btn-success" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}&flag=pdf">PDF</a>
                             </div>
                         </div>
                     </div>
