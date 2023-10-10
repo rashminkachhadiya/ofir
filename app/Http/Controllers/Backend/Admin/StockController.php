@@ -50,6 +50,7 @@ class StockController extends Controller
           return number_format((float)$items->qty, 0, '.', '');
         })
         ->addColumn('sku', function ($items) {
+            return '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->item_id . '/edit" target="_blank">'. $items->item['sku'] .'</a>';
             return $items->item['sku'];
         })
         ->addColumn('item_status', function ($items) {
