@@ -9,8 +9,13 @@
                         <div>
                             <h5><strong> Order Details </strong></h5>
                         </div>
-                        <div>
-                            <a class="btn btn-xs btn-success" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}">Download</a>
+                        <div class="d-flex">
+                            <div class="mr-1">
+                                <a class="btn btn-xs btn-info" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}/flag=view">View</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-xs btn-success" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}/flag=pdf">PDF</a>
+                            </div>
                         </div>
                     </div>
                     <form id='edit-tab' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"

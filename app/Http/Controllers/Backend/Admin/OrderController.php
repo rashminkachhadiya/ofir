@@ -278,6 +278,11 @@ class OrderController extends Controller
       $supplier = Supplier::all()->pluck('f_name','id')->toArray();
       // return view('backend.admin.order.invoice',compact('order'));
       $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('order','supplier'));
-      return $pdf->stream();
+      if($request->flag == 'view')
+      {
+        return $pdf->stream();
+      }else{
+        return $pdf->download();
+      }
     }
 }
