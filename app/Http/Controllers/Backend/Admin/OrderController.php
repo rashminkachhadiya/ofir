@@ -275,8 +275,9 @@ class OrderController extends Controller
     public function pdfDownload(Request $request)
     {
       $order = Order::find($request->id);
+      $supplier = Supplier::all()->pluck('f_name','id')->toArray();
       // return view('backend.admin.order.invoice',compact('order'));
-      $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('order'));
+      $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('order','supplier'));
       return $pdf->stream();
     }
 }

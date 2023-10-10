@@ -51,8 +51,6 @@
                                         </tbody>
                                     </table>
                                 </td>
-                                <td width="60%" align="center" valign="top"><strong><img src="{{ asset('assets/img/logo.png') }}" width="200" height="50" alt=""/></strong>
-                                </td>
                                 <td width="20%" align="left" valign="middle">
                                     
                                 </td>
@@ -67,36 +65,91 @@
                         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
                             <tr>
-                                <td width="20%" align="left" valign="middle">
+                                <td width="30%" align="left" valign="top">
                                     <table border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
-                                                <td>
-                                                    <span style="font-size: 15px;">ORDER TO</span>
-                                                    <div class="td_tag">{{ $order->shipping_address_first_name }}  {{ $order->shipping_address_last_name }}</div>
-                                                    <!-- <div class="td_tag">Nature's Art LTD</div> -->
-                                                    <div class="td_tag">{{ $order->shipping_address_1 }}</div>
-                                                    <div class="td_tag">{{ $order->shipping_address_2 }}</div>
-                                                    <div class="td_tag">{{ $order->shipping_city }}</div>
-                                                    <div class="td_tag">{{ $order->shipping_country }}</div>
-                                                    <div class="td_tag">{{ $order->shipping_postcode }}</div>
-                                                </td>
+                                                <td width="60%">Supplier Name: &nbsp;</td>
+                                                <td>{{ $supplier[$order->supplier_name] }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%">Date: </td>
+                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%">Order No: &nbsp;</td>
+                                                <td><strong>{{ $order->order_number }}</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%">Code: &nbsp;</td>
+                                                <td>{{ $order->sku }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%">Category: &nbsp;</td>
+                                                <td>{{ config('params.categories')[$order->category_id] }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </td>
-                                <td width="50%" align="center" valign="top"><strong></strong>
+                                <td width="40%" align="center" valign="top">
+                                    <table border="0" style="margin-left:50px;" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td width="60%">Category: &nbsp;</td>
+                                                <td>{{ config('params.categories')[$order->category_id] }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td width="60%">Metal Type: &nbsp;</td>
+                                                <td>{{ config('params.metal_type')[$order->metal_type] }}</td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td width="60%">Metal Colour: &nbsp;</td>
+                                                <td>{{ config('params.metal_colour')[$order->metal_colour] }}</td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td width="60%">Size: &nbsp;</td>
+                                                <td>{{ $order->size }}</td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td width="60%">Weight: &nbsp;</td>
+                                                <td>{{ $order->weight }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td width="60%">Qty: &nbsp;</td>
+                                                <td>{{ $order->quantity }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </td>
                                 <td width="30%" align="left" style="vertical-align: baseline;">
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <td width="60%">Order No.</td>
-                                                <td width="40%"><strong>{{ $order->order_number }}</strong></td>
+                                                <td colspan="2" style="text-align: center"><strong>Gem Info</strong></td>
                                             </tr>
                                             <tr>
-                                                <td width="60%">Date:</td>
-                                                <td width="40%">{{ Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                                                <td width="60%">Gem:</td>
+                                                <td width="40%">{{ $order->gem }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%">Shape:</td>
+                                                <td width="40%">{{ $order->shape }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="60%">Carat:</td>
+                                                <td width="40%">{{ $order->carat }}</td>
+                                            </tr><tr>
+                                                <td width="60%">Colour:</td>
+                                                <td width="40%">{{ $order->colour }}</td>
+                                            </tr><tr>
+                                                <td width="60%">Cleaerty:</td>
+                                                <td width="40%">{{ $order->cleaerty }}</td>
+                                            </tr><tr>
+                                                <td width="60%">Pcs:</td>
+                                                <td width="40%">{{ $order->pcs }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -118,16 +171,11 @@
                     <tr>
                         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
-                                <tr style="">
-                                    <td width="1%" align="center" valign="middle">&nbsp;</td>
-                                    <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">ITEM CODE</span></td>
-                                    <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">TITLE</span></td>
-                                    <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">DESCRIPTION</span></td>
-                                    <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">QTY</span></td>
-                                    <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">RATE</span></td>
-                                    <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">AMOUNT</span></td>
-                                    <td width="1%" align="center" valign="middle">&nbsp;</td>
-                                </tr>
+                                @foreach($order->orderPicture as $image)
+                                    <div class="col-md-2 mt-2">
+                                        <img width="170px;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                    </div>
+                                @endforeach
                                
                             </tbody>
                         </table></td>
