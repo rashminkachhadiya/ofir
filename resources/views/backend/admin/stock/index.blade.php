@@ -22,11 +22,19 @@
     <div class="app-page-title mt-1">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
-                <div class="form-group col-md-6 col-sm-12">
+                <div class="form-group col-md-3 col-sm-12">
                     {!! Form::select('item_status', $itemStatus ?? [],  $item->in_stock ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'item_status']) !!}
                     <span id="error_email" class="has-error"></span>
                 </div>
-                <div class="d-flex col-md-4 col-sm-2" style="align-items: center">
+                <div class="form-group col-md-3 col-sm-6">
+                    {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+                <div class="form-group col-md-3 col-sm-6">
+                    {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
+                    <span id="error_email" class="has-error"></span>
+                </div>
+                <div class="d-flex col-md-3 col-sm-2" style="align-items: center">
                     <div>
                         <p>Qty: &nbsp;</p>
                     </div>
@@ -34,7 +42,7 @@
                         <p id="total_qty">0</p>                        
                     </div>
                 </div>
-                <div class="d-flex col-md-4 col-sm-2" style="align-items: center">
+                <div class="d-flex col-md-3 col-sm-2" style="align-items: center">
                     <div>
                         <p>Gr: &nbsp;</p>
                     </div>
@@ -42,7 +50,7 @@
                         <p id="total_gram_val">0.00</p>                        
                     </div>
                 </div>
-                <div class="d-flex col-md-4 col-sm-2" style="align-items: center">
+                <div class="d-flex col-md-3 col-sm-2" style="align-items: center">
                     <div>
                         <p>Ct: &nbsp;</p>
                     </div>
@@ -105,6 +113,8 @@
                         "X-CSRF-TOKEN": CSRF_TOKEN,
                     },
                     data: function(d) {
+                        d.catalogue_id = $('#catalogue_id').val();
+                        d.sub_catalogue_id = $('#sub_catalogue_id').val();
                         d.item_status = $('#item_status').val();
                     },
                     "dataType": 'json'
@@ -112,7 +122,7 @@
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'sku', name: 'sku'},
+                    {data: 'sku', name: 'items.sku'},
                     {data: 'item_code', name: 'item_code'},
                     {data: 'qty', name: 'qty'},
                     {data: 'gram', name: 'gram'},
@@ -230,11 +240,11 @@
         table.draw();
         // var sub_catalogue = {!! json_encode(config('params.')) !!};
     });
+        $("body").on("change","#catalogue_id",function(e){
+        table.draw();
+        // var sub_catalogue = {!! json_encode(config('params.')) !!};
+    });
         $("body").on("change","#sub_catalogue_id",function(e){
-            table.draw();    
-        });
-
-        $("body").on("change","#in_stock",function(e){
             table.draw();    
         });
 

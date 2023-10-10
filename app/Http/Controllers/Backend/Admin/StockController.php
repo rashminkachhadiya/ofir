@@ -20,7 +20,11 @@ class StockController extends Controller
     {
         $itemStatus = ['0'=>'Apro','1'=>'Sold'];
         $itemStatus[''] = 'All Status';
-        return view('backend.admin.stock.index',compact('itemStatus'));
+        $catalogues = config('params.catalogue');
+        $catalogues[''] = 'All Catalogue';
+        $subCatalogue = config('params.1');
+        $subCatalogue[''] = 'All Sub Catalogue';
+        return view('backend.admin.stock.index',compact('itemStatus','catalogues','subCatalogue'));
     }
 
 
@@ -34,10 +38,19 @@ class StockController extends Controller
          $can_delete = "style='display:none;'";
       }
 
-      $items = ItemStock::select('item_stocks.*');
+      $items = ItemStock::select('item_stocks.*','items.sku')
+            ->leftjoin('items','items.id','=','item_stocks.item_id');
         if(!is_null($request['item_status']))
         {
           $items->where('item_status','=',$request['item_status']);
+        }
+        if(!is_null($request['catalogue_id']))
+        {
+          $items->where('items.catalogue_id', '=', $request['catalogue_id']);
+        }
+        if(!is_null($request['sub_catalogue_id']))
+        {
+          $items->where('items.sub_catalogue_id', '=', $request['sub_catalogue_id']);
         }
       return Datatables::of($items)
         ->addColumn('created_at', function ($items) {
@@ -50,8 +63,7 @@ class StockController extends Controller
           return number_format((float)$items->qty, 0, '.', '');
         })
         ->addColumn('sku', function ($items) {
-            return '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->item_id . '/edit" target="_blank">'. $items->item['sku'] .'</a>';
-            return $items->item['sku'];
+            return '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->item_id . '/edit" target="_blank">'. $items->sku .'</a>';
         })
         ->addColumn('item_status', function ($items) {
             if(!is_null($items->item_status))
