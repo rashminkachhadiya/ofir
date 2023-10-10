@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Invoice</title>
+    <title>Supplier Order</title>
     <style>
         body {
             margin: 0;
@@ -26,9 +26,15 @@
             text-align: center;
             line-height: 20px;
         }
+        #details {
+          /*border: 1px solid black;*/
+          border-collapse: collapse;
+        }
         .td_tag {
             font-size: 12px; 
-            line-height: 15px;
+            line-height: 20px;
+            border:1px solid black;
+            border-collapse: collapse;
         }
     </style>
 </head>
@@ -66,98 +72,36 @@
                         <tbody>
                             <tr>
                                 <td width="30%" align="left" valign="top">
-                                    <table border="0" cellspacing="0" cellpadding="0">
-                                        <tbody>
-                                            <tr>
-                                                <td width="60%">Supplier Name: &nbsp;</td>
-                                                <td>{{ $supplier[$order->supplier_name] }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Date: </td>
-                                                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Order No: &nbsp;</td>
-                                                <td><strong>{{ $order->order_number }}</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Code: &nbsp;</td>
-                                                <td>{{ $order->sku }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Category: &nbsp;</td>
-                                                <td>{{ config('params.categories')[$order->category_id] }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                     @foreach($order->orderPicture as $image)
+                                        <img width="170px;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                    @endforeach
                                 </td>
-                                <td width="40%" align="center" valign="top">
-                                    <table border="0" style="margin-left:50px;" cellspacing="0" cellpadding="0">
+                                <td width="70%" align="center" valign="top">
+                                    <table id="details" width="100%" border="0" cellspacing="1" cellpadding="0">
                                         <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td width="60%">Category: &nbsp;</td>
-                                                <td>{{ config('params.categories')[$order->category_id] }}</td>
+                                            <tr style="">
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Date</span></td>
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Order</span></td>
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Name</span></td>
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Code</span></td>
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Size</span></td>
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Qty</span></td>
+                                                <td width="10%" height="25" align="center" bgcolor="#e5dddf" valign="middle" style="border-right: 1px solid #fff"><span style="font-size: 12px; color: #78bd7d;">Metal</span></td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td width="60%">Metal Type: &nbsp;</td>
-                                                <td>
-                                                    @if(!is_null($order->metal_type))
+                                                <td class="td_tag" align="center">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                                                <td class="td_tag" align="center">{{ $order->order_number }}</td>
+                                                <td class="td_tag" align="center">{{ $supplier[$order->supplier_name] }}</td>
+                                                <td class="td_tag" align="center">{{ $order->sku }}</td>
+                                                <td class="td_tag" align="center">{{ $order->size }}</td>
+                                                <td class="td_tag" align="center">{{ $order->quantity }}</td>
+                                                <td class="td_tag" align="center">@if(!is_null($order->metal_type))
                                                     {{ config('params.metal_type')[$order->metal_type] }}
-                                                    @endif
-                                                </td>
-                                            </tr><tr>
-                                                <td></td>
-                                                <td width="60%">Metal Colour: &nbsp;</td>
-                                                <td>
-                                                    @if(!is_null($order->mmetal_colour))
-                                                    {{ config('params.metal_colour')[$order->metal_colour] }}
-                                                    @endif
-                                                </td>
-                                            </tr><tr>
-                                                <td></td>
-                                                <td width="60%">Size: &nbsp;</td>
-                                                <td>{{ $order->size }}</td>
-                                            </tr><tr>
-                                                <td></td>
-                                                <td width="60%">Weight: &nbsp;</td>
-                                                <td>{{ $order->weight }}</td>
+                                                    @endif</td>
                                             </tr>
                                             <tr>
-                                                <td></td>
-                                                <td width="60%">Qty: &nbsp;</td>
-                                                <td>{{ $order->quantity }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                                <td width="30%" align="left" style="vertical-align: baseline;">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2" style="text-align: center"><strong>Gem Info</strong></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Gem:</td>
-                                                <td width="40%">{{ $order->gem }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Shape:</td>
-                                                <td width="40%">{{ $order->shape }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="60%">Carat:</td>
-                                                <td width="40%">{{ $order->carat }}</td>
-                                            </tr><tr>
-                                                <td width="60%">Colour:</td>
-                                                <td width="40%">{{ $order->colour }}</td>
-                                            </tr><tr>
-                                                <td width="60%">Cleaerty:</td>
-                                                <td width="40%">{{ $order->cleaerty }}</td>
-                                            </tr><tr>
-                                                <td width="60%">Pcs:</td>
-                                                <td width="40%">{{ $order->pcs }}</td>
+                                                <td>Note: </td>
+                                                <td colspan="5">{{ $order->admin_notes }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -174,19 +118,6 @@
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tbody>
-                                @foreach($order->orderPicture as $image)
-                                    <div class="col-md-2 mt-2">
-                                        <img width="170px;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
-                                    </div>
-                                @endforeach
-                               
-                            </tbody>
-                        </table></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
