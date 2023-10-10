@@ -226,10 +226,13 @@
                                         <input type="radio" name="is_available" class="flat-green"value="0" {{ ( $item->is_available == 0 ) ? 'checked' : '' }}/> No
                                     </div>
                                 </div>
-                                <div id="catelogue_size">
+                                <div class="col" id="catelogue_size">
                                     <hr>
                                     <div class="row text-center">
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-1 p-1">
+                                            <p><strong>Date</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-1 p-1">
                                             <p><strong>Code</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
@@ -259,6 +262,9 @@
                                         <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Date</strong></p>
                                         </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Note</strong></p>
+                                        </div>
                                     </div>
                                     @if(count($itemStock) > 0  && !empty($itemStock))
                                         <?php
@@ -266,7 +272,10 @@
                                         ?>
                                         @foreach($itemStock as $size)
                                         <div class="form-group row mt-1 item_size-{{$size->id}}">
-                                            <div class="col-md-2 pl-2 p-1">
+                                            <div style="text-align: center;" class="col-md-1 pl-2 p-1">
+                                              <p style="margin: revert;">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
+                                            </div>
+                                            <div class="col-md-1 pl-2 p-1">
                                               <input type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
                                             </div>
                                             <div class="col-md-1 pl-2 p-1">
@@ -306,6 +315,9 @@
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
                                             </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="text" name="stocknotes[{{ $size->id }}]" class="form-control" id="stocknotes_{{ $size->id }}" value="{{ $size->stocknotes }}">
+                                            </div>
                                             @if($sizeCount == 0)
                                             
                                             <?php
@@ -322,6 +334,9 @@
                                         @endforeach
                                         @else
                                     <div class="form-group row">
+                                        <div class="col-md-2 pl-2 p-1">
+                                          
+                                        </div>
                                         <div class="col-md-2 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
                                         </div>
@@ -460,7 +475,10 @@
         $("body").on("click", ".add", function (e) {
             $("#catelogue_size").append(
                 '<div class="form-group row item_size-'+ add_number +'">\
-                    <div class="col-md-2 pl-2 p-1">\
+                    <div class="col-md-1 pl-2 p-1">\
+                      \
+                    </div>\
+                    <div class="col-md-1 pl-2 p-1">\
                       <input type="text" name="new_code['+ add_number +']" class="form-control" id="new_code-'+ add_number +'" value="" placeholder="Code">\
                     </div>\
                     <div class="col-md-1 pl-2 p-1">\
@@ -499,6 +517,9 @@
                     </div>\
                     <div class="col-md-1 p-1">\
                       <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
+                    </div>\
+                    <div class="col-md-1 p-0 p-1">\
+                        <input type="text" name="new_stocknotes['+ add_number +']" class="form-control" id="stocknotes_'+ add_number +'" value="" placeholder="Note">\
                     </div>\
                     <div class="col-md-1">\
                         <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\

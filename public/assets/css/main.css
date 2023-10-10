@@ -18,6 +18,9 @@
 .select2-selection__choice{
     color: black !important;
 }
+#catelogue_size .col-md-1{
+    max-width: 7% !important;
+}
  .product-details-des .quantity {
     margin-right: 15px;
 }

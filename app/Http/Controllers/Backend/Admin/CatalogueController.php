@@ -266,7 +266,7 @@ class CatalogueController extends Controller
                $item->diamond = $request->input('diamond');
                $item->loss = $request->input('loss');
                $item->diamond_note = $request->input('diamond_note');
-               
+
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
@@ -506,6 +506,7 @@ class CatalogueController extends Controller
                         $itemStock->total_gram = $value * $request->gram[$key];
                         $itemStock->total_ct = $value * $request->ct[$key];
                         $itemStock->notes = $request->notes[$key];
+                        $itemStock->stocknotes = $request->stocknotes[$key];
                         $itemStock->item_status = $request->item_status[$key];
                         $itemStock->date = !is_null($request->date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->date[$key])) : NULL;
                         $itemStock->save();
@@ -528,6 +529,7 @@ class CatalogueController extends Controller
                         $itemStock->total_gram = $value * $request->new_gram[$key];
                         $itemStock->total_ct = $value * $request->new_ct[$key];
                         $itemStock->notes = $request->new_notes[$key];
+                        $itemStock->stocknotes = $request->new_stocknotes[$key];
                         $itemStock->item_status = $request->new_item_status[$key];
                         $itemStock->date = !is_null($request->new_date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->new_date[$key])) : NULL;
                         $itemStock->save();
