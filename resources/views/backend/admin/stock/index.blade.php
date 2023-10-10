@@ -64,8 +64,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Date</th>
-                                <th>Parent</th>
                                 <th>Code</th>
+                                <th>Sub Code</th>
                                 <th>Qty</th>
                                 <th>Gram</th>
                                 <th>Size</th>
