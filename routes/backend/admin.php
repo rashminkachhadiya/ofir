@@ -27,6 +27,7 @@ Route::get('/export', 'UserController@export')->name('export');
 Route::resource('order', 'OrderController');
 Route::post('/update-order','OrderController@updateOrder');
 Route::get('/allOrders','OrderController@getAll')->name('allOrders');
+Route::get('/pdf-download','OrderController@pdfDownload')->name('pdfDownload');
 
 
 Route::resource('catalogue', 'CatalogueController');

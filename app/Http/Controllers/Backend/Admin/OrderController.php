@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 use View;
 use DB;
+use PDF;
 use URL;
 
 class OrderController extends Controller
@@ -269,5 +270,13 @@ class OrderController extends Controller
       $order->admin_notes = $request->admin_notes;
       $order->save();
       return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
+    }
+
+    public function pdfDownload(Request $request)
+    {
+      $order = Order::find($request->id);
+      // return view('backend.admin.order.invoice',compact('order'));
+      $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('order'));
+      return $pdf->stream();
     }
 }

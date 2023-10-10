@@ -9,6 +9,9 @@
                         <div>
                             <h5><strong> Order Details </strong></h5>
                         </div>
+                        <div>
+                            <a class="btn btn-xs btn-success" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}">Download</a>
+                        </div>
                     </div>
                     <form id='edit-tab' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
                             novalidate>
