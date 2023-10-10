@@ -64,17 +64,23 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ URL :: to('/admin/supplier') }}">
+                    <a href="{{ URL :: to('/admin/stock') }}">
                         <i class="metismenu-icon"></i>
-                        Supplier
+                        Stock
                     </a>
                 </li>
                 <li>
                     <a href="{{ URL :: to('/admin/supplier') }}">
                         <i class="metismenu-icon"></i>
-                        Order Supplier
+                        Supplier
                     </a>
                 </li>
+                <!-- <li>
+                    <a href="{{ URL :: to('/admin/supplier') }}">
+                        <i class="metismenu-icon"></i>
+                        Order Supplier
+                    </a>
+                </li> -->
                 <!-- <li>
                     <a href="{{ URL :: to('/admin/blogs') }}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
