@@ -218,7 +218,10 @@
                                 <div id="catelogue_size">
                                     <hr>
                                     <div class="row text-center">
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-1 p-1">
+                                            <p><strong>Date</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
                                             <p><strong>Code</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
@@ -248,9 +251,15 @@
                                         <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Date</strong></p>
                                         </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Note</strong></p>
+                                        </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-2 p-1">
+                                          
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
@@ -290,6 +299,9 @@
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
                                             </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="text" name="new_stocknotes[0]" class="form-control" id="new_stocknotes_0" value="" placeholder="Note">
+                                            </div>
                                     </div>
                                 </div>
                                 
@@ -320,7 +332,10 @@
         $("body").on("click", ".add", function (e) {
              $("#catelogue_size").append(
                 '<div class="form-group row item_size-'+ add_number +'">\
-                    <div class="col-md-2 pl-2 p-1">\
+                    <div class="col-md-1 pl-2 p-1">\
+                      \
+                    </div>\
+                    <div class="col-md-1 pl-2 p-1">\
                       <input type="text" name="new_code['+ add_number +']" class="form-control" id="new_code-'+ add_number +'" value="" placeholder="Code">\
                     </div>\
                     <div class="col-md-1 pl-2 p-1">\
@@ -359,6 +374,9 @@
                     </div>\
                     <div class="col-md-1 p-1">\
                       <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
+                    </div>\
+                    <div class="col-md-1 p-0 p-1">\
+                        <input type="text" name="new_stocknotes['+ add_number +']" class="form-control" id="stocknotes_'+ add_number +'" value="" placeholder="Note">\
                     </div>\
                     <div class="col-md-1">\
                         <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\

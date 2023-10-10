@@ -334,10 +334,10 @@
                                         @endforeach
                                         @else
                                     <div class="form-group row">
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-2 p-1">
                                           
                                         </div>
-                                        <div class="col-md-2 pl-2 p-1">
+                                        <div class="col-md-1 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
@@ -376,6 +376,9 @@
                                         </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
+                                            </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input type="text" name="new_stocknotes[0]" class="form-control" id="new_stocknotes_0" value="" placeholder="Note">
                                             </div>
                                         
                                     </div>

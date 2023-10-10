@@ -68,6 +68,8 @@ class CatalogueController extends Controller
           if($request['in_stock'] == 1)
           {
             $items->having('tot_qty','>',0);
+          }elseif($request['in_stock'] == 2){
+            $items->where('item_stocks.item_status','=','0');
           }else{
             $items->having('tot_qty','=',0);
           }
@@ -286,6 +288,7 @@ class CatalogueController extends Controller
                         $itemStock->total_gram = $value * $request->new_gram[$key];
                         $itemStock->total_ct = $value * $request->new_ct[$key];
                         $itemStock->notes = $request->new_notes[$key];
+                        $itemStock->stocknotes = $request->new_stocknotes[$key];
                         $itemStock->item_status = $request->new_item_status[$key];
                         $itemStock->date = !is_null($request->new_date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->new_date[$key])) : NULL;
                         $itemStock->save();

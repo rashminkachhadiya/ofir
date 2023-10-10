@@ -173,6 +173,7 @@ return [
     'in_stock' => [
         '0' => 'No',
         '1' => 'Yes',
+        '2' => 'Apro'
     ],
 
     'currency' => [
