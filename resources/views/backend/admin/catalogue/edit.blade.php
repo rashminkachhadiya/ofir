@@ -306,7 +306,7 @@
                                               <select class="form-control" name="item_status[{{ $size->id }}]">
                                                 <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select</option>
                                                 <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
-                                                <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sale</option>
+                                                <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sold</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -368,7 +368,7 @@
                                               <select class="form-control" name="new_item_status[0]">
                                                 <option value="" >Select</option>
                                                 <option value="0" >Apro</option>
-                                                <option value="1" >Sale</option>
+                                                <option value="1" >Sold</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -512,7 +512,7 @@
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
                         <option value="">Select</option>\
                         <option value="0">Apro</option>\
-                        <option value="1">Sale</option>\
+                        <option value="1">Sold</option>\
                       </select>\
                     </div>\
                     <div class="col-md-1 p-1">\

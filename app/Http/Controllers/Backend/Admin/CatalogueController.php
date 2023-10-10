@@ -70,7 +70,10 @@ class CatalogueController extends Controller
             $items->having('tot_qty','>',0);
           }elseif($request['in_stock'] == 2){
             $items->where('item_stocks.item_status','=','0');
-          }else{
+          }elseif($request['in_stock'] == 3){
+            $items->where('item_stocks.item_status','=','1');
+          }
+          else{
             $items->having('tot_qty','=',0);
           }
         }

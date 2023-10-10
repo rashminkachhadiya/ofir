@@ -366,7 +366,7 @@
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
                         <option value="">Select</option>\
                         <option value="0">Apro</option>\
-                        <option value="1">Sale</option>\
+                        <option value="1">Sold</option>\
                       </select>\
                     </div>\
                     <div class="col-md-1 p-1">\
