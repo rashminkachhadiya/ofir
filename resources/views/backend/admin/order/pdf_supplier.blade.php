@@ -102,11 +102,19 @@
                                             <tr>
                                                 <td></td>
                                                 <td width="60%">Metal Type: &nbsp;</td>
-                                                <td>{{ config('params.metal_type')[$order->metal_type] }}</td>
+                                                <td>
+                                                    @if(!is_null($order->metal_type))
+                                                    {{ config('params.metal_type')[$order->metal_type] }}
+                                                    @endif
+                                                </td>
                                             </tr><tr>
                                                 <td></td>
                                                 <td width="60%">Metal Colour: &nbsp;</td>
-                                                <td>{{ config('params.metal_colour')[$order->metal_colour] }}</td>
+                                                <td>
+                                                    @if(!is_null($order->mmetal_colour))
+                                                    {{ config('params.metal_colour')[$order->metal_colour] }}
+                                                    @endif
+                                                </td>
                                             </tr><tr>
                                                 <td></td>
                                                 <td width="60%">Size: &nbsp;</td>
