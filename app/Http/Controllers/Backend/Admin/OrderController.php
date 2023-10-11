@@ -63,7 +63,7 @@ class OrderController extends Controller
       {
         $orders->orWhere('orders.order_number', 'LIKE', '%'. $request['search']['value'] .'%');
       }
-      return Datatables::of($orders,$supplier)
+      return Datatables::of($orders,$supplier,$request)
         ->addColumn('created_at', function ($orders) {
           return Carbon::parse($orders->created_at)->format('d/m/Y');
            // return $orders->created_at;
@@ -94,7 +94,7 @@ class OrderController extends Controller
            return  config('params.currency')[$orders->est_price_currency] . $orders->tot_est_price;
           }
         })
-        ->addColumn('action', function ($orders) use ($can_edit, $can_delete) {
+        ->addColumn('action', function ($orders) use ($can_edit, $can_delete, $request) {
            $html = '<div class="btn-group">';
            
            if($orders->order_status == '0'){
@@ -114,9 +114,13 @@ class OrderController extends Controller
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
 
            $html .= '<a id="' . $orders->id . '" class="btn btn-xs btn-danger margin-r-5 delete" title="Delete"><i class="fa fa-times"></i> </a>';
-           $html .= '<div class="form-check form-check-custom form-check-sm">
+           if(!is_null($request['supplier_id']))
+           {
+              $html .= '<div class="form-check form-check-custom form-check-sm">
                         <input class="form-check-input child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
-                     </div>';
+                     </div>'; 
+           }
+           
            // $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $orders->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
            $html .= '</div>';
            return $html;
@@ -277,10 +281,16 @@ class OrderController extends Controller
 
     public function pdfDownload(Request $request)
     {
-      $order = Order::find($request->id);
+      if(isset($request->id) && !is_null($request->id))
+      {
+          $ids[] = $request->id;
+      }else if(isset($request->ids)){
+          $ids = explode(', ',$request->ids);
+      }
+      $orders = Order::whereIn('id',$ids)->get();
       $supplier = Supplier::all()->pluck('f_name','id')->toArray();
       // return view('backend.admin.order.invoice',compact('order'));
-      $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('order','supplier'));
+      $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
       if($request->flag == 'view')
       {
         return $pdf->stream();

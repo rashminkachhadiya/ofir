@@ -20,17 +20,29 @@
         </div>
     </div>
     <div class="app-page-title mt-1">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="form-group col-md-6 col-sm-12">
-                    {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
-                    <span id="error_email" class="has-error"></span>
+        <div class="page-title-wrapper" style="display: block !important;">
+            <div class="page-title-heading" style="display: block !important;">
+                <div class="d-flex" style="justify-content: space-between;">
+                    <div class="d-flex">
+                        <div class="form-group col-md-6 col-sm-12">
+                            {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
+                            <span id="error_email" class="has-error"></span>
+                        </div>
+                        <div class="form-group col-md-9 col-sm-12">
+                            {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
+                            <span id="error_email" class="has-error"></span>
+                        </div>
+                        <input type="hidden" id="supplier_id" name="supplier_id" value="">
+                    </div>
+                    <div style="">
+                        <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
+                            <input type="hidden" name="ids" id="print_ids">
+                            <div class="mr-1">
+                                <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-group col-md-9 col-sm-12">
-                    {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <input type="hidden" id="supplier_id" name="supplier_id" value="">
             </div>
         </div>
     </div>
@@ -71,6 +83,15 @@
         }
     </style>
     <script>
+        function printLabel()
+        {
+            var allVals = [];
+            $("input[name='ids[]']:checked").each(function() {
+                allVals.push($(this).attr('value'));
+            });
+            $("#print_ids").val(allVals.join(', '));
+            $('#form-print').submit();
+        }
         $(function () {
 
             table = $('#manage_all').DataTable({

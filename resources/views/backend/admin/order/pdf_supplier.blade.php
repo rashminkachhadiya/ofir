@@ -71,6 +71,7 @@
                     <tr>
                         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
+                            @foreach($orders as $order)
                             <tr>
                                 <td width="30%" align="left" valign="top">
                                      @foreach($order->orderPicture as $image)
@@ -111,6 +112,8 @@
                                     </table>
                                 </td>
                             </tr>
+                            <tr><td>&nbsp;</td></tr>
+                            @endforeach
                             </tbody>
                         </table></td>
                     </tr>
