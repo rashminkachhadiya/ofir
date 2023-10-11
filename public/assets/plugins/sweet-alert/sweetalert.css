@@ -266,6 +266,9 @@ body.stop-scrolling {
   display: inline-block;
   position: relative;
 }
+.sa-confirm-button-container .confirm {
+  color: white !important;
+}
 .sweet-alert .la-ball-fall {
   position: absolute;
   left: 50%;
