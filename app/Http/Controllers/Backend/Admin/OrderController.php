@@ -292,15 +292,16 @@ class OrderController extends Controller
       // return view('backend.admin.order.pdf_supplier',compact('orders','supplier'));
       $mpdf = new \Mpdf\Mpdf();
       $html = view('backend.admin.order.pdf_supplier',compact('orders','supplier'))->render();
+      $mpdf->autoScriptToLang = true;
+      $mpdf->autoLangToFont = true;
       $mpdf->WriteHTML($html);
-      $mpdf->Output();
       // $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
       // $mpdf->autoLangToFont = true;
-      // if($request->flag == 'view')
-      // {
-      //   return $pdf->stream();
-      // }else{
-      //   return $pdf->download();
-      // }
+      if($request->flag == 'view')
+      {
+        return $mpdf->Output();
+      }else{
+        return $mpdf->download();
+      }
     }
 }

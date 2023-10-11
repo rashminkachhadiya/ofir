@@ -109,8 +109,8 @@
                                                 <td>&nbsp;</td>
                                             </tr>
                                             <tr>
-                                                <td style="font-size: 12px; line-height: 20px;border:1px solid black;border-collapse: collapse;border-spacing: -1px;border-right: none;" valign="top" rowspan="7">Note: </td>
-                                                <td style="font-size: 12px; line-height: 20px;border:1px solid black;border-collapse: collapse;border-spacing: -1px;border-left: none;" valign="top" colspan="7" rowspan="7">{{ $order->admin_notes }}</td>
+                                                <td style="font-size: 15px; line-height: 20px;border:1px solid black;border-collapse: collapse;border-spacing: -1px;border-right: none;" valign="top" rowspan="7">Note: </td>
+                                                <td style="text-align=left;font-size: 12px; line-height: 20px;border:1px solid black;border-collapse: collapse;border-spacing: -1px;border-left: none;" align="left" valign="top" colspan="7" rowspan="7">{{ $order->admin_notes }}</td>
                                             </tr>
                                             <tr><td>&nbsp;</td></tr>
                                         </tbody>
