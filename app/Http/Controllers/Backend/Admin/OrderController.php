@@ -117,7 +117,7 @@ class OrderController extends Controller
            if(!is_null($request['supplier_id']))
            {
               $html .= '<div class="form-check form-check-custom form-check-sm">
-                        <input class="form-check-input child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
+                        <input style="width:30px; height:23px;" class="form-check-input child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
                      </div>'; 
            }
            

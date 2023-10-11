@@ -34,6 +34,7 @@
                         </div>
                         <input type="hidden" id="supplier_id" name="supplier_id" value="">
                     </div>
+                    @if(!is_null(request()->get('supplier_id')))
                     <div class="d-flex">
                         <div>
                             <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
@@ -53,6 +54,7 @@
                             </form>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
