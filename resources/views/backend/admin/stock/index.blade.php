@@ -183,17 +183,17 @@
              
                     // Total over this page
                     qtyTotal = api
-                        .column(4, { page: 'current' })
-                        .data()
-                        .reduce((a, b) => intVal(a) + intVal(b), 0);
-
-                    gramTotal = api
                         .column(5, { page: 'current' })
                         .data()
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
 
+                    gramTotal = api
+                        .column(6, { page: 'current' })
+                        .data()
+                        .reduce((a, b) => intVal(a) + intVal(b), 0);
+
                     ctTotal = api
-                        .column(8, { page: 'current' })
+                        .column(9, { page: 'current' })
                         .data()
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
                     $('#total_gram_val').html(gramTotal.toFixed(2));
