@@ -35,12 +35,22 @@
                         <input type="hidden" id="supplier_id" name="supplier_id" value="">
                     </div>
                     <div style="">
-                        <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
-                            <input type="hidden" name="ids" id="print_ids">
-                            <div class="mr-1">
-                                <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
-                            </div>
-                        </form>
+                        <div>
+                            <form action="{{ URL :: to('/admin/pdf-download') }}?flag=view" id="form-print" method="get">
+                                <input type="hidden" name="ids" id="print_ids">
+                                <div class="mr-1">
+                                    <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <form action="{{ URL :: to('/admin/pdf-download') }}?flag=download" id="form-print" method="get">
+                                <input type="hidden" name="ids" id="print_ids">
+                                <div class="mr-1">
+                                    <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
