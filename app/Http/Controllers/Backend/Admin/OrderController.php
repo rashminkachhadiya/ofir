@@ -289,7 +289,7 @@ class OrderController extends Controller
       }
       $orders = Order::whereIn('id',$ids)->get();
       $supplier = Supplier::all()->pluck('f_name','id')->toArray();
-      // return view('backend.admin.order.invoice',compact('order'));
+      return view('backend.admin.order.invoice',compact('orders','supplier'));
       $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
       if($request->flag == 'view')
       {
