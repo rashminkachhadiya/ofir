@@ -66,6 +66,10 @@ class StockController extends Controller
         ->addColumn('date', function ($items) {
           return Carbon::parse($items->date)->format('d/m/Y');
         })
+        ->addColumn('check', function ($items) {
+            $checked = ($items->check == 1) ? 'checked' : '';
+          return '<input style="width:30px; height:23px;" class="" type="checkbox" value="'.$items->id.'" onchange="checkStock(this)" name="id" '.$checked.'/>';
+        })
         ->addColumn('qty', function ($items) {
           return number_format((float)$items->qty, 0, '.', '');
         })
@@ -83,7 +87,7 @@ class StockController extends Controller
                }
             }
         })
-        ->rawColumns(['created_at', 'date','sku'])
+        ->rawColumns(['created_at', 'date','sku', 'check'])
         ->addIndexColumn()
         ->make(true);
    }
@@ -152,5 +156,19 @@ class StockController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function stockCheck(Request $request)
+    {
+        $id = $request->stock_id;
+        $stock = ItemStock::find($id);
+        if($stock->check == 0)
+        {
+            $stock->check = 1;
+        }else{
+            $stock->check = 0;
+        }
+        $stock->save();
+        return true;
     }
 }

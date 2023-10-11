@@ -291,6 +291,7 @@ class OrderController extends Controller
       $supplier = Supplier::all()->pluck('f_name','id')->toArray();
       // return view('backend.admin.order.pdf_supplier',compact('orders','supplier'));
       $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
+      $mpdf->autoLangToFont = true;
       if($request->flag == 'view')
       {
         return $pdf->stream();

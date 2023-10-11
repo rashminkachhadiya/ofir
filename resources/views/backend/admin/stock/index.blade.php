@@ -82,6 +82,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th></th>
                                 <th>Date</th>
                                 <th>Code</th>
                                 <th>Sub Code</th>
@@ -112,6 +113,21 @@
         }
     </style>
     <script>
+         function checkStock(val)
+        {
+            var stockId = $(val).attr('value');
+            $.ajax({
+                type: "GET",
+                url: '{{ url("admin/stock-check") }}?stock_id='+stockId,
+                datatype: 'html',
+                success: function (data) {
+                    table.draw();
+                },
+                error: function (result) {
+                    $("#modal_data").html("Sorry Cannot Load Data");
+                }
+            });
+        }
         $(function () {
 
             table = $('#manage_all').DataTable({
@@ -132,6 +148,7 @@
                 },
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
+                    {data: 'check', name: 'check', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'sku', name: 'items.sku'},
                     {data: 'item_code', name: 'item_code'},
