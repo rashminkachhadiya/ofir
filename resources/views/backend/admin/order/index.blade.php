@@ -34,12 +34,12 @@
                         </div>
                         <input type="hidden" id="supplier_id" name="supplier_id" value="">
                     </div>
-                    <div style="">
+                    <div class="d-flex">
                         <div>
                             <form action="{{ URL :: to('/admin/pdf-download') }}?flag=view" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <div class="mr-1">
-                                    <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
+                                    <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="printLabel(1)">View</a>
                                 </div>
                             </form>
                         </div>
