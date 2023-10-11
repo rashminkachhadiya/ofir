@@ -301,7 +301,7 @@ class OrderController extends Controller
       {
         return $mpdf->Output();
       }else{
-        return $mpdf->download();
+        return $mpdf->Output('supplier.pdf','D');
       }
     }
 }
