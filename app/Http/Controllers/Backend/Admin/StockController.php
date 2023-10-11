@@ -19,7 +19,6 @@ class StockController extends Controller
     public function index()
     {
         $itemStatus = ['0'=>'Apro','1'=>'Sold','2' => 'In Stock'];
-        $itemStatus[''] = 'All Status';
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
         $subCatalogue = config('params.1');
@@ -42,12 +41,15 @@ class StockController extends Controller
             ->leftjoin('items','items.id','=','item_stocks.item_id');
         if(!is_null($request['item_status']))
         {
-            if($request['item_status'] == 2)
-          {
-            $items->where('qty','>',0);
-          }else{
-            $items->where('item_status','=',$request['item_status']);            
-          }
+            $array = $request['item_status'];
+            if(in_array(2, $array))
+            {
+                $items->orWhere('qty','>',0);
+                if (($key = array_search(2, $array)) !== false) {
+                    unset($array[$key]);
+                }
+            }
+            $items->orWhereIn('item_status',$array);
         }
         if(!is_null($request['catalogue_id']))
         {

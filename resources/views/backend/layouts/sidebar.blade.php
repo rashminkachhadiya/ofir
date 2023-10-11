@@ -66,7 +66,7 @@
                 <li>
                     <a href="{{ URL :: to('/admin/stock') }}">
                         <i class="metismenu-icon"></i>
-                        Stock
+                        Inventory
                     </a>
                 </li>
                 <li>

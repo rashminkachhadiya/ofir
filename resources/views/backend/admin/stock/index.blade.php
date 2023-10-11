@@ -9,53 +9,64 @@
     background: white;
 }
 </style>
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All Stock</div>
-            </div>
-        </div>
-    </div>
     <div class="app-page-title mt-1">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="form-group col-md-3 col-sm-12">
-                    {!! Form::select('item_status', $itemStatus ?? [],  $item->in_stock ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'item_status']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <div class="form-group col-md-3 col-sm-6">
-                    {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <div class="d-flex col-md-3 col-sm-2" style="align-items: center">
-                    <div>
-                        <p>Qty: &nbsp;</p>
+        <div class="page-title-wrapper" style="display: block !important;">
+            <div class="page-title-heading" style="display: block !important;">
+                <div class="row">
+                    <div class="col-md-4 row" style="border-right:1px solid">
+                        <div class="form-group col-md-4">
+                            <label for=""> Sold </label><br/>
+                            <input type="radio" name="item_status_sold" class="flat-green"value="1" id="item_status_sold" checked/> Yes
+                            <input type="radio" name="item_status_sold" class="flat-red"value="0" id="item_status_sold" /> No
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""> Inventory </label><br/>
+                            <input type="radio" name="item_status_inventory" class="flat-green"value="1" checked/> Yes
+                            <input type="radio" name="item_status_inventory" class="flat-red"value="0" /> No
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""> Apro </label><br/>
+                            <input type="radio" name="item_status_apro" class="flat-green"value="1" checked/> Yes
+                            <input type="radio" name="item_status_apro" class="flat-red"value="0" /> No
+                        </div>  
                     </div>
-                    <div>
-                        <p id="total_qty">0</p>                        
+                    <div class="col-md-4">
+                        <div class="form-group col-md-6 col-sm-6">
+                            {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
+                            <span id="error_email" class="has-error"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-6">
+                            {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
+                            <span id="error_email" class="has-error"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="d-flex col-md-3 col-sm-2" style="align-items: center">
-                    <div>
-                        <p>Gr: &nbsp;</p>
+                    <div class="col-md-2">
+                       <div class="d-flex col-md-12" style="align-items: center">
+                            <div>
+                                <p>Qty: &nbsp;</p>
+                            </div>
+                            <div>
+                                <p id="total_qty">0</p>                        
+                            </div>
+                        </div> 
                     </div>
-                    <div>
-                        <p id="total_gram_val">0.00</p>                        
-                    </div>
-                </div>
-                <div class="d-flex col-md-3 col-sm-2" style="align-items: center">
-                    <div>
-                        <p>Ct: &nbsp;</p>
-                    </div>
-                    <div>
-                        <p id="total_ct_val">0.00</p>                        
+                    <div class="col-md-2">
+                        <div class="d-flex col-md-12" style="align-items: center">
+                            <div>
+                                <p>Gr: &nbsp;</p>
+                            </div>
+                            <div>
+                                <p id="total_gram_val">0.00</p>                        
+                            </div>
+                        </div>
+                        <div class="d-flex col-md-12" style="align-items: center">
+                            <div>
+                                <p>Ct: &nbsp;</p>
+                            </div>
+                            <div>
+                                <p id="total_ct_val">0.00</p>                        
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -197,7 +208,20 @@
 
         $(document).ready(function () {
             // View Form
-            
+            $('input[type="checkbox"].flat-green').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+            });
+            $('input[type="radio"].flat-green').iCheck({
+                radioClass: 'iradio_flat-green'
+            });
+
+            $('input[type="checkbox"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-red',
+            });
+            $('input[type="radio"].flat-red').iCheck({
+                radioClass: 'iradio_flat-red'
+            });
+
             $("#manage_all").on("click", ".view", function () {
                 var id = $(this).attr('id');
                 ajax_submit_view('order', id)
@@ -236,11 +260,16 @@
             
         });
 
-        $("body").on("change","#item_status",function(e){
+        $("input[name=item_status_sold]:radio").change(function () {
+            alert('yess');
+        });
+        $("body").on("change","#item_status_sold",function(e){
+
         table.draw();
         // var sub_catalogue = {!! json_encode(config('params.')) !!};
     });
         $("body").on("change","#catalogue_id",function(e){
+            alert($("#item_status_sold").val());
         table.draw();
         // var sub_catalogue = {!! json_encode(config('params.')) !!};
     });
