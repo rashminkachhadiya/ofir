@@ -290,13 +290,17 @@ class OrderController extends Controller
       $orders = Order::whereIn('id',$ids)->get();
       $supplier = Supplier::all()->pluck('f_name','id')->toArray();
       // return view('backend.admin.order.pdf_supplier',compact('orders','supplier'));
-      $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
-      $mpdf->autoLangToFont = true;
-      if($request->flag == 'view')
-      {
-        return $pdf->stream();
-      }else{
-        return $pdf->download();
-      }
+      $mpdf = new \Mpdf\Mpdf();
+      $html = view('backend.admin.order.pdf_supplier',compact('orders','supplier'))->render();
+      $mpdf->WriteHTML($html);
+      $mpdf->Output();
+      // $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
+      // $mpdf->autoLangToFont = true;
+      // if($request->flag == 'view')
+      // {
+      //   return $pdf->stream();
+      // }else{
+      //   return $pdf->download();
+      // }
     }
 }
