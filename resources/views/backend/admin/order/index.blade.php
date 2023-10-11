@@ -36,15 +36,16 @@
                     </div>
                     <div class="d-flex">
                         <div>
-                            <form action="{{ URL :: to('/admin/pdf-download') }}?flag=view" id="form-print" method="get">
+                            <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
+                                <input type="hidden" name="flag" value="view">
                                 <div class="mr-1">
                                     <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="printLabel(1)">View</a>
                                 </div>
                             </form>
                         </div>
                         <div>
-                            <form action="{{ URL :: to('/admin/pdf-download') }}?flag=download" id="form-print" method="get">
+                            <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <div class="mr-1">
                                     <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
