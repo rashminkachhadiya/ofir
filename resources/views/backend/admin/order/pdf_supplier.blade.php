@@ -75,7 +75,7 @@
                             <tr>
                                 <td width="20%" align="left" valign="top">
                                      @foreach($order->orderPicture as $image)
-                                        <img style="border: 1.5px solid black;border-collapse: collapse;border-spacing: -1px;" width="140px;" height="140px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                        <img style="border: 1px solid black;border-collapse: collapse;border-spacing: -1px;" width="140px;" height="140px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
                                     @endforeach
                                 </td>
                                 <td width="70%" align="center" valign="top">
