@@ -114,12 +114,9 @@ class OrderController extends Controller
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
 
            $html .= '<a id="' . $orders->id . '" class="btn btn-xs btn-danger margin-r-5 delete" title="Delete"><i class="fa fa-times"></i> </a>';
-           if(!is_null($request['supplier_id']))
-           {
-              $html .= '<div class="form-check form-check-custom form-check-sm">
+            $html .= '<div class="form-check form-check-custom form-check-sm">
                         <input style="width:30px; height:23px;" class="form-check-input child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
-                     </div>'; 
-           }
+                     </div>';
            
            // $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $orders->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
            $html .= '</div>';

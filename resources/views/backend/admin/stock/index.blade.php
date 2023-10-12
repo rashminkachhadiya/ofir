@@ -16,8 +16,8 @@
                     <div class="col-md-4 row" style="border-right:1px solid">
                         <div class="form-group col-md-4">
                             <label for=""> Sold </label><br/>
-                            <input type="radio" name="item_status_sold" class="flat-green"value="1" id="item_status_sold" checked/> Yes
-                            <input type="radio" name="item_status_sold" class="flat-red"value="0" id="item_status_sold" /> No
+                            <input type="radio" name="item_status_sold" class="flat-green"value="1" onchange="itemStatusSold(1)" id="item_status_sold" checked/> Yes
+                            <input type="radio" name="item_status_sold" class="flat-red"value="0" onchange="itemStatusSold(0)" id="item_status_sold" /> No
                         </div>
                         <div class="form-group col-md-4">
                             <label for=""> Inventory </label><br/>
@@ -128,6 +128,12 @@
                 }
             });
         }
+
+        function itemStatusSold(val)
+        {
+            alert(val);
+        }
+
         $(function () {
 
             table = $('#manage_all').DataTable({
