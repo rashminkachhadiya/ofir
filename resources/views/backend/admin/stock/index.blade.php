@@ -16,18 +16,18 @@
                     <div class="col-md-4 row" style="border-right:1px solid">
                         <div class="form-group col-md-4">
                             <label for=""> Sold </label><br/>
-                            <input type="radio" name="item_status_sold" class="flat-green"value="1" onchange="itemStatusSold(1)" id="item_status_sold" checked/> Yes
-                            <input type="radio" name="item_status_sold" class="flat-red"value="0" onchange="itemStatusSold(0)" id="item_status_sold" /> No
+                            {!! Form::radio('item_status_sold', '1',true,['class' => '','checked'=>'checked']) !!} Yes
+                            {!! Form::radio('item_status_sold', '0',false,['class' => '']) !!} No
                         </div>
                         <div class="form-group col-md-4">
-                            <label for=""> Inventory </label><br/>
-                            <input type="radio" name="item_status_inventory" class="flat-green"value="1" checked/> Yes
-                            <input type="radio" name="item_status_inventory" class="flat-red"value="0" /> No
+                            <label for=""> In Stock </label><br/>
+                            {!! Form::radio('item_status_in_stock', '1',true,['class' => '','checked'=>'checked']) !!} Yes
+                            {!! Form::radio('item_status_in_stock', '0',false,['class' => '']) !!} No
                         </div>
                         <div class="form-group col-md-4">
                             <label for=""> Apro </label><br/>
-                            <input type="radio" name="item_status_apro" class="flat-green"value="1" checked/> Yes
-                            <input type="radio" name="item_status_apro" class="flat-red"value="0" /> No
+                            {!! Form::radio('item_status_apro', '1',true,['class' => '','checked'=>'checked']) !!} Yes
+                            {!! Form::radio('item_status_apro', '0',false,['class' => '']) !!} No
                         </div>  
                     </div>
                     <div class="col-md-4">
@@ -129,10 +129,6 @@
             });
         }
 
-        function itemStatusSold(val)
-        {
-            alert(val);
-        }
 
         $(function () {
 
@@ -148,7 +144,9 @@
                     data: function(d) {
                         d.catalogue_id = $('#catalogue_id').val();
                         d.sub_catalogue_id = $('#sub_catalogue_id').val();
-                        d.item_status = $('#item_status').val();
+                        d.item_status_sold = $('input[name="item_status_sold"]:checked').val();
+                        d.item_status_in_stock = $('input[name="item_status_in_stock"]:checked').val();
+                        d.item_status_apro = $('input[name="item_status_apro"]:checked').val();
                     },
                     "dataType": 'json'
                 },
@@ -224,6 +222,7 @@
 
         });
     </script>
+
     <script type="text/javascript">
         function create() {
             ajax_submit_create('users');
@@ -231,6 +230,19 @@
 
         $(document).ready(function () {
             // View Form
+
+            $("input[name='item_status_sold']").on('change',function(){
+                table.draw();
+            });
+
+            $("input[name='item_status_in_stock']").on('change',function(){
+                table.draw();
+            });
+
+            $("input[name='item_status_apro']").on('change',function(){
+                table.draw();
+            });
+
             $('input[type="checkbox"].flat-green').iCheck({
                 checkboxClass: 'icheckbox_flat-green',
             });
@@ -283,16 +295,12 @@
             
         });
 
-        $("input[name=item_status_sold]:radio").change(function () {
-            alert('yess');
-        });
         $("body").on("change","#item_status_sold",function(e){
 
         table.draw();
         // var sub_catalogue = {!! json_encode(config('params.')) !!};
     });
         $("body").on("change","#catalogue_id",function(e){
-            alert($("#item_status_sold").val());
         table.draw();
         // var sub_catalogue = {!! json_encode(config('params.')) !!};
     });

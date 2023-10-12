@@ -39,18 +39,29 @@ class StockController extends Controller
 
       $items = ItemStock::select('item_stocks.*','items.sku')
             ->leftjoin('items','items.id','=','item_stocks.item_id');
-        if(!is_null($request['item_status']))
+        if($request['item_status_sold'] == 1)
         {
-            $array = $request['item_status'];
-            if(in_array(2, $array))
-            {
-                $items->orWhere('qty','>',0);
-                if (($key = array_search(2, $array)) !== false) {
-                    unset($array[$key]);
-                }
-            }
-            $items->orWhereIn('item_status',$array);
+            $items->orWhere('item_stocks.item_status', '=', 1);
+        }else{
+            $items->orwhere('item_stocks.item_status', '!=', 1);
         }
+
+        if($request['item_status_in_stock'] == 1)
+        {
+            $items->orWhere('qty','>',0);
+        }else{
+            $items->orWhere('qty','=',0);
+
+        }
+
+        if($request['item_status_apro'] == 1)
+        {
+            $items->orWhere('item_stocks.item_status','=',0);
+        }else{
+            $items->orwhere('item_stocks.item_status', '!=', 0);
+        }
+
+
         if(!is_null($request['catalogue_id']))
         {
           $items->where('items.catalogue_id', '=', $request['catalogue_id']);
