@@ -16,17 +16,17 @@
                     <div class="col-md-4 row" style="border-right:1px solid">
                         <div class="form-group col-md-4">
                             <label for=""> Sold </label><br/>
-                            {!! Form::radio('item_status_sold', '1',true,['class' => '','checked'=>'checked']) !!} Yes
+                            {!! Form::radio('item_status_sold', '1',false,['class' => '']) !!} Yes
                             {!! Form::radio('item_status_sold', '0',false,['class' => '']) !!} No
                         </div>
                         <div class="form-group col-md-4">
                             <label for=""> In Stock </label><br/>
-                            {!! Form::radio('item_status_in_stock', '1',true,['class' => '','checked'=>'checked']) !!} Yes
+                            {!! Form::radio('item_status_in_stock', '1',false,['class' => '']) !!} Yes
                             {!! Form::radio('item_status_in_stock', '0',false,['class' => '']) !!} No
                         </div>
                         <div class="form-group col-md-4">
                             <label for=""> Apro </label><br/>
-                            {!! Form::radio('item_status_apro', '1',true,['class' => '','checked'=>'checked']) !!} Yes
+                            {!! Form::radio('item_status_apro', '1',false,['class' => '']) !!} Yes
                             {!! Form::radio('item_status_apro', '0',false,['class' => '']) !!} No
                         </div>  
                     </div>
@@ -156,7 +156,7 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'sku', name: 'items.sku'},
                     {data: 'item_code', name: 'item_code'},
-                    {data: 'qty', name: 'qty'},
+                    {data: 'tot_qty', name: 'tot_qty'},
                     {data: 'gram', name: 'gram'},
                     {data: 'size', name: 'size'},
                     {data: 'colour', name: 'colour'},

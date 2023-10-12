@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ItemStock;
 use Yajra\DataTables\DataTables;
 use Carbon\Carbon;
+use DB;
 
 
 class StockController extends Controller
@@ -37,28 +38,31 @@ class StockController extends Controller
          $can_delete = "style='display:none;'";
       }
 
-      $items = ItemStock::select('item_stocks.*','items.sku')
-            ->leftjoin('items','items.id','=','item_stocks.item_id');
-        if($request['item_status_sold'] == 1)
+      $items = ItemStock::select('item_stocks.*',DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"),'items.sku')
+            ->leftjoin('items','items.id','=','item_stocks.item_id')->groupBy('item_stocks.id');
+        if(!is_null($request['item_status_sold']) && $request['item_status_sold'] == 1)
         {
             $items->orWhere('item_stocks.item_status', '=', 1);
-        }else{
-            $items->orwhere('item_stocks.item_status', '!=', 1);
+        }
+        if(!is_null($request['item_status_sold']) && $request['item_status_sold'] == 0){
+            $items->orwhere('item_stocks.item_status', '!=', 1)->orWhereNull('item_stocks.item_status');
         }
 
-        if($request['item_status_in_stock'] == 1)
+        if(!is_null($request['item_status_in_stock']) && $request['item_status_in_stock'] == 1)
         {
-            $items->orWhere('qty','>',0);
-        }else{
-            $items->orWhere('qty','=',0);
-
+            $items->having('tot_qty','>',0);
+        }
+        if(!is_null($request['item_status_in_stock']) && $request['item_status_in_stock'] == 0)
+        {
+            $items->having('tot_qty','=',0);
         }
 
-        if($request['item_status_apro'] == 1)
+        if(!is_null($request['item_status_apro']) && $request['item_status_apro'] == 1)
         {
             $items->orWhere('item_stocks.item_status','=',0);
-        }else{
-            $items->orwhere('item_stocks.item_status', '!=', 0);
+        }
+        if(!is_null($request['item_status_apro']) && $request['item_status_apro'] == 0){
+            $items->orwhere('item_stocks.item_status', '!=', 0)->orWhereNull('item_stocks.item_status');
         }
 
 
@@ -81,8 +85,14 @@ class StockController extends Controller
             $checked = ($items->check == 1) ? 'checked' : '';
           return '<input style="width:30px; height:23px;" class="" type="checkbox" value="'.$items->id.'" onchange="checkStock(this)" name="id" '.$checked.'/>';
         })
-        ->addColumn('qty', function ($items) {
-          return number_format((float)$items->qty, 0, '.', '');
+        ->addColumn('tot_qty', function ($items) {
+          return number_format((float)$items->tot_qty, 0, '.', '');
+        })
+        ->addColumn('colour', function ($items) {
+            if(!is_null($items->colour))
+            {
+                return config('params.metal_colour')[$items->colour];
+            }
         })
         ->addColumn('sku', function ($items) {
             return '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->item_id . '/edit" target="_blank">'. $items->sku .'</a>';
