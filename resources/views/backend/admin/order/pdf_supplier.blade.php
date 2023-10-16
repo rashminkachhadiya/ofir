@@ -71,6 +71,9 @@
                     <tr>
                         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tbody>
+                            @php
+                                $count = 0;
+                            @endphp
                             @foreach($orders as $order)
                             <tr>
                                 <td width="20%" align="left" valign="top">
@@ -118,6 +121,12 @@
                                 </td>
                             </tr>
                             <tr><td>&nbsp;</td></tr>
+                            @php
+                                $count++;
+                            @endphp
+                            @if(($count/5) == 0)
+                                <div class="page-break"></div>
+                            @endif
                             @endforeach
                             </tbody>
                         </table></td>
