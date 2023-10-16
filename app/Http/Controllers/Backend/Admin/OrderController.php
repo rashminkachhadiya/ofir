@@ -114,15 +114,17 @@ class OrderController extends Controller
            $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
 
            $html .= '<a id="' . $orders->id . '" class="btn btn-xs btn-danger margin-r-5 delete" title="Delete"><i class="fa fa-times"></i> </a>';
-            $html .= '<div class="form-check form-check-custom form-check-sm">
-                        <input style="width:30px; height:23px;" class="form-check-input child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
-                     </div>';
-           
+            
            // $html .= '<a data-toggle="tooltip" ' . $can_delete . ' id="' . $orders->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
            $html .= '</div>';
            return $html;
         })
-        ->rawColumns(['action', 'order_type', 'order_status', 'order_total', 'shipping_address_first_name'])
+        ->addColumn('checkbox', function ($orders) {
+          return '<div class="btn-group"><div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
+                               </div></div>';
+        })
+        ->rawColumns(['action', 'order_type', 'order_status', 'order_total', 'shipping_address_first_name','checkbox'])
         ->addIndexColumn()
         ->make(true);
     }

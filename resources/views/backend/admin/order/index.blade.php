@@ -77,6 +77,9 @@
                                 <th>Est. Price</th>
                                 <th>Order Status</th>
                                 <th>Action</th>
+                                <th><div class="btn-group"><div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
+                               </div></div></th>
                             </tr>
                             </thead>
                         </table>
@@ -132,7 +135,8 @@
                     {data: 'ref', name: 'ref'},
                     {data: 'tot_est_price', name: 'tot_est_price'},
                     {data: 'order_status', name: 'order_status'},
-                    {data: 'action', name: 'action'}
+                    {data: 'action', name: 'action'},
+                    {data: 'checkbox', name: 'checkbox', searchable: false, orderable: false}
                 ],
                 "autoWidth": false,
                 "lengthMenu": [25, 50, 100],
@@ -194,6 +198,10 @@
 
         $("body").on("change","#order_status",function(e){
             table.draw();    
+        });
+
+        $('body').on("change",".master-checkbox",function(e){
+            $(".child-checkbox:not(:disabled)").prop('checked', $(this).prop('checked'));
         });
 
     </script>
