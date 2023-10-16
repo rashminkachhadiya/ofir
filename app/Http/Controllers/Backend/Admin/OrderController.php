@@ -110,8 +110,8 @@ class OrderController extends Controller
             $html .= '<a data-toggle="tooltip" ' . $can_edit . '  id="' . $orders->id . '" class="btn btn-xs btn-secondary edit" title="re-open"><i class="fa fa-folder-open"></i></a>';
            }
 
-           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '?next=' .$orders->next() .'"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View"><i class="fa fa-eye fa-fw"></i> </a>';
-           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
+           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '?next=' .$orders->next() .'"  id="' . $orders->id . '" class="btn btn-xs btn-success margin-r-5" title="View" target="_blank"><i class="fa fa-eye fa-fw"></i> </a>';
+           $html .= '<a href="' . \URL :: to('admin/order') .  '/' . $orders->id . '/edit" id="' . $orders->id . '" target="_blank" class="btn btn-xs btn-info" title="Edit"><i class="fa fa-edit"></i> </a>';
 
            $html .= '<a id="' . $orders->id . '" class="btn btn-xs btn-danger margin-r-5 delete" title="Delete"><i class="fa fa-times"></i> </a>';
             

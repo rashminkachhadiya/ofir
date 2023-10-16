@@ -124,7 +124,7 @@
                             @php
                                 $count++;
                             @endphp
-                            @if(($count%5) == 0)
+                            @if($count == 0)
                                 <div class="page-break"></div>
                             @endif
                             @endforeach
