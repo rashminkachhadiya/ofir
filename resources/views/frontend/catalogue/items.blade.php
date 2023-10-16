@@ -101,10 +101,18 @@ div.content {
 
                 <a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">Home</a>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <h2 style="color:black;font-style: italic; text-align: center;">{{ config('params.catalogue')[$mainCatalogue] }} <span style="font-size: 15px;">{{config('params.'.$mainCatalogue)[$subCatelogue]}}</span></h2> 
               </div>
-              <div class="col-md-3">
+              <div class="col-md-2">
+                <p style="color: black; margin: 0px;padding: 0px;">Metal</p>
+                {!! Form::select('metal_colour', $metal ?? [],  $selectMetal ?? '', ['class' => 'form-control m-0 p-0','data-control'=>"select2", 'id'=>'metal']) !!}
+              </div>
+              <div class="col-md-2">
+                <p style="color: black; margin: 0px;padding: 0px;">Gems</p>
+                {!! Form::select('metal_colour', $gems ?? [],  $selectGem ?? '', ['class' => 'form-control m-0 p-0','data-control'=>"select2", 'id'=>'gems']) !!}
+              </div>
+              <div class="col-md-1">
                 <h6 style="color:black;font-style: italic; text-align: right;"><a style="color: black;" href="{{ URL::to('/cart') }}">cart</a></h6>
               </div>
             </div>
@@ -253,5 +261,81 @@ div.content {
         
       });
     });
+
+    $("body").on("change","#metal",function(e){
+        set_query_para('metal',$('#metal').val());
+        location.reload();
+    });
+
+    $("body").on("change","#gems",function(e){
+        set_query_para('gems',$('#gems').val());
+        location.reload();
+    });
+
+    function set_query_para($key,$data)
+    {
+        var url_string = "";
+        var search = ltrim(window.location.search,"?")
+        var search_join = [];
+        var $target_found = false;
+        var search_split = search.split("&");
+        if(search!="")
+        {
+            $.each(search_split,function($index,$value)
+            {
+                var $value_split = $value.split("=");
+                if($value_split.length=2)
+                {
+                    if($value_split[0]==$key)
+                    {
+                        $value_split[1] = $data
+                        $target_found = true;
+                    }
+                }
+
+                var $value_join = $value_split.join("=");
+
+                search_join.push($value_join);
+          });
+        }
+
+        if(!$target_found)
+        {
+          search_join.push($key+"="+$data)
+        }
+
+        url_string  +=("?"+(search_join.join("&")));
+
+        history.pushState(null,null,url_string);
+    }
+    function ltrim(str, characters)
+{
+    var nativeTrimLeft = String.prototype.trimLeft;
+    str = makeString(str);
+    if (!characters && nativeTrimLeft) return nativeTrimLeft.call(str);
+    characters = defaultToWhiteSpace(characters);
+    return str.replace(new RegExp('^' + characters + '+'), '');
+}
+function makeString(object)
+{
+    if (object == null) return '';
+    return String(object);
+}
+function defaultToWhiteSpace(characters)
+{
+    if (characters == null){
+        return '\\s';
+    }
+    else if (characters.source){
+    return characters.source;
+    }
+    else{
+        return '[' + escapeRegExp(characters) + ']';
+    }
+}
+function escapeRegExp(str)
+{
+    return makeString(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+}
 </script>
 @endpush

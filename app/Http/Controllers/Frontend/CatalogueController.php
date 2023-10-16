@@ -104,6 +104,12 @@ class CatalogueController extends Controller
     {
         $previousURL = url()->previous();
         $last_url = explode('?',str_replace(url('/'), '', $previousURL));
+        $metal = config('params.metal_colour');
+        $metal['0'] = "All";
+        $gems = ['diamond' => 'Diamond', 'gems' => 'Gems'];
+        $gems[''] = "All";
+        $selectMetal = $request->metal;
+        $selectGem = $request->gems;
         if(isset($last_url[1]))
         {
             if($last_url[1] != 'all_product=yes' && $last_url[1] != 'all_product=no')
@@ -121,7 +127,14 @@ class CatalogueController extends Controller
         }else{
             $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('items.catalogue_id',$request->main_catalogue)->where('items.sub_catalogue_id',$request->sub_catalogue)->where('items.is_active',1);
         }
-
+        if(!is_null($request->metal) && $request->metal != 0)
+        {
+            $items->where('items.metal_colour','=',$request->metal);
+        }
+        if(!is_null($request->gems))
+        {
+            $items->where('items.gem','like','%'.$request->gems.'%');
+        }
         if($request->all_product == 'yes')
         {
             $items = $items->orderByRaw('ISNULL(items.sku), items.sku ASC')->get();
@@ -130,7 +143,7 @@ class CatalogueController extends Controller
             $items = $items->orderByRaw('ISNULL(items.sku), items.sku ASC')->paginate($pagination);
             $page = '1';
         }    
-        return view('frontend.catalogue.items',compact('items','page','mainCatalogue','subCatelogue'));
+        return view('frontend.catalogue.items',compact('items','page','mainCatalogue','subCatelogue','metal','gems','selectMetal','selectGem'));
     }
 
     public function itemDetails(Request $request)
