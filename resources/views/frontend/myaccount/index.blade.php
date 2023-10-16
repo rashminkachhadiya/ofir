@@ -118,8 +118,20 @@
                 </div>
               </form>
             </div> -->
-            <h4 class="d-block" style="color: black; text-align: center;">Hi {{Auth()->user()->f_name}}</h4>
-
+            <div class="d-flex" style="justify-content: space-between;">
+              <div style="text-align: center;">
+                <h4 class="d-block" style="color: black; text-align: center;">Hi {{Auth()->user()->f_name}}</h4>
+              </div>
+              <div>
+                <form action="{{ URL :: to('/my-account/order/user-view') }}" id="form-print" method="get">
+                      <input type="hidden" name="ids" id="print_ids">
+                      <input type="hidden" name="flag" value="view">
+                      <div class="mr-1">
+                         <!--  <a class="btn btn-xs btn-info user-view" href="javascript:void(0)">View</a> -->
+                      </div>
+                  </form>
+              </div>
+            </div>
             <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
               <div class="row">
                 <div class="col-lg-12 col-12 p-0">
@@ -128,17 +140,34 @@
                       <thead>
                         <tr>
                           <th class="pro-thumbnail">Date</th>
+                          <th class="pro-thumbnail">Image</th>
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
                           <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
+                          <th><div class="btn-group">
+                            <div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
+                               </div>
+                             </div>
+                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         @forelse($orders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                            <td>
+                                @foreach($order->orderPicture as $image)
+                                <div class="col-md-2 mt-2">
+                                  <img width="60px;" height="60px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                </div>
+                                @php
+                                  break;
+                                @endphp
+                                @endforeach
+                            </td>
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
@@ -162,6 +191,11 @@
                               </div>
                               @endif
                             </td>
+                            <td>
+                              <div class="btn-group"><div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" child-checkbox me-9" type="checkbox" value="{{ $order->id }}" name="ids[]"/>
+                               </div></div>
+                            </td>
                           </tr>
                         @empty
                         <tr>
@@ -182,6 +216,7 @@
                       <thead>
                         <tr>
                           <th class="pro-thumbnail">Date</th>
+                          <th class="pro-thumbnail">Image</th>
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
@@ -193,6 +228,16 @@
                         @forelse($pendingOrders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                            <td>
+                                @foreach($order->orderPicture as $image)
+                                <div class="col-md-2 mt-2">
+                                  <img width="60px;" height="60px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                </div>
+                                @php
+                                  break;
+                                @endphp
+                                @endforeach
+                            </td>
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
@@ -236,6 +281,7 @@
                       <thead>
                         <tr>
                           <th class="pro-thumbnail">Date</th>
+                          <th class="pro-thumbnail">Image</th>
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
@@ -247,6 +293,16 @@
                         @forelse($readyOrders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                            <td>
+                                @foreach($order->orderPicture as $image)
+                                <div class="col-md-2 mt-2">
+                                  <img width="60px;" height="60px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                </div>
+                                @php
+                                  break;
+                                @endphp
+                                @endforeach
+                            </td>
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
@@ -479,6 +535,15 @@
         });
     });
 
+    $(document).on("click", ".user-view", function () {
+         var allVals = [];
+            $("input[name='ids[]']:checked").each(function() {
+                allVals.push($(this).attr('value'));
+            });
+            $("#print_ids").val(allVals.join(', '));
+            $('#form-print').submit();
+    });
+
     $(document).on("click", ".order_cancel", function () {
         var id = $(this).attr('id');
         $.ajax({
@@ -600,6 +665,9 @@
 
             }
             // <- end 'submitHandler' callback
+        });
+  $('body').on("change",".master-checkbox",function(e){
+            $(".child-checkbox:not(:disabled)").prop('checked', $(this).prop('checked'));
         });
 </script>
 @endpush

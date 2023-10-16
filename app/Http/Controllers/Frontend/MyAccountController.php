@@ -45,4 +45,10 @@ class MyAccountController extends Controller
         $order->delete();
         return true;
     }
+
+    public function userView(Request $request)
+    {
+       echo "string";
+       die;
+    }
 }
