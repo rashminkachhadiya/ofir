@@ -108,7 +108,7 @@ div.content {
                 <h6 style="color:black;font-style: italic; text-align: right;"><a style="color: black;" href="{{ URL::to('/cart') }}">cart</a></h6>
               </div>
             </div>
-            <div class="row" style="height: 500px; overflow-y: auto;">
+            <div class="row" style="height: 600px; overflow-y: auto;">
                 @forelse($items as $item)
                   <div class="col-md-4 text-center">
                     <div>
