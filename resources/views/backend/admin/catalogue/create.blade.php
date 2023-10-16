@@ -290,7 +290,7 @@
                                               <select class="form-control" name="new_item_status[0]">
                                                 <option value="" >Select</option>
                                                 <option value="0" >Apro</option>
-                                                <option value="1" >Sale</option>
+                                                <option value="1" >Sold</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
