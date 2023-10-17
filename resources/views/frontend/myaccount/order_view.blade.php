@@ -107,7 +107,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 p-0">
+        <div class="col-md-4 pl-2">
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
                     <strong> Metal Type : </strong>
