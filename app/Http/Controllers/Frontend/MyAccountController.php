@@ -54,6 +54,6 @@ class MyAccountController extends Controller
         }
         $orders = Order::whereIn('id',$id)->get();
         $supplier = Supplier::all()->pluck('f_name','id')->toArray();
-        return view('backend.admin.order.pdf_supplier',compact('orders','supplier'));
+        return view('frontend.myaccount.all_order_view',compact('orders','supplier'));
     }
 }
