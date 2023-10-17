@@ -149,7 +149,7 @@
                           <th class="pro-price">Colour</th>
                           <th class="pro-price">Carat</th>
                           <th class="pro-price">Ref.</th>
-                          <th class="pro-price">Est. Price</th>
+                          <th class="pro-price">Est.</th>
                           <th class="pro-remove">Action</th>
                           <th><div class="btn-group">
                             <div class="form-check form-check-custom form-check-sm">
