@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Supplier;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use View;
@@ -48,7 +49,11 @@ class MyAccountController extends Controller
 
     public function userView(Request $request)
     {
-       echo "string";
-       die;
+        if(isset($request->ids)){
+          $id = explode(',',$request->ids);
+        }
+        $orders = Order::whereIn('id',$id)->get();
+        $supplier = Supplier::all()->pluck('f_name','id')->toArray();
+        return view('backend.admin.order.pdf_supplier',compact('orders','supplier'));
     }
 }

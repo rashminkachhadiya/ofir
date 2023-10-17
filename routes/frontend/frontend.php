@@ -26,6 +26,6 @@ Route::middleware('auth')->group(function ()
 	Route::get('my-account/order/{order_id}','MyAccountController@orderDetails');
 	Route::get('my-account/order-confim/{order_id}','MyAccountController@orderConfirm');
 	Route::get('my-account/order-cancel/{order_id}','MyAccountController@orderCancel');
-	Route::get('my-account/order/user-view','MyAccountController@userView');
+	Route::get('my-account/view','MyAccountController@userView')->name('userView');
 
 });

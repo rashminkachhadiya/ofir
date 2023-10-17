@@ -123,13 +123,11 @@
                 <h4 class="d-block" style="color: black; text-align: center;">Hi {{Auth()->user()->f_name}}</h4>
               </div>
               <div>
-                <form action="{{ URL :: to('/my-account/order/user-view') }}" id="form-print" method="get">
-                      <input type="hidden" name="ids" id="print_ids">
-                      <input type="hidden" name="flag" value="view">
-                      <div class="mr-1">
-                         <!--  <a class="btn btn-xs btn-info user-view" href="javascript:void(0)">View</a> -->
-                      </div>
-                  </form>
+                  <input type="hidden" name="ids" id="print_ids">
+                  <input type="hidden" name="flag" value="view">
+                  <div class="mr-1">
+                      <a class="btn btn-xs btn-info user-view" id="viewbtn" target="_blank" href="javascript:void(0)">View</a>
+                  </div>
               </div>
             </div>
             <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -537,11 +535,13 @@
 
     $(document).on("click", ".user-view", function () {
          var allVals = [];
-            $("input[name='ids[]']:checked").each(function() {
-                allVals.push($(this).attr('value'));
-            });
-            $("#print_ids").val(allVals.join(', '));
-            $('#form-print').submit();
+          $("input[name='ids[]']:checked").each(function() {
+              allVals.push($(this).attr('value'));
+          });
+
+          var URL = "{!! URL :: to('my-account/view') !!}";
+          var new_URL = URL + '?ids='+allVals;
+          window.open(new_URL, "_blank"); 
     });
 
     $(document).on("click", ".order_cancel", function () {
@@ -669,5 +669,70 @@
   $('body').on("change",".master-checkbox",function(e){
             $(".child-checkbox:not(:disabled)").prop('checked', $(this).prop('checked'));
         });
+      function set_query_para($key,$data)
+    {
+        var url_string = "";
+        var search = ltrim(window.location.search,"?")
+        var search_join = [];
+        var $target_found = false;
+        var search_split = search.split("&");
+        if(search!="")
+        {
+            $.each(search_split,function($index,$value)
+            {
+                var $value_split = $value.split("=");
+                if($value_split.length=2)
+                {
+                    if($value_split[0]==$key)
+                    {
+                        $value_split[1] = $data
+                        $target_found = true;
+                    }
+                }
+
+                var $value_join = $value_split.join("=");
+
+                search_join.push($value_join);
+          });
+        }
+
+        if(!$target_found)
+        {
+          search_join.push($key+"="+$data)
+        }
+
+        url_string  +=("?"+(search_join.join("&")));
+
+        history.pushState(null,null,url_string);
+    }
+    function ltrim(str, characters)
+{
+    var nativeTrimLeft = String.prototype.trimLeft;
+    str = makeString(str);
+    if (!characters && nativeTrimLeft) return nativeTrimLeft.call(str);
+    characters = defaultToWhiteSpace(characters);
+    return str.replace(new RegExp('^' + characters + '+'), '');
+}
+function makeString(object)
+{
+    if (object == null) return '';
+    return String(object);
+}
+function defaultToWhiteSpace(characters)
+{
+    if (characters == null){
+        return '\\s';
+    }
+    else if (characters.source){
+    return characters.source;
+    }
+    else{
+        return '[' + escapeRegExp(characters) + ']';
+    }
+}
+function escapeRegExp(str)
+{
+    return makeString(str).replace(/([.*+?^=!:${}()|[\]\/\\])/g, '\\$1');
+}
 </script>
 @endpush
