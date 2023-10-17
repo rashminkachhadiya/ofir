@@ -288,7 +288,7 @@ class OrderController extends Controller
       }
       $orders = Order::whereIn('id',$ids)->get();
       $supplier = Supplier::all()->pluck('f_name','id')->toArray();
-      // return view('backend.admin.order.pdf_supplier',compact('orders','supplier'));
+      return view('frontend.myaccount.all_order_view',compact('orders','supplier'));
       $mpdf = new \Mpdf\Mpdf();
       $html = view('backend.admin.order.pdf_supplier',compact('orders','supplier'))->render();
       $mpdf->autoScriptToLang = true;

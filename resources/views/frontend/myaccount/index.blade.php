@@ -160,10 +160,10 @@
                         @forelse($orders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
-                            <td>
+                            <td style="width: 80px !important; height: 80px !important;padding: 0px;">
                                 @foreach($order->orderPicture as $image)
-                                <div class="col-md-2 mt-2">
-                                  <img width="60px;" height="60px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                <div class="col-md-2 p-0">
+                                  <img width="80px;" height="80px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
                                 </div>
                                 @php
                                   break;
@@ -247,10 +247,10 @@
                         @forelse($pendingOrders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
-                            <td>
+                            <td style="width: 80px !important; height: 80px !important;padding: 0px;">
                                 @foreach($order->orderPicture as $image)
-                                <div class="col-md-2 mt-2">
-                                  <img width="60px;" height="60px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                <div class="col-md-2 p-0">
+                                  <img width="80px;" height="80px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
                                 </div>
                                 @php
                                   break;
@@ -333,10 +333,10 @@
                         @forelse($readyOrders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
-                            <td>
+                            <td style="width: 80px !important; height: 80px !important;padding: 0px;">
                                 @foreach($order->orderPicture as $image)
-                                <div class="col-md-2 mt-2">
-                                  <img width="60px;" height="60px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
+                                <div class="col-md-2 p-0">
+                                  <img width="80px;" height="80px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
                                 </div>
                                 @php
                                   break;
@@ -486,7 +486,7 @@
   </div>
 </div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 65%;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -509,7 +509,7 @@
 
     $(document).on("click", ".view", function () {
         $("#modal_data").empty();
-        $('.modal-title').text('View Details'); // Set Title to Bootstrap modal title
+        $('.modal-title').text('Order Information'); // Set Title to Bootstrap modal title
         var id = $(this).attr('id');
         $.ajax({
             url: 'my-account/order' + '/' + id,
