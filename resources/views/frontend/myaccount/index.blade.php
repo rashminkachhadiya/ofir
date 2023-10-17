@@ -185,18 +185,18 @@
                                 {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
                               @endif
                             </td>
-                            <td>
+                            <td style="width: 90px;">
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" style="padding: 0.1rem 0.5rem !important;" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" style="padding: 0.1rem 0.5rem !important;" title="Cofirm Order"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" style="padding: 0.1rem 0.5rem !important;" title="Cancle Order"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
