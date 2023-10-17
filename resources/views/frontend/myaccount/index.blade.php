@@ -220,6 +220,12 @@
                           <th class="pro-price">Status</th>
                           <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
+                          <th><div class="btn-group">
+                            <div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
+                               </div>
+                             </div>
+                           </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -259,6 +265,11 @@
                               </div>
                               @endif
                             </td>
+                            <td>
+                              <div class="btn-group"><div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" child-checkbox me-9" type="checkbox" value="{{ $order->id }}" name="ids[]"/>
+                               </div></div>
+                            </td>
                           </tr>
                         @empty
                         <tr>
@@ -285,6 +296,12 @@
                           <th class="pro-price">Status</th>
                           <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
+                          <th><div class="btn-group">
+                            <div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
+                               </div>
+                             </div>
+                           </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -323,6 +340,11 @@
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
+                            </td>
+                            <td>
+                              <div class="btn-group"><div class="form-check form-check-custom form-check-sm">
+                                  <input style="width:30px; height:23px;" class=" child-checkbox me-9" type="checkbox" value="{{ $order->id }}" name="ids[]"/>
+                               </div></div>
                             </td>
                           </tr>
                         @empty
