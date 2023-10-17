@@ -139,7 +139,7 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th class="pro-thumbnail">Date</th>
+                          <th width="1%" class="pro-thumbnail">Date</th>
                           <th class="pro-thumbnail">Image</th>
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
@@ -148,6 +148,7 @@
                           <th class="pro-price">Qty</th>
                           <th class="pro-price">Colour</th>
                           <th class="pro-price">Carat</th>
+                          <th class="pro-price">Ref.</th>
                           <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
                           <th><div class="btn-group">
@@ -181,13 +182,13 @@
                                     {{ config('params.metal_colour')[$order->metal_colour] }}
                                     @endif</td>
                             <td>{{ $order->carat }}</td>
-
+                            <td>{{ $order->ref }}</td>
                             <td>
                               @if(!is_null($order->est_price_currency))
                                 {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
                               @endif
                             </td>
-                            <td style="width: 90px;">
+                            <td style="width: 150px;">
                               <div class="btn-group">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" style="padding: 0.1rem 0.5rem !important;" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
@@ -284,7 +285,7 @@
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.7rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
