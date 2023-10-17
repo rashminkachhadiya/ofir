@@ -208,7 +208,7 @@
                           </tr>
                         @empty
                         <tr>
-                          <td colspan="5">No Any Order</td>
+                          <td colspan="12">No Any Order</td>
                         </tr>
                         @endforelse
                       </tbody>
@@ -294,7 +294,7 @@
                           </tr>
                         @empty
                         <tr>
-                          <td colspan="5">No Any Order</td>
+                          <td colspan="12">No Any Order</td>
                         </tr>
                         @endforelse
                       </tbody>
@@ -380,7 +380,7 @@
                           </tr>
                         @empty
                         <tr>
-                          <td colspan="5">No Any Order</td>
+                          <td colspan="12">No Any Order</td>
                         </tr>
                         @endforelse
                       </tbody>
