@@ -122,11 +122,13 @@
               <div style="text-align: center;">
                 <h4 class="d-block" style="color: black; text-align: center;">Hi {{Auth()->user()->f_name}}</h4>
               </div>
-              <div>
-                  <input type="hidden" name="ids" id="print_ids">
-                  <input type="hidden" name="flag" value="view">
+              <div class="d-flex">
+                  
                   <div class="mr-1">
                       <a class="btn btn-xs btn-info user-view" id="viewbtn" target="_blank" href="javascript:void(0)">View</a>
+                  </div>
+                  <div class="mr-1">
+                      <a class="btn btn-xs btn-success user-view-all" id="viewallbtn" href="javascript:void(0)">View All</a>
                   </div>
               </div>
             </div>
@@ -592,9 +594,13 @@
               allVals.push($(this).attr('value'));
           });
 
-          var URL = "{!! URL :: to('my-account/view') !!}";
-          var new_URL = URL + '?ids='+allVals;
-          window.open(new_URL, "_blank"); 
+          set_query_para("ids",allVals);
+          location.reload();
+    });
+
+    $(document).on("click", ".user-view-all", function () {
+        var URL = "{!! URL::to('my-account') !!}";
+         window.open(URL,"_self");
     });
 
     $(document).on("click", ".order_cancel", function () {

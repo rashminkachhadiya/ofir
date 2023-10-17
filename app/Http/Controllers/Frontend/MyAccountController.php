@@ -15,13 +15,22 @@ class MyAccountController extends Controller
 {
     //
 
-    public function index()
+    public function index(Request $request)
     {
-    	$user = User::find(Auth::user()->id);
-        $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->get();
-        $pendingOrders = Order::where('user_id',Auth::user()->id)->where('order_status',0)->orderBy('created_at','DESC')->get();
-        $readyOrders = Order::where('user_id',Auth::user()->id)->where('order_status',1)->orderBy('created_at','DESC')->get();
+        $user = User::find(Auth::user()->id);
+
+        if(isset($request->ids)){
+          $id = explode(',',$request->ids);
+          $orders = Order::where('user_id',Auth::user()->id)->whereIn('id',$id)->orderBy('created_at','DESC')->get();
+          $pendingOrders = Order::where('user_id',Auth::user()->id)->whereIn('id',$id)->where('order_status',0)->orderBy('created_at','DESC')->get();
+            $readyOrders = Order::where('user_id',Auth::user()->id)->whereIn('id',$id)->where('order_status',1)->orderBy('created_at','DESC')->get();
+        }else{
+          $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->get();
+            $pendingOrders = Order::where('user_id',Auth::user()->id)->where('order_status',0)->orderBy('created_at','DESC')->get();
+            $readyOrders = Order::where('user_id',Auth::user()->id)->where('order_status',1)->orderBy('created_at','DESC')->get();
+        }
         $cartItem = Cart::select('items.sku','items.item_title','items.photo','carts.*','carts.id as cart_id','carts.size as cart_size')->join('items','carts.item_id','items.id')->where('user_id',Auth::user()->id)->get()->toArray();
+        
         return view('frontend.myaccount.index',compact('user','orders','pendingOrders','readyOrders','cartItem'));
     }
 
