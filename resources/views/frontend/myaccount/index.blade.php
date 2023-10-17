@@ -162,7 +162,7 @@
                       <tbody id="v-pills-profile_table">
                         @forelse($orders as $order)
                           <tr>
-                            <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/y') }}</td>
                             <td style="width: 80px !important; height: 80px !important;padding: 0px;">
                                 @foreach($order->orderPicture as $image)
                                 <div class="col-md-2 p-0">
@@ -189,16 +189,16 @@
                               @endif
                             </td>
                             <td style="width: 150px;">
-                              <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" style="padding: 0.1rem 0.5rem !important;" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                              <div class="btn-group mb-1">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" style="padding: 0.1rem 0.32rem !important;" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
-                              <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" style="padding: 0.1rem 0.5rem !important;" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                              <div class="btn-group mb-1">
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" style="padding: 0.1rem 0.35rem !important;" title="Cofirm Order"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
-                              <div class="btn-group">
+                              <div class="btn-group mb-1">
                                 <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" style="padding: 0.1rem 0.5rem !important;" title="Cancle Order"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
