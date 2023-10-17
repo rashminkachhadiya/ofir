@@ -125,7 +125,7 @@
               <div class="d-flex">
                   
                   <div class="mr-1">
-                      <a class="btn btn-xs btn-info user-view" id="viewbtn" target="_blank" href="javascript:void(0)">View</a>
+                      <a class="btn btn-xs btn-info user-view" id="viewbtn" href="javascript:void(0)">View</a>
                   </div>
                   <div class="mr-1">
                       <a class="btn btn-xs btn-success user-view-all" id="viewallbtn" href="javascript:void(0)">View All</a>
@@ -158,7 +158,7 @@
                            </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="v-pills-profile_table">
                         @forelse($orders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
@@ -245,7 +245,7 @@
                            </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="v-pills-invoice_table">
                         @forelse($pendingOrders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
@@ -331,7 +331,7 @@
                            </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="v-pills-ready_table">
                         @forelse($readyOrders as $order)
                           <tr>
                             <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
@@ -590,10 +590,11 @@
 
     $(document).on("click", ".user-view", function () {
          var allVals = [];
-          $("input[name='ids[]']:checked").each(function() {
+          var li = document.getElementsByClassName('tab-pane fade show active')[0].id;
+
+          $("#"+ li + "_table input[name='ids[]']:checked").each(function() {
               allVals.push($(this).attr('value'));
           });
-
           set_query_para("ids",allVals);
           location.reload();
     });
