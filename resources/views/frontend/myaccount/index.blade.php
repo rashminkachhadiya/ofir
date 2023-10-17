@@ -229,6 +229,10 @@
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
+                          <th class="pro-price">Size</th>
+                          <th class="pro-price">Qty</th>
+                          <th class="pro-price">Colour</th>
+                          <th class="pro-price">Carat</th>
                           <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
                           <th><div class="btn-group">
@@ -256,23 +260,29 @@
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
+                            <td>{{ $order->size }}</td>
+                            <td>{{ $order->quantity }}</td>
+                            <td>@if(!is_null($order->metal_colour))
+                                    {{ config('params.metal_colour')[$order->metal_colour] }}
+                                    @endif</td>
+                            <td>{{ $order->carat }}</td>
                             <td>
                               @if(!is_null($order->est_price_currency))
                                 {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
                               @endif
                             </td>
-                            <td>
+                            <td style="width: 90px;">
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;" id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
@@ -305,6 +315,10 @@
                           <th class="pro-title">Number</th>
                           <th class="pro-title">Category</th>
                           <th class="pro-price">Status</th>
+                          <th class="pro-price">Size</th>
+                          <th class="pro-price">Qty</th>
+                          <th class="pro-price">Colour</th>
+                          <th class="pro-price">Carat</th>
                           <th class="pro-price">Est. Price</th>
                           <th class="pro-remove">Action</th>
                           <th><div class="btn-group">
@@ -332,23 +346,29 @@
                             <td>{{ $order->order_number }}</td>
                             <td>{{ config('params.categories')[$order->category_id] }}</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
+                            <td>{{ $order->size }}</td>
+                            <td>{{ $order->quantity }}</td>
+                            <td>@if(!is_null($order->metal_colour))
+                                    {{ config('params.metal_colour')[$order->metal_colour] }}
+                                    @endif</td>
+                            <td>{{ $order->carat }}</td>
                             <td>
                               @if(!is_null($order->est_price_currency))
                                 {{config('params.currency')[$order->est_price_currency]}}{{ $order->tot_est_price }}
                               @endif
                             </td>
-                            <td>
+                            <td style="width: 90px;">
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
