@@ -100,7 +100,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Order Status : </strong>
+                    <strong> Status : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ config('params.order_status')[$order->order_status] }}
@@ -110,7 +110,7 @@
         <div class="col-md-4 pl-2">
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Metal Type : </strong>
+                    <strong> Type : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     @if(!is_null($order->metal_type))
