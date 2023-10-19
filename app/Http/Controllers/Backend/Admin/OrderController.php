@@ -367,6 +367,12 @@ class OrderController extends Controller
             $order->su_quantity = $request->su_quantity;
             $order->su_admin_notes = $request->su_admin_notes;
             $order->receive_supplier = $request->receive_supplier;
+
+            $order->su_est_currency = $request->su_est_currency;
+            $order->su_est_price = $request->su_est_price;
+            $order->su_tot_est_price = $request->su_tot_est_price;
+            $order->su_carat_price = $request->su_carat_price;
+
            // $order->updated_by = Auth::user()->id;
            $order->save();
 

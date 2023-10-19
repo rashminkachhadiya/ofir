@@ -120,52 +120,66 @@
         </div>
         <div class="col-md-4 pl-2">
             <div class="d-flex p-0">
-                <div class="col-md-4 p-0">
+                <div class="col-md-3 p-0">
                     <strong> Type : </strong>
                 </div>
-                <div class="col-md-8 p-0">
+                <div class="col-md-9 p-0">
                    {!! Form::select('su_metal_type', config('params.metal_type') ?? [],  $order->su_metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
-                <div class="col-md-4 p-0">
+                <div class="col-md-3 p-0">
                     <strong>Colour : </strong>
                 </div>
-                <div class="col-md-8 p-0">
+                <div class="col-md-9 p-0">
                     {!! Form::select('su_metal_colour', config('params.metal_colour') ?? [],  $order->su_metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
-                <div class="col-md-4 p-0">
+                <div class="col-md-3 p-0">
                     <strong> Size : </strong>
                 </div>
-                <div class="col-md-8 p-0">
+                <div class="col-md-9 p-0">
                     <input type="text" class="form-control" id="size" name="su_size" value="{{ $order->su_size }}" placeholder="Size">
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
-                <div class="col-md-4 p-0">
+                <div class="col-md-3 p-0">
                     <strong> Weight : </strong>
                 </div>
-                <div class="col-md-8 p-0">
+                <div class="col-md-9 p-0">
                     <input type="text" class="form-control" id="weight" name="su_weight" value="{{ $order->su_weight }}" placeholder="Weight">
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
-                <div class="col-md-4 p-0">
+                <div class="col-md-3 p-0">
                     <strong> Qty : </strong>
                 </div>
-                <div class="col-md-8 p-0">
-                    <input type="text" class="form-control" id="quantity" name="su_quantity" value="{{ $order->su_quantity }}" placeholder="Quantity">
+                <div class="col-md-9 p-0">
+                    <input type="text" class="form-control" id="su_quantity" name="su_quantity" value="{{ $order->su_quantity }}" placeholder="Quantity">
+                </div>
+            </div>
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 p-0">
+                    <strong> Price : </strong>
+                </div>
+                <div class="col-md-3 p-0">
+                    {!! Form::select('su_est_currency', config('params.currency') ?? [],  $order->su_est_currency ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'su_est_currency']) !!}
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_est_price" name="su_est_price" value="{{ $order->su_est_price }}" placeholder="Est Price">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_tot_est_price" name="su_tot_est_price" value="{{ $order->su_tot_est_price }}" placeholder="Totol" readonly>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 p-0" style="border:1px solid black;height: 90px !important;">
+        <div class="col-md-8 p-0" style="border:1px solid black;height: 90px !important;">
             <div class="d-flex p-0">
-                <div class="col-md-2 pr-0">
-                    <p><strong> Notes : </strong></p>
+                <div class="col-md-1 pr-0">
+                    <p><strong> Notes </strong></p>
                 </div>
-                <div class="col-md-10 p-0" style="text-align: left;">
+                <div class="col-md-11 p-0" style="text-align: left;">
                      <textarea type="text" class="form-control" id="notes" name="su_admin_notes" placeholder="Admin Notes" rows="3">{{ $order->su_admin_notes }}</textarea>
                 </div>
             </div>
@@ -174,50 +188,53 @@
     <div class="col-md-3" style="border:1px solid black;">
         <h5 class="text-center">Gem Info</h5>
         <div class="d-flex p-0">
-            <div class="col-md-6">
-                <strong> Gem. : </strong>
+            <div class="col-md-3">
+                <strong> Gem. </strong>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-md-6 p-0 text-left">
                 <input type="text" class="form-control" id="gem" name="su_gem" value="{{ $order->su_gem }}" placeholder="Gem">
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
-            <div class="col-md-6">
-                <strong> Shape : </strong>
+            <div class="col-md-3">
+                <strong> Shape </strong>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-md-6 p-0 text-left">
                 <input type="text" class="form-control" id="shape" name="su_shape" value="{{ $order->su_shape }}" placeholder="Shape">
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
-            <div class="col-md-6">
-                <strong> Carat : </strong>
+            <div class="col-md-3">
+                <strong> Carat </strong>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-md-3 p-0 text-left">
                 <input type="text" class="form-control" id="carat" name="su_carat" value="{{ $order->su_carat }}" placeholder="Carat">
+            </div>
+            <div class="col-md-3 p-0 text-left">
+                <input type="text" class="form-control" id="su_carat_price" name="su_carat_price" value="{{ $order->su_carat_price }}" placeholder="Price">
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
-            <div class="col-md-6">
-                <strong> Colour : </strong>
+            <div class="col-md-3">
+                <strong> Colour </strong>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-md-6 p-0 text-left">
                 <input type="text" class="form-control" id="colour" name="su_gem_colour" value="{{ $order->su_gem_colour }}" placeholder="Colour">
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
-            <div class="col-md-6">
-                <strong> Cleaerty : </strong>
+            <div class="col-md-3">
+                <strong> Cleaerty </strong>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-md-6 p-0 text-left">
                 <input type="text" class="form-control" id="cleaerty" name="su_cleaerty" value="{{ $order->su_cleaerty }}" placeholder="Cleaerty">
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
-            <div class="col-md-6">
-                <strong> Pcs : </strong>
+            <div class="col-md-3">
+                <strong> Pcs </strong>
             </div>
-            <div class="col-md-6 text-left">
+            <div class="col-md-6 p-0 text-left">
                 <input type="text" class="form-control" id="pcs" name="su_pcs" value="{{ $order->su_pcs }}" placeholder="Pcs">
             </div>
         </div>
@@ -234,6 +251,12 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function () {
+        $(document).on("focusout", "#su_quantity, #su_est_price", function(e) {
+            e.preventDefault();
+            var totalPrice = parseFloat($("#su_quantity").val()) * parseFloat($("#su_est_price").val());
+            $("#su_tot_est_price").val(totalPrice.toFixed(2));
+        });
+
         $('#editSupplier').validate({// <- attach '.validate()' to your form
             // Rules for form validation
             rules: {
