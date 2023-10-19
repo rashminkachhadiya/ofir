@@ -373,6 +373,9 @@ class OrderController extends Controller
             $order->su_tot_est_price = $request->su_tot_est_price;
             $order->su_carat_price = $request->su_carat_price;
             $order->tot_su_carat_price = $request->tot_su_carat_price;
+
+            $order->su_pcs_price = $request->su_pcs_price;
+            $order->tot_su_pcs_price = $request->tot_su_pcs_price;
            // $order->updated_by = Auth::user()->id;
            $order->save();
 

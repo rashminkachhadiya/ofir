@@ -229,8 +229,14 @@
             <div class="col-md-3">
                 <strong> Pcs </strong>
             </div>
-            <div class="col-md-6 p-0 text-left">
-                <input type="text" class="form-control" id="pcs" name="su_pcs" value="{{ $order->su_pcs }}" placeholder="Pcs">
+            <div class="col-md-3 p-0 text-left">
+                <input type="text" class="form-control" id="su_pcs" name="su_pcs" value="{{ $order->su_pcs }}" placeholder="Pcs">
+            </div>
+            <div class="col-md-3 p-0 text-left">
+                <input type="text" class="form-control" id="su_pcs_price" name="su_pcs_price" value="{{ $order->su_pcs_price }}" placeholder="Price">
+            </div>
+            <div class="col-md-3 p-0 text-left">
+                <input type="text" class="form-control" id="tot_su_pcs_price" name="tot_su_pcs_price" value="{{ $order->tot_su_pcs_price }}" placeholder="Total" readonly>
             </div>
         </div>
     </div>
@@ -256,6 +262,12 @@
             e.preventDefault();
             var totalPrice = parseFloat($("#su_carat").val()) * parseFloat($("#su_carat_price").val());
             $("#tot_su_carat_price").val(totalPrice.toFixed(2));
+        });
+
+        $(document).on("focusout", "#su_pcs, #su_pcs_price", function(e) {
+            e.preventDefault();
+            var totalPrice = parseFloat($("#su_pcs").val()) * parseFloat($("#su_pcs_price").val());
+            $("#tot_su_pcs_price").val(totalPrice.toFixed(2));
         });
 
         $('#editSupplier').validate({// <- attach '.validate()' to your form
