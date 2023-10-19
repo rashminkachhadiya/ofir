@@ -95,7 +95,7 @@ class StockController extends Controller
             }
         })
         ->addColumn('sku', function ($items) {
-            return '<a href="' . \URL :: to('admin/catalogue') .  '/' . $items->item_id . '/edit" target="_blank">'. $items->sku .'</a>';
+            return '<a style="color:black;" href="' . \URL :: to('admin/catalogue') .  '/' . $items->item_id . '/edit" target="_blank">'. $items->sku .'</a>';
         })
         ->addColumn('item_status', function ($items) {
             if(!is_null($items->item_status))

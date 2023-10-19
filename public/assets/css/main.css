@@ -8,6 +8,12 @@
  =========================================================
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
+ #manage_all{
+    color: black !important;
+ }
+ .page-title-heading{
+    color: black;
+ }
  .confirm {
     color: green !important;
  }
@@ -21,9 +27,7 @@
 #catelogue_size .col-md-1{
     max-width: 7% !important;
 }
-#catelogue_size .col-md-1{
-    max-width: 7% !important;
-}
+
  .product-details-des .quantity {
     margin-right: 15px;
 }
@@ -8626,7 +8630,7 @@ a,button,.btn{
     background:black;
 }
 .app-theme-white .app-page-title{
-    background:grey;
+    background:white;
 }
 .app-theme-white .app-footer .app-footer__inner,.app-theme-white .app-header{
     background:#fafbfc
@@ -11934,7 +11938,7 @@ a.badge-alternate:hover,a.badge-alternate:focus{
     top:-3px
 }
 .card{
-	background: #808080;
+	/*background: #808080;*/
     box-shadow:0 0.46875rem 2.1875rem rgba(4,9,20,0.03),0 0.9375rem 1.40625rem rgba(4,9,20,0.03),0 0.25rem 0.53125rem rgba(4,9,20,0.05),0 0.125rem 0.1875rem rgba(4,9,20,0.03);
     border-width:0;
     transition:all .2s

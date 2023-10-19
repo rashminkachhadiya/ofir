@@ -67,7 +67,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover table-dark">
+                               class="align-middle mb-0 table table-borderless table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
