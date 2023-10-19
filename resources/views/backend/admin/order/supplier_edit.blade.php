@@ -165,6 +165,17 @@
                     <input type="text" class="form-control" id="su_quantity" name="su_quantity" value="{{ $order->su_quantity }}" placeholder="Quantity">
                 </div>
             </div>
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 p-0">
+                    <strong> Total : </strong>
+                </div>
+                <div class="col-md-4 p-0">
+                    <input type="text" class="form-control" id="su_work" name="su_work" value="{{ $order->su_work }}" placeholder="Work">
+                </div>
+                <div class="col-md-5 p-0">
+                    <input type="text" class="form-control" id="su_final_total" name="su_final_total" value="{{ $order->su_final_total }}" placeholder="Total" readonly>
+                </div>
+            </div>
         </div>
         <div class="col-md-8 p-0" style="border:1px solid black;height: 90px !important;">
             <div class="d-flex p-0">
@@ -256,19 +267,34 @@
             e.preventDefault();
             var totalPrice = parseFloat($("#su_weight").val()) * parseFloat($("#su_est_price").val());
             $("#su_tot_est_price").val(totalPrice.toFixed(2));
+            finalTotal();
         });
 
         $(document).on("focusout", "#su_carat, #su_carat_price", function(e) {
             e.preventDefault();
             var totalPrice = parseFloat($("#su_carat").val()) * parseFloat($("#su_carat_price").val());
             $("#tot_su_carat_price").val(totalPrice.toFixed(2));
+            finalTotal();
         });
 
         $(document).on("focusout", "#su_pcs, #su_pcs_price", function(e) {
             e.preventDefault();
             var totalPrice = parseFloat($("#su_pcs").val()) * parseFloat($("#su_pcs_price").val());
             $("#tot_su_pcs_price").val(totalPrice.toFixed(2));
+            finalTotal();
         });
+
+        $(document).on("focusout", "#su_work", function(e) {
+            e.preventDefault();
+            finalTotal();
+            alert('yess');
+        });
+
+        function finalTotal()
+        {
+            var finalTotal = parseFloat($("#su_work").val()) + parseFloat($("#tot_su_carat_price").val()) + parseFloat($("#su_tot_est_price").val()) + parseFloat($("#tot_su_pcs_price").val());
+            $("#su_final_total").val(finalTotal.toFixed(2));
+        }
 
         $('#editSupplier').validate({// <- attach '.validate()' to your form
             // Rules for form validation
