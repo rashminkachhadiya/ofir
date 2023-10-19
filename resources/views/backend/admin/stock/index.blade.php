@@ -8,6 +8,9 @@
     top: 0;
     background: white;
 }
+#manage_all{
+    color: black !important;
+ }
 </style>
     <div class="app-page-title mt-1">
         <div class="page-title-wrapper" style="display: block !important;">
@@ -78,7 +81,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
+                               class="align-middle mb-0 table table-borderless table-striped table-hover" style="color: black;">
                             <thead>
                             <tr>
                                 <th>#</th>
