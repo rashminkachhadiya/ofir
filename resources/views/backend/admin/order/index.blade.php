@@ -160,8 +160,15 @@
                 "lengthMenu": [25, 50, 100],
                 "language": {
                     "lengthMenu": "Show _MENU_ "
+                },
+                "rowCallback": function(row, data, index)
+                { 
+                    console.log(data);
+                    if(data['order_status']=='Done')
+                    { 
+                        $(row).css('color', 'red'); 
+                    }
                 }
-
             });
             $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
                 'width': '220px',
