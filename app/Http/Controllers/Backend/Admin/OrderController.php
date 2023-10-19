@@ -47,6 +47,13 @@ class OrderController extends Controller
       {
         $orders->where('orders.user_id', '=', $request['user_id']);
       }
+
+      if(!is_null($request['ids']))
+      {
+        $id = explode(',',$request->ids);
+        $orders->whereIn('orders.id', $id);
+      }
+
       if(!empty($request['user_id']))
       {
         $orders->where('orders.user_id', '=', $request['user_id']);
@@ -68,6 +75,10 @@ class OrderController extends Controller
           return Carbon::parse($orders->created_at)->format('d/m/Y');
            // return $orders->created_at;
         })
+        ->addColumn('image', function ($orders) {
+            return view('backend.admin.order.image', ['orders'=>$orders]) ;
+           // return $orders->created_at;
+        })
         ->addColumn('order_number', function ($orders) {
            return $orders->order_number;
         })
@@ -87,6 +98,12 @@ class OrderController extends Controller
         })
         ->addColumn('client_name', function ($orders) {
            return $orders->orderUser->f_name;
+        })
+        ->addColumn('metal_colour', function ($orders) {
+           if(!is_null($orders->metal_colour))
+            {
+               return config('params.metal_colour')[$orders->metal_colour];
+            }
         })
         ->addColumn('tot_est_price', function ($orders) {
           if(!is_null($orders->est_price_currency))
@@ -124,7 +141,7 @@ class OrderController extends Controller
                                   <input style="width:30px; height:23px;" class=" child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
                                </div></div>';
         })
-        ->rawColumns(['action', 'order_type', 'order_status', 'order_total', 'shipping_address_first_name','checkbox'])
+        ->rawColumns(['action', 'order_type', 'image','order_status', 'order_total', 'shipping_address_first_name','checkbox','metal_colour'])
         ->addIndexColumn()
         ->make(true);
     }

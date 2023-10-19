@@ -40,7 +40,7 @@
                                 <input type="hidden" name="ids" id="print_ids">
                                 <input type="hidden" name="flag" value="view">
                                 <div class="mr-1">
-                                    <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="printLabel(1)">View</a>
+                                    <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="printLabel(0)">View</a>
                                 </div>
                             </form>
                         </div>
@@ -48,7 +48,7 @@
                             <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <div class="mr-1">
-                                    <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">PDF</a>
+                                    <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">View All</a>
                                 </div>
                             </form>
                         </div>
@@ -67,15 +67,20 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Order Date</th>
+                                <th>Date</th>
+                                <th>Image</th>
                                 <th>Supplier</th>
-                                <th>Order Number</th>
+                                <th>Number</th>
                                 <th>Code</th>
                                 <th>Category</th>
                                 <th>Name</th>
+                                <th>Size</th>
+                                <th>Qty</th>
+                                <th>Colour</th>
+                                <th>Carat</th>
                                 <th>Ref.</th>
-                                <th>Est. Price</th>
-                                <th>Order Status</th>
+                                <th>Est.</th>
+                                <th>Status</th>
                                 <th>Action</th>
                                 <th><div class="btn-group"><div class="form-check form-check-custom form-check-sm">
                                   <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
@@ -97,14 +102,20 @@
         }
     </style>
     <script>
-        function printLabel()
+        function printLabel(tag)
         {
-            var allVals = [];
-            $("input[name='ids[]']:checked").each(function() {
-                allVals.push($(this).attr('value'));
-            });
-            $("#print_ids").val(allVals.join(', '));
-            $('#form-print').submit();
+            if(tag == 0)
+            {
+                var allVals = [];
+                $("input[name='ids[]']:checked").each(function() {
+                    allVals.push($(this).attr('value'));
+                });
+                $("#print_ids").val(allVals.join(', ')); 
+                table.draw();
+            }else{
+                location.reload();
+            }
+            
         }
         $(function () {
 
@@ -121,17 +132,24 @@
                         d.user_id = $('#user_id').val();
                         d.supplier_id = $('#supplier_id').val();
                         d.order_status = $('#order_status').val();
+                        d.ids = $("#print_ids").val();
                     },
                     "dataType": 'json'
                 },
                 columns: [
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'image', name:'image'},
                     {data: 'supplier_name', name: 'supplier_name'},
                     {data: 'order_number', name: 'order_number'},
                     {data: 'sku', name: 'sku'},
                     {data: 'category', name: 'category'},
                     {data: 'client_name', name: 'client_name'},
+                    {data: 'size', name: 'size'},
+                    {data: 'quantity', name: 'quantity'},
+                    {data: 'metal_colour', name: 'metal_colour'},
+                    {data: 'carat', name: 'carat'},
+
                     {data: 'ref', name: 'ref'},
                     {data: 'tot_est_price', name: 'tot_est_price'},
                     {data: 'order_status', name: 'order_status'},
