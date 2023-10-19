@@ -379,6 +379,16 @@ class OrderController extends Controller
 
             $order->su_work = $request->su_work;
             $order->su_final_total = $request->su_final_total;
+
+            $order->su_shipping = $request->su_shipping;
+            $order->su_other_1 = $request->su_other_1;
+            $order->su_other_2 = $request->su_other_2;
+            $order->d_price = $request->d_price;
+            $order->tot_d_price = $request->tot_d_price;
+            $order->p_price = $request->p_price;
+            $order->tot_p_price = $request->tot_p_price;
+
+
            // $order->updated_by = Auth::user()->id;
            $order->save();
 

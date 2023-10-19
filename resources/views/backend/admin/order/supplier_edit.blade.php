@@ -167,6 +167,20 @@
             </div>
             <div class="d-flex p-0 mt-1">
                 <div class="col-md-3 p-0">
+                    
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_shipping" name="su_shipping" value="{{ $order->su_shipping }}" placeholder="Shipping">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_other_1" name="su_other_1" value="{{ $order->su_other_1 ?? 0 }}" placeholder="Other">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_other_2" name="su_other_2" value="{{ $order->su_other_2 ?? 0 }}" placeholder="Other">
+                </div>
+            </div>
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 p-0">
                     <strong> Total : </strong>
                 </div>
                 <div class="col-md-4 p-0">
@@ -176,11 +190,33 @@
                     <input type="text" class="form-control" id="su_final_total" name="su_final_total" value="{{ $order->su_final_total }}" placeholder="Total" readonly>
                 </div>
             </div>
+            <div class="d-flex p-0 mt-2">
+                <div class="col-md-6 p-0">
+                    <strong> $ : </strong>
+                </div>
+                <div class="col-md-6 p-0">
+                    <strong> £ : </strong>
+                </div>
+            </div>
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="d_price" name="d_price" value="{{ $order->d_price }}" placeholder="">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="tot_d_price" name="tot_d_price" value="{{ $order->tot_d_price }}" style="color: green" readonly>
+                </div>
+                <div class="col-md-3 ml-1 p-0">
+                    <input type="text" class="form-control" id="p_price" name="p_price" value="{{ $order->p_price }}" placeholder="">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="tot_p_price" name="tot_p_price" value="{{ $order->tot_p_price }}" placeholder="" readonly>
+                </div>
+            </div>
         </div>
-        <div class="col-md-8 p-0" style="border:1px solid black;height: 90px !important;">
+        <div class="col-md-7 p-0" style="border:1px solid black;height: 90px !important;">
             <div class="d-flex p-0">
                 <div class="col-md-1 pr-0">
-                    <p><strong> Notes </strong></p>
+                    <p><strong> Note </strong></p>
                 </div>
                 <div class="col-md-11 p-0" style="text-align: left;">
                      <textarea type="text" class="form-control" id="notes" name="su_admin_notes" placeholder="Admin Notes" rows="3">{{ $order->su_admin_notes }}</textarea>
@@ -284,14 +320,28 @@
             finalTotal();
         });
 
+        $(document).on("focusout", "#su_shipping, #su_other_1, #su_other_2", function(e){
+            e.preventDefault();            
+            finalTotal();
+        });
+
         $(document).on("focusout", "#su_work", function(e) {
             e.preventDefault();
             finalTotal();
         });
 
+        $(document).on("focusout", "#d_price, #p_price", function(e) {
+            e.preventDefault();
+            var totDollarPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#d_price").val());
+            var totPoundPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#p_price").val());
+            $("#tot_d_price").val(totDollarPrice.toFixed(2));
+            $("#tot_p_price").val(totPoundPrice.toFixed(2));
+
+        });
+
         function finalTotal()
         {
-            var finalTotal = parseFloat($("#su_work").val()) + parseFloat($("#tot_su_carat_price").val()) + parseFloat($("#su_tot_est_price").val()) + parseFloat($("#tot_su_pcs_price").val());
+            var finalTotal = parseFloat($("#su_work").val()) + parseFloat($("#tot_su_carat_price").val()) + parseFloat($("#su_tot_est_price").val()) + parseFloat($("#tot_su_pcs_price").val()) + parseFloat($("#su_shipping").val()) + parseFloat($("#su_other_1").val()) + parseFloat($("#su_other_2").val());
             $("#su_final_total").val(finalTotal.toFixed(2));
         }
 
