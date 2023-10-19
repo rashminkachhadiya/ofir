@@ -92,8 +92,9 @@ class OrderController extends Controller
         })
         ->addColumn('supplier_name', function ($orders) use ($supplier) {
           $checked = ($orders->receive_supplier == 1) ? 'checked' : '';
-           return isset($supplier[$orders->supplier_name]) ? '<div class="d-flex"><div>'.$supplier[$orders->supplier_name] . '</div><div><input style="width:30px; height:23px;" class="" type="checkbox" value="'.$orders->id.'" onchange="receiveSupplier(this)" name="id" '.$checked.'/></div>' : "";
+           return isset($supplier[$orders->supplier_name]) ? '<div class="d-flex"><div><a data-toggle="tooltip" id="' . $orders->id . '" class="btn supplier-edit" title="Edit">'.$supplier[$orders->supplier_name].'</a></div><div><input style="width:30px; height:23px;" class="" type="checkbox" value="'.$orders->id.'" onchange="receiveSupplier(this)" name="id" '.$checked.'/></div>' : "";
         })
+
         ->addColumn('category', function ($orders) {
            return config('params.categories')[$orders->category_id];
         })
@@ -334,5 +335,50 @@ class OrderController extends Controller
         }
         $order->save();
         return true;
+    }
+
+    public function updateSupplierInformation(Request $request)
+    {
+        $id = $request->id;
+        $order = Order::where('id', $id)->first();
+        $roles = Role::all(); //Get all roles
+        $view = View::make('backend.admin.order.supplier_edit', compact('order', 'roles'))->render();
+        return response()->json(['html' => $view]);
+    }
+
+    public function receiveSupplierSave(Request $request)
+    {
+      if ($request->ajax()) {
+                
+        $order = Order::findOrFail($request->id);
+
+        DB::beginTransaction();
+        try {
+            $order->su_metal_type = $request->su_metal_type;
+            $order->su_metal_colour = $request->su_metal_colour;
+            $order->su_weight = $request->su_weight;
+            $order->su_size = $request->su_size;
+            $order->su_shape = $request->su_shape;
+            $order->su_carat = $request->su_carat;
+            $order->su_colour = $request->su_gem_colour;
+            $order->su_cleaerty = $request->su_cleaerty;
+            $order->su_pcs = $request->su_pcs;
+            $order->su_gem = $request->su_gem;
+            $order->su_quantity = $request->su_quantity;
+            $order->su_admin_notes = $request->su_admin_notes;
+            $order->receive_supplier = $request->receive_supplier;
+           // $order->updated_by = Auth::user()->id;
+           $order->save();
+
+           DB::commit();
+           return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
+
+        } catch (\Exception $e) {
+           DB::rollback();
+           return response()->json(['type' => 'error', 'message' => $e->getMessage()]);
+        }
+      } else {
+         return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+      } 
     }
 }

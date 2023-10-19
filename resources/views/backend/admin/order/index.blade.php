@@ -207,6 +207,24 @@
                 ajax_submit_edit('order', id)
             });
 
+            $("#manage_all").on("click", ".supplier-edit", function () {
+                var id = $(this).attr('id');
+                $("#modal_data").empty();
+                $('.modal-title').text('Supplier Information');
+
+                $.ajax({
+                    url: '{{ url("admin/update-supplier-information") }}?id='+id,
+                    type: 'get',
+                    success: function (data) {
+                        $("#modal_data").html(data.html);
+                        $('#myModal').modal('show'); // show bootstrap modal
+                    },
+                    error: function (result) {
+                        $("#modal_data").html("Sorry Cannot Load Data");
+                    }
+                });
+            });
+
 
             // Delete
             $("#manage_all").on("click", ".delete", function () {
