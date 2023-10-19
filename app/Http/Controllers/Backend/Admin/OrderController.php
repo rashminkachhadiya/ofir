@@ -91,7 +91,8 @@ class OrderController extends Controller
           }
         })
         ->addColumn('supplier_name', function ($orders) use ($supplier) {
-           return isset($supplier[$orders->supplier_name]) ? $supplier[$orders->supplier_name] : "";
+          $checked = ($orders->receive_supplier == 1) ? 'checked' : '';
+           return isset($supplier[$orders->supplier_name]) ? '<div class="d-flex"><div>'.$supplier[$orders->supplier_name] . '</div><div><input style="width:30px; height:23px;" class="" type="checkbox" value="'.$orders->id.'" onchange="receiveSupplier(this)" name="id" '.$checked.'/></div>' : "";
         })
         ->addColumn('category', function ($orders) {
            return config('params.categories')[$orders->category_id];
@@ -141,7 +142,7 @@ class OrderController extends Controller
                                   <input style="width:30px; height:23px;" class=" child-checkbox me-9" type="checkbox" value="'.$orders->id.'" name="ids[]"/>
                                </div></div>';
         })
-        ->rawColumns(['action', 'order_type', 'image','order_status', 'order_total', 'shipping_address_first_name','checkbox','metal_colour'])
+        ->rawColumns(['action', 'order_type', 'image','order_status', 'order_total', 'shipping_address_first_name','checkbox','metal_colour','supplier_name'])
         ->addIndexColumn()
         ->make(true);
     }
@@ -319,5 +320,19 @@ class OrderController extends Controller
       }else{
         return $mpdf->Output('supplier.pdf','D');
       }
+    }
+
+    public function receiveSupplier(Request $request)
+    {
+        $id = $request->order_id;
+        $order = Order::find($id);
+        if($order->receive_supplier == 0)
+        {
+            $order->receive_supplier = 1;
+        }else{
+            $order->receive_supplier = 0;
+        }
+        $order->save();
+        return true;
     }
 }

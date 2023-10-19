@@ -28,6 +28,7 @@ Route::resource('order', 'OrderController');
 Route::post('/update-order','OrderController@updateOrder');
 Route::get('/allOrders','OrderController@getAll')->name('allOrders');
 Route::get('/pdf-download','OrderController@pdfDownload')->name('pdfDownload');
+Route::get('/receive-supplier','OrderController@receiveSupplier')->name('receiveSupplier');
 
 
 Route::resource('catalogue', 'CatalogueController');

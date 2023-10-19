@@ -174,7 +174,20 @@
         function create() {
             ajax_submit_create('users');
         }
-
+        function receiveSupplier(val) {
+            var orderId = $(val).attr('value');
+            $.ajax({
+                type: "GET",
+                url: '{{ url("admin/receive-supplier") }}?order_id='+orderId,
+                datatype: 'html',
+                success: function (data) {
+                    table.draw();
+                },
+                error: function (result) {
+                    $("#modal_data").html("Sorry Cannot Load Data");
+                }
+            });
+        }
         $(document).ready(function () {
             // View Form
             const queryString = window.location.search;
