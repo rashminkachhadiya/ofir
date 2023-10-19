@@ -147,8 +147,14 @@
                 <div class="col-md-3 p-0">
                     <strong> Weight : </strong>
                 </div>
-                <div class="col-md-9 p-0">
-                    <input type="text" class="form-control" id="weight" name="su_weight" value="{{ $order->su_weight }}" placeholder="Weight">
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_weight" name="su_weight" value="{{ $order->su_weight }}" placeholder="Weight">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_est_price" name="su_est_price" value="{{ $order->su_est_price }}" placeholder="Est Price">
+                </div>
+                <div class="col-md-3 p-0">
+                    <input type="text" class="form-control" id="su_tot_est_price" name="su_tot_est_price" value="{{ $order->su_tot_est_price }}" placeholder="Totol" readonly>
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
@@ -157,20 +163,6 @@
                 </div>
                 <div class="col-md-9 p-0">
                     <input type="text" class="form-control" id="su_quantity" name="su_quantity" value="{{ $order->su_quantity }}" placeholder="Quantity">
-                </div>
-            </div>
-            <div class="d-flex p-0 mt-1">
-                <div class="col-md-3 p-0">
-                    <strong> Price : </strong>
-                </div>
-                <div class="col-md-3 p-0">
-                    {!! Form::select('su_est_currency', config('params.currency') ?? [],  $order->su_est_currency ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'su_est_currency']) !!}
-                </div>
-                <div class="col-md-3 p-0">
-                    <input type="text" class="form-control" id="su_est_price" name="su_est_price" value="{{ $order->su_est_price }}" placeholder="Est Price">
-                </div>
-                <div class="col-md-3 p-0">
-                    <input type="text" class="form-control" id="su_tot_est_price" name="su_tot_est_price" value="{{ $order->su_tot_est_price }}" placeholder="Totol" readonly>
                 </div>
             </div>
         </div>
@@ -208,10 +200,13 @@
                 <strong> Carat </strong>
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="carat" name="su_carat" value="{{ $order->su_carat }}" placeholder="Carat">
+                <input type="text" class="form-control" id="su_carat" name="su_carat" value="{{ $order->su_carat }}" placeholder="Carat">
             </div>
             <div class="col-md-3 p-0 text-left">
                 <input type="text" class="form-control" id="su_carat_price" name="su_carat_price" value="{{ $order->su_carat_price }}" placeholder="Price">
+            </div>
+            <div class="col-md-3 p-0 text-left">
+                <input type="text" class="form-control" id="tot_su_carat_price" name="tot_su_carat_price" value="{{ $order->tot_su_carat_price }}" placeholder="Total" readonly>
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
@@ -251,10 +246,16 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function () {
-        $(document).on("focusout", "#su_quantity, #su_est_price", function(e) {
+        $(document).on("focusout", "#su_weight, #su_est_price", function(e) {
             e.preventDefault();
-            var totalPrice = parseFloat($("#su_quantity").val()) * parseFloat($("#su_est_price").val());
+            var totalPrice = parseFloat($("#su_weight").val()) * parseFloat($("#su_est_price").val());
             $("#su_tot_est_price").val(totalPrice.toFixed(2));
+        });
+
+        $(document).on("focusout", "#su_carat, #su_carat_price", function(e) {
+            e.preventDefault();
+            var totalPrice = parseFloat($("#su_carat").val()) * parseFloat($("#su_carat_price").val());
+            $("#tot_su_carat_price").val(totalPrice.toFixed(2));
         });
 
         $('#editSupplier').validate({// <- attach '.validate()' to your form
