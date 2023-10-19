@@ -279,7 +279,7 @@
                                               <input type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
                                             </div>
                                             <div class="col-md-1 pl-2 p-1">
-                                              <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{ $size->qty }}">
+                                              <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{number_format((float)$size->qty, 0, '.', '') }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="text" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
