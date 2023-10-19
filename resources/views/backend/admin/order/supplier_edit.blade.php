@@ -287,7 +287,6 @@
         $(document).on("focusout", "#su_work", function(e) {
             e.preventDefault();
             finalTotal();
-            alert('yess');
         });
 
         function finalTotal()
