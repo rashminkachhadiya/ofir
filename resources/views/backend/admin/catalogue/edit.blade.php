@@ -271,24 +271,31 @@
                                             $sizeCount = 0;
                                         ?>
                                         @foreach($itemStock as $size)
-                                        <div class="form-group row mt-1 item_size-{{$size->id}}">
+                                        <?php
+                                            $colors = "black";
+                                            if($size->item_status == 1)
+                                            {
+                                                $colors = "red";
+                                            }
+                                        ?>
+                                        <div  class="form-group row mt-1 item_size-{{$size->id}}">
                                             <div style="text-align: center;" class="col-md-1 pl-2 p-1">
-                                              <p style="margin: revert; color: black;">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
+                                              <p style="margin: revert; color: {{ $colors }}">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
                                             </div>
                                             <div class="col-md-1 pl-2 p-1">
-                                              <input type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
+                                              <input style="color: {{ $colors }}" type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
                                             </div>
                                             <div class="col-md-1 pl-2 p-1">
-                                              <input type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{number_format((float)$size->qty, 0, '.', '') }}">
+                                              <input style="color: {{ $colors }}" type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{number_format((float)$size->qty, 0, '.', '') }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="text" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
+                                              <input style="color: {{ $colors }}" type="text" name="gram[{{ $size->id }}]" class="form-control" id="gram_{{ $size->id }}" value="{{ $size->gram }}"  placeholder="Gram">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="text" name="q_size[{{ $size->id }}]" class="form-control" id="q_size{{ $size->id }}" value="{{ $size->size }}">
+                                              <input style="color: {{ $colors }}" type="text" name="q_size[{{ $size->id }}]" class="form-control" id="q_size{{ $size->id }}" value="{{ $size->size }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <select class="form-control" name="colour[{{ $size->id }}]">
+                                              <select style="color: {{ $colors }}" class="form-control" name="colour[{{ $size->id }}]">
                                                 <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select</option>
                                                 <option value="0" {{ $size->colour == "0" ? 'selected' : '' }}>White</option>
                                                 <option value="1" {{ $size->colour == "1" ? 'selected' : '' }}>Yellow</option>
@@ -297,26 +304,26 @@
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="text" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
+                                              <input style="color: {{ $colors }}" type="text" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="text" name="pieces[{{ $size->id }}]" class="form-control" id="pieces_{{ $size->id }}" value="{{ $size->pieces }}">
+                                              <input style="color: {{ $colors }}" type="text" name="pieces[{{ $size->id }}]" class="form-control" id="pieces_{{ $size->id }}" value="{{ $size->pieces }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <select class="form-control" name="item_status[{{ $size->id }}]">
+                                              <select style="color: {{ $colors }}" class="form-control" name="item_status[{{ $size->id }}]">
                                                 <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select</option>
                                                 <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
                                                 <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sold</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Name">
+                                              <input style="color: {{ $colors }}" type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Name">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
+                                              <input style="color: {{ $colors }}" type="date" name="date[{{ $size->id }}]" class="form-control" id="date_{{ $size->id }}" value="{{ !is_null($size->date) ? \Carbon\Carbon::parse($size->date)->format('Y-m-d') : NULL }}" placeholder="Date">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                              <input type="text" name="stocknotes[{{ $size->id }}]" class="form-control" id="stocknotes_{{ $size->id }}" value="{{ $size->stocknotes }}">
+                                              <input style="color: {{ $colors }}" type="text" name="stocknotes[{{ $size->id }}]" class="form-control" id="stocknotes_{{ $size->id }}" value="{{ $size->stocknotes }}">
                                             </div>
                                             @if($sizeCount == 0)
                                             

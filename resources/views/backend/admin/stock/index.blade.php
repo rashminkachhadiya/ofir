@@ -209,6 +209,14 @@
 
                     // console.log(pageTotal);
                 },
+                "rowCallback": function(row, data, index)
+                { 
+                    console.log(data);
+                    if(data['item_status']=='Sold')
+                    { 
+                        $(row).css('color', 'red'); 
+                    }
+                },
                 "autoWidth": false,
                 "scrollX": true,
                 "scrollY": 450,
