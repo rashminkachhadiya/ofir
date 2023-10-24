@@ -273,7 +273,7 @@
                                         @foreach($itemStock as $size)
                                         <div class="form-group row mt-1 item_size-{{$size->id}}">
                                             <div style="text-align: center;" class="col-md-1 pl-2 p-1">
-                                              <p style="margin: revert;">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
+                                              <p style="margin: revert; color: black;">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
                                             </div>
                                             <div class="col-md-1 pl-2 p-1">
                                               <input type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
