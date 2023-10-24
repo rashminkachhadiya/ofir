@@ -253,6 +253,9 @@
 .bg-primary{
     background-color:#3f6ad8 !important
 }
+p strong{
+    color: black;
+}
 a.bg-primary:hover,a.bg-primary:focus,button.bg-primary:hover,button.bg-primary:focus{
     background-color:#2651be !important
 }

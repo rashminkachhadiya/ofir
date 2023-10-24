@@ -117,7 +117,7 @@
                                         <span id="error_item_title_gram" class="has-error"></span>
                                     </div> -->
                                     <div class="col-md-12 p-1 pb-4 text-center" style="border: 1px solid">
-                                        <h5 class="text-center">Gem Info</h5>
+                                        <h5 style="color: black;" class="text-center">Gem Info</h5>
                                         <div class="d-flex">
                                             <div class="col-md-4 p-0">
                                                 <label class="col-form-label">Gem.</label>
