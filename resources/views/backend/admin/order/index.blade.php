@@ -24,11 +24,15 @@
             <div class="page-title-heading" style="display: block !important;">
                 <div class="d-flex" style="justify-content: space-between;">
                     <div class="d-flex">
-                        <div class="form-group col-md-6 col-sm-12">
+                        <div class="form-group col-md-5 col-sm-12">
                             {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
                             <span id="error_email" class="has-error"></span>
                         </div>
-                        <div class="form-group col-md-9 col-sm-12">
+                        <div class="form-group col-md-5 col-sm-12">
+                            {!! Form::select('supplier_id', $suppliers ?? [],  $item->supplier_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_id']) !!}
+                            <span id="error_email" class="has-error"></span>
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
                             {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
                             <span id="error_email" class="has-error"></span>
                         </div>
@@ -253,6 +257,10 @@
 
 
         $("body").on("change","#order_status",function(e){
+            table.draw();    
+        });
+
+        $("body").on("change","#supplier_id",function(e){
             table.draw();    
         });
 

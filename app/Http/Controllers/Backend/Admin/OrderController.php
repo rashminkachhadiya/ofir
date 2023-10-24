@@ -28,8 +28,12 @@ class OrderController extends Controller
     {
         $orderStatus = config('params.order_status');
         $users = User::pluck('f_name','id')->toArray();
+        $suppliers = Supplier::pluck('f_name','id')->toArray();
+
         $users[''] = 'All Users';
-        return view('backend.admin.order.index',compact('orderStatus','users'));
+        $suppliers[''] = 'All Suppliers';
+
+        return view('backend.admin.order.index',compact('orderStatus','users','suppliers'));
     }
 
     public function getAll(Request $request)
