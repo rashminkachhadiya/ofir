@@ -1,53 +1,53 @@
 <div class="product-details-inner">
     <div class="row">
-    <div class="col-md-9 row">
-        <div class="col-md-4">
-            <div class="product-large-slider">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                  <div style="border: 1px solid black;" class="carousel-inner">
-                    @php
-                    $count = 0;
-                    @endphp
-                    @foreach($order->orderPicture as $image)
-                    @if($count == 0)
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
-                    </div>
+        <div class="col-md-9 row">
+            <div class="col-md-4">
+                <div class="product-large-slider">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                      <div style="border: 1px solid black;" class="carousel-inner">
+                        @php
+                        $count = 0;
+                        @endphp
+                        @foreach($order->orderPicture as $image)
+                        @if($count == 0)
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                        </div>
 
-                    @else
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
-                    </div>
-                    @endif
-                    @php
-                    $count++;
-                    @endphp
-                    @endforeach
-                </div>
-                <div>
-                    <div>
-                        <strong>{{ $order->sku }}</strong>
+                        @else
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                        </div>
+                        @endif
+                        @php
+                        $count++;
+                        @endphp
+                        @endforeach
                     </div>
                     <div>
-                        <ol class="carousel-indicators">
-                            @php
-                            $countOl = 0;
-                            @endphp
-                            @foreach($order->orderPicture as $image)
-                            @if($countOl == 0)
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            @else
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ $countOl }}"></li>
-                            @endif
-                            @php
-                            $countOl++;
-                            @endphp
-                            @endforeach
-                        </ol>
+                        <div>
+                            <strong>{{ $order->sku }}</strong>
+                        </div>
+                        <div>
+                            <ol class="carousel-indicators">
+                                @php
+                                $countOl = 0;
+                                @endphp
+                                @foreach($order->orderPicture as $image)
+                                @if($countOl == 0)
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                @else
+                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $countOl }}"></li>
+                                @endif
+                                @php
+                                $countOl++;
+                                @endphp
+                                @endforeach
+                            </ol>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         <div class="col-md-4 p-0">
             <div class="d-flex">
@@ -159,7 +159,7 @@
                     <p><strong> Notes : </strong></p>
                 </div>
                 <div class="col-md-10 p-0" style="text-align: left;">
-                    {{ $order->notes }}sdsa
+                    {{ $order->notes }}
                 </div>
             </div>
         </div>

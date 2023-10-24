@@ -18,226 +18,257 @@
                             <h5><strong> View Details </strong></h5>
                         </div>
                     </div>
-                    <div class="d-flex">
-                        <div class="col-md-4 col-sm-12">
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Order Date : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Order Number : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->order_number }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Code : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->sku }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Order By : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->orderUser->f_name }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Email : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->orderUser->email }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Order Status : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ config('params.order_status')[$order->order_status] }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Ref. : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->ref }}
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Customer Notes : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->notes }}
+                    <div class="row">
+                        <div class="col-md-9 row">
+                            <div class="col-md-4">
+                                <div class="product-large-slider">
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                      <div style="border: 1px solid black;" class="carousel-inner">
+                                        @php
+                                        $count = 0;
+                                        @endphp
+                                        @foreach($order->orderPicture as $image)
+                                        @if($count == 0)
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                                        </div>
+
+                                        @else
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                                        </div>
+                                        @endif
+                                        @php
+                                        $count++;
+                                        @endphp
+                                        @endforeach
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <strong>{{ $order->sku }}</strong>
+                                        </div>
+                                        <div>
+                                            <ol class="carousel-indicators">
+                                                @php
+                                                $countOl = 0;
+                                                @endphp
+                                                @foreach($order->orderPicture as $image)
+                                                @if($countOl == 0)
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                                @else
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $countOl }}"></li>
+                                                @endif
+                                                @php
+                                                $countOl++;
+                                                @endphp
+                                                @endforeach
+                                            </ol>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-4 p-0">
                             <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Category : </strong></p>
+                                <div class="col-md-4 p-0">
+                                    <strong>Date: </strong>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
+                                    {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
+                                </div>
+                            </div>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Order No: </strong>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                    {{ $order->order_number }}
+                                </div>
+                            </div>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Order By : </strong>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                    {{ $order->orderUser->f_name }}
+                                </div>
+                            </div>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Email : </strong>
+                                </div>
+                                <div class="col-md-8 p-0" style="word-wrap: break-word;">
+                                    {{ $order->orderUser->email }}
+                                </div>
+                            </div>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Ref. : </strong>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                    {{ $order->ref }}
+                                </div>
+                            </div>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Category : </strong>
+                                </div>
+                                <div class="col-md-8 p-0">
                                     {{ config('params.categories')[$order->category_id] }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Supplier Name : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Status : </strong>
                                 </div>
-                                <div class="col-md-6">
-                                    @if(!is_null($order->supplier_name))
+                                <div class="col-md-8 p-0">
+                                    {{ config('params.order_status')[$order->order_status] }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 pl-2">
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Supplier : </strong>
+                                </div>
+                                <div class="col-md-8 p-0">
+                                   @if(!is_null($order->supplier_name))
                                     {{ $supplier[$order->supplier_name] }}
                                     @endif
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Metal Type : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Type : </strong>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     @if(!is_null($order->metal_type))
                                     {{ config('params.metal_type')[$order->metal_type] }}
                                     @endif
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Metal Colour : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong>Colour : </strong>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     @if(!is_null($order->metal_colour))
                                     {{ config('params.metal_colour')[$order->metal_colour] }}
                                     @endif
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Size : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Size : </strong>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     {{ $order->size }}
                                 </div>
                             </div>
-
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Weight : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Weight : </strong>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     {{ $order->weight }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Quantity : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Qty : </strong>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     {{ $order->quantity }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Est Price : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Est Price : </strong>
                                 </div>
-                                @if(!is_null($order->est_price_currency))
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     {{ config('params.currency')[$order->est_price_currency] }}{{ number_format((float) $order->est_price, 2, '.', '') }}
                                 </div>
-                                @endif
-                            </div>
-                            <div class="d-flex">
-                                <div class="col-md-6">
-                                    <p><strong> Total Est Price </strong></p>
+                            </div><div class="d-flex p-0">
+                                <div class="col-md-4 p-0">
+                                    <strong> Total Est Price : </strong>
                                 </div>
-                                @if(!is_null($order->est_price_currency))
-                                <div class="col-md-6">
+                                <div class="col-md-8 p-0">
                                     {{ config('params.currency')[$order->est_price_currency] }}{{ $order->tot_est_price }}
                                 </div>
-                                @endif
                             </div>
-                            @if(!is_null($order->admin_notes))
-                            <div class="d-flex">
-                                <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6 p-0" style="border:1px solid black;height: 90px !important;">
+                            <div class="d-flex p-0">
+                                <div class="col-md-2 pr-0">
+                                    <p><strong> Customer Notes : </strong></p>
+                                </div>
+                                <div class="col-md-10 p-0" style="text-align: left;">
+                                    {{ $order->notes }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 p-0" style="border:1px solid black;height: 90px !important;">
+                            <div class="d-flex p-0">
+                                <div class="col-md-2 pr-0">
                                     <p><strong> Admin Notes : </strong></p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-10 p-0" style="text-align: left;">
                                     {{ $order->admin_notes }}
                                 </div>
                             </div>
-                            @endif   
                         </div>
-                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-3" style="border:1px solid black;">
                             <h5 class="text-center">Gem Info</h5>
-                            <div class="d-flex">
-                                <div class="col-md-6 text-center">
-                                    <p><strong> Gem. : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-6">
+                                    <strong> Gem. : </strong>
                                 </div>
                                 <div class="col-md-6 text-left">
                                     {{ $order->gem }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6 text-center">
-                                    <p><strong> Shape : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-6">
+                                    <strong> Shape : </strong>
                                 </div>
                                 <div class="col-md-6 text-left">
                                     {{ $order->shape }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6 text-center">
-                                    <p><strong> Carat : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-6">
+                                    <strong> Carat : </strong>
                                 </div>
                                 <div class="col-md-6 text-left">
                                     {{ $order->carat }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6 text-center">
-                                    <p><strong> Colour : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-6">
+                                    <strong> Colour : </strong>
                                 </div>
                                 <div class="col-md-6 text-left">
                                     {{ $order->colour }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6 text-center">
-                                    <p><strong> Cleaerty : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-6">
+                                    <strong> Cleaerty : </strong>
                                 </div>
                                 <div class="col-md-6 text-left">
                                     {{ $order->cleaerty }}
                                 </div>
                             </div>
-                            <div class="d-flex">
-                                <div class="col-md-6 text-center">
-                                    <p><strong> Pcs : </strong></p>
+                            <div class="d-flex p-0">
+                                <div class="col-md-6">
+                                    <strong> Pcs : </strong>
                                 </div>
                                 <div class="col-md-6 text-left">
                                     {{ $order->pcs }}
                                 </div>
                             </div>
-                    </div>
-                </div>
-                    <div class="row">
-                        @foreach($order->orderPicture as $image)
-                            <div class="col-md-2 mt-2">
-                                <img width="170px;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
-                            </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

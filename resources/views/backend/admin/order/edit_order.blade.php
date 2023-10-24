@@ -70,15 +70,15 @@
                                     {!! Form::select('status', config('params.order_status') ?? [],  $order->order_status ?? '', ['class' => 'form-control select2','data-control'=>"select2", 'id'=>'status']) !!}
                                 </div>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex mt-1">
                                 <div class="col-md-6">
                                     <p><strong> Ref. : </strong></p>
                                 </div>
                                 <div class="col-md-6">
-                                    {{ $order->ref }}
+                                    <input type="text" class="form-control" id="ref" name="ref" value="{{ $order->ref }}" placeholder="Ref.">
                                 </div>
                             </div>
-                            <div class="d-flex">
+                            <div class="d-flex mt-1">
                                 <div class="col-md-6">
                                     <p><strong> Customer Notes : </strong></p>
                                 </div>

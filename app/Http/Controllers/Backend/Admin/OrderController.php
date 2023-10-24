@@ -279,6 +279,7 @@ class OrderController extends Controller
       $order->metal_type = $request->metal_type;
       $order->metal_colour = $request->metal_colour;
       $order->order_status = $request->status;
+      $order->ref = $request->ref;
       $order->size = $request->size;
 
       $order->weight = $request->weight;
