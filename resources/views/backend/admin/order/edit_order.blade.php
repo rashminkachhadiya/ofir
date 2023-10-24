@@ -20,8 +20,57 @@
                     </div>
                     <form id='edit-tab' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
                             novalidate>
-                    <div class="d-flex">
-                        <div class="col-md-4 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="product-large-slider">
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                      <div style="border: 1px solid black;" class="carousel-inner">
+                                        @php
+                                        $count = 0;
+                                        @endphp
+                                        @foreach($order->orderPicture as $image)
+                                        @if($count == 0)
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                                        </div>
+
+                                        @else
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                                        </div>
+                                        @endif
+                                        @php
+                                        $count++;
+                                        @endphp
+                                        @endforeach
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <strong>{{ $order->sku }}</strong>
+                                        </div>
+                                        <div>
+                                            <ol class="carousel-indicators">
+                                                @php
+                                                $countOl = 0;
+                                                @endphp
+                                                @foreach($order->orderPicture as $image)
+                                                @if($countOl == 0)
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                                @else
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $countOl }}"></li>
+                                                @endif
+                                                @php
+                                                $countOl++;
+                                                @endphp
+                                                @endforeach
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-12">
                             <div class="d-flex">
                                 <div class="col-md-6">
                                     <p><strong> Order Date : </strong></p>
@@ -78,16 +127,8 @@
                                     <input type="text" class="form-control" id="ref" name="ref" value="{{ $order->ref }}" placeholder="Ref.">
                                 </div>
                             </div>
-                            <div class="d-flex mt-1">
-                                <div class="col-md-6">
-                                    <p><strong> Customer Notes : </strong></p>
-                                </div>
-                                <div class="col-md-6">
-                                    {{ $order->notes }}
-                                </div>
-                            </div>
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <div class="d-flex">
                                 <div class="col-md-6">
                                     <p><strong> Category : </strong></p>
@@ -155,18 +196,11 @@
                                         <input type="text" class="form-control" id="tot_est_price" name="tot_est_price" value="{{ $order->tot_est_price }}" placeholder="Totol" readonly>
                                     </div>
                                 </div>
-                                <div class="d-flex mt-1">
-                                    <div class="col-md-6">
-                                        <p><strong>Admin Notes : </strong></p>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <textarea type="text" class="form-control" id="notes" name="admin_notes" placeholder="Admin Notes" rows="3" required="false">{{ $order->admin_notes }}</textarea>
-                                    </div>
-                                </div> 
+                                
                             </div>
-                            <div class="col-md-4 p-1 pb-4 text-center">
+                            <div class="col-md-3 p-1 pb-4 text-center">
                                         <h5 class="text-center">Gem Info</h5>
-                                        <div class="d-flex mt-1">
+                                <div class="d-flex mt-1">
                                     <div class="col-md-6">
                                         <p><strong> Gem. : </strong></p>
                                     </div>
@@ -218,16 +252,29 @@
                                                 data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
                                         </button>
                                 </div>
-                                    </div>
-                        </form> 
-
-                    </div>
-                    <div class="row">
-                        @foreach($order->orderPicture as $image)
-                            <div class="col-md-2 mt-2">
-                                <img width="170px;" height="170px" src="{{asset('assets/images/users/order/').'/'.$image->images}}">
                             </div>
-                        @endforeach
+                            
+                        <div class="col-md-3 p-0">
+                            <div class="d-flex mt-1">
+                                <div class="col-md-6">
+                                    <p><strong> Customer Notes : </strong></p>
+                                </div>
+                                <div class="col-md-6">
+                                    {{ $order->notes }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-0">
+                            <div class="d-flex mt-1">
+                                    <div class="col-md-6">
+                                        <p><strong>Admin Notes : </strong></p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <textarea type="text" class="form-control" id="notes" name="admin_notes" placeholder="Admin Notes" rows="3" required="false">{{ $order->admin_notes }}</textarea>
+                                    </div>
+                                </div> 
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

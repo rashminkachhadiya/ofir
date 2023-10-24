@@ -409,4 +409,12 @@ class OrderController extends Controller
          return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
       } 
     }
+
+    public function getCustomer(Request $request)
+    {
+        $item = User::where('f_name','LIKE',"%".$request['term']['term']."%")
+                    ->get()->toArray();
+
+        return response()->json(['data' => $item]);
+    }
 }

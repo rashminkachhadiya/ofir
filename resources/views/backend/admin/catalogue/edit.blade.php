@@ -317,6 +317,7 @@
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
+                                                
                                               <input style="color: {{ $colors }}" type="text" name="notes[{{ $size->id }}]" class="form-control" id="notes_{{ $size->id }}" value="{{ $size->notes }}" placeholder="Name">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -416,6 +417,8 @@
     </div>
 @endsection
 @push('script')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     function showImage(imgNumber) {
         const imageUploader = document.querySelector("#photo-"+imgNumber);
@@ -730,6 +733,34 @@
             $("#total_trade").val((totalCost + totalTrade).toFixed(4));
             $("#total_retail").val((totalCost + totalRetail).toFixed(4));
              // alert(totalTrade);
+        });
+
+        $('.customer').select2({
+          ajax: {
+            minimumInputLength: 2,
+            url: '/admin/get-customer',
+            dataType: 'json',
+            type: "GET",
+            data: function (term) {
+            return {
+                term: term
+                };
+            },
+            processResults: function (data) {
+                var arr = []
+                    $.each(data.data, function (index, value) {
+                        arr.push({
+                            id: value.f_name,
+                            text: value.f_name
+                        })
+                    })
+                return {
+                    results: arr
+                };
+            },
+            tags:true,
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+          }
         });
 
     });
