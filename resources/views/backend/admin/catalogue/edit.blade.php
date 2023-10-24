@@ -235,7 +235,7 @@
                                         <div class="col-md-1 pl-1 p-1">
                                             <p><strong>Code</strong></p>
                                         </div>
-                                        <div class="col-md-1 pl-2 p-1">
+                                        <div class="col-md-0-5 pl-2 p-1">
                                             <p><strong> Qty</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
@@ -285,7 +285,7 @@
                                             <div class="col-md-1 pl-2 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
                                             </div>
-                                            <div class="col-md-1 pl-2 p-1">
+                                            <div class="col-md-0-5 pl-2 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="stock[{{ $size->id }}]" class="form-control" id="size_{{ $size->id }}" value="{{number_format((float)$size->qty, 0, '.', '') }}">
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -348,7 +348,7 @@
                                         <div class="col-md-1 pl-2 p-1">
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
                                         </div>
-                                        <div class="col-md-1 pl-2 p-1">
+                                        <div class="col-md-0-5 pl-2 p-1">
                                           <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="" placeholder="Qty">
                                         </div>
                                         <div class="col-md-1 p-0 p-1">
@@ -494,7 +494,7 @@
                     <div class="col-md-1 pl-2 p-1">\
                       <input type="text" name="new_code['+ add_number +']" class="form-control" id="new_code-'+ add_number +'" value="" placeholder="Code">\
                     </div>\
-                    <div class="col-md-1 pl-2 p-1">\
+                    <div class="col-md-0-5 pl-2 p-1">\
                       <input type="number" name="new_stock['+ add_number +']" class="form-control" id="new_stock-'+ add_number +'" value="" placeholder="Qty">\
                     </div>\
                     <div class="col-md-1 p-1">\
