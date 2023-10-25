@@ -117,10 +117,14 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     public function columnWidths(): array
 	{
 	    return [
-	        'A' => 30,
+	        'A' => 15,
 	        'B' => 30,        
-	        'C' => 30,
-	        'D' => 30,  
+	        'C' => 15,
+	        'D' => 15,
+	        'F' => 15,
+	        'G' => 15,
+	        'I' => 10,
+	        '0' => 20,  
 	    ];
 	}
 
