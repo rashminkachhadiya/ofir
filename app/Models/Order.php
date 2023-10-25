@@ -16,6 +16,11 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id','id');
     }
 
+    public function orderSupplier()
+    {
+        return $this->belongsTo(Supplier::class, 'supplier_name','id');
+    }
+
     public static function autoGenerateOrderNumber() {
         $po_detail = self::select('order_number')->orderBy('id', 'desc')->first();
         if (!empty($po_detail)) {

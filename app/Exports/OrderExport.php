@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use Carbon\Carbon;
 
 class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, WithMapping, WithEvents
 {
@@ -60,6 +61,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         	"Name",
         	"Size",
         	"Qty",
+        	"Metal",
         	"Colour",
         	"Carat",
         	"Ref.",
@@ -71,16 +73,17 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     public function map($order): array
     {
     	$data = [
-    		$order->created_at,
+			Carbon::parse($order->created_at)->format('d/m/Y'),
     		"", 
-            $order->supplier_name,
+            $order->orderSupplier->f_name,
             $order->order_number,
             $order->sku,
 	        config('params.categories')[$order->category_id],
             $order->orderUser->f_name,
             $order->size,
             $order->quantity,
-            $order->metal_colour,
+	        config('params.metal_type')[$order->metal_type],
+	        config('params.metal_colour')[$order->metal_colour],
             $order->carat,
             $order->ref,
             $order->tot_est_price,
@@ -90,16 +93,17 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     	if(isset($order->orderPicture[0]->images) && !is_null($order->orderPicture[0]->images))
     	{
 			$data = [
-	    		$order->created_at,
+				Carbon::parse($order->created_at)->format('d/m/Y'),
 	         	asset('assets/images/users/order/') . '/' . $order->orderPicture[0]->images,
-	            $order->supplier_name,
+	            $order->orderSupplier->f_name,
 	            $order->order_number,
 	            $order->sku,
 	            config('params.categories')[$order->category_id],
 	            $order->orderUser->f_name,
 	            $order->size,
 	            $order->quantity,
-	            $order->metal_colour,
+	        	config('params.metal_type')[$order->metal_type],
+	            config('params.metal_colour')[$order->metal_colour],
 	            $order->carat,
 	            $order->ref,
 	            $order->tot_est_price,
@@ -125,7 +129,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         return [
             AfterSheet::class    => function(AfterSheet $event) {
    
-                $event->sheet->getDelegate()->getStyle('A1:N1')
+                $event->sheet->getDelegate()->getStyle('A1:O1')
                                 ->getFont()
                                 ->setBold(true);
    
