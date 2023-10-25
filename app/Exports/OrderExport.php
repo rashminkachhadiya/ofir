@@ -124,7 +124,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
 	        'F' => 15,
 	        'G' => 15,
 	        'I' => 10,
-	        '0' => 20,  
+	        'O' => 20,  
 	    ];
 	}
 
