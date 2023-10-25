@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, WithMapping, WithEvents, WithDrawings
+class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, WithMapping, WithEvents
 {
 	protected $selected;
 
@@ -29,22 +29,24 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         return Order::whereIn('id',$this->selected)->get();
     }
 
-    public function drawings()
-    {
+    // public function drawings()
+    // {
     
 
-        $drawing = new Drawing();
+    //     $drawing = new Drawing();
 
     
-        $drawing->setName('Image');
-        $drawing->setDescription('This is my Image');
-        $drawing->setPath(public_path('/assets/images/users/order'));
+    //     $drawing->setName('Image');
+    //     $drawing->setDescription('This is my Image');
+    //     $drawing->setPath(public_path('/assets/images/users/order'));
+    //     echo "Yess11";
+    //     die;
         
-        $drawing->setHeight(90);
-        $drawing->setCoordinates('D1');
+    //     $drawing->setHeight(90);
+    //     $drawing->setCoordinates('D1');
 
-        return $drawing;
-    }
+    //     return $drawing;
+    // }
 
     public function headings(): array
     {
@@ -89,7 +91,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     	{
 			$data = [
 	    		$order->created_at,
-	         	$order->orderPicture[0]->images,
+	         	asset('assets/images/users/order/') . '/' . $order->orderPicture[0]->images,
 	            $order->supplier_name,
 	            $order->order_number,
 	            $order->sku,
