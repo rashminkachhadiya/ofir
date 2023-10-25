@@ -29,7 +29,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         return Order::whereIn('id',$this->selected)->get();
     }
 
-    public function drawings()
+    public function drawings($order)
     {
     
 
@@ -38,7 +38,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     
         $drawing->setName('Image');
         $drawing->setDescription('This is my Image');
-        $drawing->setPath(asset('assets/images/users/order/'));
+        $drawing->setPath(public_path('/assets/images/users/order'));
         
         $drawing->setHeight(90);
         $drawing->setCoordinates('D1');
