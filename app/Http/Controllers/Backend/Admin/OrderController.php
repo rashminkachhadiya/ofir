@@ -16,6 +16,8 @@ use View;
 use DB;
 use PDF;
 use URL;
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -416,5 +418,17 @@ class OrderController extends Controller
                     ->get()->toArray();
 
         return response()->json(['data' => $item]);
+    }
+
+    public function excelDownload(Request $request) 
+    {
+      if(isset($request->id) && !is_null($request->id))
+      {
+          $ids[] = $request->id;
+      }else if(isset($request->ids)){
+          $ids = explode(', ',$request->ids);
+      }
+
+      return Excel::download(new OrderExport($ids), 'order.xlsx');
     }
 }

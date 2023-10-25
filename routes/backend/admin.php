@@ -28,6 +28,8 @@ Route::resource('order', 'OrderController');
 Route::post('/update-order','OrderController@updateOrder');
 Route::get('/allOrders','OrderController@getAll')->name('allOrders');
 Route::get('/pdf-download','OrderController@pdfDownload')->name('pdfDownload');
+Route::get('/excel-download','OrderController@excelDownload')->name('excelDownload');
+
 Route::get('/receive-supplier','OrderController@receiveSupplier')->name('receiveSupplier');
 Route::get('/update-supplier-information','OrderController@updateSupplierInformation')->name('updateSupplierInformation');
 Route::post('/receive-supplier-save','OrderController@receiveSupplierSave')->name('receiveSupplierSave');

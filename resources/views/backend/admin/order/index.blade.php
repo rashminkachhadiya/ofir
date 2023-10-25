@@ -40,6 +40,15 @@
                     </div>
                     <div class="d-flex">
                         <div>
+                            <form action="{{ URL :: to('/admin/excel-download') }}" id="form-print" method="get">
+                                <input type="hidden" name="ids" id="print_ids">
+                                <input type="hidden" name="flag" value="view">
+                                <div class="mr-1">
+                                    <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="Export()">Export</a>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
                             <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <input type="hidden" name="flag" value="view">
@@ -121,6 +130,18 @@
             }
             
         }
+
+        function Export()
+        {
+            // alert('yess');
+            var allVals = [];
+            $("input[name='ids[]']:checked").each(function() {
+                allVals.push($(this).attr('value'));
+            });
+            $("#print_ids").val(allVals.join(', ')); 
+            $('#form-print').submit();
+        }
+
         $(function () {
 
             table = $('#manage_all').DataTable({
