@@ -39,7 +39,7 @@
                         <input type="hidden" id="supplier_id" name="supplier_id" value="">
                     </div>
                     <div class="d-flex">
-                        <!-- <div>
+                        <div>
                             <form action="{{ URL :: to('/admin/excel-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <input type="hidden" name="flag" value="view">
@@ -47,7 +47,7 @@
                                     <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="Export()">Export</a>
                                 </div>
                             </form>
-                        </div> -->
+                        </div>
                         <div>
                             <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
