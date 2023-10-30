@@ -396,6 +396,12 @@ class OrderController extends Controller
             $order->p_price = $request->p_price;
             $order->tot_p_price = $request->tot_p_price;
 
+            $order->d_weight_price = $request->d_weight_price;
+            $order->d_qty_price = $request->d_qty_price;
+            $order->p_weight_price = $request->p_weight_price;
+            $order->p_qty_price = $request->p_qty_price;
+            
+
 
            // $order->updated_by = Auth::user()->id;
            $order->save();

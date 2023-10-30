@@ -203,6 +203,17 @@
             </div>
             <div class="d-flex p-0 mt-1">
                 <div class="col-md-3 text-right">
+                    
+                </div>
+                 <div class="col-md-4 p-0">
+                    <input type="text" class="form-control" id="d_weight_price" name="d_weight_price" value="{{ $order->d_weight_price }}" placeholder="Weigth Price" readonly>
+                </div>
+                <div class="col-md-5 p-0">
+                    <input type="text" class="form-control" id="d_qty_price" name="d_qty_price" value="{{ $order->d_qty_price }}" placeholder="Qty Price" readonly>
+                </div>
+            </div>
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 text-right">
                     <strong> £ : </strong>
                 </div>
                 <div class="col-md-4 p-0">
@@ -210,6 +221,17 @@
                 </div>
                 <div class="col-md-5 p-0">
                     <input type="text" class="form-control" id="tot_p_price" name="tot_p_price" value="{{ $order->tot_p_price }}" placeholder="" readonly>
+                </div>
+            </div>
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 text-right">
+                    
+                </div>
+                 <div class="col-md-4 p-0">
+                    <input type="text" class="form-control" id="p_weight_price" name="p_weight_price" value="{{ $order->p_weight_price }}" placeholder="Weigth Price" readonly>
+                </div>
+                <div class="col-md-5 p-0">
+                    <input type="text" class="form-control" id="p_qty_price" name="p_qty_price" value="{{ $order->p_qty_price }}" placeholder="Qty Price" readonly>
                 </div>
             </div>
         </div>
@@ -336,13 +358,48 @@
             var totPoundPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#p_price").val());
             $("#tot_d_price").val(totDollarPrice.toFixed(2));
             $("#tot_p_price").val(totPoundPrice.toFixed(2));
-
+            dollarChange();
+            poundChange();
         });
+
+
 
         function finalTotal()
         {
             var finalTotal = parseFloat($("#su_work").val()) + parseFloat($("#tot_su_carat_price").val()) + parseFloat($("#su_tot_est_price").val()) + parseFloat($("#tot_su_pcs_price").val()) + parseFloat($("#su_shipping").val()) + parseFloat($("#su_other_1").val()) + parseFloat($("#su_other_2").val());
             $("#su_final_total").val(finalTotal.toFixed(2));
+            dollarChange();
+            poundChange();
+        }
+
+        $(document).on("focusout", "#su_quantity", function(e) {
+            e.preventDefault();
+            dollarChange();
+            poundChange();
+        });
+
+        function dollarChange()
+        {
+            var totDollarPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#d_price").val());
+            var totPoundPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#p_price").val());
+            $("#tot_d_price").val(totDollarPrice.toFixed(2));
+            $("#tot_p_price").val(totPoundPrice.toFixed(2));
+            var dWeightPrice =  parseFloat($("#tot_d_price").val()) / parseFloat($("#su_weight").val());
+            var dQtyPrice = parseFloat($("#tot_d_price").val()) / parseFloat($("#su_quantity").val());
+            $("#d_weight_price").val(dWeightPrice.toFixed(2));
+            $("#d_qty_price").val(dQtyPrice.toFixed(2));  
+         }
+
+        function poundChange()
+        {
+            var totDollarPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#d_price").val());
+            var totPoundPrice = parseFloat($("#su_final_total").val()) * parseFloat($("#p_price").val());
+            $("#tot_d_price").val(totDollarPrice.toFixed(2));
+            $("#tot_p_price").val(totPoundPrice.toFixed(2));
+            var pWeightPrice =  parseFloat($("#tot_p_price").val()) / parseFloat($("#su_weight").val());
+            var pQtyPrice = parseFloat($("#tot_p_price").val()) / parseFloat($("#su_quantity").val());
+            $("#p_weight_price").val(pWeightPrice.toFixed(2));
+            $("#p_qty_price").val(pQtyPrice.toFixed(2));
         }
 
         $('#editSupplier').validate({// <- attach '.validate()' to your form
