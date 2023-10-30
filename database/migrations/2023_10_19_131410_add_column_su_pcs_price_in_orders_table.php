@@ -29,6 +29,7 @@ class AddColumnSuPcsPriceInOrdersTable extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('su_pcs_price');
             $table->dropColumn('tot_su_pcs_price');
+            
         });
     }
 }
