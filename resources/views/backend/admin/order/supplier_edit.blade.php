@@ -190,25 +190,25 @@
                     <input type="text" class="form-control" id="su_final_total" name="su_final_total" value="{{ $order->su_final_total }}" placeholder="Total" readonly>
                 </div>
             </div>
-            <div class="d-flex p-0 mt-2">
-                <div class="col-md-6 p-0">
+            <div class="d-flex p-0 mt-1">
+                <div class="col-md-3 text-right">
                     <strong> $ : </strong>
                 </div>
-                <div class="col-md-6 p-0">
-                    <strong> £ : </strong>
+                 <div class="col-md-4 p-0">
+                    <input type="text" class="form-control" id="d_price" name="d_price" value="{{ $order->d_price }}" placeholder="">
+                </div>
+                <div class="col-md-5 p-0">
+                    <input type="text" class="form-control" id="tot_d_price" name="tot_d_price" value="{{ $order->tot_d_price }}" style="color: green" readonly>
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
-                <div class="col-md-3 p-0">
-                    <input type="text" class="form-control" id="d_price" name="d_price" value="{{ $order->d_price }}" placeholder="">
+                <div class="col-md-3 text-right">
+                    <strong> £ : </strong>
                 </div>
-                <div class="col-md-3 p-0">
-                    <input type="text" class="form-control" id="tot_d_price" name="tot_d_price" value="{{ $order->tot_d_price }}" style="color: green" readonly>
-                </div>
-                <div class="col-md-3 ml-1 p-0">
+                <div class="col-md-4 p-0">
                     <input type="text" class="form-control" id="p_price" name="p_price" value="{{ $order->p_price }}" placeholder="">
                 </div>
-                <div class="col-md-3 p-0">
+                <div class="col-md-5 p-0">
                     <input type="text" class="form-control" id="tot_p_price" name="tot_p_price" value="{{ $order->tot_p_price }}" placeholder="" readonly>
                 </div>
             </div>
@@ -247,13 +247,13 @@
                 <strong> Carat </strong>
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="su_carat" name="su_carat" value="{{ $order->su_carat }}" placeholder="Carat">
+                <input type="text" class="form-control" id="su_carat" name="su_carat" value="{{ $order->su_carat ?? 0 }}" placeholder="Carat">
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="su_carat_price" name="su_carat_price" value="{{ $order->su_carat_price }}" placeholder="Price">
+                <input type="text" class="form-control" id="su_carat_price" name="su_carat_price" value="{{ $order->su_carat_price ?? 0 }}" placeholder="Price">
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="tot_su_carat_price" name="tot_su_carat_price" value="{{ $order->tot_su_carat_price }}" placeholder="Total" readonly>
+                <input type="text" class="form-control" id="tot_su_carat_price" name="tot_su_carat_price" value="{{ $order->tot_su_carat_price ?? 0 }}" placeholder="Total" readonly>
             </div>
         </div>
         <div class="d-flex p-0 mt-1">
@@ -277,13 +277,13 @@
                 <strong> Pcs </strong>
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="su_pcs" name="su_pcs" value="{{ $order->su_pcs }}" placeholder="Pcs">
+                <input type="text" class="form-control" id="su_pcs" name="su_pcs" value="{{ $order->su_pcs ?? 0 }}" placeholder="Pcs">
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="su_pcs_price" name="su_pcs_price" value="{{ $order->su_pcs_price }}" placeholder="Price">
+                <input type="text" class="form-control" id="su_pcs_price" name="su_pcs_price" value="{{ $order->su_pcs_price ?? 0 }}" placeholder="Price">
             </div>
             <div class="col-md-3 p-0 text-left">
-                <input type="text" class="form-control" id="tot_su_pcs_price" name="tot_su_pcs_price" value="{{ $order->tot_su_pcs_price }}" placeholder="Total" readonly>
+                <input type="text" class="form-control" id="tot_su_pcs_price" name="tot_su_pcs_price" value="{{ $order->tot_su_pcs_price ?? 0 }}" placeholder="Total" readonly>
             </div>
         </div>
     </div>
