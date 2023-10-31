@@ -326,9 +326,9 @@
                                             <div class="col-md-1 p-0 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="stocknotes[{{ $size->id }}]" class="form-control" id="stocknotes_{{ $size->id }}" value="{{ $size->stocknotes }}">
                                             </div>
-                                            <div class="col-md-1 p-0 p-1">
+                                            <!-- <div class="col-md-1 p-0 p-1">
                                                 <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('1', 'C39')}}" alt="barcode" />
-                                            </div>
+                                            </div> -->
                                             @if($sizeCount == 0)
                                             
                                             <?php
