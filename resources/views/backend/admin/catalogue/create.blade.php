@@ -291,6 +291,7 @@
                                                 <option value="" >Select</option>
                                                 <option value="0" >Apro</option>
                                                 <option value="1" >Sold</option>
+                                                <option value="2">Transaction</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -367,6 +368,7 @@
                         <option value="">Select</option>\
                         <option value="0">Apro</option>\
                         <option value="1">Sold</option>\
+                        <option value="2">Transaction</option>\
                       </select>\
                     </div>\
                     <div class="col-md-1 p-1">\

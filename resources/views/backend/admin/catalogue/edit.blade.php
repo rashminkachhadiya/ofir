@@ -314,6 +314,7 @@
                                                 <option value="" {{ is_null($size->item_status) ? 'selected' : '' }}>Select</option>
                                                 <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
                                                 <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sold</option>
+                                                <option value="2" {{ $size->item_status == "2" ? 'selected' : '' }}>Transaction</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -380,6 +381,7 @@
                                                 <option value="" >Select</option>
                                                 <option value="0" >Apro</option>
                                                 <option value="1" >Sold</option>
+                                                <option value="2">Transaction</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -526,6 +528,7 @@
                         <option value="">Select</option>\
                         <option value="0">Apro</option>\
                         <option value="1">Sold</option>\
+                        <option value="2">Transaction</option>\
                       </select>\
                     </div>\
                     <div class="col-md-1 p-1">\
