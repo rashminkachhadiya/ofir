@@ -163,7 +163,7 @@ return [
     '11' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
-        '6' => 'BRACELETS',
+        '6' => 'Colour Stone',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',

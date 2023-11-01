@@ -1,11 +1,17 @@
-@extends('frontend.layouts.master')
+@extends('frontend.layouts.master_catalogue')
 @section('title', 'Home')
+@section('nav_link')
+<a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('/catalogue/'.$mainCatalogue) }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
+<a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">Home</a>
+@endsection
+@section('middle')
+@endsection
 @section('content')
 <style type="text/css">
     .back {
   /*background: #e2e2e2;*/
   width: 100%;
-  position: absolute;
+  /*position: absolute;*/
   top: 0;
   bottom: 0;
 }
@@ -15,7 +21,7 @@
   width: 650px;
   height: 500px;
   background-color: #e2e2e2;
-  position: absolute;
+  /*position: absolute;*/
   left: 0;
   right: 0;
   top: 0;
@@ -97,9 +103,7 @@ div.content {
         <div class="div-center">
             <div class="mb-4 d-flex" style="border-bottom: 1px solid black;">
               <div class="col-md-3">
-                <a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('/catalogue/'.$mainCatalogue) }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
-
-                <a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">Home</a>
+                
               </div>
               <div class="col-md-4">
                 <h2 style="color:black;font-style: italic; text-align: center;">{{ config('params.catalogue')[$mainCatalogue] }} <span style="font-size: 15px;">{{config('params.'.$mainCatalogue)[$subCatelogue]}}</span></h2> 
@@ -111,9 +115,6 @@ div.content {
               <div class="col-md-2">
                 <p style="color: black; margin: 0px;padding: 0px;">Gems</p>
                 {!! Form::select('metal_colour', $gems ?? [],  $selectGem ?? '', ['class' => 'form-control m-0 p-0','data-control'=>"select2", 'id'=>'gems']) !!}
-              </div>
-              <div class="col-md-1">
-                <h6 style="color:black;font-style: italic; text-align: right;"><a style="color: black;" href="{{ URL::to('/cart') }}">cart</a></h6>
               </div>
             </div>
             <div class="row" style="height: 600px; overflow-y: auto;">
