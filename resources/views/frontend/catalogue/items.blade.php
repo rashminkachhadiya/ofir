@@ -18,7 +18,7 @@
 
 .div-center {
   border-radius: 40px;
-  width: 650px;
+  width: 100%;
   height: 500px;
   background-color: #e2e2e2;
   /*position: absolute;*/
@@ -102,11 +102,11 @@ div.content {
     <div class="back">
         <div class="div-center">
             <div class="mb-4 d-flex" style="border-bottom: 1px solid black;">
-              <div class="col-md-3">
-                
-              </div>
               <div class="col-md-4">
                 <h2 style="color:black;font-style: italic; text-align: center;">{{ config('params.catalogue')[$mainCatalogue] }} <span style="font-size: 15px;">{{config('params.'.$mainCatalogue)[$subCatelogue]}}</span></h2> 
+              </div>
+              <div class="col-md-4">
+                
               </div>
               <div class="col-md-2">
                 <p style="color: black; margin: 0px;padding: 0px;">Metal</p>
@@ -119,7 +119,7 @@ div.content {
             </div>
             <div class="row" style="height: 600px; overflow-y: auto;">
                 @forelse($items as $item)
-                  <div class="col-md-4 text-center">
+                  <div class="col-md-3 col-sm-6 text-center">
                     <div>
                       <!-- <img style="border: 1px solid black;" class="mb-1"
                       src="{{asset($item->photo) }}"

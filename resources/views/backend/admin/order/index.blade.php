@@ -21,46 +21,56 @@
     </div>
     <div class="app-page-title mt-1">
         <div class="page-title-wrapper" style="display: block !important;">
-            <div class="page-title-heading" style="display: block !important;">
-                <div class="d-flex" style="justify-content: space-between;">
-                    <div class="d-flex">
-                        <div class="form-group col-md-5 col-sm-12">
+            <div class="page-title-heading" style="display: block !important; justify-content: space-between;">
+                <div class="row">
+                        <div class="col-md-2">
                             {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
                             <span id="error_email" class="has-error"></span>
                         </div>
-                        <div class="form-group col-md-5 col-sm-12">
-                            {!! Form::select('supplier_id', $suppliers ?? [],  $item->supplier_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_id']) !!}
+                        <div class="col-md-2">
+                             {!! Form::select('supplier_id', $suppliers ?? [],  $item->supplier_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_id']) !!}
                             <span id="error_email" class="has-error"></span>
                         </div>
-                        <div class="form-group col-md-6 col-sm-12">
+                        <div class="col-md-2">
                             {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
                             <span id="error_email" class="has-error"></span>
                         </div>
-                        <input type="hidden" id="supplier_id" name="supplier_id" value="">
-                    </div>
-                    <div class="d-flex">
+                        <div class="col-md-2 p-0">
+                            <input type="text" id="ref" class="form-control" name="ref" value="" placeholder="Ref">
+                        </div>
+                        <div class="col-md-1">
+                            
+                        </div>
+                        <div class="col-md-1">
+                            
+                        </div>
+                    <div class="mr-1 p-0">
                         <div>
                             <form action="{{ URL :: to('/admin/excel-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <input type="hidden" name="flag" value="view">
-                                <div class="mr-1">
+                                <div>
                                     <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="Export()">Export</a>
                                 </div>
                             </form>
                         </div>
+                    </div>
+                    <div class="mr-1 p-0">
                         <div>
                             <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
                                 <input type="hidden" name="flag" value="view">
-                                <div class="mr-1">
+                                <div>
                                     <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="printLabel(0)">View</a>
                                 </div>
                             </form>
                         </div>
+                    </div>
+                    <div class="mr-1 p-0">
                         <div>
                             <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
                                 <input type="hidden" name="ids" id="print_ids">
-                                <div class="mr-1">
+                                <div>
                                     <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">View All</a>
                                 </div>
                             </form>
@@ -158,6 +168,7 @@
                         d.supplier_id = $('#supplier_id').val();
                         d.order_status = $('#order_status').val();
                         d.ids = $("#print_ids").val();
+                        d.ref = $("#ref").val();
                     },
                     "dataType": 'json'
                 },
@@ -282,6 +293,10 @@
         });
 
         $("body").on("change","#supplier_id",function(e){
+            table.draw();    
+        });
+
+        $("body").on("keyup","#ref",function(e){
             table.draw();    
         });
 

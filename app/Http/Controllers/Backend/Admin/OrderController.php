@@ -72,6 +72,10 @@ class OrderController extends Controller
       {
         $orders->whereIn('orders.order_status', $request['order_status']);
       }
+      if(!is_null($request['ref']))
+      {
+        $orders->orwhere('orders.ref', 'LIKE','%'. $request['ref'] .'%');
+      }
       if(!is_null($request['search']['value']))
       {
         $orders->orWhere('orders.order_number', 'LIKE', '%'. $request['search']['value'] .'%');
@@ -400,7 +404,7 @@ class OrderController extends Controller
             $order->d_qty_price = $request->d_qty_price;
             $order->p_weight_price = $request->p_weight_price;
             $order->p_qty_price = $request->p_qty_price;
-            
+
 
 
            // $order->updated_by = Auth::user()->id;
