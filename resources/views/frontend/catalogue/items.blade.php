@@ -20,7 +20,7 @@
   border-radius: 40px;
   width: 100%;
   height: 500px;
-  background-color: #e2e2e2;
+  background-color: #fff;
   /*position: absolute;*/
   left: 0;
   right: 0;
