@@ -35,7 +35,7 @@
                             {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
                             <span id="error_email" class="has-error"></span>
                         </div>
-                        <div class="col-md-2 p-0">
+                        <div class="col-md-2">
                             <input type="text" id="ref" class="form-control" name="ref" value="" placeholder="Ref">
                         </div>
                         <div class="col-md-1">

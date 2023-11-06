@@ -1757,7 +1757,7 @@ pre code{
 .form-control{
     display:block;
     width:100%;
-    height:calc(1.80rem + 2px);
+    height:calc(1.80rem + 4px);
     padding:.375rem .75rem;
     font-size:0.8rem;
     font-weight:400;
@@ -8711,8 +8711,12 @@ a,button,.btn{
     margin:0;
     padding:0
 }
+.select2-container--default .select2-selection--multiple{
+    border: 1px solid #ced4da !important;
+}
 .app-page-title .page-title-heading{
-    font-size:1.25rem;
+    /*font-size:1.25rem;*/
+    /*width: 100% !important;*/
     font-weight:400;
     display:flex;
     align-content:center;
