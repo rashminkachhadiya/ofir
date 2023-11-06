@@ -117,7 +117,7 @@ div.content {
                 {!! Form::select('metal_colour', $gems ?? [],  $selectGem ?? '', ['class' => 'form-control m-0 p-0','data-control'=>"select2", 'id'=>'gems']) !!}
               </div>
             </div>
-            <div class="row" style="height: 600px; overflow-y: auto;">
+            <div class="row item-div" style="height: 600px; overflow-y: auto;">
                 @forelse($items as $item)
                   <div class="col-md-3 col-sm-6 text-center">
                     <div>
@@ -160,6 +160,9 @@ div.content {
                 <div class="minicart-catelogue-button">
                   <a class="btn btn-dark set-page mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">Set Page</a>
                 </div>
+                <div class="minicart-catelogue-button">
+                  <a class="scroll-top ml-2 btn btn-dark mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">Back to Top</a>
+                </div>
                 @endif
 
                 @if($page != 'all_product')
@@ -176,6 +179,12 @@ div.content {
 @endsection
 @push('script')
 <script type="text/javascript">
+  $('.scroll-top').on('click', function (event) {
+    $('.item-div').animate({
+      scrollTop: 0
+    }, 1000);
+  });
+
   $('.all-product').click(function(e){
     var url = new URL(window.location.href);
     var search_params = url.searchParams;
