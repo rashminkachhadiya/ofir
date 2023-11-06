@@ -117,7 +117,7 @@ class CatalogueController extends Controller
                 Session::put('previousURL',url()->previous());
             }
         }
-        $pagination = 9;
+        $pagination = 12;
         $mainCatalogue = $request->main_catalogue;
         $subCatelogue = $request->sub_catalogue;
         if(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'ALL COLLECTIONS'){
