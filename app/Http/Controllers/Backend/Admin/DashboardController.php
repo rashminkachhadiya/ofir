@@ -39,6 +39,9 @@ class DashboardController extends Controller
 		    'chart_type' => 'line',
 		    'continuous_time'       => true,
 		    'group_by_field_format' => 'Y-m-d H:i:s',
+		    'conditions'            => 
+		        [['name' => 'Order', 'condition' => '', 'color' => 'blue', 'fill' => false],
+		    	],
 		];
 		$chart1 = new LaravelChart($chart_options);
 
