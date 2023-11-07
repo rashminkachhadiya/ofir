@@ -151,7 +151,8 @@
             $("#print_ids").val(allVals.join(', ')); 
             $('#form-print').submit();
         }
-
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
         $(function () {
 
             table = $('#manage_all').DataTable({
@@ -169,6 +170,7 @@
                         d.order_status = $('#order_status').val();
                         d.ids = $("#print_ids").val();
                         d.ref = $("#ref").val();
+                        d.param = urlParams.get('param');
                     },
                     "dataType": 'json'
                 },

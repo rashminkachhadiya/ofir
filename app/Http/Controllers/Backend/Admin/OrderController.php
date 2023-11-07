@@ -80,6 +80,11 @@ class OrderController extends Controller
       {
         $orders->orWhere('orders.order_number', 'LIKE', '%'. $request['search']['value'] .'%');
       }
+      if(!is_null($request['param']))
+      {
+        $orders->where('orders.created_at', '>=', Carbon::yesterday());
+        $orders->orWhere('orders.created_at', '=',now());  
+      }
       $orders->orderBy('created_at','DESC');
       return Datatables::of($orders,$supplier,$request)
         ->addColumn('created_at', function ($orders) {
