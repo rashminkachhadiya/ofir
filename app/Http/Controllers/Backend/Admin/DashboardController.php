@@ -16,7 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
     	$orderInformation = Order::select(DB::raw("sum(orders.tot_est_price) as total_order_price"),DB::raw("count(id) as total_order"),DB::raw("SUM(CASE 
-            WHEN created_at >= '" . Carbon::yesterday() . "' OR created_at = now()  THEN 1 ELSE 0 END) AS new_order"), DB::raw("SUM(CASE 
+            WHEN created_at >= '" . Carbon::yesterday() . "' OR created_at = now()  THEN 1 ELSE 0 END) AS new_order"),DB::raw("SUM(CASE 
+            WHEN order_status = 3 THEN 1 ELSE 0 END) AS all_confirm_order"), DB::raw("SUM(CASE 
             WHEN created_at >= '" . Carbon::yesterday() . "' OR created_at = now()  THEN orders.tot_est_price ELSE 0 END) AS new_sell"))->first();
 
 

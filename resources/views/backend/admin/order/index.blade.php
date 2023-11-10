@@ -239,6 +239,8 @@
             const urlParams = new URLSearchParams(queryString);
             $('#user_id').val(urlParams.get('user_id'));
             $('#supplier_id').val(urlParams.get('supplier_id'));
+            $('#order_status').val(urlParams.get('order_status'));
+
             table.draw();
             // console.log(urlParams.get('user_id'));
             $("#manage_all").on("click", ".view", function () {
