@@ -209,8 +209,12 @@
 
     $(".print").click(function(event){
         $('.back').addClass('d-none');
+        $('.modal-header').addClass('d-none');
+        $('.action_link').addClass('d-none');
         window.print();
-        $('.back').addClass('d-block');
+        $('.back').removeClass('d-none');
+        $('.modal-header').removeClass('d-none');
+        $('.action_link').removeClass('d-none');
     })
 
     $(".fa-plus-circle").click(function(event) {
