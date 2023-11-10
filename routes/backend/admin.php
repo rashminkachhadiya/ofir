@@ -44,6 +44,7 @@ Route::get('/catalogue/{id}/copy-product', 'CatalogueController@copyProduct');
 Route::post('/catalogue-save/{id}', 'CatalogueController@copyProductSave');
 Route::get('/allCatalogue','CatalogueController@getAll')->name('allCatalogue');
 Route::get('/get-subcatalogue','CatalogueController@getSubCatalogue');
+Route::get('/get-customer','CatalogueController@getCustomer')->name('getCustomer');
 
 
 Route::resource('stock', 'StockController');

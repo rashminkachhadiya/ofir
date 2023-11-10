@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 use App\Models\Item;
+use App\Models\User;
 use App\Models\ItemStock;
 use DB;
 use URL;
@@ -626,5 +627,14 @@ class CatalogueController extends Controller
                DB::rollback();
                return response()->json(['type' => 'error', 'message' => $e->getMessage()]);
             }
+    }
+
+    public function getCustomer(Request $request)
+    {
+      $customer = User::where('f_name','LIKE',"%".$request['term']['term']."%")
+                    ->orWhere('l_name','LIKE',"%".$request['term']['term']."%")
+                    ->get()->toArray();
+
+        return response()->json(['data' => $customer]);
     }
 }

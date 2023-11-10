@@ -105,6 +105,10 @@ class StockController extends Controller
                     return "Apro";
                }elseif ($items->item_status == '1') {
                    return "Sold";
+               }elseif($items->item_status == '2'){
+                 return "Transaction";
+               }elseif($items->item_status == '3'){
+                 return "Repair";
                }
             }
         })

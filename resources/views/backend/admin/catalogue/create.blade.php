@@ -292,10 +292,12 @@
                                                 <option value="0" >Apro</option>
                                                 <option value="1" >Sold</option>
                                                 <option value="2">Transaction</option>
+                                                <option value="3">Repair</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
-                                            <input type="text" name="new_notes[0]" class="form-control" id="new_notes_0" value="" placeholder="Name">
+                                            <select name="new_notes[0]" class="form-control select-customer" id="new_notes_0">
+                                                </select>
                                         </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="date" name="new_date[0]" class="form-control" id="new_date_0" value="" placeholder="Date">
@@ -328,7 +330,34 @@
 @endsection
 @push('script')
 <script>
-
+    function selectRefresh() {
+        $(".select-customer").select2({
+            ajax: {
+            minimumInputLength: 2,
+            url: '/admin/get-customer',
+            dataType: 'json',
+            type: "GET",
+            data: function (term) {
+            return {
+                term: term
+                };
+            },
+            processResults: function (data) {
+                var arr = []
+                    $.each(data.data, function (index, value) {
+                        arr.push({
+                            id: value.f_name,
+                            text: value.f_name
+                        })
+                    })
+                return {
+                    results: arr
+                };
+            }
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+          }
+        });
+    }
     let add_number = 1;
         $("body").on("click", ".add", function (e) {
              $("#catelogue_size").append(
@@ -369,10 +398,12 @@
                         <option value="0">Apro</option>\
                         <option value="1">Sold</option>\
                         <option value="2">Transaction</option>\
+                        <option value="3">Repair</option>\
                       </select>\
                     </div>\
                     <div class="col-md-1 p-1">\
-                      <input type="text" name="new_notes['+ add_number +']" class="form-control" id="note_'+ add_number +'" value="" placeholder="Name">\
+                      <select name="new_notes['+ add_number +']" class="form-control select-customer" id="note_'+ add_number +'">\
+                        </select>\
                     </div>\
                     <div class="col-md-1 p-1">\
                       <input type="date" name="new_date['+ add_number +']" class="form-control" id="date_'+ add_number +'" value="" placeholder="Date">\
@@ -388,6 +419,7 @@
                 </div>'
             );
             add_number++;
+            selectRefresh();
         });
 
         $("body").on("click", ".remove", function (e) {
@@ -436,6 +468,32 @@
 
         let number_of_image = 1;
     $(document).ready(function () {
+        $('.select-customer').select2({
+          ajax: {
+            minimumInputLength: 2,
+            url: '/admin/get-customer',
+            dataType: 'json',
+            type: "GET",
+            data: function (term) {
+            return {
+                term: term
+                };
+            },
+            processResults: function (data) {
+                var arr = []
+                    $.each(data.data, function (index, value) {
+                        arr.push({
+                            id: value.f_name,
+                            text: value.f_name
+                        })
+                    })
+                return {
+                    results: arr
+                };
+            }
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+          }
+        });
 
         $('input[type="checkbox"].flat-green').iCheck({
             checkboxClass: 'icheckbox_flat-green',
