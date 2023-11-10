@@ -210,6 +210,7 @@
     $(".print").click(function(event){
         $('.back').addClass('d-none');
         window.print();
+        $('.back').addClass('d-block');
     })
 
     $(".fa-plus-circle").click(function(event) {
