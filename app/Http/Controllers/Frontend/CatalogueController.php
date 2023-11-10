@@ -276,4 +276,19 @@ class CatalogueController extends Controller
         $cart->save();
         return true;
     }
+
+    public function pdfPrint(Request $request)
+    {
+        $mpdf = new \Mpdf\Mpdf();
+        $item = Item::where('id',$request->item_id)->first();
+        $metalType = config('params.metal_type');
+        $metalType[''] = "Select";
+        $metalColour = config('params.metal_colour');
+        $metalColour[''] = "Select";
+        $html = view('frontend.catalogue.quick_view', compact('item','metalType','metalColour'))->render();
+        $mpdf->autoScriptToLang = true;
+        $mpdf->autoLangToFont = true;
+        $mpdf->WriteHTML($html);
+        $mpdf->Output('item.pdf','D');
+    }
 }

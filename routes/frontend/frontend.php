@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function ()
 	
 
 	Route::get('item-details/{item_id}','CatalogueController@itemDetails');
+	Route::get('pdf-print/{item_id}','CatalogueController@pdfPrint');
+
 	Route::get('my-account/order/{order_id}','MyAccountController@orderDetails');
 	Route::get('my-account/order-confim/{order_id}','MyAccountController@orderConfirm');
 	Route::get('my-account/order-cancel/{order_id}','MyAccountController@orderCancel');

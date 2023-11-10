@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Hi, {{Auth()->user()->f_name}}</h5>
-            <a href="javascript:void(0)" class="close print"><i class="fa fa-print" aria-hidden="true"></i></a>
+            <a href="{{ URL :: to('/pdf-print') }}/{{ $item->id }} " item-id="" class="close print"><i class="fa fa-print" aria-hidden="true"></i></a>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="">
@@ -208,13 +208,8 @@
     });
 
     $(".print").click(function(event){
-        $('.back').addClass('d-none');
-        $('.modal-header').addClass('d-none');
-        $('.action_link').addClass('d-none');
-        window.print();
-        $('.back').removeClass('d-none');
-        $('.modal-header').removeClass('d-none');
-        $('.action_link').removeClass('d-none');
+        var itemId = $(this).attr('item-id');
+
     })
 
     $(".fa-plus-circle").click(function(event) {
