@@ -1,4 +1,4 @@
-@extends('frontend.layouts.master')
+@extends('frontend.layouts.master_catalogue')
 @foreach($orders as $order)
 <div class="modal-body">
 <div class="row">

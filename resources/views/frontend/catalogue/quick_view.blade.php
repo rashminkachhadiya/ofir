@@ -2,6 +2,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Hi, {{Auth()->user()->f_name}}</h5>
+            <a href="javascript:void(0)" class="close print"><i class="fa fa-print" aria-hidden="true"></i></a>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="">
@@ -205,6 +206,11 @@
         $('#item-qty').val(parseInt(qty) - 1);        
        }
     });
+
+    $(".print").click(function(event){
+        $('.back').addClass('d-none');
+        window.print();
+    })
 
     $(".fa-plus-circle").click(function(event) {
        var qty = $('#item-qty').val();
