@@ -1,6 +1,17 @@
 @extends('backend.layouts.master')
 @section('title', ' All Order')
 @section('content')
+<style type="text/css">
+    .thead tr:first-child th {
+    position: sticky;
+    z-index: 12;
+    top: 0;
+    background: white;
+}
+#manage_all{
+    color: black !important;
+ }
+ </style>
     <div class="app-page-title">
         <div class="page-title-wrapper">
             <div class="page-title-heading">
@@ -86,7 +97,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
+                               class="align-middle mb-0 table table-borderless table-striped table-hover table-color">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -195,6 +206,9 @@
                     {data: 'checkbox', name: 'checkbox', searchable: false, orderable: false}
                 ],
                 "autoWidth": false,
+                "scrollX": true,
+                "scrollY": 450,
+                "alwaysCloneTop": true,
                 "lengthMenu": [25, 50, 100],
                 "language": {
                     "lengthMenu": "Show _MENU_ "

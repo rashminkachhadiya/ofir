@@ -76,6 +76,7 @@
                                 <th>#</th>
                                 <th>Code</th>
                                 <th>Date</th>
+                                <th>Image</th>
                                 <th>Catalogue</th>
                                 <th>Product</th>
                                 <th>Item Title</th>
@@ -126,6 +127,7 @@
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'sku', name: 'sku'},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'image', name:'image'},
                     {data: 'catalogue_id', name: 'catalogue_id'},
                     {data: 'sub_catalogue_id', name: 'sub_catalogue_id'},
                     {data: 'item_title', name: 'item_title'},

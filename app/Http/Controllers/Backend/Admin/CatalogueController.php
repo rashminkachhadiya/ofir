@@ -82,6 +82,10 @@ class CatalogueController extends Controller
         ->addColumn('created_at', function ($orders) {
           return Carbon::parse($orders->created_at)->format('d/m/Y');
         })
+        ->addColumn('image', function ($orders) {
+            return view('backend.admin.catalogue.image', ['orders'=>$orders]) ;
+           // return $orders->created_at;
+        })
         ->addColumn('catalogue_id', function ($items) {
            return config('params.catalogue')[$items->catalogue_id];
         })

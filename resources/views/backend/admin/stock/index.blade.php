@@ -87,6 +87,7 @@
                                 <th>#</th>
                                 <th></th>
                                 <th>Date</th>
+                                <th>Image</th>
                                 <th>Code</th>
                                 <th>Sub Code</th>
                                 <th>Qty</th>
@@ -157,6 +158,7 @@
                     {data: 'DT_RowIndex', searchable: false, orderable: false},
                     {data: 'check', name: 'check', searchable: false, orderable: false},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'image', name:'image'},
                     {data: 'sku', name: 'items.sku'},
                     {data: 'item_code', name: 'item_code'},
                     {data: 'tot_qty', name: 'tot_qty'},

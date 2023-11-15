@@ -38,7 +38,7 @@ class StockController extends Controller
          $can_delete = "style='display:none;'";
       }
 
-      $items = ItemStock::select('item_stocks.*',DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"),'items.sku')
+      $items = ItemStock::select('item_stocks.*','items.photo',DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"),'items.sku')
             ->leftjoin('items','items.id','=','item_stocks.item_id')->groupBy('item_stocks.id');
         if(!is_null($request['item_status_sold']) && $request['item_status_sold'] == 1)
         {
@@ -80,6 +80,10 @@ class StockController extends Controller
         })
         ->addColumn('date', function ($items) {
           return Carbon::parse($items->date)->format('d/m/Y');
+        })
+        ->addColumn('image', function ($items) {
+            return view('backend.admin.catalogue.image', ['orders'=>$items]) ;
+           // return $orders->created_at;
         })
         ->addColumn('check', function ($items) {
             $checked = ($items->check == 1) ? 'checked' : '';
