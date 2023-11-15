@@ -69,6 +69,9 @@
                             <div>
                                 <p id="total_ct_val">0.00</p>                        
                             </div>
+                        </div>
+                        <div class="d-flex col-md-12" style="align-items: center">
+                            <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="resetStock()">Reset</a>
                         </div>  
                     </div>
                 </div>
@@ -117,7 +120,21 @@
         }
     </style>
     <script>
-         function checkStock(val)
+        function resetStock(){
+           $.ajax({
+                type: "GET",
+                url: '{{ url("admin/stock-reset") }}',
+                datatype: 'html',
+                success: function (data) {
+                    table.draw();
+                },
+                error: function (result) {
+                    $("#modal_data").html("Sorry Cannot Load Data");
+                }
+            }); 
+        }
+
+        function checkStock(val)
         {
             var stockId = $(val).attr('value');
             $.ajax({

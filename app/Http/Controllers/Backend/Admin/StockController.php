@@ -200,4 +200,11 @@ class StockController extends Controller
         $stock->save();
         return true;
     }
+
+    public function stockReset(Request $request)
+    {
+        ItemStock::query()->update([
+            'check' => 0]);
+        return true;
+    }
 }

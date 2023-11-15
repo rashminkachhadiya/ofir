@@ -50,6 +50,7 @@ Route::get('/get-customer','CatalogueController@getCustomer')->name('getCustomer
 Route::resource('stock', 'StockController');
 Route::get('/allStock','StockController@getAll')->name('allStock');
 Route::get('/stock-check','StockController@stockCheck')->name('stockCheck');
+Route::get('/stock-reset', 'StockController@stockReset')->name('stockReset');
 
 Route::resource('cart', 'CartController');
 Route::get('/allCarts','CartController@getAll')->name('allCarts');

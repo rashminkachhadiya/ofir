@@ -24,20 +24,20 @@
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> User Name </label>
             <input type="text" class="form-control" id="username" name="username" value="{{$user->username}}" placeholder=""
-                   required>
+                   >
             <span id="error_username" class="has-error"></span>
         </div>
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Password </label>
             <input type="text" class="form-control" id="password" name="password" value="{{ $user->password }}" placeholder=""
-                   required>
+                   >
             <span id="error_password" class="has-error"></span>
         </div>
 
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Exp. Time </label>
             <input type="text" class="form-control" id="datepicker" name="exp_date" value="{{ $user->exp_time}}" placeholder=""
-                   required>
+                   >
             <span id="error_password" class="has-error"></span>
         </div>
         <div class="form-group col-md-4 col-sm-12">
