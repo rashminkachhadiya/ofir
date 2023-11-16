@@ -145,15 +145,10 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 for ($i = 0; $i < count($orders); $i++) //iterate based on row count
                 {
                     $event->sheet->getRowDimension($row)->setRowHeight(85);
+                    $event->sheet->getStyle("B2:B2")
+                    ->setValignment('center')->setAlignment('center');
                     $row++;
                 }
-
-                $event->sheet->cells('B2', function($cell) {
-
-                    // manipulate the cell
-                    $cell->setAlignment('center');
-
-                });
             },
         ];
     }
