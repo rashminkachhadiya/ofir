@@ -144,7 +144,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 $row = 2;
                 for ($i = 2; $i < count($orders); $i++) //iterate based on row count
                 {
-                    $event->sheet->getRowDimension($row)->setRowHeight(50);
+                    $event->sheet->getRowDimension(2)->setRowHeight(50);
                     $row++;
                 }
    
