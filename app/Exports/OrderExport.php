@@ -139,7 +139,12 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                                 ->getFont()
                                 ->setBold(true);
 
-                $event->sheet->getColumnDimension('B')->setAutoSize(true);
+                $orders = Order::whereIn('id',$this->selected)->get();
+                //Set row height
+                for ($i = 2; $i < count($orders); $i++) //iterate based on row count
+                {
+                    $event->sheet->getRowDimension('B' . +$i)->setRowHeight(100);
+                }
    
             },
         ];
