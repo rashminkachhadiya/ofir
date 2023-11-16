@@ -41,8 +41,8 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
             $drawing->setName('Image');
             $drawing->setDescription('This is my Image');
             $drawing->setPath(public_path('/assets/images/users/order/').$order->orderPicture[0]->images);
-            $drawing->setHeight(100);
-             $drawing->setWidth(100);
+            $drawing->setHeight(50);
+            $drawing->setWidth(50);
             $drawing->setCoordinates('B'.$start);
             $start++;
             $drawings [] = ($drawing);   
@@ -140,11 +140,12 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                                 ->setBold(true);
 
                 $orders = Order::whereIn('id',$this->selected)->get();
-                //Set row height
-                // for ($i = 2; $i < count($orders); $i++) //iterate based on row count
-                // {
-                    $event->sheet->getRowDimension(2)->setRowHeight(100);
-                // }
+                // Set row height
+                for ($i = 2; $i < count($orders); $i++) //iterate based on row count
+                {
+                    $event->sheet->getRowDimension($i)->setRowHeight(50);
+                    $event->sheet->getColumnDimension('B')->setWidth(50);
+                }
    
             },
         ];
