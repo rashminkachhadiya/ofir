@@ -144,7 +144,13 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 $row = 2;
                 for ($i = 0; $i < count($orders); $i++) //iterate based on row count
                 {
-                    $event->sheet->getRowDimension($row)->setRowHeight(60);
+                    $event->sheet->getRowDimension($row)->setRowHeight(85);
+                    $event->sheet->getDelegate()->getStyle('B2:B2')
+                                ->getAlignment()
+                                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                    $event->sheet->getDelegate()->getStyle('B2:B2')
+                                ->getAlignment()
+                                ->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
                     $row++;
                 }
             },
