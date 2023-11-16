@@ -39,7 +39,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     
         $drawing->setName('Image');
         $drawing->setDescription('This is my Image');
-        $drawing->setPath(public_path('/assets/images/users/order'));
+        $drawing->setPath(public_path('/assets/images/users/order/1694614515.jpg'));
         $drawing->setHeight(90);
          $drawing->setWidth(120);
         $drawing->setCoordinates('D1');
