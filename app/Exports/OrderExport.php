@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use Carbon\Carbon;
 
-class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, WithDrawings,WithEvents
+class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,WithDrawings,WithMapping,WithEvents
 {
 	protected $selected;
 
@@ -39,10 +39,10 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     
         $drawing->setName('Image');
         $drawing->setDescription('This is my Image');
-        $drawing->setPath(public_path('/assets/images/users/order/').$order->orderPicture[0]->images);
+        $drawing->setPath(public_path('/assets/images/users/order/1694614515.jpg'));
         $drawing->setHeight(90);
          $drawing->setWidth(120);
-        $drawing->setCoordinates('D1');
+        $drawing->setCoordinates('B1');
 
         return $drawing;
     }
@@ -92,7 +92,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     	{
 			$data = [
 				Carbon::parse($order->created_at)->format('d/m/Y'),
-                $this->drawings($order),
+                "",
 	            $order->orderSupplier->f_name,
 	            $order->order_number,
 	            $order->sku,
