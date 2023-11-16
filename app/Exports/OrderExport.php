@@ -30,7 +30,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         return Order::whereIn('id',$this->selected)->get();
     }
 
-    public function drawings()
+    public function drawings($order)
     {
     
 
@@ -39,7 +39,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
     
         $drawing->setName('Image');
         $drawing->setDescription('This is my Image');
-        $drawing->setPath(public_path('/assets/images/users/order/').$this->orderPicture[0]->images);
+        $drawing->setPath(public_path('/assets/images/users/order/').$order->orderPicture[0]->images);
         $drawing->setHeight(90);
          $drawing->setWidth(120);
         $drawing->setCoordinates('D1');
@@ -68,49 +68,49 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         ];
     }
 
-   //  public function map($order): array
-   //  {
-   //  	$data = [
-			// Carbon::parse($order->created_at)->format('d/m/Y'),
-   //  		"", 
-   //          $order->orderSupplier->f_name,
-   //          $order->order_number,
-   //          $order->sku,
-	  //       config('params.categories')[$order->category_id],
-   //          $order->orderUser->f_name,
-   //          $order->size,
-   //          $order->quantity,
-	  //       config('params.metal_type')[$order->metal_type],
-	  //       config('params.metal_colour')[$order->metal_colour],
-   //          $order->carat,
-   //          $order->ref,
-   //          $order->tot_est_price,
-   //          config('params.order_status')[$order->order_status],
-   //  	];
+    public function map($order): array
+    {
+    	$data = [
+			Carbon::parse($order->created_at)->format('d/m/Y'),
+    		"", 
+            $order->orderSupplier->f_name,
+            $order->order_number,
+            $order->sku,
+	        config('params.categories')[$order->category_id],
+            $order->orderUser->f_name,
+            $order->size,
+            $order->quantity,
+	        config('params.metal_type')[$order->metal_type],
+	        config('params.metal_colour')[$order->metal_colour],
+            $order->carat,
+            $order->ref,
+            $order->tot_est_price,
+            config('params.order_status')[$order->order_status],
+    	];
 
-   //  	if(isset($order->orderPicture[0]->images) && !is_null($order->orderPicture[0]->images))
-   //  	{
-			// $data = [
-			// 	Carbon::parse($order->created_at)->format('d/m/Y'),
-	  //        	asset('assets/images/users/order/') . '/' . $order->orderPicture[0]->images,
-	  //           $order->orderSupplier->f_name,
-	  //           $order->order_number,
-	  //           $order->sku,
-	  //           config('params.categories')[$order->category_id],
-	  //           $order->orderUser->f_name,
-	  //           $order->size,
-	  //           $order->quantity,
-	  //       	config('params.metal_type')[$order->metal_type],
-	  //           config('params.metal_colour')[$order->metal_colour],
-	  //           $order->carat,
-	  //           $order->ref,
-	  //           $order->tot_est_price,
-   //          	config('params.order_status')[$order->order_status],
-   //  		];
-   //  	}
+    	if(isset($order->orderPicture[0]->images) && !is_null($order->orderPicture[0]->images))
+    	{
+			$data = [
+				Carbon::parse($order->created_at)->format('d/m/Y'),
+                $this->drawings($order),
+	            $order->orderSupplier->f_name,
+	            $order->order_number,
+	            $order->sku,
+	            config('params.categories')[$order->category_id],
+	            $order->orderUser->f_name,
+	            $order->size,
+	            $order->quantity,
+	        	config('params.metal_type')[$order->metal_type],
+	            config('params.metal_colour')[$order->metal_colour],
+	            $order->carat,
+	            $order->ref,
+	            $order->tot_est_price,
+            	config('params.order_status')[$order->order_status],
+    		];
+    	}
 
-   //  	return $data;
-   //  }
+    	return $data;
+    }
 
     public function columnWidths(): array
 	{
