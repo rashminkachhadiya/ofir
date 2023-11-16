@@ -138,6 +138,8 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 $event->sheet->getDelegate()->getStyle('A1:O1')
                                 ->getFont()
                                 ->setBold(true);
+
+                $event->sheet->getColumnDimension('B')->setAutoSize(true);
    
             },
         ];
