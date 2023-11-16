@@ -146,7 +146,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 {
                     $event->sheet->getRowDimension($row)->setRowHeight(85);
                     $event->sheet->getStyle("B2:B2")
-                    ->setValignment('center')->setAlignment('center');
+                    getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
                     $row++;
                 }
             },
