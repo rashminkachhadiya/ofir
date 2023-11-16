@@ -30,11 +30,11 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths, Wit
         return Order::whereIn('id',$this->selected)->get();
     }
 
-    public function drawings()
+    public function drawings($order)
     {
     
 
-        $drawing = new Drawing($order);
+        $drawing = new Drawing();
 
     
         $drawing->setName('Image');
