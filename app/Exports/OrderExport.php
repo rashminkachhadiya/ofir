@@ -139,8 +139,8 @@ class OrderExport implements FromCollection, ShouldAutoSize, WithHeadings, WithC
                 $event->sheet->getDelegate()->getStyle('A1:O1')
                                 ->getFont()
                                 ->setBold(true);
-                 $event->sheet->getDelegate()->getStyle("A2:O2")->
-                    getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                 // $event->sheet->getDelegate()->getStyle("A2:O2")->
+                 //    getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
                 $orders = Order::whereIn('id',$this->selected)->get();
                 //Set row height
                 $row = 2;
