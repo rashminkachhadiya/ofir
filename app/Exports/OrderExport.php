@@ -121,7 +121,7 @@ class OrderExport implements FromCollection, ShouldAutoSize, WithHeadings, WithC
 	{
 	    return [
 	        'A' => 15,
-	        'B' => 16,        
+	        'B' => 12,        
 	        'C' => 15,
 	        'D' => 15,
 	        'F' => 15,
@@ -146,8 +146,7 @@ class OrderExport implements FromCollection, ShouldAutoSize, WithHeadings, WithC
                 $row = 2;
                 for ($i = 0; $i < count($orders); $i++) //iterate based on row count
                 {
-                    $event->sheet->getRowDimension($row)->setRowHeight(80);
-                   
+                    $event->sheet->getRowDimension($row)->setRowHeight(75);
                     $row++;
                 }
             },
