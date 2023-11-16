@@ -35,7 +35,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
     
         $orders = Order::whereIn('id',$this->selected)->get();
         $start = 2;
-        foreach ($orders as $key => $value) {
+        foreach ($orders as $order) {
             $drawing = new Drawing();
             $drawing->setName('Image');
             $drawing->setDescription('This is my Image');
