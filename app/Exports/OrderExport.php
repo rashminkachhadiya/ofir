@@ -11,9 +11,10 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Carbon\Carbon;
 
-class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,WithDrawings,WithMapping,WithEvents
+class OrderExport implements FromCollection, ShouldAutoSize, WithHeadings, WithColumnWidths,WithDrawings,WithMapping,WithEvents
 {
 	protected $selected;
 
@@ -145,7 +146,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 $row = 2;
                 for ($i = 0; $i < count($orders); $i++) //iterate based on row count
                 {
-                    $event->sheet->getRowDimension($row)->setRowHeight(85);
+                    $event->sheet->getRowDimension($row)->setRowHeight(80);
                    
                     $row++;
                 }
