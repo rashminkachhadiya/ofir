@@ -34,19 +34,21 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
     {
     
         $orders = Order::whereIn('id',$this->selected)->get();
+        $drawings = [];
         $start = 2;
         foreach ($orders as $order) {
             $drawing = new Drawing();
             $drawing->setName('Image');
             $drawing->setDescription('This is my Image');
             $drawing->setPath(public_path('/assets/images/users/order/').$order->orderPicture[0]->images);
-            $drawing->setHeight(20);
-             $drawing->setWidth(20);
+            $drawing->setHeight(100);
+             $drawing->setWidth(100);
             $drawing->setCoordinates('B'.$start);
             $start++;
-            return $drawing;    
+            $drawings [] = ($drawing);   
         }
         
+        return $drawings; 
     }
 
     public function headings(): array
