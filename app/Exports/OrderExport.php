@@ -151,7 +151,7 @@ class OrderExport implements FromCollection, WithHeadings, WithColumnWidths,With
                 $event->sheet->cell('B2', function($cell) {
 
                     // manipulate the cell
-                    $cells->setAlignment('center');
+                    $cell->setAlignment('center');
 
                 });
             },
