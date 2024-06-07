@@ -638,7 +638,7 @@ class CatalogueController extends Controller
       $customer = User::where('f_name','LIKE',"%".$request['term']['term']."%")
                     ->orWhere('l_name','LIKE',"%".$request['term']['term']."%")
                     ->get()->toArray();
-
+      $customer[''] = ['f_name' => ''];
         return response()->json(['data' => $customer]);
     }
 }

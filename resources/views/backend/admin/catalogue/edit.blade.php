@@ -446,6 +446,8 @@
 <script type="text/javascript">
     function selectRefresh() {
         $(".select-customer").select2({
+            placeholder: 'All',
+            allowClear: true,
             ajax: {
             minimumInputLength: 2,
             url: '/admin/get-customer',
@@ -457,7 +459,7 @@
                 };
             },
             processResults: function (data) {
-                var arr = []
+                var arr = [];
                     $.each(data.data, function (index, value) {
                         arr.push({
                             id: value.f_name,
