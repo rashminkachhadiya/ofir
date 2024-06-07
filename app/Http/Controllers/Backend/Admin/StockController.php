@@ -19,8 +19,11 @@ class StockController extends Controller
      */
     public function index()
     {
-        echo 'yess';
+        $item = ItemStock::where('item_status',1)->get();
+        echo "<pre>";
+        print_r($item);
         die;
+        $item->delete();
         $itemStatus = ['0'=>'Apro','1'=>'Sold','2' => 'In Stock'];
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
