@@ -19,6 +19,8 @@ class StockController extends Controller
      */
     public function index()
     {
+        echo 'yess';
+        die;
         $itemStatus = ['0'=>'Apro','1'=>'Sold','2' => 'In Stock'];
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
