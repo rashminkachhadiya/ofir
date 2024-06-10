@@ -518,6 +518,7 @@ class CatalogueController extends Controller
                         $itemStock->total_ct = $value * $request->ct[$key];
                         $itemStock->notes = $request->notes[$key];
                         $itemStock->stocknotes = $request->stocknotes[$key];
+                        $itemStock->location = $request->location[$key];
                         $itemStock->item_status = $request->item_status[$key];
                         $itemStock->date = !is_null($request->date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->date[$key])) : NULL;
                         $itemStock->save();
@@ -541,6 +542,7 @@ class CatalogueController extends Controller
                         $itemStock->total_ct = $value * $request->new_ct[$key];
                         $itemStock->notes = $request->new_notes[$key];
                         $itemStock->stocknotes = $request->new_stocknotes[$key];
+                        $itemStock->location = $request->new_location[$key];
                         $itemStock->item_status = $request->new_item_status[$key];
                         $itemStock->date = !is_null($request->new_date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->new_date[$key])) : NULL;
                         $itemStock->save();

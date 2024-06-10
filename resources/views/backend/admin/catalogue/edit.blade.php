@@ -265,6 +265,9 @@
                                         <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Note</strong></p>
                                         </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Location</strong></p>
+                                        </div>
                                     </div>
                                     @if(count($itemStock) > 0  && !empty($itemStock))
                                         <?php
@@ -329,6 +332,9 @@
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="stocknotes[{{ $size->id }}]" class="form-control" id="stocknotes_{{ $size->id }}" value="{{ $size->stocknotes }}">
+                                            </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <input style="color: {{ $colors }}" type="text" name="location[{{ $size->id }}]" class="form-control" id="location_{{ $size->id }}" value="{{ $size->location }}">
                                             </div>
                                             <!-- <div class="col-md-1 p-0 p-1">
                                                 <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('1', 'C39')}}" alt="barcode" />
@@ -399,6 +405,7 @@
                                             <div class="col-md-1 p-0 p-1">
                                               <input type="text" name="new_stocknotes[0]" class="form-control" id="new_stocknotes_0" value="" placeholder="Note">
                                             </div>
+
                                         
                                     </div>
                                     @endif
@@ -576,6 +583,9 @@
                     </div>\
                     <div class="col-md-1 p-0 p-1">\
                         <input type="text" name="new_stocknotes['+ add_number +']" class="form-control" id="stocknotes_'+ add_number +'" value="" placeholder="Note">\
+                    </div>\
+                    <div class="col-md-1 p-0 p-1">\
+                        <input type="text" name="new_location['+ add_number +']" class="form-control" id="location_'+ add_number +'" value="" placeholder="location">\
                     </div>\
                     <div class="col-md-1">\
                         <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\

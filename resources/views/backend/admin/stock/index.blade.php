@@ -103,6 +103,7 @@
                                 <th>Customer</th>
                                 <th>Date</th>
                                 <th>Note</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -188,6 +189,7 @@
                     {data: 'notes', name: 'notes'},
                     {data: 'date', name: 'date'},
                     {data: 'stocknotes', name: 'stocknotes'},
+                    {data: 'action', name: 'action'},
                 ],
                 footerCallback: function (row, data, start, end, display) {
                     let api = this.api();
@@ -302,7 +304,7 @@
             // Delete
             $("#manage_all").on("click", ".delete", function () {
                 var id = $(this).attr('id');
-                ajax_submit_delete('catalogue', id)
+                ajax_submit_delete('stock', id)
             });
 
             $("#manage_all").on("click", ".copy-product", function () {

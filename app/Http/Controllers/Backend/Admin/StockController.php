@@ -119,7 +119,13 @@ class StockController extends Controller
                }
             }
         })
-        ->rawColumns(['created_at', 'date','sku', 'check'])
+        ->addColumn('action', function ($items) {
+           $html = '<div class="btn-group">';
+              $html .= '<a data-toggle="tooltip" id="' . $items->id . '" class="btn btn-xs btn-danger mr-1 delete" title="Delete"><i class="fa fa-trash"></i> </a>';
+           $html .= '</div>';
+           return $html;
+        })
+        ->rawColumns(['created_at', 'date','sku', 'check', 'action'])
         ->addIndexColumn()
         ->make(true);
    }
@@ -185,9 +191,16 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        if ($request->ajax()) {
+        
+            $item = ItemStock::find($id); //Get user with specified id
+            $item->delete();
+            return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+          } else {
+             return response()->json(['status' => 'false', 'message' => "Access only ajax request"]);
+          }
     }
 
     public function stockCheck(Request $request)
