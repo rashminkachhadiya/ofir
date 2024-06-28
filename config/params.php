@@ -46,7 +46,7 @@ return [
         '7' => 'GRAFF',
         '8' => 'PIAGET',
         '9' => 'Fred',
-        '10' => 'Buccellati',
+        '10' => 'Messika',
         '11' => 'LEBAR',
     ],
 
@@ -168,6 +168,8 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
+        '7' => 'TENNIS',
+        '8' => 'TENNIS MOUNT',
     ],
 
     'in_stock' => [
