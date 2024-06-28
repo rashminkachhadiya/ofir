@@ -229,6 +229,9 @@
                                 <div class="col" id="catelogue_size">
                                     <hr>
                                     <div class="row text-center">
+                                        <div class="col-md-0-5 pl-1 p-1">
+                                            <p><strong>Check</strong></p>
+                                        </div>
                                         <div class="col-md-1 pl-1 p-1">
                                             <p><strong>Date</strong></p>
                                         </div>
@@ -265,9 +268,6 @@
                                         <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Note</strong></p>
                                         </div>
-                                        <div class="col-md-1 pl-2 p-1">
-                                            <p><strong> Location</strong></p>
-                                        </div>
                                     </div>
                                     @if(count($itemStock) > 0  && !empty($itemStock))
                                         <?php
@@ -282,10 +282,16 @@
                                             }
                                         ?>
                                         <div  class="form-group row mt-1 item_size-{{$size->id}}">
+                                            <div style="text-align: center; " class="col-md-0-5 pl-2 p-1">
+                                                <?php
+                                                    $checked = ($size->check == 1) ? 'checked' : ''; 
+                                                ?>
+                                              <input style="width:30px; height:23px;" class="" type="checkbox" value="{{ $size->id }}" onchange="checkStock(this)" name="id" {{ $checked }}/>
+                                            </div>
                                             <div style="text-align: center;" class="col-md-1 pl-2 p-1">
                                               <p style="margin: revert; color: {{ $colors }}">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
                                             </div>
-                                            <div class="col-md-1 pl-2 p-1">
+                                            <div class="col-md-1 pl-2 p-1" style="max-width: 8% !important;">
                                               <input style="color: {{ $colors }}" type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
                                             </div>
                                             <div class="col-md-0-5 pl-2 p-1">
@@ -318,7 +324,9 @@
                                                 <option value="0" {{ $size->item_status == "0" ? 'selected' : '' }}>Apro</option>
                                                 <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sold</option>
                                                 <option value="2" {{ $size->item_status == "2" ? 'selected' : '' }}>Transaction</option>
-                                                <option value="2" {{ $size->item_status == "3" ? 'selected' : '' }}>Repair</option>
+                                                <option value="3" {{ $size->item_status == "3" ? 'selected' : '' }}>Repair</option>
+                                                <option value="4" {{ $size->item_status == "4" ? 'selected' : '' }}>UK</option>
+                                                <option value="5" {{ $size->item_status == "5" ? 'selected' : '' }}>Israel</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
@@ -332,9 +340,6 @@
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="stocknotes[{{ $size->id }}]" class="form-control" id="stocknotes_{{ $size->id }}" value="{{ $size->stocknotes }}">
-                                            </div>
-                                            <div class="col-md-1 p-0 p-1">
-                                              <input style="color: {{ $colors }}" type="text" name="location[{{ $size->id }}]" class="form-control" id="location_{{ $size->id }}" value="{{ $size->location }}">
                                             </div>
                                             <!-- <div class="col-md-1 p-0 p-1">
                                                 <img src="data:image/png;base64,{{DNS1D::getBarcodePNG('1', 'C39')}}" alt="barcode" />
@@ -438,6 +443,22 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+    function checkStock(val)
+        {
+            var stockId = $(val).attr('value');
+            $.ajax({
+                type: "GET",
+                url: '{{ url("admin/stock-check") }}?stock_id='+stockId,
+                datatype: 'html',
+                success: function (data) {
+                    
+                },
+                error: function (result) {
+                    $("#modal_data").html("Sorry Cannot Load Data");
+                }
+            });
+        }
+
     function showImage(imgNumber) {
         const imageUploader = document.querySelector("#photo-"+imgNumber);
         const imagePreview = document.querySelector("#preview-"+imgNumber);
@@ -584,9 +605,6 @@
                     <div class="col-md-1 p-0 p-1">\
                         <input type="text" name="new_stocknotes['+ add_number +']" class="form-control" id="stocknotes_'+ add_number +'" value="" placeholder="Note">\
                     </div>\
-                    <div class="col-md-1 p-0 p-1">\
-                        <input type="text" name="new_location['+ add_number +']" class="form-control" id="location_'+ add_number +'" value="" placeholder="location">\
-                    </div>\
                     <div class="col-md-1">\
                         <a class="btn btn-danger remove" data-id="'+ add_number +'" style="color: white;">\
                             <i class="fa fa-minus" aria-hidden="true"></i>\
@@ -716,7 +734,7 @@
                     });
             }
             // <- end 'submitHandler' callback
-        });        
+        });
 
         $('body').on('click', '.size_stock', function(event) {
             var list_id = [];

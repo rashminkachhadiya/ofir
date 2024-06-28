@@ -31,6 +31,16 @@
                             <label for=""> Apro </label><br/>
                             {!! Form::radio('item_status_apro', '1',false,['class' => '']) !!} Yes
                             {!! Form::radio('item_status_apro', '0',false,['class' => '']) !!} No
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""> UK </label><br/>
+                            {!! Form::radio('item_status_uk', '1',false,['class' => '']) !!} Yes
+                            {!! Form::radio('item_status_uk', '0',false,['class' => '']) !!} No
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for=""> Israel </label><br/>
+                            {!! Form::radio('item_status_israel', '1',false,['class' => '']) !!} Yes
+                            {!! Form::radio('item_status_israel', '0',false,['class' => '']) !!} No
                         </div>  
                     </div>
                     <div class="col-md-4">
@@ -169,6 +179,8 @@
                         d.item_status_sold = $('input[name="item_status_sold"]:checked').val();
                         d.item_status_in_stock = $('input[name="item_status_in_stock"]:checked').val();
                         d.item_status_apro = $('input[name="item_status_apro"]:checked').val();
+                        d.item_status_uk = $('input[name="item_status_uk"]:checked').val();
+                        d.item_status_israel = $('input[name="item_status_israel"]:checked').val();
                     },
                     "dataType": 'json'
                 },
@@ -272,6 +284,14 @@
             });
 
             $("input[name='item_status_apro']").on('change',function(){
+                table.draw();
+            });
+
+            $("input[name='item_status_uk']").on('change',function(){
+                table.draw();
+            });
+
+            $("input[name='item_status_israel']").on('change',function(){
                 table.draw();
             });
 
