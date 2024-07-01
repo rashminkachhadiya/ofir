@@ -502,12 +502,7 @@
           }
         });
     }
-    $(window).on('load', function() {
-        selectRefresh();
-    });
-    $(document).load(function () {
-        selectRefresh();
-    });
+    
     $(document).ready(function () {
 
         $('input[type="checkbox"].flat-green').iCheck({
