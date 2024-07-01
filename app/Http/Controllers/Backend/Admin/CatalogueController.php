@@ -521,6 +521,7 @@ class CatalogueController extends Controller
                         $itemStock->location = $request->location[$key];
                         $itemStock->item_status = $request->item_status[$key];
                         $itemStock->date = !is_null($request->date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->date[$key])) : NULL;
+                        $itemStock->created_at = !is_null($request->created_date[$key]) ? date('Y-m-d H:i:s' , strtotime($request->created_date[$key])) : NULL;
                         $itemStock->save();
                     }
                     $itemStockDelete = ItemStock::where('item_id',$item->id)->whereNotIn('id',array_keys($request->stock))->delete();

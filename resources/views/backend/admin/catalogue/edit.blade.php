@@ -289,7 +289,7 @@
                                               <input style="width:30px; height:23px;" class="" type="checkbox" value="{{ $size->id }}" onchange="checkStock(this)" name="id" {{ $checked }}/>
                                             </div>
                                             <div style="text-align: center;" class="col-md-1 pl-2 p-1">
-                                              <p style="margin: revert; color: {{ $colors }}">{{ \Carbon\Carbon::parse($size->created_at)->format('d/m/Y') }}</p>
+                                                <input style="color: {{ $colors }}" type="date" name="created_date[{{ $size->id }}]" class="form-control" id="created-date_{{ $size->id }}" value="{{ !is_null($size->created_at) ? \Carbon\Carbon::parse($size->created_at)->format('Y-m-d') : NULL }}" placeholder="Date">
                                             </div>
                                             <div class="col-md-1 pl-2 p-1" style="max-width: 8% !important;">
                                               <input style="color: {{ $colors }}" type="text" name="code[{{$size->id}}]" class="form-control" id="code-0" value="{{ $size->item_code }}" placeholder="Code">
@@ -474,7 +474,7 @@
 <script type="text/javascript">
     function selectRefresh() {
         $(".select-customer").select2({
-            placeholder: 'All',
+            placeholder: 'Select',
             allowClear: true,
             ajax: {
             minimumInputLength: 2,
@@ -502,7 +502,11 @@
           }
         });
     }
+    $(window).on('load', function() {
+        selectRefresh();
+    });
     $(document).ready(function () {
+
         $('input[type="checkbox"].flat-green').iCheck({
             checkboxClass: 'icheckbox_flat-green',
         });
