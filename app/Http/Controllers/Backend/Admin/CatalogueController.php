@@ -37,26 +37,26 @@ class CatalogueController extends Controller
       //   print_r($allCatalogue);
       //   die;
 
-      // for ($i=1003; $i < 1101 ; $i++) {
-      //     $item = new Item();
-      //     $item->sku = 'LE'.$i;
-      //     $item->catalogue_id = 11;
-      //     $item->sub_catalogue_id = 9;
-      //     $item->item_title = 'girls earring';
-      //     $item->is_allcollection = 0;
-      //     $item->is_available = 0;
-      //     $item->metal_colour = 1;
-      //     $item->metal_type = 4;
-      //     $item->is_active = 1;
-      //     $item->in_stock = 0;
-      //     $item->created_by = Auth::user()->id;
-      //     $item->updated_by = Auth::user()->id;
-      //     $item->save();
+      for ($i=2001; $i < 2025 ; $i++) {
+          $item = new Item();
+          $item->sku = 'LE'.$i;
+          $item->catalogue_id = 11;
+          $item->sub_catalogue_id = 9;
+          $item->item_title = 'girls earring';
+          $item->is_allcollection = 0;
+          $item->is_available = 0;
+          $item->metal_colour = 1;
+          $item->metal_type = 4;
+          $item->is_active = 1;
+          $item->in_stock = 0;
+          $item->created_by = Auth::user()->id;
+          $item->updated_by = Auth::user()->id;
+          $item->save();
 
-      //     $itemStock = new ItemStock();
-      //     $itemStock->item_id = $item->id;
-      //     $itemStock->save();
-      // }
+          $itemStock = new ItemStock();
+          $itemStock->item_id = $item->id;
+          $itemStock->save();
+      }
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
         $subCatalogue = config('params.1');
