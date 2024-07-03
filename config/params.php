@@ -166,6 +166,7 @@ return [
         '6' => 'Colour Stone',
         '2' => 'PENDANT',
         '3' => 'EARRINGS',
+        '9' => 'EARRINGS 9K',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
         '7' => 'TENNIS',

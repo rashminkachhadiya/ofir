@@ -501,7 +501,6 @@ class CatalogueController extends Controller
                $item->save();
 
                $itemStock = ItemStock::where('item_id',$item->id)->get();
-
                 if(!empty($request->stock))
                 {
                     foreach ($request->stock as $key => $value) 
@@ -516,7 +515,7 @@ class CatalogueController extends Controller
                         $itemStock->colour = $request->colour[$key];
                         $itemStock->total_gram = $value * $request->gram[$key];
                         $itemStock->total_ct = $value * $request->ct[$key];
-                        $itemStock->notes = $request->notes[$key];
+                        $itemStock->notes = isset($request->notes[$key]) ? $request->notes[$key] : NULL;
                         $itemStock->stocknotes = $request->stocknotes[$key];
                         $itemStock->location = $request->location[$key];
                         $itemStock->item_status = $request->item_status[$key];
