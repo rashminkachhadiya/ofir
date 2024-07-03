@@ -37,7 +37,7 @@ class CatalogueController extends Controller
       //   print_r($allCatalogue);
       //   die;
 
-      for ($i=4008; $i < 4018 ; $i++) {
+      for ($i=4020; $i < 4032 ; $i++) {
           $item = new Item();
           $item->sku = 'LE'.$i;
           $item->catalogue_id = 11;
