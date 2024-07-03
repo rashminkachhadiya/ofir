@@ -63,11 +63,14 @@ return [
     '1' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
-        '6' => 'BRACELETS',
-        '7' => 'PENDANT',
-        '2' => 'NECKLACES',
+        '6' => 'Colour Stone',
+        '2' => 'PENDANT',
         '3' => 'EARRINGS',
+        '9' => 'EARRINGS 9K',
+        '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
+        '7' => 'TENNIS',
+        '8' => 'TENNIS MOUNT',
     ],
 
     '2' => [
