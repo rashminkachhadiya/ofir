@@ -64,6 +64,7 @@ return [
         '0' => 'RINGS',
         '1' => 'BANGLE',
         '6' => 'BRACELETS',
+        '7' => 'PENDANT',
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
