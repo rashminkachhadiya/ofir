@@ -63,8 +63,8 @@ return [
     '1' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
-        '6' => 'Colour Stone',
-        '2' => 'PENDANT',
+        '6' => 'BRACELETS',
+        '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
