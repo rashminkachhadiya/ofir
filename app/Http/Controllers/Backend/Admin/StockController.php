@@ -25,7 +25,7 @@ class StockController extends Controller
         $itemStatus = ['0'=>'Apro','1'=>'Sold','2' => 'In Stock'];
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
-        $subCatalogue = config('params.1');
+        $subCatalogue = config('params.allSubCat');
         $subCatalogue[''] = 'All Sub Catalogue';
         return view('backend.admin.stock.index',compact('itemStatus','catalogues','subCatalogue'));
     }

@@ -59,7 +59,7 @@ class CatalogueController extends Controller
       // }
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'All Catalogue';
-        $subCatalogue = config('params.11');
+        $subCatalogue = config('params.allSubCat');
         $subCatalogue[''] = 'All Sub Catalogue';
         $inStock = config('params.in_stock');
         $inStock[''] = 'All Stock';
@@ -156,7 +156,7 @@ class CatalogueController extends Controller
        if ($haspermision) {
             $catalogues = config('params.catalogue');
             $catalogues[''] = 'Select Catalogue';
-            $subCatalogue = config('params.1');
+            $subCatalogue = config('params.allSubCat');
             $subCatalogue[''] = 'Select Sub Catalogue';
           return view('backend.admin.catalogue.create',compact('catalogues','subCatalogue'));
        } else {

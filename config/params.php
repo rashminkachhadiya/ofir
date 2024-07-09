@@ -50,6 +50,21 @@ return [
         '11' => 'LEBAR',
     ],
 
+    'allSubCat' => [
+        '0' => 'RINGS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
+        '2' => 'NECKLACES',
+        '10' => 'Colour Stone',
+        '11' => 'PENDANT',
+        '3' => 'EARRINGS',
+        '9' => 'EARRINGS 9K',
+        '7' => 'TENNIS',
+        '8' => 'TENNIS MOUNT',
+        '4' => 'ALL COLLECTIONS',
+        '5' => 'AVAILABLE',
+    ],
+
     '0' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
@@ -164,7 +179,7 @@ return [
     '11' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
-        '6' => 'Colour Stone',
+        '10' => 'Colour Stone',
         '2' => 'PENDANT',
         '3' => 'EARRINGS',
         '9' => 'EARRINGS 9K',
