@@ -233,7 +233,7 @@
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
 
                     ctTotal = api
-                        .column(9, { page: 'current' })
+                        .column(10, { page: 'current' })
                         .data()
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
                     $('#total_gram_val').html(gramTotal.toFixed(2));
