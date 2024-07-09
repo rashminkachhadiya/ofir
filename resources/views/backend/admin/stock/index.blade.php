@@ -228,7 +228,7 @@
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
 
                     gramTotal = api
-                        .column(6, { page: 'current' })
+                        .column(7, { page: 'current' })
                         .data()
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
 
