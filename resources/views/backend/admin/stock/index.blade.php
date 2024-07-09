@@ -223,7 +223,7 @@
              
                     // Total over this page
                     qtyTotal = api
-                        .column(5, { page: 'current' })
+                        .column(6, { page: 'current' })
                         .data()
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
 

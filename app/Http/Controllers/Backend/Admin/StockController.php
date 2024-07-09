@@ -110,7 +110,7 @@ class StockController extends Controller
           return '<input style="width:30px; height:23px;" class="" type="checkbox" value="'.$items->id.'" onchange="checkStock(this)" name="id" '.$checked.'/>';
         })
         ->addColumn('tot_qty', function ($items) {
-          return number_format((float)$items->tot_qty, 0, '.', '');
+          return number_format((float)$items->qty, 0, '.', '');
         })
         ->addColumn('colour', function ($items) {
             if(!is_null($items->colour))
