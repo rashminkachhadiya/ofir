@@ -123,7 +123,7 @@ class CatalogueController extends Controller
             }
         })
         ->addColumn('sub_catalogue_id', function ($items) {
-           return config('params.'.$items->catalogue_id)[$items->sub_catalogue_id];
+           return config('params.allSubCat')[$items->sub_catalogue_id];
         })
         ->addColumn('is_active', function ($items) {
            return $items->is_active ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';

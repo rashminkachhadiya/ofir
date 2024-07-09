@@ -180,7 +180,7 @@ return [
         '0' => 'RINGS',
         '1' => 'BANGLE',
         '10' => 'Colour Stone',
-        '2' => 'PENDANT',
+        '11' => 'PENDANT',
         '3' => 'EARRINGS',
         '9' => 'EARRINGS 9K',
         '7' => 'TENNIS',
