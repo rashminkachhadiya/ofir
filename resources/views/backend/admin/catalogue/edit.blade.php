@@ -335,8 +335,6 @@
                                                 <option value="1" {{ $size->item_status == "1" ? 'selected' : '' }}>Sold</option>
                                                 <option value="2" {{ $size->item_status == "2" ? 'selected' : '' }}>Transaction</option>
                                                 <option value="3" {{ $size->item_status == "3" ? 'selected' : '' }}>Repair</option>
-                                                <option value="4" {{ $size->item_status == "4" ? 'selected' : '' }}>UK</option>
-                                                <option value="5" {{ $size->item_status == "5" ? 'selected' : '' }}>Israel</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
