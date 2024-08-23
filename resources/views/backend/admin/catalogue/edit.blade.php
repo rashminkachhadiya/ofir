@@ -250,11 +250,14 @@
                                         <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Colour</strong></p>
                                         </div>
-                                        <div class="col-md-1 pl-2 p-1">
+                                        <div class="col-md-0-5 pl-2 p-1">
                                             <p><strong> Ct</strong></p>
                                         </div>
-                                        <div class="col-md-1 pl-2 p-1">
+                                        <div class="col-md-0-5 pl-2 p-1">
                                             <p><strong> Pcs.</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Country</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Status</strong></p>
@@ -312,11 +315,18 @@
                                                 <option value="3" {{ $size->colour == "3" ? 'selected' : '' }}>Mix</option>
                                               </select>
                                             </div>
-                                            <div class="col-md-1 p-0 p-1">
+                                            <div class="col-md-0-5 p-0 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="ct[{{ $size->id }}]" class="form-control" id="ct_{{ $size->id }}" value="{{ $size->ct }}">
                                             </div>
-                                            <div class="col-md-1 p-0 p-1">
+                                            <div class="col-md-0-5 p-0 p-1">
                                               <input style="color: {{ $colors }}" type="text" name="pieces[{{ $size->id }}]" class="form-control" id="pieces_{{ $size->id }}" value="{{ $size->pieces }}">
+                                            </div>
+                                            <div class="col-md-1 p-0 p-1">
+                                              <select style="color: {{ $colors }}" class="form-control" name="location[{{ $size->id }}]">
+                                                <option value="" {{ is_null($size->location) ? 'selected' : '' }}>Select</option>
+                                                <option value="0" {{ $size->location == "0" ? 'selected' : '' }}>UK</option>
+                                                <option value="1" {{ $size->location == "1" ? 'selected' : '' }}>Israel</option>
+                                              </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
                                               <select style="color: {{ $colors }}" class="form-control" name="item_status[{{ $size->id }}]">
@@ -582,11 +592,18 @@
                         <option value="3">Mix</option>\
                       </select>\
                     </div>\
-                    <div class="col-md-1 p-1">\
+                    <div class="col-md-0-5 p-1">\
                       <input type="text" name="new_ct['+ add_number +']" class="form-control" id="ct_'+ add_number +'" value="" placeholder="Ct">\
                     </div>\
-                    <div class="col-md-1 p-1">\
+                    <div class="col-md-0-5 p-1">\
                       <input type="text" name="new_pieces['+ add_number +']" class="form-control" id="pieces_'+ add_number +'" value="" placeholder="Pieces">\
+                    </div>\
+                    <div class="col-md-1 p-1">\
+                      <select class="form-control" id="item_status_'+ add_number +'" name="new_location['+ add_number +']">\
+                        <option value="">Select</option>\
+                        <option value="0">UK</option>\
+                        <option value="1">Israel</option>\
+                      </select>\
                     </div>\
                     <div class="col-md-1 p-1">\
                       <select class="form-control" id="item_status_'+ add_number +'" name="new_item_status['+ add_number +']">\
