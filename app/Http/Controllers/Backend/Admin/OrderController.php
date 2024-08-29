@@ -108,7 +108,7 @@ class OrderController extends Controller
         })
         ->addColumn('supplier_name', function ($orders) use ($supplier) {
           $checked = ($orders->receive_supplier == 1) ? 'checked' : '';
-           return isset($supplier[$orders->supplier_name]) && $orders->supplier_name != null '<div class="d-flex"><div><a data-toggle="tooltip" id="' . $orders->id . '" class="btn supplier-edit" title="Edit">'.$supplier[$orders->supplier_name].'</a></div><div><input style="width:30px; height:23px;" class="" type="checkbox" value="'.$orders->id.'" onchange="receiveSupplier(this)" name="id" '.$checked.'/></div>' : "";
+           return isset($supplier[$orders->supplier_name]) && $orders->supplier_name != null ? '<div class="d-flex"><div><a data-toggle="tooltip" id="' . $orders->id . '" class="btn supplier-edit" title="Edit">'.$supplier[$orders->supplier_name].'</a></div><div><input style="width:30px; height:23px;" class="" type="checkbox" value="'.$orders->id.'" onchange="receiveSupplier(this)" name="id" '.$checked.'/></div>' : "";
         })
 
         ->addColumn('category', function ($orders) {
