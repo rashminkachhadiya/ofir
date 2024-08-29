@@ -10,6 +10,7 @@ return [
         '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '5' => 'AVAILABLE',
+        '4' => 'ALL COLLECTIONS',
     ],
 
     'metal_type' => [
