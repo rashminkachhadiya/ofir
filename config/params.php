@@ -182,6 +182,7 @@ return [
         '1' => 'BANGLE',
         '10' => 'Colour Stone',
         '11' => 'PENDANT',
+        '2' => 'NECKLACES',
         '3' => 'EARRINGS',
         '9' => 'EARRINGS 9K',
         '7' => 'TENNIS',
