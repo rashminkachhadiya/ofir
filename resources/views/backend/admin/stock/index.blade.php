@@ -109,6 +109,7 @@
                                 <th>Color</th>
                                 <th>Ct</th>
                                 <th>Pcs.</th>
+                                <th>Location</th>
                                 <th>Status</th>
                                 <th>Customer</th>
                                 <th>Date</th>
@@ -197,6 +198,7 @@
                     {data: 'colour', name: 'colour'},
                     {data: 'ct', name:'ct'},
                     {data: 'pieces', name:'pieces'},
+                    {data: 'location', name:'location'},
                     {data: 'item_status',name: 'item_status'},
                     {data: 'notes', name: 'notes'},
                     {data: 'date', name: 'date'},

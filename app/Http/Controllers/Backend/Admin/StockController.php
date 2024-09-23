@@ -71,18 +71,18 @@ class StockController extends Controller
 
         if(!is_null($request['item_status_uk']) && $request['item_status_uk'] == 1)
         {
-            $items->orWhere('item_stocks.item_status','=',4);
+            $items->orWhere('item_stocks.location','=',0);
         }
         if(!is_null($request['item_status_uk']) && $request['item_status_uk'] == 0){
-            $items->orwhere('item_stocks.item_status', '!=', 4)->orWhereNull('item_stocks.item_status');
+            $items->orwhere('item_stocks.location', '!=', 0)->orWhereNull('item_stocks.item_status');
         }
         
         if(!is_null($request['item_status_israel']) && $request['item_status_israel'] == 1)
         {
-            $items->orWhere('item_stocks.item_status','=',5);
+            $items->orWhere('item_stocks.location','=',1);
         }
         if(!is_null($request['item_status_israel']) && $request['item_status_israel'] == 0){
-            $items->orwhere('item_stocks.item_status', '!=', 5)->orWhereNull('item_stocks.item_status');
+            $items->orwhere('item_stocks.location', '!=', 1)->orWhereNull('item_stocks.item_status');
         }
 
 
@@ -137,6 +137,19 @@ class StockController extends Controller
                  return "UK";
                }elseif($items->item_status == '5'){
                  return "Israel";
+               }
+            }
+        })
+        ->addColumn('location', function ($items) {
+            if(!is_null($items->location))
+            {
+               if($items->location == '0')
+               {
+                    return "UK";
+               }elseif ($items->location == '1') {
+                   return "Israel";
+               }else{
+                    return " ";
                }
             }
         })
