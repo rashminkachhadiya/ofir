@@ -74,7 +74,7 @@ class StockController extends Controller
             $items->orWhere('item_stocks.location','=',0);
         }
         if(!is_null($request['item_status_uk']) && $request['item_status_uk'] == 0){
-            $items->orwhere('item_stocks.location', '!=', 0)->orWhereNull('item_stocks.item_status');
+            $items->orwhere('item_stocks.location', '!=', 0)->orWhereNull('item_stocks.location');
         }
         
         if(!is_null($request['item_status_israel']) && $request['item_status_israel'] == 1)
@@ -82,7 +82,7 @@ class StockController extends Controller
             $items->orWhere('item_stocks.location','=',1);
         }
         if(!is_null($request['item_status_israel']) && $request['item_status_israel'] == 0){
-            $items->orwhere('item_stocks.location', '!=', 1)->orWhereNull('item_stocks.item_status');
+            $items->orwhere('item_stocks.location', '!=', 1)->orWhereNull('item_stocks.location');
         }
 
 
@@ -133,10 +133,6 @@ class StockController extends Controller
                  return "Transaction";
                }elseif($items->item_status == '3'){
                  return "Repair";
-               }elseif($items->item_status == '4'){
-                 return "UK";
-               }elseif($items->item_status == '5'){
-                 return "Israel";
                }
             }
         })
