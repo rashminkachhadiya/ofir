@@ -148,8 +148,6 @@ class StockController extends Controller
                     return "UK";
                }elseif ($items->location == '1') {
                    return "Israel";
-               }else{
-                    return " ";
                }
             }
         })
