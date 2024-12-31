@@ -111,6 +111,7 @@
                                 <th>Size</th>
                                 <th>Qty</th>
                                 <th>Colour</th>
+                                <th>MLT</th>
                                 <th>Carat</th>
                                 <th>Ref.</th>
                                 <th>Est.</th>
@@ -197,8 +198,8 @@
                     {data: 'size', name: 'size'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'metal_colour', name: 'metal_colour'},
+                    {data: 'metal_type', name: 'metal_type'},
                     {data: 'carat', name: 'carat'},
-
                     {data: 'ref', name: 'ref'},
                     {data: 'tot_est_price', name: 'tot_est_price'},
                     {data: 'order_status', name: 'order_status'},

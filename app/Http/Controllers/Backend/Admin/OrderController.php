@@ -123,6 +123,12 @@ class OrderController extends Controller
                return config('params.metal_colour')[$orders->metal_colour];
             }
         })
+        ->addColumn('metal_type', function ($orders) {
+           if(!is_null($orders->metal_type))
+            {
+               return config('params.metal_type')[$orders->metal_type];
+            }
+        })
         ->addColumn('tot_est_price', function ($orders) {
           if(!is_null($orders->est_price_currency))
           {
