@@ -112,7 +112,13 @@ class OrderController extends Controller
         })
 
         ->addColumn('category', function ($orders) {
-           return config('params.categories')[$orders->category_id];
+            if($orders->sub_category_id !== null && isset(config('params.'.$orders->category_id)[$orders->sub_category_id]))
+            {
+                return config('params.'.$orders->category_id)[$orders->sub_category_id];
+            }
+            else{
+                return config('params.categories')[$orders->category_id] ?? '';   
+            }
         })
         ->addColumn('client_name', function ($orders) {
            return $orders->orderUser->f_name;

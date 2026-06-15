@@ -204,7 +204,8 @@ class CatalogueController extends Controller
         $order->user_id = Auth::user()->id;
         $order->order_number = Order::autoGenerateOrderNumber();
         $order->sku = $cart->itemDetails->sku;
-        $order->category_id = $cart->itemDetails->sub_catalogue_id;
+        $order->category_id = $cart->itemDetails->catalogue_id;
+        $order->sub_category_id = $cart->itemDetails->sub_catalogue_id;
         $order->metal_type = $cart->metal_type;
         $order->metal_colour = $cart->metal_colour;
         $order->weight = $cart->weight;

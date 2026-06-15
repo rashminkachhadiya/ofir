@@ -182,8 +182,11 @@ div.content {
                         </div>
                       </td>
                       <?php
-                        $Total = $item['quantity'] * $item['price'];
-                        $allTotal = $allTotal + $Total;
+                        $quantity = isset($item['quantity']) ? (float) str_replace(',', '', $item['quantity']) : 0;
+                        $price = isset($item['price']) ? (float) str_replace(',', '', $item['price']) : 0;
+                        
+                        $Total = $quantity * $price;
+                        $allTotal += $Total;
                         $VAT = $allTotal * 0.2;
                       ?>
                       <td width="10%" class="pro-remove text-center">

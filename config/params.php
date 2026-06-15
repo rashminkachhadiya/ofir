@@ -11,6 +11,7 @@ return [
         '3' => 'EARRINGS',
         '5' => 'AVAILABLE',
         '4' => 'ALL COLLECTIONS',
+        '8' => 'TENNIS MOUNT',
     ],
 
     'metal_type' => [
@@ -41,7 +42,7 @@ return [
         '1' => 'Van cleef',
         '2' => 'BVLGARI',
         '3' => 'Tiffany',
-        '4' => 'CHAUMET',
+        '4' => 'HERMES',
         '5' => 'CHANEL',
         '6' => 'CHOPARD',
         '7' => 'GRAFF',

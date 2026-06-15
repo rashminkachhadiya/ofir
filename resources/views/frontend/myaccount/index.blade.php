@@ -174,7 +174,11 @@
                                 @endforeach
                             </td>
                             <td>{{ $order->order_number }}</td>
-                            <td>{{ config('params.categories')[$order->category_id] }}</td>
+                            <td>@if($order->sub_category_id !== null && isset(config('params.'.$order->category_id)[$order->sub_category_id]))
+                                    {{ config('params.'.$order->category_id)[$order->sub_category_id] }}
+                                @else
+                                    {{ config('params.categories')[$order->category_id] ?? '' }}
+                                @endif</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
                             <td>{{ $order->size }}</td>
                             <td>{{ $order->quantity }}</td>
@@ -261,7 +265,11 @@
                                 @endforeach
                             </td>
                             <td>{{ $order->order_number }}</td>
-                            <td>{{ config('params.categories')[$order->category_id] }}</td>
+                            <td>@if($order->sub_category_id !== null && isset(config('params.'.$order->category_id)[$order->sub_category_id]))
+                                    {{ config('params.'.$order->category_id)[$order->sub_category_id] }}
+                                @else
+                                    {{ config('params.categories')[$order->category_id] ?? '' }}
+                                @endif</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
                             <td>{{ $order->size }}</td>
                             <td>{{ $order->quantity }}</td>
@@ -347,7 +355,11 @@
                                 @endforeach
                             </td>
                             <td>{{ $order->order_number }}</td>
-                            <td>{{ config('params.categories')[$order->category_id] }}</td>
+                            <td>@if($order->sub_category_id !== null && isset(config('params.'.$order->category_id)[$order->sub_category_id]))
+                                    {{ config('params.'.$order->category_id)[$order->sub_category_id] }}
+                                @else
+                                    {{ config('params.categories')[$order->category_id] ?? '' }}
+                                @endif</td>
                             <td>{{ config('params.order_status')[$order->order_status] }}</td>
                             <td>{{ $order->size }}</td>
                             <td>{{ $order->quantity }}</td>
@@ -465,8 +477,11 @@
                         </div>
                       </td>
                       <?php
-                        $Total = $item['quantity'] * $item['price'];
-                        $allTotal = $allTotal + $Total;
+                        $quantity = isset($item['quantity']) ? (float) str_replace(',', '', $item['quantity']) : 0;
+                        $price = isset($item['price']) ? (float) str_replace(',', '', $item['price']) : 0;
+                        
+                        $Total = $quantity * $price;
+                        $allTotal += $Total;
                         $VAT = $allTotal * 0.2;
                       ?>
                       <td width="10%" class="pro-remove text-center">

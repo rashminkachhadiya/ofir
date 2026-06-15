@@ -83,7 +83,11 @@
                                     <p><strong> Category : </strong></p>
                                 </div>
                                 <div class="col-md-6">
-                                    {{ config('params.categories')[$order->category_id] }}
+                                    @if($order->sub_category_id !== null && isset(config('params.'.$order->category_id)[$order->sub_category_id]))
+                                    {{ config('params.'.$order->category_id)[$order->sub_category_id] }}
+                                    @else
+                                        {{ config('params.categories')[$order->category_id] ?? '' }}
+                                    @endif
                                 </div>
                             </div>
                             <div class="d-flex">
