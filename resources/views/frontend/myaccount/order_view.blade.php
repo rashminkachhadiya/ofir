@@ -52,7 +52,7 @@
         <div class="col-md-4 p-0">
             <div class="d-flex">
                 <div class="col-md-4 p-0">
-                    <strong>Date: </strong>
+                    <strong>{{ __('Date') }}: </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
@@ -60,7 +60,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Order No: </strong>
+                    <strong>{{ __('Order No') }}: </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ $order->order_number }}
@@ -68,7 +68,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Order By : </strong>
+                    <strong>{{ __('Order By') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ $order->orderUser->f_name }}
@@ -76,7 +76,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Email : </strong>
+                    <strong>{{ __('Email') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0" style="word-wrap: break-word;">
                     {{ $order->orderUser->email }}
@@ -84,7 +84,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Ref. : </strong>
+                    <strong>{{ __('Ref') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ $order->ref }}
@@ -92,7 +92,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Category : </strong>
+                    <strong>{{ __('Category') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ config('params.categories')[$order->category_id] }}
@@ -100,7 +100,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Status : </strong>
+                    <strong>{{ __('Status') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ config('params.order_status')[$order->order_status] }}
@@ -110,7 +110,7 @@
         <div class="col-md-4 pl-2">
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Type : </strong>
+                    <strong>{{ __('Type') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     @if(!is_null($order->metal_type))
@@ -120,7 +120,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong>Colour : </strong>
+                    <strong>{{ __('Colour') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     @if(!is_null($order->metal_colour))
@@ -130,7 +130,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Size : </strong>
+                    <strong>{{ __('Size') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ $order->size }}
@@ -138,7 +138,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Weight : </strong>
+                    <strong>{{ __('Weight') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ $order->weight }}
@@ -146,7 +146,7 @@
             </div>
             <div class="d-flex p-0">
                 <div class="col-md-4 p-0">
-                    <strong> Qty : </strong>
+                    <strong>{{ __('Qty') }} : </strong>
                 </div>
                 <div class="col-md-8 p-0">
                     {{ $order->quantity }}
@@ -156,7 +156,7 @@
         <div class="col-md-12 p-0" style="border:1px solid black;height: 90px !important;">
             <div class="d-flex p-0">
                 <div class="col-md-2 pr-0">
-                    <p><strong> Notes : </strong></p>
+                    <p><strong>{{ __('Notes') }} : </strong></p>
                 </div>
                 <div class="col-md-10 p-0" style="text-align: left;">
                     {{ $order->notes }}
@@ -165,10 +165,10 @@
         </div>
     </div>
     <div class="col-md-3" style="border:1px solid black;">
-        <h5 class="text-center">Gem Info</h5>
+        <h5 class="text-center">{{ __('Gem Info') }}</h5>
         <div class="d-flex p-0">
             <div class="col-md-6">
-                <strong> Gem. : </strong>
+                <strong>{{ __('Gem') }} : </strong>
             </div>
             <div class="col-md-6 text-left">
                 {{ $order->gem }}
@@ -176,7 +176,7 @@
         </div>
         <div class="d-flex p-0">
             <div class="col-md-6">
-                <strong> Shape : </strong>
+                <strong>{{ __('Shape') }} : </strong>
             </div>
             <div class="col-md-6 text-left">
                 {{ $order->shape }}
@@ -184,7 +184,7 @@
         </div>
         <div class="d-flex p-0">
             <div class="col-md-6">
-                <strong> Carat : </strong>
+                <strong>{{ __('Carat') }} : </strong>
             </div>
             <div class="col-md-6 text-left">
                 {{ $order->carat }}
@@ -192,7 +192,7 @@
         </div>
         <div class="d-flex p-0">
             <div class="col-md-6">
-                <strong> Colour : </strong>
+                <strong>{{ __('Colour') }} : </strong>
             </div>
             <div class="col-md-6 text-left">
                 {{ $order->colour }}
@@ -200,7 +200,7 @@
         </div>
         <div class="d-flex p-0">
             <div class="col-md-6">
-                <strong> Cleaerty : </strong>
+                <strong>{{ __('Cleaerty') }} : </strong>
             </div>
             <div class="col-md-6 text-left">
                 {{ $order->cleaerty }}
@@ -208,7 +208,7 @@
         </div>
         <div class="d-flex p-0">
             <div class="col-md-6">
-                <strong> Pcs : </strong>
+                <strong>{{ __('Pcs') }} : </strong>
             </div>
             <div class="col-md-6 text-left">
                 {{ $order->pcs }}

@@ -2,6 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/language/{locale}', function ($locale) {
+    $supportedLocales = ['en', 'ru'];
+
+    if (in_array($locale, $supportedLocales, true)) {
+        session(['locale' => $locale]);
+    }
+
+    return redirect()->back();
+})->name('language.switch');
+
 Route::group([
     'namespace' => 'Frontend',
     'as' => 'frontend.'],

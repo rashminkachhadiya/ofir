@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg modal-dialog-centered" style="max-width: 65%">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Hi, {{Auth()->user()->f_name}}</h5>
+            <h5 class="modal-title" id="exampleModalLabel">{{ __('Hi, :name', ['name' => Auth()->user()->f_name]) }}</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body" style="">
@@ -63,7 +63,7 @@
                                 <div class="col-md-5 mt-2">
                                     <div class="d-flex">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Metal</label>
+                                            <label class="col-form-label">{{ __('Metal') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
                                             {!! Form::select('metal_type', $metalType ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Colour</label>
+                                            <label class="col-form-label">{{ __('Colour') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
                                             {!! Form::select('metal_colour', $metalColour ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
@@ -79,23 +79,23 @@
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Weight</label>
+                                            <label class="col-form-label">{{ __('Weight') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}" placeholder="Weight" required>
+                                            <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}" placeholder="{{ __('Weight') }}" required>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Size</label>
+                                            <label class="col-form-label">{{ __('Size') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}" placeholder="Size" required>
+                                            <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}" placeholder="{{ __('Size') }}" required>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Qty</label>
+                                            <label class="col-form-label">{{ __('Qty') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
                                             <div class="quantity">
@@ -108,10 +108,10 @@
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Ref...</label>
+                                            <label class="col-form-label">{{ __('Ref') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" name="reference" value="{{ $item->ref }}" id="ref" placeholder="Reference">
+                                            <input type="text" class="form-control" name="reference" value="{{ $item->ref }}" id="ref" placeholder="{{ __('Reference') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -121,56 +121,56 @@
                                 <div class="col-md-5 mt-2">
                                     <div class="d-flex">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Gem.</label>
+                                            <label class="col-form-label">{{ __('Gem') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="gem" name="gem" value="{{ $item->gem }}" placeholder="Gem">
+                                            <input type="text" class="form-control" id="gem" name="gem" value="{{ $item->gem }}" placeholder="{{ __('Gem') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Shape</label>
+                                            <label class="col-form-label">{{ __('Shape') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="shape" name="shape" value="{{ $item->shape }}" placeholder="Shape" required>
+                                            <input type="text" class="form-control" id="shape" name="shape" value="{{ $item->shape }}" placeholder="{{ __('Shape') }}" required>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Carat</label>
+                                            <label class="col-form-label">{{ __('Carat') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
+                                            <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="{{ __('Carat') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Colour</label>
+                                            <label class="col-form-label">{{ __('Colour') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
-                                            <input type="text" class="form-control" name="colour" id="colour" value="{{ $item->colour }}" placeholder="Colour">
+                                            <input type="text" class="form-control" name="colour" id="colour" value="{{ $item->colour }}" placeholder="{{ __('Colour') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Cleaerty</label>
+                                            <label class="col-form-label">{{ __('Cleaerty') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" value="{{ $item->cleaerty }}" placeholder="Cleaerty">
+                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" value="{{ $item->cleaerty }}" placeholder="{{ __('Cleaerty') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
                                         <div class="col-md-4 p-0">
-                                            <label class="col-form-label">Pcs</label>
+                                            <label class="col-form-label">{{ __('Pcs') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" name="pcs" id="pcs" value="{{ $item->pcs }}" placeholder="Pcs">
+                                            <input type="text" class="form-control" name="pcs" id="pcs" value="{{ $item->pcs }}" placeholder="{{ __('Pcs') }}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="quantity-cart-box mt-2 mb-2 align-items-center">
-                                <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes" id="notes" rows="3" required="false">{{ $item->notes }}</textarea>
+                                <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="{{ __('Notes') }}" id="notes" rows="3" required="false">{{ $item->notes }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                 <hr>
                 <div class="d-flex" style="justify-content: end;">
                     <div class="action_link ml-3">
-                        <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart update-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>Update Order</strong></a>
+                        <a style="border-radius: 15px; background: #000 !important; color: #fff !important;" class="btn btn-cart update-cart" item-id="{{ $item->id }}" href="javascript:void(0)"><strong>{{ __('Update Order') }}</strong></a>
                     </div>
                     <div class="ml-2" style="width: 50px;margin-top: 10px;">
                         

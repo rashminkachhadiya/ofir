@@ -3,7 +3,7 @@
 <title> @yield('title') | {{ config('app.name') }} </title>
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
+<meta name="Description" lang="{{ app()->getLocale() }}" content="ADD SITE DESCRIPTION">
 <meta name="author" content="ADD AUTHOR INFORMATION">
 <meta name="robots" content="index, follow">
 <meta name="csrf-token" content="{{ csrf_token() }}">

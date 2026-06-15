@@ -98,13 +98,13 @@ div.content {
         <div class="div-center">
             <div class="mb-4 d-flex" style="align-items: center;">
               <div class="col-md-3">
-                <a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">Home</a>
+                <a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">{{ __('Home') }}</a>
               </div>
               <div class="col-md-6">
-                <h2 style="color:black;font-style: italic; text-align: center;">Cart</h2> 
+                <h2 style="color:black;font-style: italic; text-align: center;">{{ __('Cart') }}</h2> 
               </div>
               <div class="col-md-3">
-                <h6 style="color:black;font-style: italic; text-align: right;"><a style="color: black;" href="{{ URL::to('/cart') }}">cart</a></h6>
+                <h6 style="color:black;font-style: italic; text-align: right;"><a style="color: black;" href="{{ URL::to('/cart') }}">{{ __('Cart') }}</a></h6>
               </div>
             </div>
            
@@ -114,19 +114,19 @@ div.content {
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th class="pro-thumbnail">Image</th>
-                      <th class="pro-title">Code</th>
-                      <th class="pro-title">Product</th>
+                      <th class="pro-thumbnail">{{ __('Image') }}</th>
+                      <th class="pro-title">{{ __('Code') }}</th>
+                      <th class="pro-title">{{ __('Product') }}</th>
                       <!-- <th class="pro-price">Price</th> -->
-                      <th class="pro-quantity">Metal Type</th>
-                      <th class="pro-quantity">Metal Colour</th>
-                      <th class="pro-quantity">Size</th>
-                      <th class="pro-quantity">Quantity</th>
-                      <th class="pro-quantity">Ref</th>
-                      <th class="pro-quantity">Notes</th>
+                      <th class="pro-quantity">{{ __('Metal Type') }}</th>
+                      <th class="pro-quantity">{{ __('Metal Colour') }}</th>
+                      <th class="pro-quantity">{{ __('Size') }}</th>
+                      <th class="pro-quantity">{{ __('Quantity') }}</th>
+                      <th class="pro-quantity">{{ __('Ref') }}</th>
+                      <th class="pro-quantity">{{ __('Notes') }}</th>
 
                       <!-- <th class="pro-subtotal">Total</th> -->
-                      <th class="pro-remove">Action</th>
+                      <th class="pro-remove">{{ __('Action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -190,9 +190,9 @@ div.content {
                         $VAT = $allTotal * 0.2;
                       ?>
                       <td width="10%" class="pro-remove text-center">
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">Order</a>
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="edit-btn" style="color: blue;" title="Edit"><i class="fa fa-edit"></i></a>
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart" title="Delete"><i style="color: red;" class="pe-7s-trash"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">{{ __('Order') }}</a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="edit-btn" style="color: blue;" title="{{ __('Edit') }}"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart" title="{{ __('Delete') }}"><i style="color: red;" class="pe-7s-trash"></i></a>
                       </td>
                     </tr>
                     @endforeach

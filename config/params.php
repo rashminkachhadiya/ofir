@@ -2,6 +2,11 @@
 
 
 return [
+    'locales' => [
+        'en' => 'English',
+        'ru' => 'Russian',
+    ],
+
     'categories' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',

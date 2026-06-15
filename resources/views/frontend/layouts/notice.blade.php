@@ -4,7 +4,7 @@
 @endphp
 <div class="widget">
     @if($notices)
-        <h5 class="widget-title">Notice Board</h5>
+        <h5 class="widget-title">{{ __('Notice Board') }}</h5>
         <div class="recent-post-widget">
             @foreach($notices as $notice)
                 <div class="rp-item">

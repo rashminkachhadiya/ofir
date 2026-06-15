@@ -9,10 +9,10 @@
           <div  class="nav flex-column nav-pills mt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <!-- <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Profile</a> -->
             <a class="m-2 mt-0" style="font-size: 30px;cursor: pointer;" href="{{ URL::to('/') }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
-            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">All Orders</a>
-            <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-controls="v-pills-invoice" aria-selected="false">Pending Orders</a>
-            <a class="nav-link" id="v-pills-ready-tab" data-toggle="pill" href="#v-pills-ready" role="tab" aria-controls="v-pills-ready" aria-selected="false">Ready for Collection</a>
-            <a class="nav-link" id="v-pills-my-cart-tab" data-toggle="pill" href="#v-pills-my-cart" role="tab" aria-controls="v-pills-my-cart" aria-selected="false">My Cart</a>
+            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">{{ __('All Orders') }}</a>
+            <a class="nav-link" id="v-pills-invoice-tab" data-toggle="pill" href="#v-pills-invoice" role="tab" aria-controls="v-pills-invoice" aria-selected="false">{{ __('Pending Orders') }}</a>
+            <a class="nav-link" id="v-pills-ready-tab" data-toggle="pill" href="#v-pills-ready" role="tab" aria-controls="v-pills-ready" aria-selected="false">{{ __('Ready for Collection') }}</a>
+            <a class="nav-link" id="v-pills-my-cart-tab" data-toggle="pill" href="#v-pills-my-cart" role="tab" aria-controls="v-pills-my-cart" aria-selected="false">{{ __('My Cart') }}</a>
           </div>
         </div>
         <div class="col-10 mt-4">
@@ -24,89 +24,89 @@
                   <input type="hidden" name="user_id" value="{{ $user->id }}">
                   <div class="col-6">
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab;"> First Name </label>
+                      <label for="" style="color: #f195ab;"> {{ __('First Name') }} </label>
                       <input type="text" class="form-control" id="f_name" name="f_name" value="{{ $user->f_name }}" placeholder="" required>
                       <span id="error_f_name" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab;" > Last Name </label>
+                      <label for="" style="color: #f195ab;" > {{ __('Last Name') }} </label>
                       <input type="text" class="form-control" id="l_name" name="l_name" value="{{ $user->l_name }}" placeholder="" required>
                       <span id="error_l_name" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab;"> Email </label>
+                      <label for="" style="color: #f195ab;"> {{ __('Email') }} </label>
                       <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}" placeholder="" disabled>
                       <span id="error_email" class="has-error"></span>
                     </div>
                     @if($user->user_type == 0)
                     <div class="form-group col-md-12" id="company_div">
-                      <label for="" style="color: #f195ab;"> Company </label>
+                      <label for="" style="color: #f195ab;"> {{ __('Company') }} </label>
                       <input type="text" class="form-control" id="company" name="company" value="{{ $user->company }}" placeholder="" required>
                       <span id="error_company" class="has-error"></span>
                     </div>
                     @endif
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab"> Address field 1 </label>
+                      <label for="" style="color: #f195ab"> {{ __('Address field 1') }} </label>
                       <input type="text" class="form-control" id="address_field_1" name="address_field_1" value="{{ $user->address_field_1 }}" placeholder="" required>
                       <span id="error_address_field_1" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab"> Address field 2 </label>
+                      <label for="" style="color: #f195ab"> {{ __('Address field 2') }} </label>
                       <input type="text" class="form-control" id="address_field_2" name="address_field_2" value="{{ $user->address_field_2 }}" placeholder="" required>
                       <span id="error_address_field_2" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab"> City </label>
+                      <label for="" style="color: #f195ab"> {{ __('City') }} </label>
                       <input type="text" class="form-control" id="city" name="city" value="{{ $user->city }}" placeholder="" required>
                       <span id="error_city" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab;"> Country </label>
+                      <label for="" style="color: #f195ab;"> {{ __('Country') }} </label>
                       <input type="text" class="form-control" id="country" name="country" value="{{ $user->country }}" placeholder="" required>
                       <span id="error_country" class="has-error"></span>
                     </div>
                   </div>
                   <div class="col-6">
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab"> State/Province/County </label>
+                      <label for="" style="color: #f195ab"> {{ __('State/Province/County') }} </label>
                       <input type="text" class="form-control" id="state_province_county" name="state_province_county" value="{{ $user->state_province_county }}" placeholder="" required>
                       <span id="error_state_province_county" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                      <label for="" style="color: #f195ab"> Postcode </label>
+                      <label for="" style="color: #f195ab"> {{ __('Postcode') }} </label>
                       <input type="text" class="form-control" id="postcode" name="postcode" value="{{ $user->postcode }}" placeholder="" required>
                       <span id="error_postcode" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="" style="color: #f195ab"> Telephone </label>
+                        <label for="" style="color: #f195ab"> {{ __('Telephone') }} </label>
                         <input type="text" class="form-control" id="telephone" name="telephone" value="{{ $user->telephone }}" placeholder="">
                         <span id="error_telephone" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="" style="color: #f195ab"> Mobile </label>
+                        <label for="" style="color: #f195ab"> {{ __('Mobile') }} </label>
                         <input type="text" class="form-control" id="mobile" name="mobile" value="{{ $user->mobile }}" placeholder="" required>
                         <span id="error_mobile" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                        <label style="color: #f195ab">Password:</label>
-                        {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control',)) !!}
+                        <label style="color: #f195ab">{{ __('Password') }}:</label>
+                        {!! Form::password('password', array('placeholder' => __('Password'),'class' => 'form-control',)) !!}
                         <span id="error_password" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12">
-                        <label style="color: #f195ab">Confirm Password:</label>
-                        {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
+                        <label style="color: #f195ab">{{ __('Confirm Password') }}:</label>
+                        {!! Form::password('confirm-password', array('placeholder' => __('Confirm Password'),'class' => 'form-control')) !!}
                         <span id="error_confirm-password" class="has-error"></span>
                     </div>
                     @if($user->user_type == 0)
                     <div class="form-group col-md-12" id="vat_number_div">
-                        <label for="" style="color: #f195ab"> VAT Number </label>
+                        <label for="" style="color: #f195ab"> {{ __('VAT Number') }} </label>
                         <input type="text" class="form-control" id="vat_number" name="vat_number" value="{{ $user->vat_number }}" placeholder="" required>
                         <span id="error_vat_number" class="has-error"></span>
                     </div>
                     @endif
                     @if($user->user_type == 0)
                     <div class="form-group col-md-12" id="refrences_div">
-                        <label for="" style="color: #f195ab"> Refrences </label>
+                        <label for="" style="color: #f195ab"> {{ __('Refrences') }} </label>
                         <input type="text" class="form-control" id="refrences" name="refrences" value="{{ $user->refrences }}" placeholder="" required>
                         <span id="error_refrences" class="has-error"></span>
                     </div>
@@ -114,21 +114,21 @@
                   </div>
                 </div>
                 <div class="text-center mb-2">
-                  <button type="submit" style="background: #f195ab !important; color: black !important;" class="btn btn-cart">Submit</button>
+                  <button type="submit" style="background: #f195ab !important; color: black !important;" class="btn btn-cart">{{ __('Submit') }}</button>
                 </div>
               </form>
             </div> -->
             <div class="d-flex" style="justify-content: space-between;">
               <div style="text-align: center;">
-                <h4 class="d-block" style="color: black; text-align: center;">Hi {{Auth()->user()->f_name}}</h4>
+                <h4 class="d-block" style="color: black; text-align: center;">{{ __('Hi, :name', ['name' => Auth()->user()->f_name]) }}</h4>
               </div>
               <div class="d-flex">
                   
                   <div class="mr-1">
-                      <a class="btn btn-xs btn-info user-view" id="viewbtn" href="javascript:void(0)">View</a>
+                      <a class="btn btn-xs btn-info user-view" id="viewbtn" href="javascript:void(0)">{{ __('View') }}</a>
                   </div>
                   <div class="mr-1">
-                      <a class="btn btn-xs btn-success user-view-all" id="viewallbtn" href="javascript:void(0)">View All</a>
+                      <a class="btn btn-xs btn-success user-view-all" id="viewallbtn" href="javascript:void(0)">{{ __('View All') }}</a>
                   </div>
               </div>
             </div>
@@ -139,18 +139,18 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th width="1%" class="pro-thumbnail">Date</th>
-                          <th class="pro-thumbnail">Image</th>
-                          <th class="pro-title">Number</th>
-                          <th class="pro-title">Category</th>
-                          <th class="pro-price">Status</th>
-                          <th class="pro-price">Size</th>
-                          <th class="pro-price">Qty</th>
-                          <th class="pro-price">Colour</th>
-                          <th class="pro-price">Carat</th>
-                          <th class="pro-price">Ref.</th>
-                          <th class="pro-price">Est.</th>
-                          <th class="pro-remove">Action</th>
+                          <th width="1%" class="pro-thumbnail">{{ __('Date') }}</th>
+                          <th class="pro-thumbnail">{{ __('Image') }}</th>
+                          <th class="pro-title">{{ __('Number') }}</th>
+                          <th class="pro-title">{{ __('Category') }}</th>
+                          <th class="pro-price">{{ __('Status') }}</th>
+                          <th class="pro-price">{{ __('Size') }}</th>
+                          <th class="pro-price">{{ __('Qty') }}</th>
+                          <th class="pro-price">{{ __('Colour') }}</th>
+                          <th class="pro-price">{{ __('Carat') }}</th>
+                          <th class="pro-price">{{ __('Ref') }}</th>
+                          <th class="pro-price">{{ __('Est') }}</th>
+                          <th class="pro-remove">{{ __('Action') }}</th>
                           <th><div class="btn-group">
                             <div class="form-check form-check-custom form-check-sm">
                                   <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
@@ -194,16 +194,16 @@
                             </td>
                             <td style="width: 150px;">
                               <div class="btn-group mb-1">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" style="padding: 0.1rem 0.32rem !important;" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" style="padding: 0.1rem 0.32rem !important;" title="{{ __('View') }}"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
                               <div class="btn-group mb-1">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" style="padding: 0.1rem 0.35rem !important;" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" style="padding: 0.1rem 0.35rem !important;" title="{{ __('Confirm Order') }}"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group mb-1">
-                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" style="padding: 0.1rem 0.5rem !important;" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" style="padding: 0.1rem 0.5rem !important;" title="{{ __('Cancel Order') }}"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
@@ -215,7 +215,7 @@
                           </tr>
                         @empty
                         <tr>
-                          <td colspan="12">No Any Order</td>
+                          <td colspan="12">{{ __('No Any Order') }}</td>
                         </tr>
                         @endforelse
                       </tbody>
@@ -231,17 +231,17 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th class="pro-thumbnail">Date</th>
-                          <th class="pro-thumbnail">Image</th>
-                          <th class="pro-title">Number</th>
-                          <th class="pro-title">Category</th>
-                          <th class="pro-price">Status</th>
-                          <th class="pro-price">Size</th>
-                          <th class="pro-price">Qty</th>
-                          <th class="pro-price">Colour</th>
-                          <th class="pro-price">Carat</th>
-                          <th class="pro-price">Est. Price</th>
-                          <th class="pro-remove">Action</th>
+                          <th class="pro-thumbnail">{{ __('Date') }}</th>
+                          <th class="pro-thumbnail">{{ __('Image') }}</th>
+                          <th class="pro-title">{{ __('Number') }}</th>
+                          <th class="pro-title">{{ __('Category') }}</th>
+                          <th class="pro-price">{{ __('Status') }}</th>
+                          <th class="pro-price">{{ __('Size') }}</th>
+                          <th class="pro-price">{{ __('Qty') }}</th>
+                          <th class="pro-price">{{ __('Colour') }}</th>
+                          <th class="pro-price">{{ __('Carat') }}</th>
+                          <th class="pro-price">{{ __('Est. Price') }}</th>
+                          <th class="pro-remove">{{ __('Action') }}</th>
                           <th><div class="btn-group">
                             <div class="form-check form-check-custom form-check-sm">
                                   <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
@@ -284,16 +284,16 @@
                             </td>
                             <td style="width: 90px;">
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="{{ __('View') }}"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;" id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;" id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="{{ __('Confirm Order') }}"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.7rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.7rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="{{ __('Cancel Order') }}"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
@@ -305,7 +305,7 @@
                           </tr>
                         @empty
                         <tr>
-                          <td colspan="12">No Any Order</td>
+                          <td colspan="12">{{ __('No Any Order') }}</td>
                         </tr>
                         @endforelse
                       </tbody>
@@ -321,17 +321,17 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <th class="pro-thumbnail">Date</th>
-                          <th class="pro-thumbnail">Image</th>
-                          <th class="pro-title">Number</th>
-                          <th class="pro-title">Category</th>
-                          <th class="pro-price">Status</th>
-                          <th class="pro-price">Size</th>
-                          <th class="pro-price">Qty</th>
-                          <th class="pro-price">Colour</th>
-                          <th class="pro-price">Carat</th>
-                          <th class="pro-price">Est. Price</th>
-                          <th class="pro-remove">Action</th>
+                          <th class="pro-thumbnail">{{ __('Date') }}</th>
+                          <th class="pro-thumbnail">{{ __('Image') }}</th>
+                          <th class="pro-title">{{ __('Number') }}</th>
+                          <th class="pro-title">{{ __('Category') }}</th>
+                          <th class="pro-price">{{ __('Status') }}</th>
+                          <th class="pro-price">{{ __('Size') }}</th>
+                          <th class="pro-price">{{ __('Qty') }}</th>
+                          <th class="pro-price">{{ __('Colour') }}</th>
+                          <th class="pro-price">{{ __('Carat') }}</th>
+                          <th class="pro-price">{{ __('Est. Price') }}</th>
+                          <th class="pro-remove">{{ __('Action') }}</th>
                           <th><div class="btn-group">
                             <div class="form-check form-check-custom form-check-sm">
                                   <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
@@ -374,16 +374,16 @@
                             </td>
                             <td style="width: 90px;">
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="View"><i class="fa fa-eye fa-fw"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-success margin-r-5 view" title="{{ __('View') }}"><i class="fa fa-eye fa-fw"></i> </a>
                               </div>
                               @if($order->order_status == 0)
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="Cofirm Order"><i class="fa fa-check"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-info margin-r-5 order_confim" title="{{ __('Confirm Order') }}"><i class="fa fa-check"></i> </a>
                               </div>
                               @endif
                               @if($order->order_status == 3)
                               <div class="btn-group">
-                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="Cancle Order"><i class="fa fa-times"></i> </a>
+                                <a href="javascript:void(0)" style="padding: 0.1rem 0.5rem !important;"  id="{{ $order->id }}" class="btn btn-xs btn-danger margin-r-5 order_cancel" title="{{ __('Cancel Order') }}"><i class="fa fa-times"></i> </a>
                               </div>
                               @endif
                             </td>
@@ -395,7 +395,7 @@
                           </tr>
                         @empty
                         <tr>
-                          <td colspan="12">No Any Order</td>
+                          <td colspan="12">{{ __('No Any Order') }}</td>
                         </tr>
                         @endforelse
                       </tbody>
@@ -411,19 +411,19 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th class="pro-thumbnail">Image</th>
-                      <th class="pro-title">Code</th>
-                      <th class="pro-title">Product</th>
+                      <th class="pro-thumbnail">{{ __('Image') }}</th>
+                      <th class="pro-title">{{ __('Code') }}</th>
+                      <th class="pro-title">{{ __('Product') }}</th>
                       <!-- <th class="pro-price">Price</th> -->
-                      <th class="pro-quantity">Metal Type</th>
-                      <th class="pro-quantity">Metal Colour</th>
-                      <th class="pro-quantity">Size</th>
-                      <th class="pro-quantity">Quantity</th>
-                      <th class="pro-quantity">Ref</th>
-                      <th class="pro-quantity">Notes</th>
+                      <th class="pro-quantity">{{ __('Metal Type') }}</th>
+                      <th class="pro-quantity">{{ __('Metal Colour') }}</th>
+                      <th class="pro-quantity">{{ __('Size') }}</th>
+                      <th class="pro-quantity">{{ __('Quantity') }}</th>
+                      <th class="pro-quantity">{{ __('Ref') }}</th>
+                      <th class="pro-quantity">{{ __('Notes') }}</th>
 
                       <!-- <th class="pro-subtotal">Total</th> -->
-                      <th class="pro-remove">Action</th>
+                      <th class="pro-remove">{{ __('Action') }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -485,9 +485,9 @@
                         $VAT = $allTotal * 0.2;
                       ?>
                       <td width="10%" class="pro-remove text-center">
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">Order</a>
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="edit-btn" style="color: blue;" title="Edit"><i class="fa fa-edit"></i></a>
-                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart" title="Delete"><i style="color: red;" class="pe-7s-trash"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="order-btn" style="color: blue;">{{ __('Order') }}</a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="edit-btn" style="color: blue;" title="{{ __('Edit') }}"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-id="{{ $item['cart_id'] }}" class="remove-item-cart" title="{{ __('Delete') }}"><i style="color: red;" class="pe-7s-trash"></i></a>
                       </td>
                     </tr>
                     @endforeach
@@ -507,7 +507,7 @@
     <div class="modal-dialog modal-lg" role="document" style="max-width: 65%;">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('Modal title') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -527,7 +527,7 @@
 
     $(document).on("click", ".view", function () {
         $("#modal_data").empty();
-        $('.modal-title').text('Order Information'); // Set Title to Bootstrap modal title
+        $('.modal-title').text("{{ __('Order Information') }}"); // Set Title to Bootstrap modal title
         var id = $(this).attr('id');
         $.ajax({
             url: 'my-account/order' + '/' + id,
@@ -537,7 +537,7 @@
                 $('#myModal').modal('show'); // show bootstrap modal
             },
             error: function (result) {
-                $("#modal_data").html("Sorry Cannot Load Data");
+                $("#modal_data").html("{{ __('Sorry Cannot Load Data') }}");
             }
         });
     });
@@ -551,7 +551,7 @@
                 location.reload();
             },
             error: function(result) {
-                $("#quick_view_item_details").html("Sorry Cannot Load Data");
+                $("#quick_view_item_details").html("{{ __('Sorry Cannot Load Data') }}");
             }
           
         });
@@ -566,7 +566,7 @@
               location.reload();
           },
           error: function(result) {
-              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+              $("#quick_view_item_details").html("{{ __('Sorry Cannot Load Data') }}");
           }
         
       });
@@ -584,7 +584,7 @@
               $('#quick_view_item_details').modal('show'); // show bootstrap modal
           },
           error: function(result) {
-              $("#quick_view_item_details").html("Sorry Cannot Load Data");
+              $("#quick_view_item_details").html("{{ __('Sorry Cannot Load Data') }}");
           }
         
       });
@@ -599,7 +599,7 @@
               location.reload();
             },
             error: function (result) {
-                $("#modal_data").html("Sorry Cannot Load Data");
+                $("#modal_data").html("{{ __('Sorry Cannot Load Data') }}");
             }
         });
     });
@@ -629,14 +629,14 @@
               location.reload();
             },
             error: function (result) {
-                $("#modal_data").html("Sorry Cannot Load Data");
+                $("#modal_data").html("{{ __('Sorry Cannot Load Data') }}");
             }
         });
     });
     
     $(document).on("click", ".view_invoice", function () {
         $("#modal_data").empty();
-        $('.modal-title').text('View Invoice'); // Set Title to Bootstrap modal title
+        $('.modal-title').text("{{ __('View Invoice') }}"); // Set Title to Bootstrap modal title
         var id = $(this).attr('id');
         $.ajax({
             url: 'my-account/invoice' + '/' + id,
@@ -646,14 +646,14 @@
                 $('#myModal').modal('show'); // show bootstrap modal
             },
             error: function (result) {
-                $("#modal_data").html("Sorry Cannot Load Data");
+                $("#modal_data").html("{{ __('Sorry Cannot Load Data') }}");
             }
         });
     });
 
     $(document).on("click", ".cancel", function () {
         $("#modal_data").empty();
-        $('.modal-title').text('Cancle Order'); // Set Title to Bootstrap modal title
+        $('.modal-title').text("{{ __('Cancel Order') }}"); // Set Title to Bootstrap modal title
         var id = $(this).attr('id');
         $.ajax({
             url: 'my-account/cancel-order' + '/' + id,
@@ -663,7 +663,7 @@
                 $('#myModal').modal('show'); // show bootstrap modal
             },
             error: function (result) {
-                $("#modal_data").html("Sorry Cannot Load Data");
+                $("#modal_data").html("{{ __('Sorry Cannot Load Data') }}");
             }
         });
     });

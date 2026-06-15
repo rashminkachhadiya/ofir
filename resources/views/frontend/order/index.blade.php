@@ -39,45 +39,45 @@ div.content {
             <div class="content">
                 <form method="post" action="" enctype="multipart/form-data" >
                   @csrf
-                  <h4 class="d-block" style="color: black;">Hi {{Auth()->user()->f_name}}</h4>
+                  <h4 class="d-block" style="color: black;">{{ __('Hi, :name', ['name' => Auth()->user()->f_name]) }}</h4>
                   <a style="font-size: 30px;cursor: pointer;" href="{{ URL::to('/') }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
-                  <h5>Create New Order</h5>
+                  <h5>{{ __('Create New Order') }}</h5>
                   <div>
-                    <label for=""> Category </label>
+                    <label for=""> {{ __('Category') }} </label>
                       {!! Form::select('category_id', $categories ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'category_id']) !!}
                   </div>
-                  <label for="">Picture</label>
+                  <label for="">{{ __('Picture') }}</label>
                   <div id="dropzone" class="dropzone dz-clickable form-fileupload">
                     <div class="dz-message dz-default" style="text-align:center;">
-                        <span>Click Here to upload Photo </span>
+                        <span>{{ __('Click Here to upload Photo') }}</span>
                     </div>
                   </div>
                   <div class="mt-2">
-                    <label for=""> Metal Type </label>
+                    <label for=""> {{ __('Metal Type') }} </label>
                       {!! Form::select('metal_type', $metalType ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                   </div>
                   <div class="mt-2">
-                    <label for=""> Metal Colour </label>
+                    <label for=""> {{ __('Metal Colour') }} </label>
                       {!! Form::select('metal_colour', $metalColour ?? [],  $userRoleId ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
                   </div>
 
                   <div class="mt-2">
-                    <label for=""> Size </label>
-                      <input type="text" class="form-control" id="size" name="size" value="" placeholder="Size" required>
+                    <label for=""> {{ __('Size') }} </label>
+                      <input type="text" class="form-control" id="size" name="size" value="" placeholder="{{ __('Size') }}" required>
                   </div>
 
                   <div class="mt-2">
-                    <label for=""> Quantity </label>
-                      <input type="number" class="form-control" id="quantity" name="quantity" value="" placeholder="Quantity" required>
+                    <label for=""> {{ __('Quantity') }} </label>
+                      <input type="number" class="form-control" id="quantity" name="quantity" value="" placeholder="{{ __('Quantity') }}" required>
                   </div>
 
                   <div class="mt-2">
-                    <label for=""> Notes </label>
-                    <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="Notes" rows="5" required="false"></textarea>
+                    <label for=""> {{ __('Notes') }} </label>
+                    <textarea type="text" class="form-control" id="notes" name="notes" value="" placeholder="{{ __('Notes') }}" rows="5" required="false"></textarea>
                   </div>
                 </form>
                 <div class="mt-2">
-                  <button class="btn btn-success" id="uploadFile">Submit</button>
+                  <button class="btn btn-success" id="uploadFile">{{ __('Submit') }}</button>
                 </div>
             </div>
         </div>
@@ -129,14 +129,14 @@ div.content {
 
           success: function(file, response) {
               Swal.fire({
-                title: 'Order Confrimed',
-                text: "est. delivery 5 weeks",
+                title: "{{ __('Order Confirmed') }}",
+                text: "{{ __('est. delivery 5 weeks') }}",
                 icon: 'success',
                 showCancelButton: true,
                 confirmButtonColor: '#000',
                 cancelButtonColor: '#d33',
-                cancelButtonText: 'Create New Order',
-                confirmButtonText: 'Done'
+                cancelButtonText: "{{ __('Create New Order') }}",
+                confirmButtonText: "{{ __('Done') }}"
               }).then((result) => {
                 if (result.isConfirmed) {
                   window.location.href = "{{ URL::to('/') }}";

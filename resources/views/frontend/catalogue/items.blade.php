@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('nav_link')
 <a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('/catalogue/'.$mainCatalogue) }}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
-<a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">Home</a>
+<a class="m-2 mt-0" style="font-size: 16px;cursor: pointer; color: black" href="{{ URL::to('/') }}">{{ __('Home') }}</a>
 @endsection
 @section('middle')
 @endsection
@@ -109,11 +109,11 @@ div.content {
                 
               </div>
               <div class="col-md-2">
-                <p style="color: black; margin: 0px;padding: 0px;">Metal</p>
+                <p style="color: black; margin: 0px;padding: 0px;">{{ __('Metal') }}</p>
                 {!! Form::select('metal_colour', $metal ?? [],  $selectMetal ?? '', ['class' => 'form-control m-0 p-0','data-control'=>"select2", 'id'=>'metal']) !!}
               </div>
               <div class="col-md-2">
-                <p style="color: black; margin: 0px;padding: 0px;">Gems</p>
+                <p style="color: black; margin: 0px;padding: 0px;">{{ __('Gems') }}</p>
                 {!! Form::select('metal_colour', $gems ?? [],  $selectGem ?? '', ['class' => 'form-control m-0 p-0','data-control'=>"select2", 'id'=>'gems']) !!}
               </div>
             </div>
@@ -148,7 +148,7 @@ div.content {
                 @empty
                   <div class="text-center">
                     <div>
-                      <p style="color: black;" class="text-center">No items found</p>                      
+                      <p style="color: black;" class="text-center">{{ __('No items found') }}</p>                      
                     </div>
                   </div>
                 @endforelse
@@ -158,16 +158,16 @@ div.content {
                 {{ $items->appends(request()->input())->links('vendor.pagination.default') }}
                 @else
                 <div class="minicart-catelogue-button">
-                  <a class="btn btn-dark set-page mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">Set Page</a>
+                  <a class="btn btn-dark set-page mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">{{ __('Set Page') }}</a>
                 </div>
                 <div class="minicart-catelogue-button">
-                  <a class="scroll-top ml-2 btn btn-dark mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">Back to Top</a>
+                  <a class="scroll-top ml-2 btn btn-dark mb-1" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">{{ __('Back to Top') }}</a>
                 </div>
                 @endif
 
                 @if($page != 'all_product')
                 <div class="minicart-catelogue-button">
-                  <a class="ml-3 btn btn-dark all-product" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">All Product</a>
+                  <a class="ml-3 btn btn-dark all-product" style="font-size: 12px !important;padding: 5px 7px !important;border-radius: 8px !important;">{{ __('All Product') }}</a>
                 </div>
                 @endif
             </div>

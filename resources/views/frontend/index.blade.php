@@ -37,26 +37,26 @@ div.content {
     <div class="back row">
         <div class="div-center">
                 @guest
-                <h4 class="d-block" style="color: black;">This web Catalog only for trader</h4>
+                <h4 class="d-block" style="color: black;">{{ __('This web Catalog only for trader') }}</h4>
                 @else
-                <h4 class="d-block" style="color: black;">Hi, {{Auth()->user()->f_name}}</h4>
+                <h4 class="d-block" style="color: black;">{{ __('Hi, :name', ['name' => Auth()->user()->f_name]) }}</h4>
                 @endguest
             <div class="content">
                 <div>
                     @guest
                     <div class="minicart-button">
-                        <a class="btn" href="{{ route('login') }}">Login</a>
+                        <a class="btn" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </div>
                     <div class="minicart-button">
-                        <a class="btn" href="{{ route('register') }}">Register</a>
+                        <a class="btn" href="{{ route('register') }}">{{ __('Register') }}</a>
                     </div>
                     <div>
                     @else
                     <div class="minicart-button">
-                        <a class="btn" href="{{ URL::to('/order') }}">New Order</a>
+                        <a class="btn" href="{{ URL::to('/order') }}">{{ __('New Order') }}</a>
                     </div>
                     <div class="minicart-button">
-                        <a class="btn" href="{{ URL::to('/my-account') }}">My Account</a>
+                        <a class="btn" href="{{ URL::to('/my-account') }}">{{ __('My Account') }}</a>
                     </div>
                     <div class="minicart-button">
                         <a class="btn" href="{{ route('logout') }}"
@@ -72,7 +72,7 @@ div.content {
 
                     @if(Auth()->user()->is_visible == 1)
                     <div class="minicart-button mt-4">
-                        <a class="btn" href="{{ URL::to('/catalogue') }}">Catalogue</a>
+                        <a class="btn" href="{{ URL::to('/catalogue') }}">{{ __('Catalogue') }}</a>
                     </div>
                     @endif
                      @endguest
