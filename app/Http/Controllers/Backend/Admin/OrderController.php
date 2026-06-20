@@ -328,28 +328,57 @@ class OrderController extends Controller
 
     public function pdfDownload(Request $request)
     {
-      if(isset($request->id) && !is_null($request->id))
-      {
-          $ids[] = $request->id;
-      }else if(isset($request->ids)){
-          $ids = explode(', ',$request->ids);
+      $ids = [];
+
+      if ($request->filled('id')) {
+          $ids[] = (int) $request->id;
       }
-      $orders = Order::whereIn('id',$ids)->get();
-      $supplier = Supplier::all()->pluck('f_name','id')->toArray();
-      return view('frontend.myaccount.all_order_view',compact('orders','supplier'));
-      $mpdf = new \Mpdf\Mpdf();
-      $html = view('backend.admin.order.pdf_supplier',compact('orders','supplier'))->render();
+
+      if ($request->filled('ids')) {
+          $requestIds = explode(',', $request->ids);
+          foreach ($requestIds as $requestId) {
+              $requestId = (int) trim($requestId);
+              if ($requestId > 0) {
+                  $ids[] = $requestId;
+              }
+          }
+      }
+
+      $ids = array_values(array_unique($ids));
+
+      if (empty($ids)) {
+          return redirect()->back()->with('error', 'Please select at least one order.');
+      }
+
+      $orders = Order::with(['orderPicture', 'orderUser'])
+          ->whereIn('id', $ids)
+          ->get()
+          ->sortBy(function ($order) use ($ids) {
+              return array_search($order->id, $ids);
+          })
+          ->values();
+
+      $supplier = Supplier::pluck('f_name', 'id')->toArray();
+      $html = view('backend.admin.order.pdf_orders', compact('orders', 'supplier'))->render();
+
+      $mpdf = new \Mpdf\Mpdf([
+          'format' => 'A4',
+          'margin_top' => 8,
+          'margin_right' => 8,
+          'margin_bottom' => 8,
+          'margin_left' => 8,
+      ]);
+
       $mpdf->autoScriptToLang = true;
       $mpdf->autoLangToFont = true;
+      $mpdf->shrink_tables_to_fit = 1;
       $mpdf->WriteHTML($html);
-      // $pdf = PDF::loadView('backend.admin.order.pdf_supplier',compact('orders','supplier'));
-      // $mpdf->autoLangToFont = true;
-      if($request->flag == 'view')
-      {
-        return $mpdf->Output();
-      }else{
-        return $mpdf->Output('supplier.pdf','D');
+
+      if ($request->flag === 'view') {
+          return $mpdf->Output();
       }
+
+      return $mpdf->Output('orders-'.now()->format('Ymd-His').'.pdf', 'D');
     }
 
     public function receiveSupplier(Request $request)
@@ -449,11 +478,26 @@ class OrderController extends Controller
 
     public function excelDownload(Request $request) 
     {
-      if(isset($request->id) && !is_null($request->id))
-      {
-          $ids[] = $request->id;
-      }else if(isset($request->ids)){
-          $ids = explode(', ',$request->ids);
+      $ids = [];
+
+      if ($request->filled('id')) {
+          $ids[] = (int) $request->id;
+      }
+
+      if ($request->filled('ids')) {
+          $requestIds = explode(',', $request->ids);
+          foreach ($requestIds as $requestId) {
+              $requestId = (int) trim($requestId);
+              if ($requestId > 0) {
+                  $ids[] = $requestId;
+              }
+          }
+      }
+
+      $ids = array_values(array_unique($ids));
+
+      if (empty($ids)) {
+          return redirect()->back()->with('error', 'Please select at least one order.');
       }
 
       return Excel::download(new OrderExport($ids), 'order.xlsx');

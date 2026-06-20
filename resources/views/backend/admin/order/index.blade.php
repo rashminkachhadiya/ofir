@@ -57,32 +57,22 @@
                         </div>
                     <div class="mr-1 p-0">
                         <div>
-                            <form action="{{ URL :: to('/admin/excel-download') }}" id="form-print" method="get">
-                                <input type="hidden" name="ids" id="print_ids">
+                            <form action="{{ URL :: to('/admin/excel-download') }}" id="export-form" method="get">
+                                <input type="hidden" name="ids" id="export_ids">
                                 <input type="hidden" name="flag" value="view">
                                 <div>
-                                    <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="Export()">Export</a>
+                                    <button class="btn btn-xs btn-info" type="button" onclick="Export()">Export</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="mr-1 p-0">
                         <div>
-                            <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
-                                <input type="hidden" name="ids" id="print_ids">
-                                <input type="hidden" name="flag" value="view">
+                            <form action="{{ URL :: to('/admin/pdf-download') }}" id="pdf-form" method="get">
+                                <input type="hidden" name="ids" id="pdf_ids">
+                                <input type="hidden" name="flag" value="pdf">
                                 <div>
-                                    <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="printLabel(0)">View</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="mr-1 p-0">
-                        <div>
-                            <form action="{{ URL :: to('/admin/pdf-download') }}" id="form-print" method="get">
-                                <input type="hidden" name="ids" id="print_ids">
-                                <div>
-                                    <a class="btn btn-xs btn-success" href="javascript:void(0)" onclick="printLabel(1)">View All</a>
+                                    <button class="btn btn-xs btn-success" type="button" onclick="downloadSelectedPdf()">PDF</button>
                                 </div>
                             </form>
                         </div>
@@ -137,31 +127,41 @@
         }
     </style>
     <script>
-        function printLabel(tag)
+        function getSelectedOrderIds()
         {
-            if(tag == 0)
-            {
-                var allVals = [];
-                $("input[name='ids[]']:checked").each(function() {
-                    allVals.push($(this).attr('value'));
-                });
-                $("#print_ids").val(allVals.join(', ')); 
-                table.draw();
-            }else{
-                location.reload();
+            var allVals = [];
+            $(".child-checkbox:checked").each(function() {
+                var checkboxValue = $(this).val();
+                if (checkboxValue) {
+                    allVals.push($.trim(checkboxValue));
+                }
+            });
+
+            return allVals;
+        }
+
+        function downloadSelectedPdf()
+        {
+            var allVals = getSelectedOrderIds();
+            if (allVals.length === 0) {
+                alert('Please select at least one order.');
+                return;
             }
-            
+
+            $("#pdf_ids").val(allVals.join(','));
+            $('#pdf-form').submit();
         }
 
         function Export()
         {
-            // alert('yess');
-            var allVals = [];
-            $("input[name='ids[]']:checked").each(function() {
-                allVals.push($(this).attr('value'));
-            });
-            $("#print_ids").val(allVals.join(', ')); 
-            $('#form-print').submit();
+            var allVals = getSelectedOrderIds();
+            if (allVals.length === 0) {
+                alert('Please select at least one order.');
+                return;
+            }
+
+            $("#export_ids").val(allVals.join(',')); 
+            $('#export-form').submit();
         }
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -180,7 +180,6 @@
                         d.user_id = $('#user_id').val();
                         d.supplier_id = $('#supplier_id').val();
                         d.order_status = $('#order_status').val();
-                        d.ids = $("#print_ids").val();
                         d.ref = $("#ref").val();
                         d.param = urlParams.get('param');
                     },
