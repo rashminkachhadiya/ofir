@@ -277,6 +277,12 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
 
+               $item->diamond_shape = $request->input('diamond_shape');
+               $item->diamond_carat = $request->input('diamond_carat');
+               $item->diamond_pcs = $request->input('diamond_pcs');
+               $item->diamond_colour = $request->input('diamond_colour');
+               $item->diamond_cleaerty = $request->input('diamond_cleaerty');
+
                $item->weight = $request->input('weight');
                $item->gem = $request->input('gem');
                $item->shape = $request->input('shape');
@@ -497,6 +503,12 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
 
+               $item->diamond_shape = $request->input('diamond_shape');
+               $item->diamond_carat = $request->input('diamond_carat');
+               $item->diamond_pcs = $request->input('diamond_pcs');
+               $item->diamond_colour = $request->input('diamond_colour');
+               $item->diamond_cleaerty = $request->input('diamond_cleaerty');
+
                $item->weight = $request->input('weight');
                $item->gem = $request->input('gem');
                $item->shape = $request->input('shape');
@@ -641,11 +653,32 @@ class CatalogueController extends Controller
                $item->size = $itemDetails->size;
                $item->metal_colour = $itemDetails->metal_colour;
                $item->metal_type = $itemDetails->metal_type;
+               $item->diamond_shape = $itemDetails->diamond_shape;
+               $item->diamond_carat = $itemDetails->diamond_carat;
+               $item->diamond_pcs = $itemDetails->diamond_pcs;
+               $item->diamond_colour = $itemDetails->diamond_colour;
+               $item->diamond_cleaerty = $itemDetails->diamond_cleaerty;
+               $item->weight = $itemDetails->weight;
+               $item->gem = $itemDetails->gem;
+               $item->shape = $itemDetails->shape;
+               $item->carat = $itemDetails->carat;
+               $item->colour = $itemDetails->colour;
+               $item->cleaerty = $itemDetails->cleaerty;
+               $item->pcs = $itemDetails->pcs;
+               $item->cost_fee = $itemDetails->cost_fee;
+               $item->setting = $itemDetails->setting;
+               $item->diamond = $itemDetails->diamond;
+               $item->loss = $itemDetails->loss;
+               $item->diamond_note = $itemDetails->diamond_note;
                $item->gram = $itemDetails->gram;
                $item->total_gram = $itemDetails->total_gram;
                $item->quantity = $itemDetails->quantity;
                $item->ct = $itemDetails->ct;
                $item->total_ct = $itemDetails->total_ct;
+               $item->price_usd = $itemDetails->price_usd;
+               $item->price_pound = $itemDetails->price_pound;
+               $item->price_eur = $itemDetails->price_eur;
+               $item->price_notes = $itemDetails->price_notes;
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
