@@ -311,6 +311,7 @@ class CatalogueController extends Controller
                         $itemStock->item_code = $request->new_code[$key];
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->new_gram[$key];
+                        $itemStock->metal_type = $request->new_metal_type[$key] ?? null;
                         $itemStock->ct = $request->new_ct[$key];
                         $itemStock->pieces = $request->new_pieces[$key];
                         $itemStock->size = $request->new_size[$key];
@@ -530,6 +531,7 @@ class CatalogueController extends Controller
                         $itemStock->item_code = $request->code[$key];
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->gram[$key];
+                        $itemStock->metal_type = $request->metal_type[$key] ?? null;
                         $itemStock->ct = $request->ct[$key];
                         $itemStock->pieces = $request->pieces[$key];
                         $itemStock->size = $request->q_size[$key];
@@ -555,6 +557,7 @@ class CatalogueController extends Controller
                         $itemStock->item_code = $request->new_code[$key];
                         $itemStock->qty = $value;
                         $itemStock->gram = $request->new_gram[$key];
+                        $itemStock->metal_type = $request->new_metal_type[$key] ?? null;
                         $itemStock->ct = $request->new_ct[$key];
                         $itemStock->pieces = $request->new_pieces[$key];
                         $itemStock->size = $request->new_q_size[$key];

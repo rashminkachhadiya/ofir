@@ -1,6 +1,9 @@
 @extends('backend.layouts.master')
 @section('title', ' Product Details')
 @section('content')
+    @php
+        $stockMetalTypes = ['' => 'Select'] + config('params.metal_type');
+    @endphp
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <div class="main-card card mb-3">
@@ -231,6 +234,9 @@
                                             <p><strong> Gram</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
+                                            <p><strong> Metal Type</strong></p>
+                                        </div>
+                                        <div class="col-md-1 pl-2 p-1">
                                             <p><strong> Size</strong></p>
                                         </div>
                                         <div class="col-md-1 pl-2 p-1">
@@ -267,6 +273,9 @@
                                         </div>
                                         <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
+                                        </div>
+                                        <div class="col-md-1 p-0 p-1">
+                                          {!! Form::select('new_metal_type[0]', $stockMetalTypes, null, ['class' => 'form-control', 'id' => 'new_metal_type-0']) !!}
                                         </div>
                                         <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_q_size[0]" class="form-control" id="new_q_size-0" value="" placeholder="Size">
@@ -373,6 +382,14 @@
                     </div>\
                     <div class="col-md-1 p-1">\
                       <input type="text" name="new_gram['+ add_number +']" class="form-control" id="size_'+ add_number +'" value="" placeholder="Gram">\
+                    </div>\
+                    <div class="col-md-1 p-1">\
+                      <select class="form-control" id="new_metal_type_'+ add_number +'" name="new_metal_type['+ add_number +']">\
+                        <option value="">Select</option>\
+                        @foreach(config('params.metal_type') as $key => $value)\
+                        <option value="{{ $key }}">{{ $value }}</option>\
+                        @endforeach\
+                      </select>\
                     </div>\
                     <div class="col-md-1 p-1">\
                       <input type="text" name="new_q_size['+ add_number +']" class="form-control" id="q_size_'+ add_number +'" value="" placeholder="Size">\
