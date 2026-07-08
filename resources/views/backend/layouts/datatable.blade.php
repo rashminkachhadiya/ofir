@@ -17,39 +17,38 @@
 <script src="{{ asset('/assets/datatables/js/dataTables.select.min.js') }}"></script>
 
 <style>
-    .admin-datatable-scroll,
-    .admin-datatable-scroll .dataTables_scroll,
-    .admin-datatable-scroll .dataTables_scrollHead,
-    .admin-datatable-scroll .dataTables_scrollBody {
-        max-width: 100% !important;
-        width: 100% !important;
-    }
-
-    .admin-datatable-container,
     .app-main__inner > .row > [class*="col-"],
     .main-card,
     .card-body {
         min-width: 0 !important;
     }
 
-    .admin-datatable-container {
+    .dataTables_wrapper {
         max-width: 100% !important;
-        overflow-x: hidden !important;
+        width: 100% !important;
     }
 
-    .admin-datatable-scroll .dataTables_scrollBody {
+    .table-responsive > .dataTables_wrapper {
+        overflow: visible !important;
+    }
+
+    .dataTables_wrapper .dataTables_scroll {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .dataTables_wrapper .dataTables_scrollBody {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
     }
 
-    .admin-datatable-scroll .dataTables_scrollHeadInner,
-    .admin-datatable-scroll .dataTables_scrollHeadInner table,
-    .admin-datatable-scroll .dataTables_scrollBody table {
-        min-width: var(--admin-datatable-width, 1100px) !important;
-        width: var(--admin-datatable-width, 1100px) !important;
+    .dataTables_wrapper .dataTables_scrollHeadInner,
+    .dataTables_wrapper .dataTables_scrollHeadInner table,
+    .dataTables_wrapper .dataTables_scrollBody table {
+        max-width: none !important;
     }
 
-    .admin-datatable-scroll table.dataTable {
+    .dataTables_wrapper table.dataTable {
         white-space: nowrap;
     }
 
@@ -105,70 +104,66 @@
         $.extend(true, $.fn.dataTable.defaults, {
             autoWidth: false,
             scrollX: true,
-            scrollXInner: '1100px'
+            scrollCollapse: true,
+            orderCellsTop: true
         });
 
-        function getAdminTableWidth(settings) {
-            var columnCount = settings && settings.aoColumns ? settings.aoColumns.length : 0;
-            var width = 0;
+        function scheduleColumnAdjust(settings, api) {
+            if (!api || !api.columns || !settings || settings._datatableAlignPending) {
+                return;
+            }
 
-            $(settings.nTHead).find('tr:first th').each(function () {
-                var title = $.trim($(this).text()).toLowerCase();
+            settings._datatableAlignPending = true;
 
-                if (title === '#') {
-                    width += 60;
-                } else if (title.indexOf('email') !== -1) {
-                    width += 240;
-                } else if (title.indexOf('action') !== -1) {
-                    width += 120;
-                } else {
-                    width += 110;
+            window.requestAnimationFrame(function () {
+                api.columns.adjust();
+
+                if (api.responsive && typeof api.responsive.recalc === 'function') {
+                    api.responsive.recalc();
                 }
-            });
 
-            return Math.max(width, columnCount * 105, 900);
+                window.setTimeout(function () {
+                    settings._datatableAlignPending = false;
+                }, 0);
+            });
         }
 
-        function applyAdminDataTableScroll(settings) {
-            if (!settings || !settings.nTable || settings.nTable.id !== 'manage_all') {
+        function bindImageAdjustments(api) {
+            var tableNode = api.table().node();
+
+            if (!tableNode) {
                 return;
             }
 
-            var width = getAdminTableWidth(settings) + 'px';
-            var $wrapper = $(settings.nTableWrapper || settings.nTable).closest('.dataTables_wrapper');
+            $(tableNode).find('img').each(function () {
+                if (this.complete) {
+                    return;
+                }
 
-            if (!$wrapper.length) {
-                return;
-            }
-
-            $wrapper
-                .addClass('admin-datatable-scroll')
-                .css('--admin-datatable-width', width);
-
-            $wrapper.closest('.table-responsive')
-                .addClass('admin-datatable-container');
-
-            $wrapper.find('.dataTables_scrollHeadInner, .dataTables_scrollHeadInner table, .dataTables_scrollBody table')
-                .css({
-                    minWidth: width,
-                    width: width
+                $(this).one('load.datatableAlign error.datatableAlign', function () {
+                    scheduleColumnAdjust(api.settings()[0], api);
                 });
-
-            $wrapper.find('.dataTables_scrollBody')
-                .attr('tabindex', '0')
-                .css('overflow-x', 'auto');
+            });
         }
 
         $(document).on('init.dt draw.dt column-sizing.dt', function (event, settings) {
+            if (!settings || !settings.nTable) {
+                return;
+            }
+
             window.setTimeout(function () {
-                applyAdminDataTableScroll(settings);
+                var api = new $.fn.dataTable.Api(settings);
+                bindImageAdjustments(api);
+                scheduleColumnAdjust(settings, api);
             }, 0);
         });
 
         $(window).on('resize orientationchange', function () {
-            $.fn.dataTable
-                .tables({visible: true, api: true})
-                .columns.adjust();
+            window.setTimeout(function () {
+                $.fn.dataTable
+                    .tables({visible: true, api: true})
+                    .columns.adjust();
+            }, 0);
         });
     })(jQuery);
 </script>
