@@ -3,6 +3,63 @@
 @section('content')
     @php
         $stockMetalTypes = ['' => 'Select'] + config('params.metal_type');
+        $shapeOptions = [
+            '' => 'Select',
+            'Round' => 'Round',
+            'Oval' => 'Oval',
+            'Pear' => 'Pear',
+            'Emerald' => 'Emerald',
+            'Princess' => 'Princess',
+            'Cushion' => 'Cushion',
+            'Radiant' => 'Radiant',
+            'Asscher' => 'Asscher',
+            'Heart' => 'Heart',
+            'Marquise' => 'Marquise',
+            'Baguette' => 'Baguette',
+            'Tapered Baguette' => 'Tapered Baguette',
+            'Trillion' => 'Trillion',
+            'Trapezoid' => 'Trapezoid',
+            'Half Moon' => 'Half Moon',
+            'Shield' => 'Shield',
+            'Bullet' => 'Bullet',
+            'Kite' => 'Kite',
+            'Square' => 'Square',
+            'Rectangle' => 'Rectangle',
+            'Octagon' => 'Octagon',
+            'Hexagon' => 'Hexagon',
+            'Cabochon' => 'Cabochon',
+            'Fancy' => 'Fancy',
+            'Other' => 'Other',
+        ];
+        $gemOptions = [
+            '' => 'Select',
+            'Emerald' => 'Emerald',
+            'Sapphire' => 'Sapphire',
+            'Ruby' => 'Ruby',
+            'Onyx' => 'Onyx',
+            'Pearl' => 'Pearl',
+            'Tsavorite' => 'Tsavorite',
+            'Tanzanite' => 'Tanzanite',
+            'Aquamarine' => 'Aquamarine',
+            'Amethyst' => 'Amethyst',
+            'Citrine' => 'Citrine',
+            'Topaz' => 'Topaz',
+            'Garnet' => 'Garnet',
+            'Tourmaline' => 'Tourmaline',
+            'Opal' => 'Opal',
+            'Jade' => 'Jade',
+            'Turquoise' => 'Turquoise',
+            'Coral' => 'Coral',
+            'Quartz' => 'Quartz',
+            'Morganite' => 'Morganite',
+            'Peridot' => 'Peridot',
+            'Spinel' => 'Spinel',
+            'Moonstone' => 'Moonstone',
+            'Lapis Lazuli' => 'Lapis Lazuli',
+            'Malachite' => 'Malachite',
+            'Mother of Pearl' => 'Mother of Pearl',
+            'Other' => 'Other',
+        ];
     @endphp
     <div class="row">
         <div class="col-md-12 col-sm-12">
@@ -14,13 +71,6 @@
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="link-tab-product-details" data-mdb-toggle="tab" href-div="tab-product-details" role="tab" aria-controls="ex1-tabs-1" aria-selected="true" >Product Details</a>
                       </li>
-                      <li class="nav-item ml-2" role="presentation">
-                       <a href="{{ URL :: to('/admin/catalogue/create') }}" class="btn btn-success"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            Add New Item
-                        </a>
-                      </li>
-
                     </ul>
                     <!-- Tabs navs -->
 
@@ -118,100 +168,100 @@
                                         <input type="text" class="form-control" id="item_title_gram" name="item_title_gram" value="{{ $item->item_title_gram }}" placeholder="">
                                         <span id="error_item_title_gram" class="has-error"></span>
                                     </div> -->
-                                    <div class="d-flex">
-                                        <div class="col-md-6">
-                                            <div class="col-md-12 p-1 pb-4 text-center" style="border: 1px solid">
-                                                <h5 style="color: black;" class="text-center">Diamond Info</h5>
-                                                <div class="d-flex">
-                                                    <div class="col-md-4 p-0">
+                                    <div class="">
+                                        <div class="col-md-12">
+                                            <h5 style="color: black;" class="">Diamond Info</h5>
+                                            <div class="col-md-12 d-flex" style="border: 1px solid">
+                                                <div class="col-md-3 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Shape</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
-                                                        <input type="text" class="form-control" id="diamond_shape" name="diamond_shape" value="{{ $item->diamond_shape }}" placeholder="Shape">
+                                                    <div class="col-md-12 p-0">
+                                                        {!! Form::select('diamond_shape', $shapeOptions, old('diamond_shape', $item->diamond_shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'diamond_shape']) !!}
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Carat</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" id="diamond_carat" name="diamond_carat" value="{{ $item->diamond_carat }}" placeholder="Carat">
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Pcs</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" name="diamond_pcs" value="{{ $item->diamond_pcs }}" id="diamond_pcs" placeholder="Pcs">
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Colour</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" id="diamond_colour" name="diamond_colour" value="{{ $item->diamond_colour }}" placeholder="Colour">
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Cleaerty</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" name="diamond_cleaerty" value="{{ $item->diamond_cleaerty }}" id="diamond_cleaerty" placeholder="Cleaerty">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="col-md-12 p-1 pb-4 text-center" style="border: 1px solid">
-                                                <h5 style="color: black;" class="text-center">Gem Info</h5>
-                                                <div class="d-flex">
-                                                    <div class="col-md-4 p-0">
+                                        <div class="col-md-12 mt-3">
+                                            <h5 style="color: black;" class="">Gem Info</h5>
+                                            <div class="col-md-12 d-flex" style="border: 1px solid">
+                                                <div class="col-md-3 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Gem.</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
-                                                        <input type="text" class="form-control" id="gem" name="gem" value="{{ $item->gem }}" placeholder="Gem">
+                                                    <div class="col-md-12 p-0">
+                                                        {!! Form::select('gem', $gemOptions, old('gem', $item->gem ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'gem']) !!}
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-3 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Shape</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
-                                                        <input type="text" class="form-control" id="shape" name="shape" value="{{ $item->shape }}" placeholder="Shape">
+                                                    <div class="col-md-12 p-0">
+                                                        {!! Form::select('shape', $shapeOptions, old('shape', $item->shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'shape']) !!}
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Carat</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Colour</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $item->colour }}" placeholder="Colour">
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Cleaerty</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" name="cleaerty" value="{{ $item->cleaerty }}" id="cleaerty" placeholder="Cleaerty">
                                                     </div>
                                                 </div>
-                                                <div class="d-flex mt-1">
-                                                    <div class="col-md-4 p-0">
+                                                <div class="col-md-2 p-0">
+                                                    <div class="col-md-8 p-0">
                                                         <label class="col-form-label">Pcs</label>
                                                     </div>
-                                                    <div class="col-md-6 p-0">
+                                                    <div class="col-md-12 p-0">
                                                         <input type="text" class="form-control" name="pcs" value="{{ $item->pcs }}" id="pcs" placeholder="Pcs">
                                                     </div>
                                                 </div>
