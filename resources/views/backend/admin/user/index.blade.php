@@ -1,110 +1,59 @@
 @extends('backend.layouts.master')
-@section('title', ' All Users')
+@section('title', 'All Users')
 @section('content')
-<style type="text/css">
-    .thead tr:first-child th {
-    position: sticky;
-    z-index: 12;
-    top: 0;
-    background: white;
-}
-#manage_all{
-    color: black !important;
- }
- </style>
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All Users</div>
-                <div class="d-inline-block ml-2">
-                    @can('user-create')
-                        <button class="btn btn-success" onclick="create()"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            New User
-                        </button>
-                    @endcan
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover table-color">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <!-- <th>Photo</th> -->
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <!-- <th>Roles</th> -->
-                                <th>Tot. Order</th>
-                                <th>Status</th>
-                                <th>Last Seen</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    <x-admin.page-header title="{{ __('All Users') }}" icon="users">
+        <x-slot name="actions">
+            @can('user-create')
+                <button class="btn btn-success" onclick="create()">
+                    <i class="fa fa-plus"></i> {{ __('New User') }}
+                </button>
+            @endcan
+        </x-slot>
+    </x-admin.page-header>
+
+    <x-admin.data-table-card table-class="align-middle mb-0 table table-borderless table-striped table-hover table-color w-100">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ __('First Name') }}</th>
+            <th>{{ __('Last Name') }}</th>
+            <th>{{ __('Email') }}</th>
+            <th>{{ __('Tot. Order') }}</th>
+            <th>{{ __('Status') }}</th>
+            <th>{{ __('Last Seen') }}</th>
+            <th>{{ __('Action') }}</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
+
     <script>
         $(function () {
-
             table = $('#manage_all').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    "url": '{!! route('admin.allUser.users') !!}',
-                    "type": "GET",
+                    url: '{!! route('admin.allUser.users') !!}',
+                    type: 'GET',
                     headers: {
-                        "X-CSRF-TOKEN": CSRF_TOKEN,
+                        'X-CSRF-TOKEN': CSRF_TOKEN,
                     },
-                    "dataType": 'json'
+                    dataType: 'json'
                 },
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex', searchable: false, orderable: false},
-                    // {data: 'file_path', name: 'file_path'},
                     {data: 'f_name', name: 'f_name'},
                     {data: 'l_name', name: 'l_name'},
                     {data: 'email', name: 'email'},
-                    // {data: 'role', name: 'role'},
                     {data: 'tot_order', name: 'tot_order', searchable: false},
                     {data: 'status', name: 'status'},
                     {data: 'last_seen', name: 'last_seen'},
                     {data: 'action', name: 'action'}
                 ],
-                "autoWidth": false,
-                "scrollX": true,
-                "scrollY": 450,
-                "alwaysCloneTop": true,
-                "lengthMenu": [25, 50, 100],
-                "language": {
-                    "lengthMenu": "Show _MENU_ "
+                lengthMenu: [25, 50, 100],
+                language: {
+                    lengthMenu: 'Show _MENU_'
                 }
             });
-            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
-                'width': '220px',
-                'height': '30px'
-            });
-
         });
     </script>
 
@@ -114,26 +63,15 @@
         }
 
         $(document).ready(function () {
-            // View Form
-            $("#manage_all").on("click", ".view", function () {
-                var id = $(this).attr('id');
-                ajax_submit_view('users', id)
+            $('#manage_all').on('click', '.view', function () {
+                ajax_submit_view('users', $(this).attr('id'));
             });
-
-            // Edit Form
-            $("#manage_all").on("click", ".edit", function () {
-                var id = $(this).attr('id');
-                ajax_submit_edit('users', id)
+            $('#manage_all').on('click', '.edit', function () {
+                ajax_submit_edit('users', $(this).attr('id'));
             });
-
-
-            // Delete
-            $("#manage_all").on("click", ".delete", function () {
-                var id = $(this).attr('id');
-                ajax_submit_delete('users', id)
+            $('#manage_all').on('click', '.delete', function () {
+                ajax_submit_delete('users', $(this).attr('id'));
             });
-
         });
-
     </script>
 @stop

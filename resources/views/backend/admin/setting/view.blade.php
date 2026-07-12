@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8 col-sm-12 table-responsive">
-        <table id="view_details" class="table table-bordered table-hover table-condensed table-striped">
+        <table id="view_details" class="table table-bordered table-hover view-detail-table table-condensed table-striped">
             <tbody>
             <tr>
                 <td class="subject"> Name</td>

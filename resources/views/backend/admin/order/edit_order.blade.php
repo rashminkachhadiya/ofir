@@ -1,30 +1,23 @@
 @extends('backend.layouts.master')
-@section('title', ' Order Item')
+@section('title', __('Edit Order'))
 @section('content')
+    <x-admin.page-header title="{{ __('Order Details') }}" icon="cart">
+        <x-slot name="actions">
+            <a class="btn btn-info btn-sm" href="{{ URL::to('/admin/pdf-download') }}?id={{ $order->id }}&flag=view">{{ __('View PDF') }}</a>
+            <a class="btn btn-success btn-sm ml-2" href="{{ URL::to('/admin/pdf-download') }}?id={{ $order->id }}&flag=pdf">{{ __('Download PDF') }}</a>
+        </x-slot>
+    </x-admin.page-header>
+
     <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card" style="background: #f6f5f3;">
-                <div class="card-body" style="color: black;">
-                    <div class="d-flex mb-3" style="justify-content: space-between;">
-                        <div>
-                            <h5><strong> Order Details </strong></h5>
-                        </div>
-                        <div class="d-flex">
-                            <div class="mr-1">
-                                <a class="btn btn-xs btn-info" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}&flag=view">View</a>
-                            </div>
-                            <div>
-                                <a class="btn btn-xs btn-success" href="{{ URL :: to('/admin/pdf-download') }}?id={{$order->id}}&flag=pdf">PDF</a>
-                            </div>
-                        </div>
-                    </div>
-                    <form id='edit-tab' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
-                            novalidate>
+        <div class="col-12">
+            <div class="main-card mb-3 card order-detail-card">
+                <div class="card-body">
+                    <form id="edit-tab" action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation admin-form-page" novalidate>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-lg-3 mb-4">
                             <div class="product-large-slider">
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                      <div style="border: 1px solid black;" class="carousel-inner">
+                                    <div id="carouselExampleIndicators" class="carousel slide order-carousel" data-ride="carousel">
+                                      <div class="carousel-inner">
                                         @php
                                         $count = 0;
                                         @endphp
@@ -202,8 +195,9 @@
                                 </div>
                                 
                             </div>
-                            <div class="col-md-3 p-1 pb-4 text-center">
-                                        <h5 class="text-center">Gem Info</h5>
+                            <div class="col-lg-3 p-1 pb-4 text-center">
+                                        <div class="gem-info-panel">
+                                        <h5 class="text-center">{{ __('Gem Info') }}</h5>
                                 <div class="d-flex mt-1">
                                     <div class="col-md-6">
                                         <p><strong> Gem. : </strong></p>
@@ -252,10 +246,11 @@
                                     </div>
                                 </div>
                                 <div class="float-right mt-2">
-                                    <button type="button" class="btn btn-success update-submit"
-                                                data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
-                                        </button>
+                                    <button type="button" class="btn btn-success update-submit">
+                                        <i class="fa fa-save"></i> {{ __('Save') }}
+                                    </button>
                                 </div>
+                                        </div>
                             </div>
                             
                         <div class="col-md-3 p-0">
@@ -284,23 +279,7 @@
             </div>
         </div>
     </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
-    <script>
-
-            
-    </script>
     <script type="text/javascript">
-        function create() {
-            ajax_submit_create('categories');
-        }
-
         $(document).on("focusout", "#quantity, #est_price", function(e) {
             e.preventDefault();
             var totalPrice = parseFloat($("#quantity").val()) * parseFloat($("#est_price").val());
@@ -353,24 +332,6 @@
                         }
                     });     
                 });
-
-            $("#manage_all").on("click", ".view", function () {
-                var id = $(this).attr('id');
-                ajax_submit_view('categories', id)
-            });
-
-            // Edit Form
-            $("#manage_all").on("click", ".edit", function () {
-                var id = $(this).attr('id');
-                ajax_submit_edit('categories', id)
-            });
-
-
-            // Delete
-            $("#manage_all").on("click", ".delete", function () {
-                var id = $(this).attr('id');
-                ajax_submit_delete('categories', id)
-            });
 
         });
 

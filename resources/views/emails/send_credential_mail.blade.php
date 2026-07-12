@@ -1,9 +1,16 @@
 @component('mail::message')
-# Hello, {{ $mailInfo->f_name }}
+# {{ __('Hello, :name', ['name' => $mailInfo->f_name]) }}
 
-<p><strong> Username: </strong>{{ $mailInfo->username }}</p>
-<p><strong> Password: </strong>{{ $mailInfo->password }}
+{{ __('Your account has been created. Here are your login credentials:') }}
 
-Thanks<br>
+@component('mail::panel')
+**{{ __('Username') }}:** {{ $mailInfo->username }}
 
+**{{ __('Password') }}:** {{ $mailInfo->password }}
+@endcomponent
+
+{{ __('Please log in and change your password after your first sign in.') }}
+
+{{ __('Thanks') }},<br>
+{{ config('app.name', 'LEBAR') }}
 @endcomponent

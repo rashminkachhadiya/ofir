@@ -1,10 +1,10 @@
-<div class="product-details-inner">
+<div class="modal-view-shell product-details-inner">
     <div class="row">
         <div class="col-md-9 row">
             <div class="col-md-4">
                 <div class="product-large-slider">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                      <div style="border: 1px solid black;" class="carousel-inner">
+                      <div class="carousel-inner">
                         @php
                         $count = 0;
                         @endphp
@@ -153,7 +153,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 p-0" style="border:1px solid black;height: 90px !important;">
+        <div class="col-md-12 p-0 order-notes-panel">
             <div class="d-flex p-0">
                 <div class="col-md-2 pr-0">
                     <p><strong>{{ __('Notes') }} : </strong></p>
@@ -164,7 +164,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="border:1px solid black;">
+    <div class="col-md-3 gem-info-panel">
         <h5 class="text-center">{{ __('Gem Info') }}</h5>
         <div class="d-flex p-0">
             <div class="col-md-6">

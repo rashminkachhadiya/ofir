@@ -1,4 +1,4 @@
-<form id='edit' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
+<form id='edit' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation modal-form"
       novalidate>
     {{method_field('PATCH')}}
     <div class="form-row">

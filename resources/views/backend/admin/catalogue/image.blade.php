@@ -1,5 +1,3 @@
-@if(!empty($orders->photo) )
-<div class="col-md-2 p-0">
-  <img width="80px;" height="80px" src="{{asset($orders->photo)}}">
-</div>
+@if(!empty($orders->photo))
+    <img src="{{ asset($orders->photo) }}" alt="Product" width="48" height="48">
 @endif

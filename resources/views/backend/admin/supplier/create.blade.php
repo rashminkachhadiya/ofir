@@ -1,4 +1,4 @@
-<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation"
+<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation modal-form"
       novalidate>
     <div class="form-row">
         <div id="status"></div>

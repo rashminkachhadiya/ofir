@@ -4,15 +4,13 @@
     @include('frontend.layouts.head')
 </head>
 <body>
+    <a href="#main-content" class="skip-link">{{ __('Skip to main content') }}</a>
     @include('frontend.layouts.language_switcher')
-    <div class="container-fluid p-0">    
-        <section>
+    <div class="container-fluid p-0">
+        <main id="main-content" role="main">
             @yield('content')
-        </section>
-        <!-- Footer section -->
-        <footer>
-            @include('frontend.layouts.footer')
-        </footer>
+        </main>
+        @include('frontend.layouts.footer')
     </div>
     @stack('script')
 </body>

@@ -1,109 +1,59 @@
 @extends('backend.layouts.master')
-@section('title', ' All Order')
+@section('title', __('Catalogue'))
 @section('content')
-<style type="text/css">
-    .thead tr:first-child th {
-    position: sticky;
-    z-index: 12;
-    top: 0;
-    background: white;
-}
-#manage_all{
-    color: black !important;
- }
-</style>
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All Catalogue</div>
-                <div class="d-inline-block ml-2">
-                    @can('user-create')
-                        <a href="{{ URL :: to('/admin/catalogue/create') }}" class="btn btn-success"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            Add New Item
-                        </a>
-                    @endcan
-                </div>
+    <x-admin.page-header title="{{ __('All Catalogue') }}" icon="albums">
+        <x-slot name="actions">
+            @can('user-create')
+                <a href="{{ URL::to('/admin/catalogue/create') }}" class="btn btn-success">
+                    <i class="fa fa-plus"></i> {{ __('Add New Item') }}
+                </a>
+            @endcan
+        </x-slot>
+    </x-admin.page-header>
+
+    <x-admin.filters-bar>
+        <div class="row align-items-end">
+            <div class="col-md-6 col-lg-3 mb-2">
+                {!! Form::select('catalogue_id', $catalogues ?? [], $item->catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'catalogue_id']) !!}
+            </div>
+            <div class="col-md-6 col-lg-3 mb-2">
+                {!! Form::select('sub_catalogue_id', $subCatalogue ?? [], $item->sub_catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'sub_catalogue_id']) !!}
+            </div>
+            <div class="col-md-6 col-lg-3 mb-2">
+                {!! Form::select('in_stock', $inStock ?? [], $item->in_stock ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'in_stock']) !!}
+            </div>
+            <div class="col-md-3 col-lg-1 mb-2 d-flex align-items-center">
+                <span class="text-muted small mr-1">Gr:</span>
+                <strong id="total_gram_val">0.00</strong>
+            </div>
+            <div class="col-md-3 col-lg-1 mb-2 d-flex align-items-center">
+                <span class="text-muted small mr-1">Ct:</span>
+                <strong id="total_ct_val">0.00</strong>
             </div>
         </div>
-    </div>
-    <div class="app-page-title mt-1">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="form-group col-md-6 col-sm-6">
-                    {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <div class="form-group col-md-6 col-sm-6">
-                    {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <div class="form-group col-md-6 col-sm-6">
-                    {!! Form::select('in_stock', $inStock ?? [],  $item->in_stock ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'in_stock']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-                <div class="d-flex col-md-2 col-sm-2" style="align-items: center">
-                    <div>
-                        <p>Gr: &nbsp;</p>
-                    </div>
-                    <div>
-                        <p id="total_gram_val">0.00</p>                        
-                    </div>
-                </div>
-                <div class="d-flex col-md-2 col-sm-2" style="align-items: center">
-                    <div>
-                        <p>Ct: &nbsp;</p>
-                    </div>
-                    <div>
-                        <p id="total_ct_val">0.00</p>                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover table-color">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Code</th>
-                                <th>Date</th>
-                                <th>Image</th>
-                                <th>Catalogue</th>
-                                <th>Product</th>
-                                <th>Item Title</th>
-                                <th>Color</th>
-                                <th>Metal</th>
-                                <th>Size</th>
-                                <th>Qty</th>
-                                <th>Gram</th>
-                                <th>Ct</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    </x-admin.filters-bar>
+
+    <x-admin.data-table-card table-class="align-middle mb-0 table table-borderless table-striped table-hover table-color w-100">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Code</th>
+            <th>Date</th>
+            <th>Image</th>
+            <th>Catalogue</th>
+            <th>Product</th>
+            <th>Item Title</th>
+            <th>Color</th>
+            <th>Metal</th>
+            <th>Size</th>
+            <th>Qty</th>
+            <th>Gram</th>
+            <th>Ct</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
     <script>
         $(function () {
 
@@ -170,22 +120,12 @@
                         .reduce((a, b) => intVal(a) + intVal(b), 0);
                     $('#total_gram_val').html(gramTotal.toFixed(2));
                     $('#total_ct_val').html(ctTotal.toFixed(2));
-                    // console.log(pageTotal);
                 },
-                "autoWidth": false,
-                "scrollX": true,
-                "scrollY": 450,
-                "alwaysCloneTop": true,
-                "lengthMenu": [25, 50, 100],
-                "language": {
-                    "lengthMenu": "Show _MENU_ "
+                lengthMenu: [25, 50, 100],
+                language: {
+                    lengthMenu: "Show _MENU_ "
                 }
             });
-            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
-                'width': '220px',
-                'height': '30px'
-            });
-
         });
     </script>
     <script type="text/javascript">

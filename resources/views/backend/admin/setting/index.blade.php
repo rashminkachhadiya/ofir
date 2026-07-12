@@ -1,47 +1,21 @@
 @extends('backend.layouts.master')
-@section('title', 'Settings')
+@section('title', __('Settings'))
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>Settings</div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Layout</th>
-                                <th>Running Year</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    <x-admin.page-header title="{{ __('Settings') }}" icon="tools" />
+
+    <x-admin.data-table-card>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ __('Name') }}</th>
+            <th>{{ __('Email') }}</th>
+            <th>{{ __('Layout') }}</th>
+            <th>{{ __('Running Year') }}</th>
+            <th>{{ __('Action') }}</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
+
     <script>
         $(function () {
             table = $('#manage_all').DataTable({

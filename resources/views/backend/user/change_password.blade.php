@@ -1,68 +1,39 @@
 @extends('backend.layouts.user_master')
-@section('title', 'Change Password')
+@section('title', __('Change Password'))
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>Change Password</div>
-            </div>
-        </div>
-    </div>
+    <x-admin.page-header title="{{ __('Change Password') }}" icon="lock" />
+
     <div class="row">
-        <div class="col-md-9 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <form id='edit' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-                        <div id="status"></div>
-                        {{method_field('PATCH')}}
-                        <div class="form-group col-md-6 col-sm-12">
-                            <label for=""> New Password </label>
-                            <input type="password" class="form-control" id="password" name="password" value=""
-                                   placeholder="Type New Password" required>
-                            <span id="error_name" class="has-error"></span>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-success" id="submit"><span
-                                    class="fa fa-save fa-fw"></span> Save
-                            </button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </form>
-                </div>
-            </div>
+        <div class="col-lg-6">
+            <x-admin.form-card>
+                <form id="edit" action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                    <div id="status"></div>
+                    {{ method_field('PATCH') }}
+
+                    <div class="form-group">
+                        <label for="password">{{ __('New Password') }}</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                               placeholder="{{ __('Type new password') }}" required autocomplete="new-password">
+                        <span id="error_password" class="has-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" id="submit">
+                        <i class="fa fa-save"></i> {{ __('Save') }}
+                    </button>
+                </form>
+            </x-admin.form-card>
         </div>
     </div>
+
     <script>
-
         $(document).ready(function () {
-
             $('#loader').hide();
 
-            $('#edit').validate({// <- attach '.validate()' to your form
-                // Rules for form validation
-                rules: {
-                    password: {
-                        required: true
-                    },
-                    password: {
-                        required: true
-                    }
-                },
-                // Messages for form validation
-                messages: {
-                    name: {
-                        required: 'Enter name'
-                    }
-                },
+            $('#edit').validate({
+                rules: { password: { required: true } },
                 submitHandler: function (form) {
-
                     var myData = new FormData($("#edit")[0]);
-                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                    myData.append('_token', CSRF_TOKEN);
+                    myData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
                     $.ajax({
                         url: 'change_password',
@@ -74,17 +45,16 @@
                         contentType: false,
                         beforeSend: function () {
                             $('#loader').show();
-                            $("#submit").prop('disabled', true); // disable button
+                            $("#submit").prop('disabled', true);
                         },
                         success: function (data) {
                             if (data.type === 'success') {
                                 notify_view(data.type, data.message);
                                 $('#loader').hide();
-                                $("#submit").prop('disabled', false); // disable button
+                                $("#submit").prop('disabled', false);
                                 $("html, body").animate({scrollTop: 0}, "slow");
-                                $('#myModal').modal('hide'); // hide bootstrap modal
                                 $('.has-error').html('');
-
+                                $('#edit')[0].reset();
                             } else if (data.type === 'error') {
                                 $('.has-error').html('');
                                 if (data.errors) {
@@ -94,15 +64,12 @@
                                 }
                                 $("#status").html(data.message);
                                 $('#loader').hide();
-                                $("#submit").prop('disabled', false); // disable button
-
+                                $("#submit").prop('disabled', false);
                             }
                         }
                     });
                 }
-                // <- end 'submitHandler' callback
-            });                    // <- end '.validate()'
-
+            });
         });
     </script>
 @endsection

@@ -1,16 +1,13 @@
 @extends('backend.layouts.master')
-@section('title', ' Order Item')
+@section('title', __('Cart Details'))
 @section('content')
+    <x-admin.page-header title="{{ __('View Cart Details') }}" icon="shopbag" />
+
     <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card" style="background: #f6f5f3;">
-                <div class="card-body" style="color: black;">
-                    <div class="d-flex mb-3" style="justify-content: space-between;">
-                        <div>
-                            <h5><strong> View Details </strong></h5>
-                        </div>
-                    </div>
-                    <div class="d-flex">
+        <div class="col-12">
+            <div class="main-card mb-3 card order-detail-card">
+                <div class="card-body">
+                    <div class="row">
                         <div class="col-md-4 col-sm-12">
                             <div class="d-flex">
                                 <div class="col-md-6">
@@ -198,44 +195,4 @@
             </div>
         </div>
     </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
-    <script>
-
-            
-    </script>
-    <script type="text/javascript">
-        function create() {
-            ajax_submit_create('categories');
-        }
-
-        $(document).ready(function () {
-            // View Form
-            $("#manage_all").on("click", ".view", function () {
-                var id = $(this).attr('id');
-                ajax_submit_view('categories', id)
-            });
-
-            // Edit Form
-            $("#manage_all").on("click", ".edit", function () {
-                var id = $(this).attr('id');
-                ajax_submit_edit('categories', id)
-            });
-
-
-            // Delete
-            $("#manage_all").on("click", ".delete", function () {
-                var id = $(this).attr('id');
-                ajax_submit_delete('categories', id)
-            });
-
-        });
-
-    </script>
 @stop

@@ -1,48 +1,29 @@
 @extends('backend.layouts.master')
-@section('title', ' All Backups')
+@section('title', __('Backups'))
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-albums icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All Backup</div>
-                <div class="d-inline-block ml-2">
-                    <button class="btn btn-success" onclick="create('db_backup')"><i
-                            class="glyphicon glyphicon-plus"></i>
-                        Database Backup
-                    </button>
-                    <button class="btn btn-success" onclick="create('full_backup')"><i
-                            class="glyphicon glyphicon-plus"></i>
-                        Full Backup
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all" class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>File Name</th>
-                                <th>Size</th>
-                                <th>Created At</th>
-                                <th>Duration</th>
-                                <th>Order</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-admin.page-header title="{{ __('All Backups') }}" icon="download">
+        <x-slot name="actions">
+            <button class="btn btn-success" onclick="create('db_backup')">
+                <i class="fa fa-database"></i> {{ __('Database Backup') }}
+            </button>
+            <button class="btn btn-success ml-2" onclick="create('full_backup')">
+                <i class="fa fa-archive"></i> {{ __('Full Backup') }}
+            </button>
+        </x-slot>
+    </x-admin.page-header>
+
+    <x-admin.data-table-card table-class="align-middle mb-0 table table-borderless table-striped table-hover w-100">
+        <thead>
+        <tr>
+            <th>{{ __('File Name') }}</th>
+            <th>{{ __('Size') }}</th>
+            <th>{{ __('Created At') }}</th>
+            <th>{{ __('Duration') }}</th>
+            <th>{{ __('Order') }}</th>
+            <th>{{ __('Action') }}</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
 
     <script>
         $(function () {

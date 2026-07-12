@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-dialog modal-lg modal-dialog-centered frontend-modal">
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">{{ __('Hi, :name', ['name' => Auth()->user()->f_name]) }}</h5>
@@ -17,7 +17,7 @@
                             </div>
                             @endif -->
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                              <div style="border: 1px solid black;" class="carousel-inner">
+                              <div class="carousel-inner">
                                 <div class="carousel-item active">
                                   <img class="d-block w-100" src="{{asset($item->photo)}}" alt="First slide">
                                 </div>

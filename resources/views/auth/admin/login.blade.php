@@ -1,4 +1,7 @@
 @extends('auth.layouts.app')
+@section('use-login-theme')
+@stop
+@section('title', __('Admin Login'))
 @section('content')
     <div class="limiter">
         <div class="container-login100">

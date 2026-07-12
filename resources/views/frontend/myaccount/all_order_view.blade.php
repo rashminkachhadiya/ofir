@@ -3,8 +3,8 @@
 <div class="modal-body">
 <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card" style="background: #f6f5f3;">
-                <div class="card-body" style="color: black;">
+            <div class="main-card mb-3 card order-list-card">
+                <div class="card-body">
                     <div class="d-flex mb-3" style="justify-content: space-between;">
                         <div>
                             <h5><strong>{{ __('Order Details') }}</strong></h5>

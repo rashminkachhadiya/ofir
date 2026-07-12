@@ -1,131 +1,66 @@
 @extends('backend.layouts.master')
-@section('title', ' All Order')
+@section('title', __('Orders'))
 @section('content')
-<style type="text/css">
-    .thead tr:first-child th {
-    position: sticky;
-    z-index: 12;
-    top: 0;
-    background: white;
-}
-#manage_all{
-    color: black !important;
- }
- </style>
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All Orders</div>
-                <div class="d-inline-block ml-2">
-                    <!-- @can('user-create')
-                        <button class="btn btn-success" onclick="create()"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            New User
-                        </button>
-                    @endcan -->
-                </div>
+    <x-admin.page-header title="{{ __('All Orders') }}" icon="cart" />
+
+    <x-admin.filters-bar>
+        <div class="row align-items-end">
+            <div class="col-md-6 col-lg-2 mb-2">
+                {!! Form::select('user_id', $users ?? [], $item->catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'user_id']) !!}
+                <span id="error_email" class="has-error"></span>
+            </div>
+            <div class="col-md-6 col-lg-2 mb-2">
+                {!! Form::select('supplier_id', $suppliers ?? [], $item->supplier_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'supplier_id']) !!}
+            </div>
+            <div class="col-md-6 col-lg-2 mb-2">
+                {!! Form::select('order_status[]', $orderStatus ?? [], $item->sub_catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'order_status', 'multiple' => 'multiple']) !!}
+            </div>
+            <div class="col-md-6 col-lg-2 mb-2">
+                <input type="text" id="ref" class="form-control" name="ref" value="" placeholder="{{ __('Ref') }}">
+            </div>
+            <div class="col-auto mb-2">
+                <form action="{{ URL::to('/admin/excel-download') }}" id="export-form" method="get">
+                    <input type="hidden" name="ids" id="export_ids">
+                    <input type="hidden" name="flag" value="view">
+                    <button class="btn btn-info btn-sm" type="button" onclick="Export()">{{ __('Export') }}</button>
+                </form>
+            </div>
+            <div class="col-auto mb-2">
+                <form action="{{ URL::to('/admin/pdf-download') }}" id="pdf-form" method="get">
+                    <input type="hidden" name="ids" id="pdf_ids">
+                    <input type="hidden" name="flag" value="pdf">
+                    <button class="btn btn-success btn-sm" type="button" onclick="downloadSelectedPdf()">{{ __('PDF') }}</button>
+                </form>
             </div>
         </div>
-    </div>
-    <div class="app-page-title mt-1">
-        <div class="page-title-wrapper" style="display: block !important;">
-            <div class="page-title-heading" style="display: block !important; justify-content: space-between;">
-                <div class="row">
-                        <div class="col-md-2">
-                            {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
-                            <span id="error_email" class="has-error"></span>
-                        </div>
-                        <div class="col-md-2">
-                             {!! Form::select('supplier_id', $suppliers ?? [],  $item->supplier_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'supplier_id']) !!}
-                            <span id="error_email" class="has-error"></span>
-                        </div>
-                        <div class="col-md-2">
-                            {!! Form::select('order_status[]', $orderStatus ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'order_status', 'multiple'=>'multiple']) !!}
-                            <span id="error_email" class="has-error"></span>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" id="ref" class="form-control" name="ref" value="" placeholder="Ref">
-                        </div>
-                        <div class="col-md-1">
-                            
-                        </div>
-                        <div class="col-md-1">
-                            
-                        </div>
-                    <div class="mr-1 p-0">
-                        <div>
-                            <form action="{{ URL :: to('/admin/excel-download') }}" id="export-form" method="get">
-                                <input type="hidden" name="ids" id="export_ids">
-                                <input type="hidden" name="flag" value="view">
-                                <div>
-                                    <button class="btn btn-xs btn-info" type="button" onclick="Export()">Export</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="mr-1 p-0">
-                        <div>
-                            <form action="{{ URL :: to('/admin/pdf-download') }}" id="pdf-form" method="get">
-                                <input type="hidden" name="ids" id="pdf_ids">
-                                <input type="hidden" name="flag" value="pdf">
-                                <div>
-                                    <button class="btn btn-xs btn-success" type="button" onclick="downloadSelectedPdf()">PDF</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover table-color">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Image</th>
-                                <th>Supplier</th>
-                                <th>Number</th>
-                                <th>Code</th>
-                                <th>Category</th>
-                                <th>Name</th>
-                                <th>Size</th>
-                                <th>Qty</th>
-                                <th>Colour</th>
-                                <th>MLT</th>
-                                <th>Carat</th>
-                                <th>Ref.</th>
-                                <th>Est.</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                                <th><div class="btn-group"><div class="form-check form-check-custom form-check-sm">
-                                  <input style="width:30px; height:23px;" class=" master-checkbox me-9" style="margin-left: 8px;" type="checkbox" name="ids[]"/>
-                               </div></div></th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    </x-admin.filters-bar>
+
+    <x-admin.data-table-card table-class="align-middle mb-0 table table-borderless table-striped table-hover table-color w-100">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Image</th>
+            <th>Supplier</th>
+            <th>Number</th>
+            <th>Code</th>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Qty</th>
+            <th>Colour</th>
+            <th>MLT</th>
+            <th>Carat</th>
+            <th>Ref.</th>
+            <th>Est.</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th class="text-center" style="min-width:50px;">
+                <input style="width:22px;height:22px;" class="master-checkbox" type="checkbox" name="ids[]" aria-label="Select all"/>
+            </th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
     <script>
         function getSelectedOrderIds()
         {
@@ -205,15 +140,11 @@
                     {data: 'action', name: 'action'},
                     {data: 'checkbox', name: 'checkbox', searchable: false, orderable: false}
                 ],
-                "autoWidth": false,
-                "scrollX": true,
-                "scrollY": 450,
-                "alwaysCloneTop": true,
-                "lengthMenu": [25, 50, 100],
-                "language": {
-                    "lengthMenu": "Show _MENU_ "
+                lengthMenu: [25, 50, 100],
+                language: {
+                    lengthMenu: "Show _MENU_ "
                 },
-                "rowCallback": function(row, data, index)
+                rowCallback: function(row, data, index)
                 { 
                     console.log(data);
                     if(data['order_status']=='Done')
@@ -222,11 +153,6 @@
                     }
                 }
             });
-            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
-                'width': '220px',
-                'height': '30px'
-            });
-
         });
     </script>
     <script type="text/javascript">

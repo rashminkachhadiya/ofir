@@ -61,13 +61,21 @@
             'Other' => 'Other',
         ];
     @endphp
+
+    <x-admin.page-header title="Edit Product" icon="box2">
+        <x-slot name="actions">
+            <a href="{{ url('admin/catalogue') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fa fa-arrow-left"></i> Back to Catalogue
+            </a>
+        </x-slot>
+    </x-admin.page-header>
+
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="main-card card mb-3">
-                <div class="card-body">
+            <x-admin.form-card>
                     <!-- Tabs navs -->
                     <input type="hidden" name="id" id="id" value="{{ $item->id }}">
-                    <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                    <ul class="nav nav-tabs catalogue-tabs mb-3" id="ex1" role="tablist">
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active" id="link-tab-product-details" data-mdb-toggle="tab" href-div="tab-product-details" role="tab" aria-controls="ex1-tabs-1" aria-selected="true" >Product Details</a>
                       </li>
@@ -77,7 +85,7 @@
                     <!-- Tabs content -->
                     <div class="tab-content" id="ex1-content">
                       <div class="tab-pane fade show active" id="tab-product-details" role="tabpanel" aria-labelledby="ex1-tab-1">
-                        <form id='edit' action="" enctype="multipart/form-data" method="" accept-charset="utf-8" class="needs-validation"
+                        <form id='edit' action="" enctype="multipart/form-data" method="" accept-charset="utf-8" class="needs-validation admin-catalogue-form"
                           novalidate>
                           {{method_field('PUT')}}
                             <div class="form-row">
@@ -111,53 +119,55 @@
                                         <input type="text" class="form-control" id="description" name="description" value="{{ $item->description }}" placeholder="">
                                         <span id="error_description" class="has-error"></span>
                                     </div>
-                                    <div class="form-group col-md-12 col-sm-12 d-flex p-0">
-                                        <div class="col-md-4 p-0">
-                                            <div class="form-group col-md-12">
-                                                <label for=""> Metal </label>
-                                                {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for=""> Weight </label>
-                                                <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}">
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for=""> Metal </label>
-                                                  {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for=""> Size </label>
-                                                <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="text-center">
-                                                <div class="form-group col-md-12 col-sm-12">
-                                                    <img id="preview-1" src="{{ asset($item->photo) }}" alt="" style="width: 280px; height: 280px;" class="uploadImage" data-id="1">
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        <label class="form-section-title">Product Images</label>
+                                        <div class="product-media-layout">
+                                            <div class="product-media-layout__meta">
+                                                <div class="form-group">
+                                                    <label for="metal_type">Metal</label>
+                                                    {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                                 </div>
-                                                <div class="mt-1 form-group col-md-12 col-sm-12" style="text-align: -webkit-center;">
-                                                    <input id="photo-1" type="file" accept="image/*" style="width: 250px;display: none;" class="form-control" name="photo_1" onchange="showImage(1)">
+                                                <div class="form-group">
+                                                    <label for="weight">Weight</label>
+                                                    <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="metal_colour">Metal Colour</label>
+                                                    {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                                </div>
+                                                <div class="form-group mb-0">
+                                                    <label for="size">Size</label>
+                                                    <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group col-md-12 col-sm-12">
-                                                <img id="preview-2" src="{{ asset($item->photo_2) }}" alt="" style="width: 83px; height: 83px;" class="uploadImage" data-id="2">
-                                            </div>
-                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
-                                                <input id="photo-2" type="file" accept="image/*" class="form-control" style="display: none;" name="photo_2" onchange="showImage(2)">
-                                            </div>
-                                            <div class="form-group col-md-12 col-sm-12">
-                                                <img id="preview-3" src="{{ asset($item->photo_3) }}" alt="" style="width: 83px; height: 83px;" class="uploadImage" data-id="3">
-                                            </div>
-                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
-                                                <input id="photo-3" type="file" accept="image/*" class="form-control" name="photo_3" style="display: none;" onchange="showImage(3)">
-                                            </div>
-                                            <div class="form-group col-md-12 col-sm-12">
-                                                <img id="preview-4" src="{{ asset($item->photo_4) }}" alt="" style="width: 83px; height: 83px;" class="uploadImage" data-id="4">
-                                            </div>
-                                            <div class="mt-1 form-group col-md-12 col-sm-12" style="width: 148px;margin-left: -3px;">
-                                                <input id="photo-4" type="file" accept="image/*" class="form-control" name="photo_4" style="display: none;" onchange="showImage(4)">
+                                            <div class="product-media-layout__gallery">
+                                                <x-admin.product-image-upload
+                                                    :slot-id="1"
+                                                    input-name="photo_1"
+                                                    label="Primary Photo"
+                                                    :src="$item->photo ?? ''"
+                                                    :primary="true"
+                                                />
+                                                <div class="product-media-layout__thumbs">
+                                                    <x-admin.product-image-upload
+                                                        :slot-id="2"
+                                                        input-name="photo_2"
+                                                        label="Photo 2"
+                                                        :src="$item->photo_2 ?? ''"
+                                                    />
+                                                    <x-admin.product-image-upload
+                                                        :slot-id="3"
+                                                        input-name="photo_3"
+                                                        label="Photo 3"
+                                                        :src="$item->photo_3 ?? ''"
+                                                    />
+                                                    <x-admin.product-image-upload
+                                                        :slot-id="4"
+                                                        input-name="photo_4"
+                                                        label="Photo 4"
+                                                        :src="$item->photo_4 ?? ''"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -170,148 +180,95 @@
                                     </div> -->
                                     <div class="">
                                         <div class="col-md-12">
-                                            <h5 style="color: black;" class="">Diamond Info</h5>
-                                            <div class="col-md-12 d-flex" style="border: 1px solid">
-                                                <div class="col-md-3 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Shape</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        {!! Form::select('diamond_shape', $shapeOptions, old('diamond_shape', $item->diamond_shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'diamond_shape']) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Carat</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" id="diamond_carat" name="diamond_carat" value="{{ $item->diamond_carat }}" placeholder="Carat">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Pcs</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" name="diamond_pcs" value="{{ $item->diamond_pcs }}" id="diamond_pcs" placeholder="Pcs">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Colour</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" id="diamond_colour" name="diamond_colour" value="{{ $item->diamond_colour }}" placeholder="Colour">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Cleaerty</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" name="diamond_cleaerty" value="{{ $item->diamond_cleaerty }}" id="diamond_cleaerty" placeholder="Cleaerty">
-                                                    </div>
-                                                </div>
+                                            <h5 class="form-section-title">Diamond Info</h5>
+                                            <div class="form-jewel-grid">
+                                                <x-admin.form-jewel-field label="Shape">
+                                                    {!! Form::select('diamond_shape', $shapeOptions, old('diamond_shape', $item->diamond_shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'diamond_shape']) !!}
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Carat" for="diamond_carat">
+                                                    <input type="text" class="form-control" id="diamond_carat" name="diamond_carat" value="{{ $item->diamond_carat }}" placeholder="Carat">
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Pcs" for="diamond_pcs">
+                                                    <input type="text" class="form-control" name="diamond_pcs" value="{{ $item->diamond_pcs }}" id="diamond_pcs" placeholder="Pcs">
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Colour" for="diamond_colour">
+                                                    <input type="text" class="form-control" id="diamond_colour" name="diamond_colour" value="{{ $item->diamond_colour }}" placeholder="Colour">
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Cleaerty" for="diamond_cleaerty">
+                                                    <input type="text" class="form-control" name="diamond_cleaerty" value="{{ $item->diamond_cleaerty }}" id="diamond_cleaerty" placeholder="Cleaerty">
+                                                </x-admin.form-jewel-field>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mt-3">
-                                            <h5 style="color: black;" class="">Gem Info</h5>
-                                            <div class="col-md-12 d-flex" style="border: 1px solid">
-                                                <div class="col-md-3 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Gem.</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        {!! Form::select('gem', $gemOptions, old('gem', $item->gem ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'gem']) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Shape</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        {!! Form::select('shape', $shapeOptions, old('shape', $item->shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'shape']) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Carat</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Colour</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $item->colour }}" placeholder="Colour">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Cleaerty</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" name="cleaerty" value="{{ $item->cleaerty }}" id="cleaerty" placeholder="Cleaerty">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2 p-0">
-                                                    <div class="col-md-8 p-0">
-                                                        <label class="col-form-label">Pcs</label>
-                                                    </div>
-                                                    <div class="col-md-12 p-0">
-                                                        <input type="text" class="form-control" name="pcs" value="{{ $item->pcs }}" id="pcs" placeholder="Pcs">
-                                                    </div>
-                                                </div>
+                                            <h5 class="form-section-title">Gem Info</h5>
+                                            <div class="form-jewel-grid">
+                                                <x-admin.form-jewel-field label="Gem">
+                                                    {!! Form::select('gem', $gemOptions, old('gem', $item->gem ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'gem']) !!}
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Shape">
+                                                    {!! Form::select('shape', $shapeOptions, old('shape', $item->shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'shape']) !!}
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Carat" for="carat">
+                                                    <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Colour" for="colour">
+                                                    <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $item->colour }}" placeholder="Colour">
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Cleaerty" for="cleaerty">
+                                                    <input type="text" class="form-control" name="cleaerty" value="{{ $item->cleaerty }}" id="cleaerty" placeholder="Cleaerty">
+                                                </x-admin.form-jewel-field>
+                                                <x-admin.form-jewel-field label="Pcs" for="pcs">
+                                                    <input type="text" class="form-control" name="pcs" value="{{ $item->pcs }}" id="pcs" placeholder="Pcs">
+                                                </x-admin.form-jewel-field>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <div class="col-md-12 mt-5 mb-3" style="border:1px solid;">
-                                            <h5 style="text-align: center">Ask for Price</h5>
-                                            <div class="d-flex">
-                                                <div class="form-group col-md-2 p-0">
-                                                    <label for=""> Work </label>
+                                        <div class="form-price-panel col-md-12 mt-4 mb-3">
+                                            <h5 class="form-price-panel__title">Ask for Price</h5>
+                                            <div class="form-price-row form-price-row--5">
+                                                <div class="form-group">
+                                                    <label for="cost_fee">Work</label>
                                                     <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="{{ $item->cost_fee }}">
                                                 </div>
-                                                <div class="form-group col-md-2 p-0 pl-1">
-                                                    <label for=""> Setting </label>
+                                                <div class="form-group">
+                                                    <label for="setting">Setting</label>
                                                     <input type="text" class="form-control" id="setting" name="setting" value="{{ $item->setting }}">
                                                 </div>
-                                                <div class="form-group col-md-2 p-0 pl-1">
-                                                    <label for=""> Diamond </label>
+                                                <div class="form-group">
+                                                    <label for="diamond">Diamond</label>
                                                     <input type="text" class="form-control" id="diamond" name="diamond" value="{{ $item->diamond }}">
                                                 </div>
-                                                <div class="form-group col-md-2 p-0 pl-1">
-                                                    <label for=""> Loss </label>
+                                                <div class="form-group">
+                                                    <label for="loss">Loss</label>
                                                     <input type="text" class="form-control" id="loss" name="loss" value="{{ $item->loss }}">
                                                 </div>
-                                                <div class="form-group col-md-4 p-0 pl-1">
-                                                    <label for=""> Note: </label>
+                                                <div class="form-group form-price-note">
+                                                    <label for="diamond_note">Note</label>
                                                     <input type="text" class="form-control" id="diamond_note" name="diamond_note" value="{{ $item->diamond_note }}">
                                                 </div>
                                             </div>
-                                            <div class="d-flex">
-                                                <div class="form-group col-md-4 pl-0">
-                                                    <label for="">$ </label>
+                                            <div class="form-price-row form-price-row--3">
+                                                <div class="form-group">
+                                                    <label for="price_usd">USD ($)</label>
                                                     <input type="text" class="form-control" id="price_usd" name="price_usd" value="{{ $item->price_usd }}">
-                                                </div><div class="form-group col-md-4 pl-0">
-                                                    <label for=""> &pound; </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="price_pound">GBP (&pound;)</label>
                                                     <input type="text" class="form-control" id="price_pound" name="price_pound" value="{{ $item->price_pound }}">
-                                                </div><div class="form-group col-md-4 p-0">
-                                                    <label for=""> &euro; </label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="price_eur">EUR (&euro;)</label>
                                                     <input type="text" class="form-control" id="price_eur" name="price_eur" value="{{ $item->price_eur }}">
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-12 p-0">
-                                                <label for=""> Price Notes </label>
+                                            <div class="form-group mb-0">
+                                                <label for="price_notes">Price Notes</label>
                                                 <input type="text" class="form-control" id="price_notes" name="price_notes" value="{{ $item->price_notes }}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex">
+                                    <div class="form-radio-row">
                                         <div class="form-group col-md-6">
                                             <label for=""> All Collection </label><br/>
                                             <input type="radio" name="is_allcollection" class="flat-green" value="1" {{ ( $item->is_allcollection == 1 ) ? 'checked' : '' }}/> Yes
@@ -329,9 +286,9 @@
                                         <input type="radio" name="is_available" class="flat-green"value="0" {{ ( $item->is_available == 0 ) ? 'checked' : '' }}/> No
                                     </div>
                                 </div>
-                                <div class="col" id="catelogue_size">
+                                <div class="col catalogue-stock-scroll" id="catelogue_size">
                                     <hr>
-                                    <div class="row text-center">
+                                    <div class="row text-center catalogue-stock-header">
                                         <div class="col-md-0-5 pl-1 p-1">
                                             <p><strong>Check</strong></p>
                                         </div>
@@ -554,8 +511,7 @@
                       </div>
                     </div>
                     <!-- Tabs content -->
-                </div>
-            </div>
+                </x-admin.form-card>
         </div>
     </div>
 @endsection
@@ -580,14 +536,26 @@
         }
 
     function showImage(imgNumber) {
-        const imageUploader = document.querySelector("#photo-"+imgNumber);
-        const imagePreview = document.querySelector("#preview-"+imgNumber);
-      let reader = new FileReader();
-     reader.readAsDataURL(imageUploader.files[0]);
-      reader.onload = function(e) {
-        imagePreview.classList.add("show");
-        imagePreview.src = e.target.result;
-      };
+        const imageUploader = document.querySelector("#photo-" + imgNumber);
+        const imagePreview = document.querySelector("#preview-" + imgNumber);
+        if (!imageUploader || !imageUploader.files || !imageUploader.files[0] || !imagePreview) {
+            return;
+        }
+        const frame = imagePreview.closest('.product-image-slot__frame');
+        const empty = frame ? frame.querySelector('.product-image-slot__empty') : null;
+        const reader = new FileReader();
+        reader.readAsDataURL(imageUploader.files[0]);
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'block';
+            imagePreview.classList.add('has-image');
+            if (frame) {
+                frame.classList.remove('is-empty');
+            }
+            if (empty) {
+                empty.classList.remove('is-visible');
+            }
+        };
     }
      let number_of_image = 1;
 </script>
@@ -658,9 +626,13 @@
 
         $('body').on('click','#id-remove-image',function(event) {
             id = $(this).attr('data-id');
-            // alert(id);
-            $('#preview-'+id).attr('src', '');
-            // $('#photo-'+id).attr('value','');
+            var preview = $('#preview-' + id);
+            var frame = preview.closest('.product-image-slot__frame');
+            preview.attr('src', '').hide().removeClass('has-image');
+            if (frame.length) {
+                frame.addClass('is-empty');
+                frame.find('.product-image-slot__empty').addClass('is-visible');
+            }
             $.ajax({
                 type: "GET",
                 url: '{{ url("admin/remove-photo") }}?item_id='+'{{ $item->id }}'+'&photo_id='+id,
@@ -770,9 +742,13 @@
             checkboxClass: 'icheckbox_flat-green',
         });
 
-        $('.uploadImage').click(function(){
-            var id = $(this).attr('data-id');
-          $("#photo-" + id).click();
+        $(document).on('click keypress', '.uploadImage', function(e) {
+            if (e.type === 'keypress' && e.which !== 13 && e.which !== 32) {
+                return;
+            }
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#photo-' + id).trigger('click');
         });
 
         $('#edit').validate({// <- attach '.validate()' to your form

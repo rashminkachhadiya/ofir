@@ -1,66 +1,31 @@
 @extends('backend.layouts.master')
-@section('title', ' All Order')
+@section('title', __('Cart'))
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>Cart</div>
-                <div class="d-inline-block ml-2">
-                    <!-- @can('user-create')
-                        <button class="btn btn-success" onclick="create()"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            New User
-                        </button>
-                    @endcan -->
-                </div>
+    <x-admin.page-header title="{{ __('Cart') }}" icon="shopbag" />
+
+    <x-admin.filters-bar>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                {!! Form::select('user_id', $users ?? [], $item->catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'user_id']) !!}
+                <span id="error_email" class="has-error"></span>
             </div>
         </div>
-    </div>
-    <div class="app-page-title mt-1">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="form-group col-md-12 col-sm-12">
-                    {!! Form::select('user_id', $users ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'user_id']) !!}
-                    <span id="error_email" class="has-error"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Date</th>
-                                <th>Client</th>
-                                <th>Code</th>
-                                <th>Category</th>
-                                <th>Qty</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    </x-admin.filters-bar>
+
+    <x-admin.data-table-card table-class="align-middle mb-0 table table-borderless table-striped table-hover w-100">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ __('Date') }}</th>
+            <th>{{ __('Client') }}</th>
+            <th>{{ __('Code') }}</th>
+            <th>{{ __('Category') }}</th>
+            <th>{{ __('Qty') }}</th>
+            <th>{{ __('Action') }}</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
+
     <script>
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);

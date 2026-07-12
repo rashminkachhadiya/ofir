@@ -2,6 +2,7 @@
     
 </div>
 <script src="{{ asset('/assets/js/main.js') }}"></script>
+<script src="{{ asset('/assets/js/admin-sidebar.js') }}"></script>
 <script src="{{ asset('/assets/js/ajax_submit.js') }}"></script>
 <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>
 <script src="{{ asset('/assets/js/jquery.plainoverlay.min.js') }}"></script>

@@ -1,55 +1,28 @@
 @extends('backend.layouts.master')
-@section('title', 'Blogs')
+@section('title', __('Blogs'))
 @section('content')
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <i class="pe-7s-users icon-gradient bg-mean-fruit"> </i>
-                </div>
-                <div>All BLogs</div>
-                <div class="d-inline-block ml-2">
-                    @can('blogs-create')
-                        <button class="btn btn-success" onclick="create()"><i
-                                class="glyphicon glyphicon-plus"></i>
-                            New Blogs
-                        </button>
-                    @endcan
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-admin.page-header title="{{ __('All Blogs') }}" icon="bookmarks">
+        <x-slot name="actions">
+            @can('blogs-create')
+                <button class="btn btn-success" onclick="create()">
+                    <i class="fa fa-plus"></i> {{ __('New Blog') }}
+                </button>
+            @endcan
+        </x-slot>
+    </x-admin.page-header>
 
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 70%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    <x-admin.data-table-card>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ __('Image') }}</th>
+            <th>{{ __('Title') }}</th>
+            <th>{{ __('Status') }}</th>
+            <th>{{ __('Action') }}</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
+
     <script>
         $(function () {
             table = $('#manage_all').DataTable({

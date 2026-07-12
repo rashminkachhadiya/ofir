@@ -1,4 +1,4 @@
-<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="modal-form">
     <div class="form-row">
         <div id="status"></div>
         <div class="form-group col-md-12 col-sm-12">
@@ -10,7 +10,7 @@
         <div class="clearfix"></div>
         <div class="col-sm-12 col-md-12">
             <strong>Assign Permissions: </strong>
-            <div class='row mb-3 mt-3'>
+            <div class='row mb-3 mt-3 permission-grid'>
                 @foreach($permission as $value)
                     @if($value->guard_name != 'admin')
                         <div class="col-md-3 col-sm-12 mb-1">

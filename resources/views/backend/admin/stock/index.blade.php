@@ -1,136 +1,89 @@
 @extends('backend.layouts.master')
-@section('title', ' All Order')
+@section('title', __('Inventory'))
 @section('content')
-<style type="text/css">
-    .thead tr:first-child th {
-    position: sticky;
-    z-index: 12;
-    top: 0;
-    background: white;
-}
-#manage_all{
-    color: black !important;
- }
-</style>
-    <div class="app-page-title mt-1">
-        <div class="page-title-wrapper" style="display: block !important;">
-            <div class="page-title-heading" style="display: block !important;">
+    <x-admin.page-header title="{{ __('Inventory / Stock') }}" icon="box2" />
+
+    <x-admin.filters-bar>
+        <div class="row">
+            <div class="col-lg-5">
                 <div class="row">
-                    <div class="col-md-4 row" style="border-right:1px solid">
-                        <div class="form-group col-md-4">
-                            <label for=""> Sold </label><br/>
-                            {!! Form::radio('item_status_sold', '1',false,['class' => '']) !!} Yes
-                            {!! Form::radio('item_status_sold', '0',false,['class' => '']) !!} No
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for=""> In Stock </label><br/>
-                            {!! Form::radio('item_status_in_stock', '1',false,['class' => '']) !!} Yes
-                            {!! Form::radio('item_status_in_stock', '0',false,['class' => '']) !!} No
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for=""> Apro </label><br/>
-                            {!! Form::radio('item_status_apro', '1',false,['class' => '']) !!} Yes
-                            {!! Form::radio('item_status_apro', '0',false,['class' => '']) !!} No
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for=""> UK </label><br/>
-                            {!! Form::radio('item_status_uk', '1',false,['class' => '']) !!} Yes
-                            {!! Form::radio('item_status_uk', '0',false,['class' => '']) !!} No
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for=""> Israel </label><br/>
-                            {!! Form::radio('item_status_israel', '1',false,['class' => '']) !!} Yes
-                            {!! Form::radio('item_status_israel', '0',false,['class' => '']) !!} No
-                        </div>  
+                    <div class="form-group col-md-4 col-6">
+                        <label>{{ __('Sold') }}</label><br>
+                        {!! Form::radio('item_status_sold', '1', false) !!} {{ __('Yes') }}
+                        {!! Form::radio('item_status_sold', '0', false) !!} {{ __('No') }}
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group col-md-6 col-sm-6">
-                            {!! Form::select('catalogue_id', $catalogues ?? [],  $item->catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'catalogue_id']) !!}
-                            <span id="error_email" class="has-error"></span>
-                        </div>
-                        <div class="form-group col-md-6 col-sm-6">
-                            {!! Form::select('sub_catalogue_id', $subCatalogue ?? [],  $item->sub_catalogue_id ?? '', ['class' => 'form-control','data-control'=>"select2", 'id' => 'sub_catalogue_id']) !!}
-                            <span id="error_email" class="has-error"></span>
-                        </div>
+                    <div class="form-group col-md-4 col-6">
+                        <label>{{ __('In Stock') }}</label><br>
+                        {!! Form::radio('item_status_in_stock', '1', false) !!} {{ __('Yes') }}
+                        {!! Form::radio('item_status_in_stock', '0', false) !!} {{ __('No') }}
                     </div>
-                    <div class="col-md-2">
-                       <div class="d-flex col-md-12" style="align-items: center">
-                            <div>
-                                <p>Qty: &nbsp;</p>
-                            </div>
-                            <div>
-                                <p id="total_qty">0</p>                        
-                            </div>
-                        </div> 
+                    <div class="form-group col-md-4 col-6">
+                        <label>{{ __('Apro') }}</label><br>
+                        {!! Form::radio('item_status_apro', '1', false) !!} {{ __('Yes') }}
+                        {!! Form::radio('item_status_apro', '0', false) !!} {{ __('No') }}
                     </div>
-                    <div class="col-md-2">
-                        <div class="d-flex col-md-12" style="align-items: center">
-                            <div>
-                                <p>Gr: &nbsp;</p>
-                            </div>
-                            <div>
-                                <p id="total_gram_val">0.00</p>                        
-                            </div>
-                        </div>
-                        <div class="d-flex col-md-12" style="align-items: center">
-                            <div>
-                                <p>Ct: &nbsp;</p>
-                            </div>
-                            <div>
-                                <p id="total_ct_val">0.00</p>                        
-                            </div>
-                        </div>
-                        <div class="d-flex col-md-12" style="align-items: center">
-                            <a class="btn btn-xs btn-info" href="javascript:void(0)" onclick="resetStock()">Reset</a>
-                        </div>  
+                    <div class="form-group col-md-4 col-6">
+                        <label>{{ __('UK') }}</label><br>
+                        {!! Form::radio('item_status_uk', '1', false) !!} {{ __('Yes') }}
+                        {!! Form::radio('item_status_uk', '0', false) !!} {{ __('No') }}
+                    </div>
+                    <div class="form-group col-md-4 col-6">
+                        <label>{{ __('Israel') }}</label><br>
+                        {!! Form::radio('item_status_israel', '1', false) !!} {{ __('Yes') }}
+                        {!! Form::radio('item_status_israel', '0', false) !!} {{ __('No') }}
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id="manage_all"
-                               class="align-middle mb-0 table table-borderless table-striped table-hover" style="color: black;">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th></th>
-                                <th>Date</th>
-                                <th>Image</th>
-                                <th>Code</th>
-                                <th>Sub Code</th>
-                                <th>Qty</th>
-                                <th>Gram</th>
-                                <th>Size</th>
-                                <th>Color</th>
-                                <th>Ct</th>
-                                <th>Pcs.</th>
-                                <th>Location</th>
-                                <th>Status</th>
-                                <th>Customer</th>
-                                <th>Date</th>
-                                <th>Note</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    {!! Form::select('catalogue_id', $catalogues ?? [], $item->catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'catalogue_id']) !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::select('sub_catalogue_id', $subCatalogue ?? [], $item->sub_catalogue_id ?? '', ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'sub_catalogue_id']) !!}
                 </div>
             </div>
+            <div class="col-lg-3">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-muted small mr-2">{{ __('Qty') }}:</span>
+                    <strong id="total_qty">0</strong>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-muted small mr-2">{{ __('Gr') }}:</span>
+                    <strong id="total_gram_val">0.00</strong>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="text-muted small mr-2">{{ __('Ct') }}:</span>
+                    <strong id="total_ct_val">0.00</strong>
+                </div>
+                <a class="btn btn-sm btn-info" href="javascript:void(0)" onclick="resetStock()">{{ __('Reset') }}</a>
+            </div>
         </div>
-    </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
+    </x-admin.filters-bar>
+
+    <x-admin.data-table-card table-class="align-middle mb-0 table table-borderless table-striped table-hover w-100">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th></th>
+            <th>Date</th>
+            <th>Image</th>
+            <th>Code</th>
+            <th>Sub Code</th>
+            <th>Qty</th>
+            <th>Gram</th>
+            <th>Size</th>
+            <th>Color</th>
+            <th>Ct</th>
+            <th>Pcs.</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Note</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+    </x-admin.data-table-card>
     <script>
         function resetStock(){
            $.ajax({
@@ -241,10 +194,8 @@
                     $('#total_gram_val').html(gramTotal.toFixed(2));
                     $('#total_ct_val').html(ctTotal.toFixed(2));
                     $('#total_qty').html(qtyTotal.toFixed(0));
-
-                    // console.log(pageTotal);
                 },
-                "rowCallback": function(row, data, index)
+                rowCallback: function(row, data, index)
                 { 
                     console.log(data);
                     if(data['item_status']=='Sold')
@@ -252,20 +203,11 @@
                         $(row).css('color', 'red'); 
                     }
                 },
-                "autoWidth": false,
-                "scrollX": true,
-                "scrollY": 450,
-                "alwaysCloneTop": true,
-                "lengthMenu": [25, 50, 100],
-                "language": {
-                    "lengthMenu": "Show _MENU_ "
+                lengthMenu: [25, 50, 100],
+                language: {
+                    lengthMenu: "Show _MENU_ "
                 }
             });
-            $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
-                'width': '220px',
-                'height': '30px'
-            });
-
         });
     </script>
 

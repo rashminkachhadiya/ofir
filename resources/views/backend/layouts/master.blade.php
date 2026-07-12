@@ -1,17 +1,19 @@
 <!doctype html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     @include('backend.layouts.head')
 </head>
 <body>
-<div class="app-container app-theme-white fixed-sidebar fixed-header body-tabs-line">
+<a href="#main-content" class="skip-link">{{ __('Skip to main content') }}</a>
+<div class="sidebar-overlay" id="sidebarOverlay" aria-hidden="true"></div>
+<div class="app-container app-theme-white fixed-sidebar fixed-header body-tabs-line closed-sidebar">
     @include('backend.layouts.topbar')
     <div class="app-main">
         @include('backend.layouts.sidebar')
         <div class="app-main__outer">
-            <div class="app-main__inner">
+            <main class="app-main__inner" id="main-content" role="main">
                 @yield('content')
-            </div>
+            </main>
         </div>
     </div>
     <div class="app-wrapper-footer">
@@ -21,5 +23,40 @@
         @stack('script')
     </div>
 </div>
+<script>
+(function () {
+    var overlay = document.getElementById('sidebarOverlay');
+    if (!overlay) return;
+
+    function closeSidebar() {
+        document.body.classList.remove('sidebar-mobile-open');
+        overlay.classList.remove('is-visible');
+        overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function openSidebar() {
+        document.body.classList.add('sidebar-mobile-open');
+        overlay.classList.add('is-visible');
+        overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    overlay.addEventListener('click', closeSidebar);
+
+    document.addEventListener('click', function (e) {
+        var toggle = e.target.closest('.mobile-toggle-nav');
+        if (toggle) {
+            if (document.body.classList.contains('sidebar-mobile-open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        }
+    });
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 991) closeSidebar();
+    });
+})();
+</script>
 </body>
 </html>

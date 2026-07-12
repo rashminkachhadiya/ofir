@@ -1,4 +1,4 @@
-<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+<form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="modal-form">
     <div class="form-row">
         <div id="status"></div>
         <div class="form-group col-md-12 col-sm-12">

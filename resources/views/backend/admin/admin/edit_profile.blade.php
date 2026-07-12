@@ -1,80 +1,55 @@
 @extends('backend.layouts.master')
-@section('title', 'Dashboard')
+@section('title', __('Edit Profile'))
 @section('content')
+    <x-admin.page-header title="{{ __('Update Profile') }}" icon="user" />
+
     <div class="row">
-        <div class="col-md-12">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <p class="panel-title"> Update Profile</p>
-                </div>
-                <div class="box-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form id='edit' action="" enctype="multipart/form-data" method="post"
-                                  accept-charset="utf-8">
-                                <div id="status"></div>
-                                {{method_field('PATCH')}}
-                                <div class="form-group col-md-6 col-sm-12">
-                                    <label for=""> Teacher Name </label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                           value="{{$user->name}}"
-                                           placeholder="" required>
-                                    <span id="error_name" class="has-error"></span>
-                                </div>
-                                <div class="form-group col-md-4 col-sm-12">
-                                    <label for=""> Email </label>
-                                    <input type="text" class="form-control" id="email" name="email"
-                                           value="{{$user->email}}"
-                                           placeholder="">
-                                    <span id="error_email" class="has-error"></span>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div class="form-group col-md-12">
-                                    <button type="submit" class="btn btn-success" id="submit"><span
-                                            class="fa fa-save fa-fw"></span> Save
-                                    </button>
-                                </div>
-                                <div class="clearfix"></div>
-                            </form>
-                        </div>
+        <div class="col-lg-8">
+            <x-admin.form-card>
+                @if (session('status'))
+                    <div class="alert alert-success">{{ session('status') }}</div>
+                @endif
+
+                <form id="edit" action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                    <div id="status"></div>
+                    {{ method_field('PATCH') }}
+
+                    <div class="form-group">
+                        <label for="name">{{ __('Name') }}</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                               value="{{ $user->name }}" required>
+                        <span id="error_name" class="has-error"></span>
                     </div>
-                </div>
-            </div>
+
+                    <div class="form-group">
+                        <label for="email">{{ __('Email') }}</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               value="{{ $user->email }}">
+                        <span id="error_email" class="has-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" id="submit">
+                        <i class="fa fa-save"></i> {{ __('Save') }}
+                    </button>
+                </form>
+            </x-admin.form-card>
         </div>
     </div>
+
     <script>
-
         $(document).ready(function () {
-
             $('#loader').hide();
 
-            $('#edit').validate({// <- attach '.validate()' to your form
-                // Rules for form validation
+            $('#edit').validate({
                 rules: {
-                    name: {
-                        required: true
-                    },
-                    phone: {
-                        required: true,
-                        number: true
-                    }
+                    name: { required: true }
                 },
-                // Messages for form validation
                 messages: {
-                    name: {
-                        required: 'Enter name'
-                    }
+                    name: { required: '{{ __('Enter name') }}' }
                 },
                 submitHandler: function (form) {
-
                     var myData = new FormData($("#edit")[0]);
-                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-                    myData.append('_token', CSRF_TOKEN);
+                    myData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
                     $.ajax({
                         url: 'edit_profile',
@@ -86,17 +61,16 @@
                         contentType: false,
                         beforeSend: function () {
                             $('#loader').show();
-                            $("#submit").prop('disabled', true); // disable button
+                            $("#submit").prop('disabled', true);
                         },
                         success: function (data) {
                             if (data.type === 'success') {
                                 notify_view(data.type, data.message);
                                 $('#loader').hide();
-                                $("#submit").prop('disabled', false); // disable button
+                                $("#submit").prop('disabled', false);
                                 $("html, body").animate({scrollTop: 0}, "slow");
-                                $('#myModal').modal('hide'); // hide bootstrap modal
+                                $('#myModal').modal('hide');
                                 $('.has-error').html('');
-
                             } else if (data.type === 'error') {
                                 $('.has-error').html('');
                                 if (data.errors) {
@@ -106,15 +80,12 @@
                                 }
                                 $("#status").html(data.message);
                                 $('#loader').hide();
-                                $("#submit").prop('disabled', false); // disable button
-
+                                $("#submit").prop('disabled', false);
                             }
                         }
                     });
                 }
-                // <- end 'submitHandler' callback
-            });                    // <- end '.validate()'
-
+            });
         });
     </script>
 @endsection

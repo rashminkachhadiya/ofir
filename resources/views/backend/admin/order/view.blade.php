@@ -1,29 +1,31 @@
 @extends('backend.layouts.master')
-@section('title', ' Order Item')
+@section('title', __('Order Details'))
 @section('content')
+    <x-admin.page-header title="{{ __('View Order Details') }}" icon="cart">
+        <x-slot name="actions">
+            <a href="{{ URL::to('admin/order/' . $order->id . '/edit') }}" class="btn btn-primary btn-sm">
+                <i class="fa fa-edit"></i> {{ __('Edit') }}
+            </a>
+        </x-slot>
+    </x-admin.page-header>
+
     <div class="row">
-        <div class="col-md-12 col-sm-12">
-            <div class="main-card mb-3 card" style="background: #f6f5f3;">
-                <div style="display: flex;justify-content: space-between;">
-                    <div>
-                        <a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('admin/order/') }}/{{$preOrder}}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg></a>
-                    </div>
-                    <div>
-                        <a class="m-2 mt-0" style="font-size: 25px;cursor: pointer;" href="{{ URL::to('admin/order/') }}/{{$nextOrder}}"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM281 385c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l71-71L136 280c-13.3 0-24-10.7-24-24s10.7-24 24-24l182.1 0-71-71c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L393 239c9.4 9.4 9.4 24.6 0 33.9L281 385z"/></svg></a>
-                    </div>
+        <div class="col-12">
+            <div class="main-card mb-3 card order-detail-card">
+                <div class="order-nav px-3 pt-3">
+                    <a href="{{ URL::to('admin/order/') }}/{{ $preOrder }}" aria-label="{{ __('Previous order') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" aria-hidden="true"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg>
+                    </a>
+                    <a href="{{ URL::to('admin/order/') }}/{{ $nextOrder }}" aria-label="{{ __('Next order') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" aria-hidden="true"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM281 385c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l71-71L136 280c-13.3 0-24-10.7-24-24s10.7-24 24-24l182.1 0-71-71c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L393 239c9.4 9.4 9.4 24.6 0 33.9L281 385z"/></svg>
+                    </a>
                 </div>
-                <div class="card-body" style="color: black;">
-                    <div class="d-flex mb-3" style="justify-content: space-between;">
-                        <div>
-                            <h5><strong> View Details </strong></h5>
-                        </div>
-                    </div>
+                <div class="card-body">
                     <div class="row">
-                        <div class="col-md-9 row">
-                            <div class="col-md-4">
-                                <div class="product-large-slider">
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                                      <div style="border: 1px solid black;" class="carousel-inner">
+                        <div class="col-lg-4 mb-4">
+                            <div class="product-large-slider">
+                                    <div id="carouselExampleIndicators" class="carousel slide order-carousel" data-ride="carousel">
+                                      <div class="carousel-inner">
                                         @php
                                         $count = 0;
                                         @endphp
@@ -68,10 +70,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 p-0">
+                        <div class="col-lg-4 mb-4">
                             <div class="d-flex">
                                 <div class="col-md-4 p-0">
-                                    <strong>Date: </strong>
+                                    <strong>{{ __('Date') }}:</strong>
                                 </div>
                                 <div class="col-md-8 p-0">
                                     {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
@@ -130,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 pl-2">
+                        <div class="col-lg-4 mb-4">
                             <div class="d-flex p-0">
                                 <div class="col-md-4 p-0">
                                     <strong> Supplier : </strong>
@@ -201,29 +203,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 p-0" style="border:1px solid black;height: 90px !important;">
-                            <div class="d-flex p-0">
-                                <div class="col-md-2 pr-0">
-                                    <p><strong> Customer Notes : </strong></p>
-                                </div>
-                                <div class="col-md-10 p-0" style="text-align: left;">
-                                    {{ $order->notes }}
-                                </div>
+                        <div class="col-lg-6 mb-3">
+                            <div class="notes-box">
+                                <strong>{{ __('Customer Notes') }}</strong>
+                                <p class="mb-0 mt-2">{{ $order->notes }}</p>
                             </div>
                         </div>
-                        <div class="col-md-6 p-0" style="border:1px solid black;height: 90px !important;">
-                            <div class="d-flex p-0">
-                                <div class="col-md-2 pr-0">
-                                    <p><strong> Admin Notes : </strong></p>
-                                </div>
-                                <div class="col-md-10 p-0" style="text-align: left;">
-                                    {{ $order->admin_notes }}
-                                </div>
+                        <div class="col-lg-6 mb-3">
+                            <div class="notes-box">
+                                <strong>{{ __('Admin Notes') }}</strong>
+                                <p class="mb-0 mt-2">{{ $order->admin_notes }}</p>
                             </div>
                         </div>
-                        </div>
-                        <div class="col-md-3" style="border:1px solid black;">
-                            <h5 class="text-center">Gem Info</h5>
+                        <div class="col-lg-3 mb-3">
+                            <div class="gem-info-panel">
+                            <h5 class="text-center">{{ __('Gem Info') }}</h5>
                             <div class="d-flex p-0">
                                 <div class="col-md-6">
                                     <strong> Gem. : </strong>
@@ -272,50 +266,11 @@
                                     {{ $order->pcs }}
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <style>
-        @media screen and (min-width: 768px) {
-            #myModal .modal-dialog {
-                width: 85%;
-                border-radius: 5px;
-            }
-        }
-    </style>
-    <script>
-
-            
-    </script>
-    <script type="text/javascript">
-        function create() {
-            ajax_submit_create('categories');
-        }
-
-        $(document).ready(function () {
-            // View Form
-            $("#manage_all").on("click", ".view", function () {
-                var id = $(this).attr('id');
-                ajax_submit_view('categories', id)
-            });
-
-            // Edit Form
-            $("#manage_all").on("click", ".edit", function () {
-                var id = $(this).attr('id');
-                ajax_submit_edit('categories', id)
-            });
-
-
-            // Delete
-            $("#manage_all").on("click", ".delete", function () {
-                var id = $(this).attr('id');
-                ajax_submit_delete('categories', id)
-            });
-
-        });
-
-    </script>
 @stop
