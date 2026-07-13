@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\ItemStock;
+use App\Services\ItemJewelInfoService;
 use DB;
 use URL;
 use Carbon\Carbon;
@@ -18,6 +19,22 @@ use View;
 
 class CatalogueController extends Controller
 {
+    /**
+     * Safely multiply stock qty by unit; avoids non-numeric PHP errors.
+     */
+    private function stockProduct($qty, $unit)
+    {
+        if ($qty === null || $qty === '' || $unit === null || $unit === '') {
+            return null;
+        }
+
+        if (!is_numeric($qty) || !is_numeric($unit)) {
+            return null;
+        }
+
+        return (float) $qty * (float) $unit;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -174,12 +191,12 @@ class CatalogueController extends Controller
     {
         if ($request->ajax()) {
          // Setup the validator
-         $rules = [
+         $rules = array_merge([
            'catalogue_id' => 'required',
            'sub_catalogue_id' => 'required',
            'item_title' => 'required|max:255',
            'photo_1' => 'required',
-         ];
+         ], ItemJewelInfoService::validationRules());
 
          $validator = Validator::make($request->all(), $rules);
          if ($validator->fails()) {
@@ -277,19 +294,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
 
-               $item->diamond_shape = $request->input('diamond_shape');
-               $item->diamond_carat = $request->input('diamond_carat');
-               $item->diamond_pcs = $request->input('diamond_pcs');
-               $item->diamond_colour = $request->input('diamond_colour');
-               $item->diamond_cleaerty = $request->input('diamond_cleaerty');
-
                $item->weight = $request->input('weight');
-               $item->gem = $request->input('gem');
-               $item->shape = $request->input('shape');
-               $item->carat = $request->input('carat');
-               $item->colour = $request->input('gem_colour');
-               $item->cleaerty = $request->input('cleaerty');
-               $item->pcs = $request->input('pcs');
 
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');
@@ -307,6 +312,10 @@ class CatalogueController extends Controller
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
+
+               ItemJewelInfoService::syncDiamondInfos($item, $request->input('diamond_info'));
+               ItemJewelInfoService::syncGemInfos($item, $request->input('gem_info'));
+               $item->save();
               }
 
               if(!empty($request->new_stock))
@@ -321,8 +330,8 @@ class CatalogueController extends Controller
                         $itemStock->ct = $request->new_ct[$key];
                         $itemStock->pieces = $request->new_pieces[$key];
                         $itemStock->size = $request->new_size[$key];
-                        $itemStock->total_gram = $value * $request->new_gram[$key];
-                        $itemStock->total_ct = $value * $request->new_ct[$key];
+                        $itemStock->total_gram = $this->stockProduct($value, $request->new_gram[$key] ?? null);
+                        $itemStock->total_ct = $this->stockProduct($value, $request->new_ct[$key] ?? null);
                         $itemStock->notes = $request->new_notes[$key];
                         $itemStock->stocknotes = $request->new_stocknotes[$key];
                         $itemStock->item_status = $request->new_item_status[$key];
@@ -365,7 +374,7 @@ class CatalogueController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $item = Item::where('id', $id)->first();
+        $item = Item::with(['diamondInfos', 'gemInfos'])->where('id', $id)->first();
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'Select Catalogue';
         $subCatalogue = config('params.'.$item->catalogue_id);
@@ -403,11 +412,11 @@ class CatalogueController extends Controller
 
         $item = Item::find($id);
         
-         $rules = [
+         $rules = array_merge([
            'catalogue_id' => 'required',
            'sub_catalogue_id' => 'required',
            'item_title' => 'required|max:255',
-         ];
+         ], ItemJewelInfoService::validationRules());
 
          $validator = Validator::make($request->all(), $rules);
          if ($validator->fails()) {
@@ -503,19 +512,7 @@ class CatalogueController extends Controller
                $item->metal_colour = $request->input('metal_colour');
                $item->metal_type = $request->input('metal_type');
 
-               $item->diamond_shape = $request->input('diamond_shape');
-               $item->diamond_carat = $request->input('diamond_carat');
-               $item->diamond_pcs = $request->input('diamond_pcs');
-               $item->diamond_colour = $request->input('diamond_colour');
-               $item->diamond_cleaerty = $request->input('diamond_cleaerty');
-
                $item->weight = $request->input('weight');
-               $item->gem = $request->input('gem');
-               $item->shape = $request->input('shape');
-               $item->carat = $request->input('carat');
-               $item->colour = $request->input('gem_colour');
-               $item->cleaerty = $request->input('cleaerty');
-               $item->pcs = $request->input('pcs');
 
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');
@@ -534,6 +531,10 @@ class CatalogueController extends Controller
                $item->updated_by = Auth::user()->id;
                $item->save();
 
+               ItemJewelInfoService::syncDiamondInfos($item, $request->input('diamond_info'));
+               ItemJewelInfoService::syncGemInfos($item, $request->input('gem_info'));
+               $item->save();
+
                $itemStock = ItemStock::where('item_id',$item->id)->get();
                 if(!empty($request->stock))
                 {
@@ -548,8 +549,8 @@ class CatalogueController extends Controller
                         $itemStock->pieces = $request->pieces[$key];
                         $itemStock->size = $request->q_size[$key];
                         $itemStock->colour = $request->colour[$key];
-                        $itemStock->total_gram = $value * $request->gram[$key];
-                        $itemStock->total_ct = $value * $request->ct[$key];
+                        $itemStock->total_gram = $this->stockProduct($value, $request->gram[$key] ?? null);
+                        $itemStock->total_ct = $this->stockProduct($value, $request->ct[$key] ?? null);
                         $itemStock->notes = isset($request->notes[$key]) ? $request->notes[$key] : NULL;
                         $itemStock->stocknotes = $request->stocknotes[$key];
                         $itemStock->location = $request->location[$key];
@@ -574,8 +575,8 @@ class CatalogueController extends Controller
                         $itemStock->pieces = $request->new_pieces[$key];
                         $itemStock->size = $request->new_q_size[$key];
                         $itemStock->colour = $request->new_colour[$key];
-                        $itemStock->total_gram = $value * $request->new_gram[$key];
-                        $itemStock->total_ct = $value * $request->new_ct[$key];
+                        $itemStock->total_gram = $this->stockProduct($value, $request->new_gram[$key] ?? null);
+                        $itemStock->total_ct = $this->stockProduct($value, $request->new_ct[$key] ?? null);
                         $itemStock->notes = $request->new_notes[$key];
                         $itemStock->stocknotes = $request->new_stocknotes[$key];
                         $itemStock->location = $request->new_location[$key];
@@ -638,7 +639,7 @@ class CatalogueController extends Controller
     {
         DB::beginTransaction();
             try {
-              $itemDetails = Item::find($request->id);
+              $itemDetails = Item::with(['diamondInfos', 'gemInfos'])->find($request->id);
               foreach($request->input('catalogue_store') as $key => $value){
                 $item = new Item();
                $item->catalogue_id = $key;
@@ -653,18 +654,7 @@ class CatalogueController extends Controller
                $item->size = $itemDetails->size;
                $item->metal_colour = $itemDetails->metal_colour;
                $item->metal_type = $itemDetails->metal_type;
-               $item->diamond_shape = $itemDetails->diamond_shape;
-               $item->diamond_carat = $itemDetails->diamond_carat;
-               $item->diamond_pcs = $itemDetails->diamond_pcs;
-               $item->diamond_colour = $itemDetails->diamond_colour;
-               $item->diamond_cleaerty = $itemDetails->diamond_cleaerty;
                $item->weight = $itemDetails->weight;
-               $item->gem = $itemDetails->gem;
-               $item->shape = $itemDetails->shape;
-               $item->carat = $itemDetails->carat;
-               $item->colour = $itemDetails->colour;
-               $item->cleaerty = $itemDetails->cleaerty;
-               $item->pcs = $itemDetails->pcs;
                $item->cost_fee = $itemDetails->cost_fee;
                $item->setting = $itemDetails->setting;
                $item->diamond = $itemDetails->diamond;
@@ -682,6 +672,9 @@ class CatalogueController extends Controller
                $item->created_by = Auth::user()->id;
                $item->updated_by = Auth::user()->id;
                $item->save();
+
+               ItemJewelInfoService::copyJewelInfos($itemDetails, $item);
+               $item->save();
               }
                DB::commit();
                return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
@@ -694,8 +687,9 @@ class CatalogueController extends Controller
 
     public function getCustomer(Request $request)
     {
-      $customer = User::where('f_name','LIKE',"%".$request['term']['term']."%")
-                    ->orWhere('l_name','LIKE',"%".$request['term']['term']."%")
+      $term = data_get($request->all(), 'term.term', data_get($request->all(), 'term', ''));
+      $customer = User::where('f_name','LIKE',"%".$term."%")
+                    ->orWhere('l_name','LIKE',"%".$term."%")
                     ->get()->toArray();
       $customer[''] = ['f_name' => ''];
         return response()->json(['data' => $customer]);

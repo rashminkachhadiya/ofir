@@ -60,6 +60,9 @@
             'Mother of Pearl' => 'Mother of Pearl',
             'Other' => 'Other',
         ];
+
+        $diamondRows = \App\Services\ItemJewelInfoService::diamondRowsForForm($item);
+        $gemRows = \App\Services\ItemJewelInfoService::gemRowsForForm($item);
     @endphp
 
     <x-admin.page-header title="Edit Product" icon="box2">
@@ -180,47 +183,17 @@
                                     </div> -->
                                     <div class="">
                                         <div class="col-md-12">
-                                            <h5 class="form-section-title">Diamond Info</h5>
-                                            <div class="form-jewel-grid">
-                                                <x-admin.form-jewel-field label="Shape">
-                                                    {!! Form::select('diamond_shape', $shapeOptions, old('diamond_shape', $item->diamond_shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'diamond_shape']) !!}
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Carat" for="diamond_carat">
-                                                    <input type="text" class="form-control" id="diamond_carat" name="diamond_carat" value="{{ $item->diamond_carat }}" placeholder="Carat">
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Pcs" for="diamond_pcs">
-                                                    <input type="text" class="form-control" name="diamond_pcs" value="{{ $item->diamond_pcs }}" id="diamond_pcs" placeholder="Pcs">
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Colour" for="diamond_colour">
-                                                    <input type="text" class="form-control" id="diamond_colour" name="diamond_colour" value="{{ $item->diamond_colour }}" placeholder="Colour">
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Cleaerty" for="diamond_cleaerty">
-                                                    <input type="text" class="form-control" name="diamond_cleaerty" value="{{ $item->diamond_cleaerty }}" id="diamond_cleaerty" placeholder="Cleaerty">
-                                                </x-admin.form-jewel-field>
-                                            </div>
+                                            @include('backend.admin.catalogue.partials.diamond-info-section', [
+                                                'rows' => $diamondRows,
+                                                'shapeOptions' => $shapeOptions,
+                                            ])
                                         </div>
                                         <div class="col-md-12 mt-3">
-                                            <h5 class="form-section-title">Gem Info</h5>
-                                            <div class="form-jewel-grid">
-                                                <x-admin.form-jewel-field label="Gem">
-                                                    {!! Form::select('gem', $gemOptions, old('gem', $item->gem ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'gem']) !!}
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Shape">
-                                                    {!! Form::select('shape', $shapeOptions, old('shape', $item->shape ?? ''), ['class' => 'form-control', 'data-control' => 'select2', 'id' => 'shape']) !!}
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Carat" for="carat">
-                                                    <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="Carat">
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Colour" for="colour">
-                                                    <input type="text" class="form-control" id="colour" name="gem_colour" value="{{ $item->colour }}" placeholder="Colour">
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Cleaerty" for="cleaerty">
-                                                    <input type="text" class="form-control" name="cleaerty" value="{{ $item->cleaerty }}" id="cleaerty" placeholder="Cleaerty">
-                                                </x-admin.form-jewel-field>
-                                                <x-admin.form-jewel-field label="Pcs" for="pcs">
-                                                    <input type="text" class="form-control" name="pcs" value="{{ $item->pcs }}" id="pcs" placeholder="Pcs">
-                                                </x-admin.form-jewel-field>
-                                            </div>
+                                            @include('backend.admin.catalogue.partials.gem-info-section', [
+                                                'rows' => $gemRows,
+                                                'shapeOptions' => $shapeOptions,
+                                                'gemOptions' => $gemOptions,
+                                            ])
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -776,6 +749,9 @@
                                     $.each(data.errors, function (key, val) {
                                         $('#error_' + key).html(val);
                                     });
+                                    if (typeof applyJewelValidationErrors === 'function') {
+                                        applyJewelValidationErrors(data.errors);
+                                    }
                                 }
                                 $("#status").html(data.message);
                                 $('#loader').hide();
@@ -890,4 +866,5 @@
 
     });
 </script>
+@include('backend.admin.catalogue.partials.jewel-info-scripts')
 @endpush

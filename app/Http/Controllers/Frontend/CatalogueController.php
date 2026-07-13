@@ -131,9 +131,32 @@ class CatalogueController extends Controller
         {
             $items->where('items.metal_colour','=',$request->metal);
         }
-        if(!is_null($request->gems))
+        if(!is_null($request->gems) && $request->gems !== '')
         {
-            $items->where('items.gem','like','%'.$request->gems.'%');
+            if ($request->gems === 'diamond') {
+                $items->where(function ($query) {
+                    $query->whereHas('diamondInfos')
+                        ->orWhere(function ($legacy) {
+                            $legacy->whereNotNull('diamond_shape')->where('diamond_shape', '!=', '')
+                                ->orWhereNotNull('diamond_carat')->where('diamond_carat', '!=', '')
+                                ->orWhereNotNull('diamond_pcs')->where('diamond_pcs', '!=', '')
+                                ->orWhereNotNull('diamond_colour')->where('diamond_colour', '!=', '')
+                                ->orWhereNotNull('diamond_cleaerty')->where('diamond_cleaerty', '!=', '');
+                        });
+                });
+            } elseif ($request->gems === 'gems') {
+                $items->where(function ($query) {
+                    $query->whereHas('gemInfos')
+                        ->orWhere(function ($legacy) {
+                            $legacy->whereNotNull('gem')->where('gem', '!=', '')
+                                ->orWhereNotNull('shape')->where('shape', '!=', '')
+                                ->orWhereNotNull('carat')->where('carat', '!=', '')
+                                ->orWhereNotNull('colour')->where('colour', '!=', '')
+                                ->orWhereNotNull('cleaerty')->where('cleaerty', '!=', '')
+                                ->orWhereNotNull('pcs')->where('pcs', '!=', '');
+                        });
+                });
+            }
         }
         if($request->all_product == 'yes')
         {
@@ -148,7 +171,7 @@ class CatalogueController extends Controller
 
     public function itemDetails(Request $request)
     {
-        $item = Item::where('id',$request->item_id)->first();
+        $item = Item::with(['diamondInfos', 'gemInfos'])->where('id', $request->item_id)->first();
         $metalType = config('params.metal_type');
         $metalType[''] = "Select";
         $metalColour = config('params.metal_colour');
@@ -281,7 +304,7 @@ class CatalogueController extends Controller
     public function pdfPrint(Request $request)
     {
         $mpdf = new \Mpdf\Mpdf();
-        $item = Item::where('id',$request->item_id)->first();
+        $item = Item::with(['diamondInfos', 'gemInfos'])->where('id', $request->item_id)->first();
         $metalType = config('params.metal_type');
         $metalType[''] = "Select";
         $metalColour = config('params.metal_colour');

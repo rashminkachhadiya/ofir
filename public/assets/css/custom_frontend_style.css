@@ -551,3 +551,63 @@
         justify-content: center;
     }
 }
+
+/* Catalogue jewel specs (quick view / PDF) */
+.catalogue-jewel-specs {
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+}
+
+.catalogue-jewel-block + .catalogue-jewel-block {
+    margin-top: 0.75rem;
+}
+
+.catalogue-jewel-block__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1a1a2e;
+}
+
+.catalogue-jewel-entry {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+}
+
+.catalogue-jewel-entry--spaced {
+    margin-bottom: 0.5rem;
+}
+
+.catalogue-jewel-entry__heading {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #6c757d;
+    margin-bottom: 0.35rem;
+}
+
+.catalogue-jewel-field {
+    margin-bottom: 0.35rem;
+}
+
+.catalogue-jewel-field__label {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #6c757d;
+}
+
+.catalogue-jewel-field__value {
+    display: block;
+    font-size: 0.8125rem;
+    color: #1a1a2e;
+    word-break: break-word;
+}
+

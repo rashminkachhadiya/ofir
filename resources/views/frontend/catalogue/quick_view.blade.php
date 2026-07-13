@@ -64,6 +64,38 @@
                            
                             <h3 class="product-name" style="word-wrap: break-word;">{{ $item->item_title }}</h3>
                             <p style="margin-bottom: 0px;" class="pro-desc">{{ $item->description }}</p>
+                            @php
+                                $diamondRows = \App\Services\ItemJewelInfoService::displayDiamondRows($item);
+                                $gemRows = \App\Services\ItemJewelInfoService::displayGemRows($item);
+                                $cartGemDefaults = \App\Services\ItemJewelInfoService::firstGemRowForCart($item);
+                            @endphp
+                            @if(!empty($diamondRows) || !empty($gemRows))
+                                <div class="catalogue-jewel-specs mt-2 mb-2">
+                                    @include('frontend.catalogue.partials.jewel-info-list', [
+                                        'title' => __('Diamond Info'),
+                                        'rows' => $diamondRows,
+                                        'fields' => [
+                                            'Shape' => 'shape',
+                                            'Carat' => 'carat',
+                                            'Pcs' => 'pcs',
+                                            'Colour' => 'colour',
+                                            'Cleaerty' => 'cleaerty',
+                                        ],
+                                    ])
+                                    @include('frontend.catalogue.partials.jewel-info-list', [
+                                        'title' => __('Gem Info'),
+                                        'rows' => $gemRows,
+                                        'fields' => [
+                                            'Gem' => 'gem',
+                                            'Shape' => 'shape',
+                                            'Carat' => 'carat',
+                                            'Colour' => 'colour',
+                                            'Cleaerty' => 'cleaerty',
+                                            'Pcs' => 'pcs',
+                                        ],
+                                    ])
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-5 mt-2">
                                     <div class="d-flex">
@@ -124,12 +156,13 @@
                                     
                                 </div>
                                 <div class="col-md-5 mt-2">
+                                    <p class="small text-muted mb-2">{{ __('Order gem details') }}</p>
                                     <div class="d-flex">
                                         <div class="col-md-4 p-0">
                                             <label class="col-form-label">{{ __('Gem') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="gem" name="gem" value="{{ $item->gem }}" placeholder="{{ __('Gem') }}">
+                                            <input type="text" class="form-control" id="gem" name="gem" value="{{ $cartGemDefaults['gem'] ?? $item->gem }}" placeholder="{{ __('Gem') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -137,7 +170,7 @@
                                             <label class="col-form-label">{{ __('Shape') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="shape" name="shape" value="{{ $item->shape }}" placeholder="{{ __('Shape') }}" required>
+                                            <input type="text" class="form-control" id="shape" name="shape" value="{{ $cartGemDefaults['shape'] ?? $item->shape }}" placeholder="{{ __('Shape') }}" required>
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -145,7 +178,7 @@
                                             <label class="col-form-label">{{ __('Carat') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" id="carat" name="carat" value="{{ $item->carat }}" placeholder="{{ __('Carat') }}">
+                                            <input type="text" class="form-control" id="carat" name="carat" value="{{ $cartGemDefaults['carat'] ?? $item->carat }}" placeholder="{{ __('Carat') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -153,7 +186,7 @@
                                             <label class="col-form-label">{{ __('Colour') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0 d-flex">
-                                            <input type="text" class="form-control" name="colour" id="colour" value="{{ $item->colour }}" placeholder="{{ __('Colour') }}">
+                                            <input type="text" class="form-control" name="colour" id="colour" value="{{ $cartGemDefaults['colour'] ?? $item->colour }}" placeholder="{{ __('Colour') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -161,7 +194,7 @@
                                             <label class="col-form-label">{{ __('Cleaerty') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" value="{{ $item->cleaerty }}" placeholder="{{ __('Cleaerty') }}">
+                                            <input type="text" class="form-control" name="cleaerty" id="cleaerty" value="{{ $cartGemDefaults['cleaerty'] ?? $item->cleaerty }}" placeholder="{{ __('Cleaerty') }}">
                                         </div>
                                     </div>
                                     <div class="d-flex mt-1">
@@ -169,7 +202,7 @@
                                             <label class="col-form-label">{{ __('Pcs') }}</label>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <input type="text" class="form-control" name="pcs" id="pcs" value="{{ $item->pcs }}" placeholder="{{ __('Pcs') }}">
+                                            <input type="text" class="form-control" name="pcs" id="pcs" value="{{ $cartGemDefaults['pcs'] ?? $item->pcs }}" placeholder="{{ __('Pcs') }}">
                                         </div>
                                     </div>
                                 </div>

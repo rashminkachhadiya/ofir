@@ -150,6 +150,55 @@
     padding-left: 0.45rem;
 }
 
+/* ─── Repeatable jewel rows (Diamond / Gem) ─── */
+.jewel-repeat-section {
+    margin-bottom: 0.75rem;
+}
+
+.jewel-repeat-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.jewel-repeat-row {
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-md, 8px);
+    padding: 0.65rem 0.75rem 0.75rem;
+    background: #fff;
+}
+
+.jewel-repeat-row__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    gap: 0.5rem;
+}
+
+.jewel-repeat-row__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted, #6c757d);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.jewel-repeat-row .form-jewel-grid {
+    margin-bottom: 0;
+}
+
+.jewel-repeat-section .jewel-add-row {
+    margin-top: 0.5rem;
+}
+
+.jewel-field-error {
+    display: block;
+    color: #dc3545;
+    font-size: 0.75rem;
+    margin-top: 0.2rem;
+}
+
 /* ─── Ask for Price panel ─── */
 .form-price-panel {
     background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
