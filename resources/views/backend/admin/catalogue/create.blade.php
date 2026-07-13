@@ -194,66 +194,7 @@
                                     </div>
                                     
                                     <div class="col-md-12">
-                                        <div class="form-price-panel col-md-12 mt-4 mb-3">
-                                            <h5 class="form-price-panel__title">Ask for Price</h5>
-                                            <div class="form-price-row form-price-row--5">
-                                                <div class="form-group">
-                                                    <label for="cost_fee">Work</label>
-                                                    <input type="text" class="form-control" id="cost_fee" name="cost_fee" value="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="setting">Setting</label>
-                                                    <input type="text" class="form-control" id="setting" name="setting" value="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="diamond">Diamond</label>
-                                                    <input type="text" class="form-control" id="diamond" name="diamond" value="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="loss">Loss</label>
-                                                    <input type="text" class="form-control" id="loss" name="loss" value="">
-                                                </div>
-                                                <div class="form-group form-price-note">
-                                                    <label for="diamond_note">Note</label>
-                                                    <input type="text" class="form-control" id="diamond_note" name="diamond_note" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-price-row form-price-row--3">
-                                                <div class="form-group">
-                                                    <label for="price_usd">USD ($)</label>
-                                                    <input type="text" class="form-control" id="price_usd" name="price_usd" value="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="price_pound">GBP (&pound;)</label>
-                                                    <input type="text" class="form-control" id="price_pound" name="price_pound" value="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="price_eur">EUR (&euro;)</label>
-                                                    <input type="text" class="form-control" id="price_eur" name="price_eur" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group mb-0">
-                                                <label for="price_notes">Price Notes</label>
-                                                <input type="text" class="form-control" id="price_notes" name="price_notes" value="">
-                                            </div>
-                                        </div>
-                                        <div class="form-radio-row">
-                                            <div class="form-group col-md-6">
-                                                <label for=""> All Collection </label><br/>
-                                                <input type="radio" name="is_allcollection" class="flat-green" value="1"/> Yes
-                                                <input type="radio" name="is_allcollection" class="flat-green" value="0" checked /> No
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label for=""> Is Active? </label><br/>
-                                                <input type="radio" name="is_active" class="flat-green"value="1" /> Yes
-                                                <input type="radio" name="is_active" class="flat-green"value="0" checked /> No
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label for=""> Available </label><br/>
-                                            <input type="radio" name="is_available" class="flat-green"value="1" checked /> Yes
-                                            <input type="radio" name="is_available" class="flat-green"value="0"/> No
-                                        </div>
+                                        @include('backend.admin.catalogue.partials.ask-price-panel')
                                     </div>
                                 </div>
 

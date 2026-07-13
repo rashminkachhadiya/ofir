@@ -152,31 +152,55 @@
 
 /* ─── Ask for Price panel ─── */
 .form-price-panel {
-    border: 1px solid var(--color-border, #dee2e6);
-    border-radius: var(--radius-md, 8px);
-    padding: 0.75rem;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-lg, 12px);
+    padding: 1rem 1.15rem;
     max-width: 100%;
-    overflow: hidden;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
     box-sizing: border-box;
 }
 
-.form-price-panel .form-price-panel__title {
-    text-align: center;
+.form-price-panel__title {
     font-size: 0.9375rem;
-    font-weight: 600;
-    margin-bottom: 0.65rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--color-border, #e2e8f0);
     color: var(--color-text, #1a1a2e);
+    text-align: left;
+}
+
+.form-price-section {
+    margin-bottom: 1rem;
+}
+
+.form-price-section:last-of-type {
+    margin-bottom: 0.75rem;
+}
+
+.form-price-section__label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted, #64748b);
+    margin: 0 0 0.5rem;
 }
 
 .form-price-panel .form-price-row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.65rem;
-    margin-bottom: 0.65rem;
+    gap: 0.75rem;
+}
+
+.form-price-panel .form-price-row + .form-price-row {
+    margin-top: 0.75rem;
 }
 
 @media (min-width: 480px) {
-    .form-price-panel .form-price-row {
+    .form-price-panel .form-price-row--4 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
@@ -186,21 +210,13 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .form-price-panel .form-price-row--5 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 992px) {
-    .form-price-panel .form-price-row--5 {
+    .form-price-panel .form-price-row--4 {
         grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 
-@media (min-width: 1400px) {
-    .form-price-panel .form-price-row--5 {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-    }
+.form-price-panel .form-price-row--full {
+    grid-template-columns: 1fr;
 }
 
 .form-price-panel .form-price-row > .form-group {
@@ -212,14 +228,13 @@
 
 .form-price-panel .form-group label {
     display: block;
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    text-transform: none;
+    letter-spacing: 0;
     white-space: nowrap;
-    writing-mode: horizontal-tb !important;
-    margin-bottom: 0.25rem;
-    color: var(--color-text-muted, #6c757d);
+    margin-bottom: 0.35rem;
+    color: var(--color-text, #1e293b);
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -227,22 +242,83 @@
 .form-price-panel .form-control {
     width: 100% !important;
     max-width: 100% !important;
-    min-height: 34px;
-    font-size: 0.8125rem;
-    padding: 0.3rem 0.45rem;
+    min-height: 38px;
+    font-size: 0.875rem;
+    padding: 0.45rem 0.65rem;
+    border-radius: var(--radius-md, 8px);
+    border-color: var(--color-border, #e2e8f0);
+    background: #fff;
 }
 
-/* Note field spans full width until extra-wide screens */
-.form-price-panel .form-price-row--5 > .form-price-note,
-.form-price-panel .form-price-row--5 > .form-group:last-child {
-    grid-column: 1 / -1;
+.form-price-panel .form-control:focus {
+    border-color: var(--color-accent, #3f6ad8);
+    box-shadow: 0 0 0 3px rgba(63, 106, 216, 0.12);
 }
 
-@media (min-width: 1400px) {
-    .form-price-panel .form-price-row--5 > .form-price-note,
-    .form-price-panel .form-price-row--5 > .form-group:last-child {
-        grid-column: auto;
+/* Product options (radio groups) */
+.form-options-panel {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+}
+
+@media (min-width: 576px) {
+    .form-options-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+}
+
+@media (min-width: 992px) {
+    .form-options-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.form-option-group {
+    background: #f8fafc;
+    border: 1px solid var(--color-border, #e2e8f0);
+    border-radius: var(--radius-md, 8px);
+    padding: 0.75rem 0.9rem;
+    min-width: 0;
+}
+
+.form-option-group__label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text, #1e293b);
+    margin-bottom: 0.55rem;
+}
+
+.form-option-group__choices {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+}
+
+.form-option-choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-muted, #64748b);
+    cursor: pointer;
+}
+
+.form-option-choice span {
+    line-height: 1.2;
+}
+
+.form-option-group .iradio_flat-green {
+    margin-right: 0 !important;
 }
 
 .form-radio-row > .form-group[class*="col-"] {
