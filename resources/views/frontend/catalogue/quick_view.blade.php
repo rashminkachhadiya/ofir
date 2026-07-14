@@ -84,10 +84,9 @@
                             <div class="catalogue-qv__field">
                                 <label class="catalogue-qv__label" for="item-qty">{{ __('Qty') }}</label>
                                 <div class="catalogue-qv__qty">
-                                    <input class="form-control" name="qty" type="text" id="item-qty" value="1">
-                                    <button type="button" class="catalogue-qv__qty-btn fa-plus-circle" aria-label="{{ __('Increase quantity') }}">
-                                        <i class="fa fa-plus-circle"></i>
-                                    </button>
+                                    <button type="button" class="catalogue-qv__qty-btn catalogue-qv__qty-minus" aria-label="{{ __('Decrease quantity') }}">−</button>
+                                    <input class="form-control catalogue-qv__qty-input" name="qty" type="text" inputmode="numeric" pattern="[0-9]*" id="item-qty" value="1" autocomplete="off">
+                                    <button type="button" class="catalogue-qv__qty-btn catalogue-qv__qty-plus" aria-label="{{ __('Increase quantity') }}">+</button>
                                 </div>
                             </div>
                             <div class="catalogue-qv__field">
@@ -156,23 +155,64 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(".fa-minus-circle").click(function () {
-        var qty = $('#item-qty').val();
-        if (qty > 1) {
-            $('#item-qty').val(parseInt(qty) - 1);
-        }
-    });
+(function ($) {
+    function getQtyValue() {
+        var qty = parseInt($('#item-qty').val(), 10);
+        return isNaN(qty) || qty < 1 ? 1 : qty;
+    }
 
-    $(".print").click(function () {
+    function setQtyValue(qty) {
+        if (isNaN(qty) || qty < 1) {
+            qty = 1;
+        }
+        $('#item-qty').val(qty);
+    }
+
+    $(document).off('click.catalogueQty', '.catalogue-qv__qty-minus')
+        .on('click.catalogueQty', '.catalogue-qv__qty-minus', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            setQtyValue(getQtyValue() - 1);
+        });
+
+    $(document).off('click.catalogueQty', '.catalogue-qv__qty-plus')
+        .on('click.catalogueQty', '.catalogue-qv__qty-plus', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            setQtyValue(getQtyValue() + 1);
+        });
+
+    $(document).off('input.catalogueQty keypress.catalogueQty paste.catalogueQty', '#item-qty')
+        .on('input.catalogueQty', '#item-qty', function () {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value !== '' && parseInt(this.value, 10) < 1) {
+                this.value = '1';
+            }
+        })
+        .on('keypress.catalogueQty', '#item-qty', function (e) {
+            var charCode = e.which || e.keyCode;
+            if (charCode < 48 || charCode > 57) {
+                e.preventDefault();
+            }
+        })
+        .on('paste.catalogueQty', '#item-qty', function (e) {
+            e.preventDefault();
+            var text = (e.originalEvent.clipboardData || window.clipboardData).getData('text') || '';
+            var digits = text.replace(/[^0-9]/g, '');
+            if (digits === '' || parseInt(digits, 10) < 1) {
+                digits = '1';
+            }
+            $(this).val(digits);
+        })
+        .on('blur.catalogueQty', '#item-qty', function () {
+            setQtyValue(getQtyValue());
+        });
+
+    $(".print").off('click').on('click', function () {
         var itemId = $(this).attr('item-id');
     });
 
-    $(".fa-plus-circle").click(function () {
-        var qty = $('#item-qty').val();
-        $('#item-qty').val(parseInt(qty) + 1);
-    });
-
-    $('.favorite').on('click', function () {
+    $('.favorite').off('click').on('click', function () {
         var itemId = $(this).attr('data-id');
         $.ajax({
             url: 'favorite',
@@ -188,7 +228,7 @@
         });
     });
 
-    $('.unfavorite').on('click', function () {
+    $('.unfavorite').off('click').on('click', function () {
         var itemId = $(this).attr('data-id');
         $.ajax({
             url: 'unfavorite',
@@ -203,4 +243,5 @@
             }
         });
     });
+})(jQuery);
 </script>
