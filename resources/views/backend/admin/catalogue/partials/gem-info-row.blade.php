@@ -3,6 +3,10 @@
     $index = $index ?? 0;
     $isNumericIndex = is_numeric($index);
     $entryNumber = $isNumericIndex ? ((int) $index + 1) : null;
+    $shapeValue = old('gem_info.' . $index . '.shape', $row['shape'] ?? '');
+    $isCustomShape = $shapeValue && !array_key_exists($shapeValue, $shapeOptions);
+    $selectShape = $isCustomShape ? 'Other' : $shapeValue;
+    $customShape = old('gem_info.' . $index . '.shape_custom', $isCustomShape ? $shapeValue : '');
 @endphp
 
 <div class="jewel-repeat-row" data-index="{{ $index }}">
@@ -31,10 +35,19 @@
             {!! Form::select(
                 'gem_info[' . $index . '][shape]',
                 $shapeOptions,
-                old('gem_info.' . $index . '.shape', $row['shape'] ?? ''),
-                ['class' => 'form-control jewel-select2', 'data-control' => 'select2']
+                $selectShape,
+                ['class' => 'form-control jewel-select2 jewel-shape-select', 'data-control' => 'select2']
             ) !!}
+            <input type="text"
+                   class="form-control jewel-shape-custom mt-1"
+                   name="gem_info[{{ $index }}][shape_custom]"
+                   value="{{ $customShape }}"
+                   placeholder="Enter shape name"
+                   @if($selectShape !== 'Other') style="display:none;" @endif>
             @error('gem_info.' . $index . '.shape')
+                <span class="jewel-field-error">{{ $message }}</span>
+            @enderror
+            @error('gem_info.' . $index . '.shape_custom')
                 <span class="jewel-field-error">{{ $message }}</span>
             @enderror
         </x-admin.form-jewel-field>

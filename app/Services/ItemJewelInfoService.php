@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Item;
 use App\Models\ItemDiamondInfo;
 use App\Models\ItemGemInfo;
+use Illuminate\Validation\Validator;
 
 class ItemJewelInfoService
 {
@@ -13,6 +14,7 @@ class ItemJewelInfoService
         return [
             'diamond_info' => 'nullable|array',
             'diamond_info.*.shape' => 'nullable|string|max:255',
+            'diamond_info.*.shape_custom' => 'nullable|string|max:255',
             'diamond_info.*.carat' => 'nullable|string|max:255',
             'diamond_info.*.pcs' => 'nullable|string|max:255',
             'diamond_info.*.colour' => 'nullable|string|max:255',
@@ -20,11 +22,45 @@ class ItemJewelInfoService
             'gem_info' => 'nullable|array',
             'gem_info.*.gem' => 'nullable|string|max:255',
             'gem_info.*.shape' => 'nullable|string|max:255',
+            'gem_info.*.shape_custom' => 'nullable|string|max:255',
             'gem_info.*.carat' => 'nullable|string|max:255',
             'gem_info.*.colour' => 'nullable|string|max:255',
             'gem_info.*.cleaerty' => 'nullable|string|max:255',
             'gem_info.*.pcs' => 'nullable|string|max:255',
         ];
+    }
+
+    public static function configureValidator(Validator $validator): void
+    {
+        $validator->after(function (Validator $validator) {
+            $data = $validator->getData();
+
+            foreach ($data['diamond_info'] ?? [] as $index => $row) {
+                if (!is_array($row)) {
+                    continue;
+                }
+
+                if (($row['shape'] ?? '') === 'Other' && trim((string) ($row['shape_custom'] ?? '')) === '') {
+                    $validator->errors()->add(
+                        "diamond_info.{$index}.shape_custom",
+                        'Please enter a shape name when Other is selected.'
+                    );
+                }
+            }
+
+            foreach ($data['gem_info'] ?? [] as $index => $row) {
+                if (!is_array($row)) {
+                    continue;
+                }
+
+                if (($row['shape'] ?? '') === 'Other' && trim((string) ($row['shape_custom'] ?? '')) === '') {
+                    $validator->errors()->add(
+                        "gem_info.{$index}.shape_custom",
+                        'Please enter a shape name when Other is selected.'
+                    );
+                }
+            }
+        });
     }
 
     public static function diamondRowsForForm(Item $item): array
@@ -179,7 +215,7 @@ class ItemJewelInfoService
         $sortOrder = 0;
         foreach (self::filterRows($rows, ['shape', 'carat', 'pcs', 'colour', 'cleaerty']) as $row) {
             $item->diamondInfos()->create([
-                'shape' => $row['shape'] ?? null,
+                'shape' => self::resolveShape($row['shape'] ?? null, $row['shape_custom'] ?? null),
                 'carat' => $row['carat'] ?? null,
                 'pcs' => $row['pcs'] ?? null,
                 'colour' => $row['colour'] ?? null,
@@ -199,7 +235,7 @@ class ItemJewelInfoService
         foreach (self::filterRows($rows, ['gem', 'shape', 'carat', 'colour', 'cleaerty', 'pcs']) as $row) {
             $item->gemInfos()->create([
                 'gem' => $row['gem'] ?? null,
-                'shape' => $row['shape'] ?? null,
+                'shape' => self::resolveShape($row['shape'] ?? null, $row['shape_custom'] ?? null),
                 'carat' => $row['carat'] ?? null,
                 'colour' => $row['colour'] ?? null,
                 'cleaerty' => $row['cleaerty'] ?? null,
@@ -252,6 +288,17 @@ class ItemJewelInfoService
 
         self::syncLegacyDiamondColumns($target);
         self::syncLegacyGemColumns($target);
+    }
+
+    private static function resolveShape(?string $shape, ?string $shapeCustom): ?string
+    {
+        if ($shape === 'Other') {
+            $custom = trim((string) $shapeCustom);
+
+            return $custom !== '' ? $custom : null;
+        }
+
+        return $shape ?: null;
     }
 
     private static function filterRows(?array $rows, array $fields): array

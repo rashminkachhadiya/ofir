@@ -1,5 +1,26 @@
 <script>
 (function ($) {
+    function toggleShapeCustom($row) {
+        var $select = $row.find('.jewel-shape-select');
+        var $custom = $row.find('.jewel-shape-custom');
+
+        if (!$select.length || !$custom.length) {
+            return;
+        }
+
+        if ($select.val() === 'Other') {
+            $custom.show();
+        } else {
+            $custom.hide().val('');
+        }
+    }
+
+    function initShapeCustomFields($container) {
+        $container.find('.jewel-repeat-row').each(function () {
+            toggleShapeCustom($(this));
+        });
+    }
+
     function initJewelSelect2($container) {
         $container.find('select.jewel-select2, select[data-control="select2"]').each(function () {
             var $select = $(this);
@@ -27,6 +48,7 @@
         });
 
         $row.find('input[type="text"]').val('');
+        $row.find('.jewel-shape-custom').hide();
     }
 
     function updateJewelRowLabels($container) {
@@ -82,6 +104,7 @@
         $container.append($row);
         reindexJewelRows($container);
         initJewelSelect2($row);
+        toggleShapeCustom($row);
     }
 
     function applyJewelValidationErrors(errors) {
@@ -119,6 +142,11 @@
 
     $(document).ready(function () {
         initJewelSelect2($('.jewel-repeat-section'));
+        initShapeCustomFields($('.jewel-repeat-section'));
+
+        $('body').on('change', '.jewel-shape-select', function () {
+            toggleShapeCustom($(this).closest('.jewel-repeat-row'));
+        });
 
         $('body').on('click', '.jewel-add-row', function () {
             var targetId = $(this).data('target');

@@ -199,6 +199,7 @@ class CatalogueController extends Controller
          ], ItemJewelInfoService::validationRules());
 
          $validator = Validator::make($request->all(), $rules);
+         ItemJewelInfoService::configureValidator($validator);
          if ($validator->fails()) {
             return response()->json([
               'type' => 'error',
@@ -419,6 +420,7 @@ class CatalogueController extends Controller
          ], ItemJewelInfoService::validationRules());
 
          $validator = Validator::make($request->all(), $rules);
+         ItemJewelInfoService::configureValidator($validator);
          if ($validator->fails()) {
             return response()->json([
               'type' => 'error',
