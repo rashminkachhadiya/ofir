@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Supplier;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use View;
 use DB;
@@ -240,7 +241,7 @@ class OrderController extends Controller
              }
           }
         if ($haspermision) {
-          $order = Order::where('id',$id)->first();
+          $order = Order::with('orderPicture')->where('id',$id)->first();
           $supplier = Supplier::all()->pluck('f_name','id')->toArray();
           $supplier[''] = 'Select Supplier';
           $metalType = config('params.metal_type');
@@ -309,29 +310,90 @@ class OrderController extends Controller
 
     public function updateOrder(Request $request)
     {
-      $order = Order::find($request->order_id);
-      $order->supplier_name = $request->supplier_name;
-      $order->metal_type = $request->metal_type;
-      $order->metal_colour = $request->metal_colour;
-      $order->order_status = $request->status;
-      $order->ref = $request->ref;
-      $order->size = $request->size;
+      $validator = Validator::make($request->all(), [
+        'order_id' => 'required|exists:orders,id',
+        'order_images' => 'nullable|array',
+        'order_images.*' => 'image|mimes:jpeg,jpg,png,gif|max:12288',
+        'delete_images' => 'nullable|array',
+        'delete_images.*' => 'integer|exists:order_images,id',
+      ]);
 
-      $order->weight = $request->weight;
-      $order->shape = $request->shape;
-      $order->carat = $request->carat;
-      $order->colour = $request->gem_colour;
-      $order->cleaerty = $request->cleaerty;
-      $order->pcs = $request->pcs;
-      $order->gem = $request->gem;
+      if ($validator->fails()) {
+        return response()->json([
+          'type' => 'error',
+          'message' => $validator->errors()->first(),
+          'errors' => $validator->errors()->toArray(),
+        ]);
+      }
 
-      $order->quantity = $request->quantity;
-      $order->est_price = $request->est_price;
-      $order->est_price_currency = $request->est_currency;
-      $order->tot_est_price = $request->tot_est_price;
-      $order->admin_notes = $request->admin_notes;
-      $order->save();
-      return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
+      $order = Order::findOrFail($request->order_id);
+
+      DB::beginTransaction();
+      try {
+        $order->supplier_name = $request->supplier_name;
+        $order->metal_type = $request->metal_type;
+        $order->metal_colour = $request->metal_colour;
+        $order->order_status = $request->status;
+        $order->ref = $request->ref;
+        $order->size = $request->size;
+
+        $order->weight = $request->weight;
+        $order->shape = $request->shape;
+        $order->carat = $request->carat;
+        $order->colour = $request->gem_colour;
+        $order->cleaerty = $request->cleaerty;
+        $order->pcs = $request->pcs;
+        $order->gem = $request->gem;
+
+        $order->quantity = $request->quantity;
+        $order->est_price = $request->est_price;
+        $order->est_price_currency = $request->est_currency;
+        $order->tot_est_price = $request->tot_est_price;
+        $order->admin_notes = $request->admin_notes;
+        $order->save();
+
+        if ($request->filled('delete_images')) {
+          $imagesToDelete = OrderImage::where('order_id', $order->id)
+            ->whereIn('id', (array) $request->delete_images)
+            ->get();
+
+          foreach ($imagesToDelete as $image) {
+            $filePath = public_path('assets/images/users/order/' . $image->images);
+            if ($image->images && is_file($filePath)) {
+              @unlink($filePath);
+            }
+            $image->delete();
+          }
+        }
+
+        if ($request->hasFile('order_images')) {
+          $destinationPath = public_path('assets/images/users/order');
+          if (!is_dir($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+          }
+
+          foreach ($request->file('order_images') as $uploadedImage) {
+            if (!$uploadedImage->isValid()) {
+              continue;
+            }
+
+            $extension = $uploadedImage->getClientOriginalExtension();
+            $imageName = time() . '_' . uniqid('', true) . '.' . $extension;
+            $uploadedImage->move($destinationPath, $imageName);
+
+            OrderImage::create([
+              'order_id' => $order->id,
+              'images' => $imageName,
+            ]);
+          }
+        }
+
+        DB::commit();
+        return response()->json(['type' => 'success', 'message' => "Successfully Updated"]);
+      } catch (\Exception $e) {
+        DB::rollback();
+        return response()->json(['type' => 'error', 'message' => $e->getMessage()]);
+      }
     }
 
     public function pdfDownload(Request $request)

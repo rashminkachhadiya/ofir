@@ -1,5 +1,10 @@
 @extends('backend.layouts.master')
 @section('title', __('Edit Order'))
+
+@push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
+@endpush
+
 @section('content')
     <x-admin.page-header title="{{ __('Order Details') }}" icon="cart">
         <x-slot name="actions">
@@ -15,53 +20,24 @@
                     <form id="edit-tab" action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation admin-form-page" novalidate>
                     <div class="row">
                         <div class="col-lg-3 mb-4">
-                            <div class="product-large-slider">
-                                    <div id="carouselExampleIndicators" class="carousel slide order-carousel" data-ride="carousel">
-                                      <div class="carousel-inner">
-                                        @php
-                                        $count = 0;
-                                        @endphp
-                                        @foreach($order->orderPicture as $image)
-                                        @if($count == 0)
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
-                                        </div>
+                            <div class="order-images-panel">
+                                <div class="order-images-panel__header">
+                                    <h6 class="order-images-panel__title">{{ __('Order Images') }}</h6>
+                                    <span class="order-images-panel__code">{{ $order->sku }}</span>
+                                </div>
 
-                                        @else
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="{{asset('assets/images/users/order/').'/'.$image->images}}" alt="Second slide">
+                                <div id="order-image-dropzone" class="dropzone order-image-dropzone">
+                                    <div class="dz-message order-image-dropzone__message">
+                                        <div class="order-image-dropzone__icon">
+                                            <i class="fa fa-cloud-upload"></i>
                                         </div>
-                                        @endif
-                                        @php
-                                        $count++;
-                                        @endphp
-                                        @endforeach
-                                    </div>
-                                    <div>
-                                        <div>
-                                            <strong>{{ $order->sku }}</strong>
-                                        </div>
-                                        <div>
-                                            <ol class="carousel-indicators">
-                                                @php
-                                                $countOl = 0;
-                                                @endphp
-                                                @foreach($order->orderPicture as $image)
-                                                @if($countOl == 0)
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                                @else
-                                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $countOl }}"></li>
-                                                @endif
-                                                @php
-                                                $countOl++;
-                                                @endphp
-                                                @endforeach
-                                            </ol>
-                                        </div>
+                                        <span class="order-image-dropzone__text">{{ __('Click or drag images here') }}</span>
+                                        <small class="order-image-dropzone__hint">{{ __('Upload multiple images — JPEG, PNG, GIF up to 12MB each') }}</small>
                                     </div>
                                 </div>
+
+                                <div id="order-image-dropzone-errors" class="order-image-dropzone__errors"></div>
                             </div>
-                            
                         </div>
                         <div class="col-md-3 col-sm-12">
                             <div class="d-flex">
@@ -279,61 +255,304 @@
             </div>
         </div>
     </div>
+
+    @push('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
     <script type="text/javascript">
+        Dropzone.autoDiscover = false;
+
+        var orderImageDropzone = null;
+        var deletedOrderImageIds = [];
+
+        var existingOrderImages = [
+            @foreach($order->orderPicture as $image)
+            {
+                id: {{ $image->id }},
+                name: {!! json_encode($image->images) !!},
+                url: {!! json_encode(asset('assets/images/users/order/'.$image->images)) !!}
+            },
+            @endforeach
+        ];
+
         $(document).on("focusout", "#quantity, #est_price", function(e) {
             e.preventDefault();
             var totalPrice = parseFloat($("#quantity").val()) * parseFloat($("#est_price").val());
-            $("#tot_est_price").val(totalPrice.toFixed(2));
+            if (!isNaN(totalPrice)) {
+                $("#tot_est_price").val(totalPrice.toFixed(2));
+            }
         });
+
+        function addExistingOrderImage(dz, image) {
+            var mockFile = {
+                name: image.name,
+                size: 12345,
+                existing: true,
+                imageId: image.id,
+                accepted: true
+            };
+
+            dz.emit("addedfile", mockFile);
+            dz.emit("thumbnail", mockFile, image.url);
+            dz.emit("complete", mockFile);
+
+            if (mockFile.previewElement) {
+                mockFile.previewElement.classList.add('dz-success', 'dz-complete', 'dz-existing');
+            }
+        }
 
         $(document).ready(function () {
-            // View Form
+            orderImageDropzone = new Dropzone("#order-image-dropzone", {
+                url: '{{ url("admin/update-order") }}',
+                autoProcessQueue: false,
+                uploadMultiple: false,
+                parallelUploads: 50,
+                addRemoveLinks: true,
+                maxFilesize: 12,
+                acceptedFiles: "image/jpeg,image/jpg,image/png,image/gif",
+                dictRemoveFile: "{{ __('Remove') }}",
+                dictFileTooBig: "{{ __('File is too big (max 12MB).') }}",
+                dictInvalidFileType: "{{ __('Only JPEG, PNG and GIF images are allowed.') }}",
+                init: function () {
+                    var dz = this;
+
+                    existingOrderImages.forEach(function (image) {
+                        addExistingOrderImage(dz, image);
+                    });
+
+                    dz.on("removedfile", function (file) {
+                        if (file.existing && file.imageId) {
+                            if (deletedOrderImageIds.indexOf(file.imageId) === -1) {
+                                deletedOrderImageIds.push(file.imageId);
+                            }
+                        }
+                    });
+
+                    dz.on("error", function (file, message) {
+                        var text = typeof message === 'string' ? message : "{{ __('Unable to add this image.') }}";
+                        $('#order-image-dropzone-errors').html('<div class="alert alert-warning py-2 mb-0">' + text + '</div>');
+                        if (file && file.previewElement) {
+                            file.previewElement.classList.add('dz-error');
+                        }
+                    });
+
+                    dz.on("addedfile", function () {
+                        $('#order-image-dropzone-errors').empty();
+                    });
+                }
+            });
 
             $('body').on('click', '.update-submit', function(event) {
-                var list_id = [];
-                    var myData = new FormData($("#edit-tab")[0]);
-                    var CSRF_TOKEN = $('input[name="csrf_token"]').val();
-                    myData.append('_token', CSRF_TOKEN);
-                    myData.append('roles', list_id);
+                event.preventDefault();
 
-                $.ajax({
-                        url: '{{ url("admin/update-order") }}',
-                        type: 'POST',
-                        data: myData,
-                        dataType: 'json',
-                        cache: false,
-                        processData: false,
-                        contentType: false,
-                        success: function (data) {
+                var myData = new FormData($("#edit-tab")[0]);
+                var CSRF_TOKEN = $('input[name="csrf_token"]').val();
+                myData.append('_token', CSRF_TOKEN);
+                myData.append('roles', []);
 
-                            if (data.type === 'success') {
-                                swal("Done!", "It was succesfully done!", "success");
-                                $("#link-tab-images").trigger("click");
-                                reload_table();
-                                notify_view(data.type, data.message);
-                                $('#loader').hide();
-                                $("#submit").prop('disabled', false); // disable button
-                                $("html, body").animate({scrollTop: 0}, "slow");
-                                $('#myModal').modal('hide'); // hide bootstrap modal
-
-                            } else if (data.type === 'error') {
-                                if (data.errors) {
-                                    $.each(data.errors, function (key, val) {
-                                        $('#error_' + key).html(val);
-                                    });
-                                }
-                                $("#status").html(data.message);
-                                $('#loader').hide();
-                                $("#submit").prop('disabled', false); // disable button
-                                swal("Error sending!", "Please try again", "error");
-
-                            }
-
+                if (orderImageDropzone) {
+                    orderImageDropzone.files.forEach(function (file) {
+                        if (!file.existing) {
+                            myData.append('order_images[]', file);
                         }
-                    });     
+                    });
+                }
+
+                deletedOrderImageIds.forEach(function (id) {
+                    myData.append('delete_images[]', id);
                 });
 
+                $.ajax({
+                    url: '{{ url("admin/update-order") }}',
+                    type: 'POST',
+                    data: myData,
+                    dataType: 'json',
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        if (data.type === 'success') {
+                            swal("Done!", "It was succesfully done!", "success");
+                            if (typeof reload_table === 'function') {
+                                reload_table();
+                            }
+                            if (typeof notify_view === 'function') {
+                                notify_view(data.type, data.message);
+                            }
+                            window.location.reload();
+                        } else if (data.type === 'error') {
+                            if (data.errors) {
+                                $.each(data.errors, function (key, val) {
+                                    $('#error_' + key).html(val);
+                                });
+                            }
+                            var errorMessage = data.message || "Please try again";
+                            if (typeof notify_view === 'function') {
+                                notify_view(data.type, errorMessage);
+                            }
+                            swal("Error sending!", errorMessage, "error");
+                        }
+                    }
+                });
+            });
         });
-
     </script>
+    @endpush
+
+    <style>
+        .order-images-panel {
+            background: #fff;
+            border: 1px solid #e8ecf1;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .order-images-panel__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .order-images-panel__title {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .order-images-panel__code {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            background: #eef2ff;
+            color: #4338ca;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .order-image-dropzone {
+            border: 2px dashed #cbd5e1 !important;
+            border-radius: 12px !important;
+            background: #f8fafc;
+            min-height: 220px;
+            padding: 0.75rem;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .order-image-dropzone:hover,
+        .order-image-dropzone.dz-drag-hover {
+            border-color: #6366f1 !important;
+            background: #f5f3ff;
+            box-shadow: inset 0 0 0 1px rgba(99, 102, 241, 0.08);
+        }
+
+        .order-image-dropzone .dz-message {
+            margin: 1.5rem 0;
+        }
+
+        .order-image-dropzone__message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 0.35rem;
+        }
+
+        .order-image-dropzone__icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef2ff;
+            color: #4f46e5;
+            font-size: 1.35rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-image-dropzone__text {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .order-image-dropzone__hint {
+            font-size: 0.78rem;
+            color: #64748b;
+        }
+
+        .order-image-dropzone .dz-preview {
+            margin: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+        }
+
+        .order-image-dropzone .dz-preview .dz-image {
+            border-radius: 10px 10px 0 0;
+            width: 120px;
+            height: 120px;
+        }
+
+        .order-image-dropzone .dz-preview .dz-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-image-dropzone .dz-preview .dz-details {
+            padding: 0.35rem 0.5rem 0.15rem;
+            opacity: 1;
+            position: relative;
+        }
+
+        .order-image-dropzone .dz-preview .dz-filename span {
+            font-size: 0.72rem;
+            color: #475569;
+        }
+
+        .order-image-dropzone .dz-preview .dz-size {
+            display: none;
+        }
+
+        .order-image-dropzone .dz-preview .dz-remove {
+            display: block;
+            margin: 0;
+            padding: 0.45rem 0.5rem 0.55rem;
+            color: #dc2626;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-top: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        .order-image-dropzone .dz-preview .dz-remove:hover {
+            color: #b91c1c;
+            text-decoration: none;
+            background: #fef2f2;
+        }
+
+        .order-image-dropzone .dz-preview.dz-existing .dz-progress {
+            display: none;
+        }
+
+        .order-image-dropzone__errors {
+            margin-top: 0.75rem;
+        }
+
+        @media (max-width: 991.98px) {
+            .order-image-dropzone {
+                min-height: 180px;
+            }
+        }
+    </style>
 @stop
