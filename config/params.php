@@ -71,6 +71,9 @@ return [
         '8' => 'TENNIS MOUNT',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
+        '12' => 'LADIES WATCHES',
+        '13' => 'UNISEX WATCHES',
+        '14' => 'ALL COLLECTIONS',
     ],
 
     '0' => [
@@ -199,9 +202,9 @@ return [
     ],
 
     '12' => [
-        '0' => 'MENS WATCHES',
-        '1' => 'LADIES WATCHES',
-        '2' => 'UNISEX WATCHES',
+        '12' => 'MENS WATCHES',
+        '13' => 'LADIES WATCHES',
+        '14' => 'UNISEX WATCHES',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
     ],
