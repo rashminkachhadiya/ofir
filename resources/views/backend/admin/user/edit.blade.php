@@ -56,7 +56,7 @@
 
         <div class="form-group col-md-4 col-sm-12">
             <label for=""> Address 2 </label>
-            <input type="text" class="form-control" id="address_2" name="address_2" value="{{ $user->address_1 }}" placeholder=""
+            <input type="text" class="form-control" id="address_2" name="address_2" value="{{ $user->address_2 }}" placeholder=""
                    >
             <span id="error_address_2" class="has-error"></span>
         </div>
@@ -94,15 +94,21 @@
         <div class="col-md-12 mt-2 mb-2">
         <strong><label>Catalogue Store</label></strong>
         </div>
+        @php
+            $catalogueStore = json_decode($user->catalogue_store, true);
+            if (!is_array($catalogueStore)) {
+                $catalogueStore = [];
+            }
+        @endphp
         @foreach(config('params.catalogue') as $key => $value)
         <div class="form-group col-md-2">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="1" name="catalogue_store[{{$key}}]" id="flexCheckDefault" {{ ( json_decode($user->catalogue_store)[$key] == 1 ) ? 'checked' : '' }}>
-              <label class="form-check-label mt-2" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="1" name="catalogue_store[{{ $key }}]" id="catalogue_store_{{ $key }}" {{ (isset($catalogueStore[$key]) && $catalogueStore[$key] == 1) ? 'checked' : '' }}>
+              <label class="form-check-label mt-2" for="catalogue_store_{{ $key }}">
                 {{ $value }}
               </label>
             </div>
-        </div>
+         </div>
         @endforeach
         <div class="clearfix"></div>
         <div class="col-md-12 mb-3 mt-3">
