@@ -55,6 +55,7 @@ return [
         '9' => 'Fred',
         '10' => 'Messika',
         '11' => 'LEBAR',
+        '12' => 'WATCHES'
     ],
 
     'allSubCat' => [
@@ -70,7 +71,6 @@ return [
         '8' => 'TENNIS MOUNT',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '0' => [
@@ -81,7 +81,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '1' => [
@@ -93,7 +92,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '2' => [
@@ -104,7 +102,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '3' => [
@@ -125,7 +122,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '5' => [
@@ -136,7 +132,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
     
     '6' => [
@@ -147,7 +142,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '7' => [
@@ -158,7 +152,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '8' => [
@@ -169,7 +162,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '9' => [
@@ -180,7 +172,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '10' => [
@@ -191,7 +182,6 @@ return [
         '3' => 'EARRINGS',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     '11' => [
@@ -206,7 +196,6 @@ return [
         '8' => 'TENNIS MOUNT',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'WATCHES'
     ],
 
     'in_stock' => [
