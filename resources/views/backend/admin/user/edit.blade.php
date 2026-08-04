@@ -95,10 +95,9 @@
         <strong><label>Catalogue Store</label></strong>
         </div>
         @php
-            $catalogueStore = json_decode($user->catalogue_store, true);
-            if (!is_array($catalogueStore)) {
-                $catalogueStore = [];
-            }
+            use App\Services\CatalogueConfigService;
+
+            $catalogueStore = CatalogueConfigService::mergeStore($user->catalogue_store);
         @endphp
         @foreach(config('params.catalogue') as $key => $value)
         <div class="form-group col-md-2">

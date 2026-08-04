@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderImage;
+use App\Services\CatalogueConfigService;
 use DB;
 
 
@@ -94,10 +95,24 @@ class CatalogueController extends Controller
 
     public function getSubCatalogue(Request $request)
     {
-        $catalogueTitle = config('params.catalogue')[$request->sub_catalogue];
         $catalogueId = $request->sub_catalogue;
-        $subCatalogue = config('params.'.$request->sub_catalogue);
-        return view('frontend.catalogue.sub_catalogue',compact('subCatalogue','catalogueTitle','catalogueId'));
+
+        if (!CatalogueConfigService::isValidCatalogue($catalogueId)) {
+            abort(404);
+        }
+
+        if (!CatalogueConfigService::hasAccess(Auth::user()->catalogue_store, $catalogueId)) {
+            abort(403);
+        }
+
+        $catalogueTitle = CatalogueConfigService::catalogueName($catalogueId);
+        $subCatalogue = CatalogueConfigService::subCatalogues($catalogueId);
+
+        if (empty($subCatalogue)) {
+            abort(404);
+        }
+
+        return view('frontend.catalogue.sub_catalogue', compact('subCatalogue', 'catalogueTitle', 'catalogueId'));
     }
 
     public function getItems(Request $request)
@@ -120,9 +135,19 @@ class CatalogueController extends Controller
         $pagination = 12;
         $mainCatalogue = $request->main_catalogue;
         $subCatelogue = $request->sub_catalogue;
-        if(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'ALL COLLECTIONS'){
+
+        if (!CatalogueConfigService::isValidCatalogue($mainCatalogue)
+            || !CatalogueConfigService::hasAccess(Auth::user()->catalogue_store, $mainCatalogue)
+            || !CatalogueConfigService::isValidSubCatalogue($mainCatalogue, $subCatelogue)) {
+            abort(404);
+        }
+
+        $subCatalogueName = CatalogueConfigService::subCatalogueName($mainCatalogue, $subCatelogue);
+        $catalogueTitle = CatalogueConfigService::catalogueName($mainCatalogue);
+
+        if($subCatalogueName == 'ALL COLLECTIONS'){
             $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('catalogue_id',$request->main_catalogue)->where('is_allcollection',1)->where('is_active',1);
-        }elseif(config('params.'.$request->main_catalogue)[$request->sub_catalogue] == 'AVAILABLE'){
+        }elseif($subCatalogueName == 'AVAILABLE'){
             $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('catalogue_id',$request->main_catalogue)->where('is_available',1)->where('is_active',1);
         }else{
             $items = Item::select('items.*', DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.qty ELSE 0 END) as tot_qty"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.gram ELSE 0 END) as tot_gram"), DB::raw("SUM(CASE WHEN item_stocks.item_status IS NULL THEN item_stocks.ct ELSE 0 END) as tot_ct"))->leftjoin('item_stocks','items.id','=','item_stocks.item_id')->groupBy('items.id')->where('items.catalogue_id',$request->main_catalogue)->where('items.sub_catalogue_id',$request->sub_catalogue)->where('items.is_active',1);
@@ -166,7 +191,7 @@ class CatalogueController extends Controller
             $items = $items->orderByRaw('LENGTH(items.sku)', 'ASC')->orderByRaw('ISNULL(items.sku), items.sku ASC')->paginate($pagination);
             $page = '1';
         }    
-        return view('frontend.catalogue.items',compact('items','page','mainCatalogue','subCatelogue','metal','gems','selectMetal','selectGem'));
+        return view('frontend.catalogue.items',compact('items','page','mainCatalogue','subCatelogue','metal','gems','selectMetal','selectGem','catalogueTitle','subCatalogueName'));
     }
 
     public function itemDetails(Request $request)

@@ -11,8 +11,8 @@
         <div class="auth-card auth-card--cart">
             <div class="mb-4 pb-3 border-bottom">
                 <h2 class="h4 text-center font-italic mb-0">
-                    {{ config('params.catalogue')[$mainCatalogue] }}
-                    <span class="d-block d-md-inline" style="font-size: 0.875rem;">{{ config('params.'.$mainCatalogue)[$subCatelogue] }}</span>
+                    {{ $catalogueTitle ?? '' }}
+                    <span class="d-block d-md-inline" style="font-size: 0.875rem;">{{ $subCatalogueName ?? '' }}</span>
                 </h2>
             </div>
             <div class="catalogue-toolbar row">

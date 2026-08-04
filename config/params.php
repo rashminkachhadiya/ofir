@@ -198,6 +198,14 @@ return [
         '5' => 'AVAILABLE',
     ],
 
+    '12' => [
+        '0' => 'MENS WATCHES',
+        '1' => 'LADIES WATCHES',
+        '2' => 'UNISEX WATCHES',
+        '4' => 'ALL COLLECTIONS',
+        '5' => 'AVAILABLE',
+    ],
+
     'in_stock' => [
         '0' => 'No',
         '1' => 'Yes',

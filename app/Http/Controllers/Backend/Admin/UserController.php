@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Admin;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Services\CatalogueConfigService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -127,20 +128,7 @@ class UserController extends Controller
                }
             }
 
-            $catalogueStore = [
-          '0' => '0',
-          '1' => '0',
-          '2' => '0',
-          '3' => '0',
-          '4' => '0',
-          '5' => '0',
-          '6' => '0',
-          '7' => '0',
-          '8' => '0',
-          '9' => '0',
-          '10' => '0',
-          '11' => '0',
-        ];
+            $catalogueStore = CatalogueConfigService::defaultStore();
 
         if(!is_null($request->input('catalogue_store')))
         {
@@ -243,20 +231,7 @@ class UserController extends Controller
    public function update(Request $request, User $user)
    {
       if ($request->ajax()) {
-        $catalogueStore = [
-          '0' => '0',
-          '1' => '0',
-          '2' => '0',
-          '3' => '0',
-          '4' => '0',
-          '5' => '0',
-          '6' => '0',
-          '7' => '0',
-          '8' => '0',
-          '9' => '0',
-          '10' => '0',
-          '11' => '0',
-        ];
+        $catalogueStore = CatalogueConfigService::defaultStore();
 
         if(!is_null($request->input('catalogue_store')))
         {

@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\ItemStock;
+use App\Services\CatalogueConfigService;
 use App\Services\ItemJewelInfoService;
 use DB;
 use URL;
@@ -125,7 +126,7 @@ class CatalogueController extends Controller
            // return $orders->created_at;
         })
         ->addColumn('catalogue_id', function ($items) {
-           return config('params.catalogue')[$items->catalogue_id];
+           return CatalogueConfigService::catalogueName($items->catalogue_id) ?? '-';
         })
         ->addColumn('metal_colour', function ($items) {
             if(!is_null($items->metal_colour))
@@ -140,7 +141,9 @@ class CatalogueController extends Controller
             }
         })
         ->addColumn('sub_catalogue_id', function ($items) {
-           return config('params.allSubCat')[$items->sub_catalogue_id];
+           return CatalogueConfigService::subCatalogueName($items->catalogue_id, $items->sub_catalogue_id)
+               ?? CatalogueConfigService::allSubCatalogueName($items->sub_catalogue_id)
+               ?? '-';
         })
         ->addColumn('is_active', function ($items) {
            return $items->is_active ? '<label class="badge badge-success">Active</label>' : '<label class="badge badge-danger">Inactive</label>';
@@ -378,7 +381,10 @@ class CatalogueController extends Controller
         $item = Item::with(['diamondInfos', 'gemInfos'])->where('id', $id)->first();
         $catalogues = config('params.catalogue');
         $catalogues[''] = 'Select Catalogue';
-        $subCatalogue = config('params.'.$item->catalogue_id);
+        $subCatalogue = CatalogueConfigService::subCatalogues($item->catalogue_id);
+        if (empty($subCatalogue)) {
+            $subCatalogue = ['' => 'Select Sub Catalogue'];
+        }
         $itemStock = ItemStock::where('item_id',$id)->get();
         return view('backend.admin.catalogue.edit',compact('item','catalogues','subCatalogue','itemStock'));
        //  $haspermision = auth()->user()->can('user-edit');
@@ -626,7 +632,8 @@ class CatalogueController extends Controller
 
     public function getSubCatalogue(Request $request)
     {
-        $subCatalogue = config('params.'.$request->catalogue_id);
+        $subCatalogue = CatalogueConfigService::subCatalogues($request->catalogue_id);
+
         return response()->json(['data' => $subCatalogue]);
     }
 

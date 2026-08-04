@@ -8,12 +8,14 @@
 @endsection
 @section('content')
 @php
-    $Catalogue = config('params.catalogue');
+    use App\Services\CatalogueConfigService;
+
+    $Catalogue = CatalogueConfigService::catalogues();
 @endphp
     <x-auth-card :catalogue="true" title="{{ __('Select Catalogue') }}">
         <div class="catalogue-grid">
             @foreach($Catalogue as $key => $value)
-                @if(json_decode(Auth::user()->catalogue_store)[$key] == 1)
+                @if(CatalogueConfigService::hasAccess(Auth::user()->catalogue_store, $key))
                     <div class="minicart-catelogue-button">
                         <a href="{{ URL::to('/catalogue') }}/{{ $key }}">{{ $value }}</a>
                     </div>
