@@ -306,6 +306,7 @@
                                                 <option value="" {{ is_null($size->location) ? 'selected' : '' }}>Select</option>
                                                 <option value="0" {{ $size->location == "0" ? 'selected' : '' }}>UK</option>
                                                 <option value="1" {{ $size->location == "1" ? 'selected' : '' }}>Israel</option>
+                                                <option value="2" {{ $size->location == "2" ? 'selected' : '' }}>Mayo</option>
                                               </select>
                                             </div>
                                             <div class="col-md-1 p-0 p-1">
