@@ -196,13 +196,18 @@ class CatalogueController extends Controller
 
     public function itemDetails(Request $request)
     {
-        $item = Item::with(['diamondInfos', 'gemInfos'])->where('id', $request->item_id)->first();
+        $item = Item::with(['diamondInfos', 'gemInfos'])
+            ->where('id', $request->item_id)
+            ->firstOrFail();
         $metalType = config('params.metal_type');
         $metalType[''] = "Select";
         $metalColour = config('params.metal_colour');
         $metalColour[''] = "Select";
         $view = View::make('frontend.catalogue.quick_view', compact('item','metalType','metalColour'))->render();
-        return response()->json(['html' => $view]);
+
+        return response()->json(['html' => $view])
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache');
     }
 
     public function addToCart(Request $request)

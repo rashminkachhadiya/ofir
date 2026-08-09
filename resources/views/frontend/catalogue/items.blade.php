@@ -168,7 +168,9 @@
       var id = $(this).attr('data-id');
       $.ajax({
           url: "{{ URL::to('item-details')}}" + '/' + id,
-          type: 'get',
+          type: 'GET',
+          cache: false,
+          data: { _: Date.now() },
           success: function(data) {
               $("#quick_view_item_details").html(data.html);
               $('#quick_view_item_details').modal('show'); // show bootstrap modal

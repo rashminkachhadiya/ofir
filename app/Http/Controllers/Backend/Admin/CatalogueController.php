@@ -36,6 +36,29 @@ class CatalogueController extends Controller
         return (float) $qty * (float) $unit;
     }
 
+    private function scalarRequestValue(Request $request, string $primaryKey, ?string $fallbackKey = null)
+    {
+        $value = $request->input($primaryKey);
+
+        if ($value === null && $fallbackKey !== null) {
+            $value = $request->input($fallbackKey);
+        }
+
+        if (is_array($value)) {
+            return null;
+        }
+
+        return $value;
+    }
+
+    private function applyItemProductFields(Request $request, Item $item): void
+    {
+        $item->metal_type = $this->scalarRequestValue($request, 'item_metal_type', 'metal_type');
+        $item->metal_colour = $this->scalarRequestValue($request, 'item_metal_colour', 'metal_colour');
+        $item->weight = $this->scalarRequestValue($request, 'item_weight', 'weight');
+        $item->size = $this->scalarRequestValue($request, 'item_size', 'size');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -294,11 +317,7 @@ class CatalogueController extends Controller
                }
                $item->is_allcollection = $request->input('is_allcollection');
                $item->is_available = $request->input('is_available');
-               $item->size = $request->input('size');
-               $item->metal_colour = $request->input('metal_colour');
-               $item->metal_type = $request->input('metal_type');
-
-               $item->weight = $request->input('weight');
+               $this->applyItemProductFields($request, $item);
 
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');
@@ -516,11 +535,7 @@ class CatalogueController extends Controller
                }
                $item->is_allcollection = $request->input('is_allcollection');
                $item->is_available = $request->input('is_available');
-               $item->size = $request->input('size');
-               $item->metal_colour = $request->input('metal_colour');
-               $item->metal_type = $request->input('metal_type');
-
-               $item->weight = $request->input('weight');
+               $this->applyItemProductFields($request, $item);
 
                $item->is_active = $request->input('is_active');
                $item->cost_fee = $request->input('cost_fee');

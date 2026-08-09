@@ -127,20 +127,20 @@
                                         <div class="product-media-layout">
                                             <div class="product-media-layout__meta">
                                                 <div class="form-group">
-                                                    <label for="metal_type">Metal</label>
-                                                    {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                                                    <label for="item_metal_type">Metal</label>
+                                                    {!! Form::select('item_metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'item_metal_type']) !!}
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="weight">Weight</label>
-                                                    <input type="text" class="form-control" id="weight" name="weight" value="{{ $item->weight }}">
+                                                    <label for="item_weight">Weight</label>
+                                                    <input type="text" class="form-control" id="item_weight" name="item_weight" value="{{ $item->weight }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="metal_colour">Metal Colour</label>
-                                                    {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                                    <label for="item_metal_colour">Metal Colour</label>
+                                                    {!! Form::select('item_metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'item_metal_colour']) !!}
                                                 </div>
                                                 <div class="form-group mb-0">
-                                                    <label for="size">Size</label>
-                                                    <input type="text" class="form-control" id="size" name="size" value="{{ $item->size }}">
+                                                    <label for="item_size">Size</label>
+                                                    <input type="text" class="form-control" id="item_size" name="item_size" value="{{ $item->size }}">
                                                 </div>
                                             </div>
                                             <div class="product-media-layout__gallery">

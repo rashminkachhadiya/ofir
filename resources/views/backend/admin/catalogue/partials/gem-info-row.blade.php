@@ -61,6 +61,16 @@
                 <span class="jewel-field-error">{{ $message }}</span>
             @enderror
         </x-admin.form-jewel-field>
+        <x-admin.form-jewel-field label="Pcs">
+            <input type="text"
+                   class="form-control"
+                   name="gem_info[{{ $index }}][pcs]"
+                   value="{{ old('gem_info.' . $index . '.pcs', $row['pcs'] ?? '') }}"
+                   placeholder="Pcs">
+            @error('gem_info.' . $index . '.pcs')
+                <span class="jewel-field-error">{{ $message }}</span>
+            @enderror
+        </x-admin.form-jewel-field>
         <x-admin.form-jewel-field label="Colour">
             <input type="text"
                    class="form-control"
@@ -78,16 +88,6 @@
                    value="{{ old('gem_info.' . $index . '.cleaerty', $row['cleaerty'] ?? '') }}"
                    placeholder="Cleaerty">
             @error('gem_info.' . $index . '.cleaerty')
-                <span class="jewel-field-error">{{ $message }}</span>
-            @enderror
-        </x-admin.form-jewel-field>
-        <x-admin.form-jewel-field label="Pcs">
-            <input type="text"
-                   class="form-control"
-                   name="gem_info[{{ $index }}][pcs]"
-                   value="{{ old('gem_info.' . $index . '.pcs', $row['pcs'] ?? '') }}"
-                   placeholder="Pcs">
-            @error('gem_info.' . $index . '.pcs')
                 <span class="jewel-field-error">{{ $message }}</span>
             @enderror
         </x-admin.form-jewel-field>

@@ -124,9 +124,9 @@
                                             'Gem' => 'gem',
                                             'Shape' => 'shape',
                                             'Carat' => 'carat',
+                                            'Pcs' => 'pcs',
                                             'Colour' => 'colour',
                                             'Cleaerty' => 'cleaerty',
-                                            'Pcs' => 'pcs',
                                         ],
                                     ])
                                 </div>
