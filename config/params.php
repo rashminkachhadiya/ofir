@@ -73,7 +73,7 @@ return [
         '5' => 'AVAILABLE',
         // '12' => 'LADIES WATCHES',
         // '13' => 'UNISEX WATCHES',
-        '14' => 'ALL COLLECTIONS',
+        // '14' => 'ALL COLLECTIONS',
     ],
 
     '0' => [
