@@ -22,7 +22,7 @@ return [
     'metal_type' => [
         '0' => '18K',
         '1' => 'Platinum',
-        '2' => 'Platinum 950',
+        // '2' => 'Platinum 950',
         '3' => '14K',
         '4' => '9K'
     ],
@@ -71,8 +71,8 @@ return [
         '8' => 'TENNIS MOUNT',
         '4' => 'ALL COLLECTIONS',
         '5' => 'AVAILABLE',
-        '12' => 'LADIES WATCHES',
-        '13' => 'UNISEX WATCHES',
+        // '12' => 'LADIES WATCHES',
+        // '13' => 'UNISEX WATCHES',
         '14' => 'ALL COLLECTIONS',
     ],
 
@@ -202,11 +202,11 @@ return [
     ],
 
     '12' => [
-        '12' => 'MENS WATCHES',
-        '13' => 'LADIES WATCHES',
-        '14' => 'UNISEX WATCHES',
+        // '12' => 'MENS WATCHES',
+        // '13' => 'LADIES WATCHES',
+        // '14' => 'UNISEX WATCHES',
         '4' => 'ALL COLLECTIONS',
-        '5' => 'AVAILABLE',
+        // '5' => 'AVAILABLE',
     ],
 
     'in_stock' => [
