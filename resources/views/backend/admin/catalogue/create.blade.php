@@ -3,6 +3,8 @@
 @section('content')
     @php
         $stockMetalTypes = ['' => 'Select'] + config('params.metal_type');
+        $metalTypes = ['' => 'Select'] + config('params.metal_type');
+        $metalColours = ['' => 'Select'] + config('params.metal_colour');
         $shapeOptions = [
             '' => 'Select',
             'Round' => 'Round',
@@ -114,7 +116,7 @@
                                             <div class="product-media-layout__meta">
                                                 <div class="form-group">
                                                     <label for="metal_type">Metal</label>
-                                                    {!! Form::select('metal_type', config('params.metal_type') ?? [],  $item->metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                                                    {!! Form::select('metal_type', $metalTypes, old('metal_type', ''), ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="weight">Weight</label>
@@ -122,7 +124,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="metal_colour">Metal Colour</label>
-                                                    {!! Form::select('metal_colour', config('params.metal_colour') ?? [],  $item->metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                                                    {!! Form::select('metal_colour', $metalColours, old('metal_colour', ''), ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
                                                 </div>
                                                 <div class="form-group mb-0">
                                                     <label for="size">Size</label>

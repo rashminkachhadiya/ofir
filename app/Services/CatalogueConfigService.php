@@ -80,4 +80,14 @@ class CatalogueConfigService
 
         return $allSubCat[$key] ?? $allSubCat[$subCatalogueId] ?? null;
     }
+
+    public static function metalTypesWithSelect(): array
+    {
+        return ['' => 'Select'] + (config('params.metal_type') ?? []);
+    }
+
+    public static function metalColoursWithSelect(): array
+    {
+        return ['' => 'Select'] + (config('params.metal_colour') ?? []);
+    }
 }

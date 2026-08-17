@@ -18,6 +18,7 @@ use DB;
 use PDF;
 use URL;
 use App\Exports\OrderExport;
+use App\Services\CatalogueConfigService;
 use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
@@ -244,8 +245,8 @@ class OrderController extends Controller
           $order = Order::with('orderPicture')->where('id',$id)->first();
           $supplier = Supplier::all()->pluck('f_name','id')->toArray();
           $supplier[''] = 'Select Supplier';
-          $metalType = config('params.metal_type');
-          $metalColour = config('params.metal_colour');
+          $metalType = CatalogueConfigService::metalTypesWithSelect();
+          $metalColour = CatalogueConfigService::metalColoursWithSelect();
           $currency = config('params.currency');
           return view('backend.admin.order.edit_order',compact('order','metalType','metalColour','supplier', 'currency'));
        } else {

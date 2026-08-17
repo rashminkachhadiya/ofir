@@ -199,10 +199,8 @@ class CatalogueController extends Controller
         $item = Item::with(['diamondInfos', 'gemInfos'])
             ->where('id', $request->item_id)
             ->firstOrFail();
-        $metalType = config('params.metal_type');
-        $metalType[''] = "Select";
-        $metalColour = config('params.metal_colour');
-        $metalColour[''] = "Select";
+        $metalType = CatalogueConfigService::metalTypesWithSelect();
+        $metalColour = CatalogueConfigService::metalColoursWithSelect();
         $view = View::make('frontend.catalogue.quick_view', compact('item','metalType','metalColour'))->render();
 
         return response()->json(['html' => $view])
@@ -301,10 +299,8 @@ class CatalogueController extends Controller
     public function editCartItem(Request $request)
     {
         $item = Cart::where('id',$request->cart_id)->first();
-        $metalType = config('params.metal_type');
-        $metalType[''] = "Select";
-        $metalColour = config('params.metal_colour');
-        $metalColour[''] = "Select";
+        $metalType = CatalogueConfigService::metalTypesWithSelect();
+        $metalColour = CatalogueConfigService::metalColoursWithSelect();
         $view = View::make('frontend.catalogue.edit_view', compact('item','metalType','metalColour'))->render();
         return response()->json(['html' => $view]);
     }
@@ -335,10 +331,8 @@ class CatalogueController extends Controller
     {
         $mpdf = new \Mpdf\Mpdf();
         $item = Item::with(['diamondInfos', 'gemInfos'])->where('id', $request->item_id)->first();
-        $metalType = config('params.metal_type');
-        $metalType[''] = "Select";
-        $metalColour = config('params.metal_colour');
-        $metalColour[''] = "Select";
+        $metalType = CatalogueConfigService::metalTypesWithSelect();
+        $metalColour = CatalogueConfigService::metalColoursWithSelect();
         $html = view('frontend.catalogue.quick_view', compact('item','metalType','metalColour'))->render();
         $mpdf->autoScriptToLang = true;
         $mpdf->autoLangToFont = true;

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\OrderImage;
+use App\Services\CatalogueConfigService;
 
 class OrderController extends Controller
 {
@@ -18,8 +19,8 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $categories = config('params.categories');
-        $metalType = config('params.metal_type');
-        $metalColour = config('params.metal_colour');
+        $metalType = CatalogueConfigService::metalTypesWithSelect();
+        $metalColour = CatalogueConfigService::metalColoursWithSelect();
         return view('frontend.order.index',compact('categories','metalType','metalColour'));
     }
 

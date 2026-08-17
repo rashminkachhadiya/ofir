@@ -124,7 +124,7 @@
                     <strong> Type : </strong>
                 </div>
                 <div class="col-md-9 p-0">
-                   {!! Form::select('su_metal_type', config('params.metal_type') ?? [],  $order->su_metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
+                   {!! Form::select('su_metal_type', ['' => 'Select'] + (config('params.metal_type') ?? []),  $order->su_metal_type ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_type']) !!}
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
@@ -132,7 +132,7 @@
                     <strong>Colour : </strong>
                 </div>
                 <div class="col-md-9 p-0">
-                    {!! Form::select('su_metal_colour', config('params.metal_colour') ?? [],  $order->su_metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
+                    {!! Form::select('su_metal_colour', ['' => 'Select'] + (config('params.metal_colour') ?? []),  $order->su_metal_colour ?? '', ['class' => 'form-control','data-control'=>"select2", 'id'=>'metal_colour']) !!}
                 </div>
             </div>
             <div class="d-flex p-0 mt-1">
