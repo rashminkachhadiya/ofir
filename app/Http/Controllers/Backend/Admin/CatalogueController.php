@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\ItemStock;
+use App\Models\Cart;
 use App\Services\CatalogueConfigService;
 use App\Services\ItemJewelInfoService;
 use DB;
@@ -634,9 +635,25 @@ class CatalogueController extends Controller
         if ($request->ajax()) {
         $haspermision = auth()->user()->can('user-delete');
         if ($haspermision) {
-            $item = Item::find($id); //Get user with specified id
-            $item->delete();
-            return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+            $item = Item::find($id);
+            if (!$item) {
+                return response()->json(['type' => 'error', 'message' => "Item not found"]);
+            }
+
+            DB::beginTransaction();
+            try {
+                Cart::withTrashed()->where('item_id', $item->id)->forceDelete();
+                ItemStock::where('item_id', $item->id)->delete();
+                $item->diamondInfos()->delete();
+                $item->gemInfos()->delete();
+                $item->delete();
+
+                DB::commit();
+                return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['type' => 'error', 'message' => "Unable to delete this product because it is still in use."]);
+            }
         } else {
             abort(403, 'Sorry, you are not authorized to access the page');
         }

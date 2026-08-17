@@ -55,7 +55,8 @@ return [
         '9' => 'Fred',
         '10' => 'Messika',
         '11' => 'LEBAR',
-        '12' => 'WATCHES'
+        '12' => 'WATCHES',
+        '13' => 'CHAUMET',
     ],
 
     'allSubCat' => [
@@ -178,6 +179,16 @@ return [
     ],
 
     '10' => [
+        '0' => 'RINGS',
+        '1' => 'BANGLE',
+        '6' => 'BRACELETS',
+        '2' => 'NECKLACES',
+        '3' => 'EARRINGS',
+        '4' => 'ALL COLLECTIONS',
+        '5' => 'AVAILABLE',
+    ],
+
+    '13' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
         '6' => 'BRACELETS',
