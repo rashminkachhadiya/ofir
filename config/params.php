@@ -201,6 +201,7 @@ return [
     '11' => [
         '0' => 'RINGS',
         '1' => 'BANGLE',
+        '6' => 'BRACELETS',
         '10' => 'Colour Stone',
         '11' => 'PENDANT',
         '2' => 'NECKLACES',
