@@ -221,7 +221,7 @@
                                           <input type="text" name="new_code[0]" class="form-control" id="new_code-0" value="" placeholder="Code">
                                         </div>
                                         <div class="col-md-0-5 pl-2 p-1">
-                                          <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="1" placeholder="Qty">
+                                          <input type="number" name="new_stock[0]" class="form-control" id="new_sotck-0" value="0" placeholder="Qty">
                                         </div>
                                         <div class="col-md-1 p-0 p-1">
                                           <input type="text" name="new_gram[0]" class="form-control" id="new_gram-0" value=""  placeholder="Gram">
@@ -329,7 +329,7 @@
                       <input type="text" name="new_code['+ add_number +']" class="form-control" id="new_code-'+ add_number +'" value="" placeholder="Code">\
                     </div>\
                     <div class="col-md-0-5 pl-2 p-1">\
-                      <input type="number" name="new_stock['+ add_number +']" class="form-control" id="new_stock-'+ add_number +'" value="1" placeholder="Qty">\
+                      <input type="number" name="new_stock['+ add_number +']" class="form-control" id="new_stock-'+ add_number +'" value="0" placeholder="Qty">\
                     </div>\
                     <div class="col-md-1 p-1">\
                       <input type="text" name="new_gram['+ add_number +']" class="form-control" id="size_'+ add_number +'" value="" placeholder="Gram">\
